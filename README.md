@@ -1,5 +1,22 @@
 # Deco Noir
 
+## Tab layout (all themes)
+
+Tabs are ordered by how often they are used, and each answers one question:
+
+| Tab | Purpose |
+|---|---|
+| **Home** | Daily control: scenes, music, climate, rooms in floor order (living room, kitchen/dining, library, craft room, outside) and appliance status (washer, dryer, Icarus, inkjet, UPS). Cogitator adds a Systems panel, a Weather panel and house-wide rail stats (lights on, UPS battery/load, WAN speed). |
+| **Floor Plan** | The same devices, spatially. |
+| **Media** | Spotify and speakers, Jellyfin, downloads, upcoming episodes. |
+| **Yard** | Weather, outdoor lights, then watering (zones, controller, schedules). |
+| **Workshop** | Icarus (live Bambu print status, camera, AMS, controls) and the HP inkjet with ink levels. |
+| **Alexandria** | Server health only: UPS power, network/Pi-hole, storage and backups, 24h graphs. |
+| **Omega-7** | The assistant (installed separately; carried over by the builder). |
+
+`tools/build_dashboard.py` is the source of truth for every tab except Omega-7. Run it, then
+`tools/install_seasons.py` (registers module versions and keeps the selected theme).
+
 ## Optional Cogitator theme
 
 **Cogitator** is the fourth selector option, based on the approved A1 / Pattern IX

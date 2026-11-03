@@ -116,6 +116,10 @@ LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_la
 SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitchen_speaker", "media_player.spotify"]
 
 # ---------------------------------------------------------------- HOME
+# Home = what you use every day: scenes, music, climate, then rooms in floor order (main -> lower -> outside),
+# then appliances. Printers/servers/downloads live on their own tabs (Workshop, Alexandria, Media).
+BAMBU_PRINTER = "ffee4738686992f668bd921495f6fb9a"   # device ids from the HA device registry
+BAMBU_AMS = "3938769c64fa7bcb59d95b6dc46b6862"
 home = {
     "type": "sections", "title": "Home", "path": "home", "icon": "mdi:home-heart", "max_columns": 4,
     "sections": [
@@ -139,6 +143,7 @@ home = {
                  "grid_options": {"columns": "full"}},
                 span=1),
 
+        # Main floor
         section(room("Living Room", "living",
                      ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.lamp_window", "switch.grow_lamp"],
                      "var(--deco-gold)", ("media_player.billie_2", "Billie")),
@@ -150,6 +155,12 @@ home = {
                 tile("media_player.billie_2", "Billie", "mdi:speaker", 4, "more-info"),
                 span=2),
 
+        section(room("Kitchen", "house", ["switch.dining_room_xmas"], "var(--deco-gold)",
+                     ("media_player.kitchen_speaker", "Kitchen speaker")),
+                tile("switch.dining_room_xmas", "Dining Xmas", "mdi:pine-tree"),
+                tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", 6, "more-info")),
+
+        # Lower floor
         section(room("Library", "library",
                      ["switch.torch_light_front", "switch.torch_light_back", "switch.basement_fireplace_lights"],
                      "var(--deco-sapphire)", ("media_player.library", "Speaker")),
@@ -158,6 +169,12 @@ home = {
                 tile("switch.basement_fireplace_lights", "Fireplace", "mdi:fireplace"),
                 tile("media_player.library", "Speaker", "mdi:speaker", 6, "more-info")),
 
+        section(room("Craft Room", "workshop", ["switch.painting_desk"], "var(--deco-garnet)",
+                     (f"sensor.{P}_print_status", "Icarus")),
+                tile("switch.painting_desk", "Painting desk", "mdi:palette-outline"),
+                tile(f"sensor.{P}_print_status", "Icarus", "mdi:printer-3d", 6, "more-info")),
+
+        # Outdoors
         section(room("Outside", "outside", ["light.outdoor_dimmer_light_1", "light.outdoor_dimmer_light_2"],
                      "var(--deco-emerald)", ("binary_sensor.rachio_9207aa_rain", "Rain sensor")),
                 tile("light.outdoor_dimmer_light_1", "Outdoor 1", "mdi:outdoor-lamp"),
@@ -165,47 +182,12 @@ home = {
                 tile("automation.outdoor_lights_sunset_to_10_pm", "Sunset schedule", "mdi:weather-sunset"),
                 tile("switch.rachio_9207aa_rain_delay", "Rain delay", "mdi:weather-pouring")),
 
-        section(room("The House", "house",
-                     ["switch.dining_room_xmas", "switch.painting_desk"], "var(--deco-gold)",
+        section(room("Laundry", "house", [], "var(--deco-gold)",
                      ("sensor.washer_current_status", "Washer")),
-                tile("switch.dining_room_xmas", "Dining Xmas", "mdi:pine-tree"),
-                tile("switch.painting_desk", "Painting desk", "mdi:palette-outline"),
-                tile("media_player.kitchen_speaker", "Kitchen", "mdi:speaker", 6, "more-info"),
-                tile("sensor.hp_officejet_pro_6970", "Printer", "mdi:printer-outline", 6, "more-info"),
                 tile("sensor.washer_current_status", "Washer", "mdi:washing-machine", 6, "more-info"),
-                tile("sensor.dryer_current_status", "Dryer", "mdi:tumble-dryer", 6, "more-info")),
-
-        section(room("Workshop", "workshop", [], "var(--deco-garnet)",
-                     (f"sensor.{P}_print_progress", "Icarus")),
-                {"type": "picture-entity", "entity": f"camera.{P}_camera", "camera_view": "auto",
-                 "show_name": False, "show_state": False, "grid_options": {"columns": 12}},
-                {"type": "custom:button-card", "template": "deco_rows", "entity": f"sensor.{P}_print_status",
-                 "name": "Icarus · H2S", "icon": "mdi:printer-3d",
-                 "variables": {"rows": [
-                     {"label": "Job", "entity": f"sensor.{P}_task_name"},
-                     {"label": "Progress", "entity": f"sensor.{P}_print_progress", "unit": "%"},
-                     {"label": "Time left", "entity": f"sensor.{P}_remaining_time", "unit": " h"},
-                     {"label": "Nozzle", "entity": f"sensor.{P}_nozzle_temperature", "unit": "°", "round": 0},
-                     {"label": "Bed", "entity": f"sensor.{P}_bed_temperature", "unit": "°", "round": 0},
-                     {"label": "AMS humidity", "entity": f"sensor.{P}_ams_1_humidity", "unit": "%"}]},
-                 "grid_options": {"columns": 12}},
-                span=2),
-
-        section(marquee("Alexandria"),
-                {"type": "custom:button-card", "template": "deco_gauge", "entity": "sensor.alexandria_battery",
-                 "name": "UPS battery", "grid_options": {"columns": 6, "rows": 3}},
-                {"type": "custom:button-card", "template": "deco_gauge", "entity": "sensor.alexandria_load",
-                 "name": "UPS load", "grid_options": {"columns": 6, "rows": 3}},
-                {"type": "custom:button-card", "template": "deco_rows", "entity": "sensor.alexandria_status",
-                 "name": "Server", "icon": "mdi:server",
-                 "styles": {"custom_fields": {"badge": ["display: none"]}},
-                 "variables": {"rows": [
-                     {"label": "Runtime on battery", "entity": "sensor.alexandria_time_left", "unit": " min", "round": 0},
-                     {"label": "Mains voltage", "entity": "sensor.alexandria_input_voltage", "unit": " V", "round": 0},
-                     {"label": "Array free", "entity": "sensor.sabnzbd_free_disk_space", "unit": " GB", "round": 0},
-                     {"label": "Ads blocked today", "entity": "sensor.pi_hole_ads_blocked"}]},
-                 "grid_options": {"columns": "full"}},
-                span=1),
+                tile("sensor.dryer_current_status", "Dryer", "mdi:tumble-dryer", 6, "more-info"),
+                tile("fan.air_purifier_fan", "Air purifier", "mdi:air-purifier"),
+                tile("sensor.hp_officejet_pro_6970", "Inkjet printer", "mdi:printer-outline", 6, "more-info")),
     ],
 }
 
@@ -248,6 +230,157 @@ floor = {
 }
 
 
+
+# ---------------------------------------------------------------- MEDIA / YARD / WORKSHOP / ALEXANDRIA
+def dtile(entity, name, icon, cols=6, action="more-info"):
+    return tile(entity, name, icon, cols, action)
+
+
+def native_tile(entity, name, icon, feature):
+    return {"type": "tile", "entity": entity, "name": name, "icon": icon,
+            "features": [{"type": feature}], "features_position": "bottom"}
+
+
+NOW_PLAYING_MD = ("{% set j = states.media_player | selectattr('attributes.media_title','defined') | "
+                  "selectattr('state','in',['playing','paused']) | list %}{% if j %}{% for m in j %}"
+                  "**{{ m.name }}**: {{ m.attributes.media_title }}{% if m.attributes.media_series_title %} "
+                  "({{ m.attributes.media_series_title }}){% endif %}\n\n{% endfor %}"
+                  "{% else %}_Nothing playing right now._{% endif %}")
+
+media = {
+    "type": "sections", "title": "Media", "path": "media", "icon": "mdi:play-box-multiple", "max_columns": 4,
+    "sections": [
+        section(marquee("Spotify"),
+                {"type": "media-control", "entity": "media_player.spotify", "name": "Spotify"},
+                {"type": "tile", "entity": "media_player.spotify", "name": "Volume", "icon": "mdi:volume-high",
+                 "hide_state": True, "features": [{"type": "media-player-volume-slider"}], "features_position": "bottom"},
+                {"type": "tile", "entity": "media_player.spotify", "name": "Playing on", "icon": "mdi:cast-audio",
+                 "state_content": "source", "tap_action": {"action": "more-info"}}, span=2),
+        section(marquee("Speakers"),
+                {"type": "media-control", "entity": "media_player.billie_2", "name": "Billie"},
+                {"type": "media-control", "entity": "media_player.library", "name": "Library"},
+                native_tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", "media-player-volume-slider"),
+                native_tile("media_player.all_speakers", "All speakers (group)", "mdi:speaker-multiple", "media-player-volume-slider"),
+                span=2),
+        section(marquee("Jellyfin"),
+                dtile("sensor.alexandria_jellyfin_active_clients", "Jellyfin viewers", "mdi:account-multiple"),
+                {"type": "markdown", "content": NOW_PLAYING_MD}),
+        section(marquee("Downloads"),
+                dtile("sensor.sabnzbd_status", "SABnzbd", "mdi:download"),
+                dtile("sensor.sabnzbd_speed", "Speed", "mdi:speedometer"),
+                dtile("sensor.sabnzbd_queue_count", "In queue", "mdi:tray-full"),
+                dtile("sensor.sabnzbd_left_to_download", "Left", "mdi:progress-download")),
+        section(marquee("Coming up"),
+                dtile("sensor.sonarr_upcoming", "Upcoming episodes", "mdi:television-classic"),
+                {"type": "calendar", "entities": ["calendar.sonarr", "calendar.radarr"], "initial_view": "listWeek"},
+                span=2),
+    ],
+}
+
+yard = {
+    "type": "sections", "title": "Yard", "path": "yard", "icon": "mdi:sprinkler", "max_columns": 3,
+    "sections": [
+        section(marquee("Weather"),
+                {"type": "weather-forecast", "entity": "weather.forecast_home", "forecast_type": "hourly",
+                 "show_current": True, "show_forecast": True},
+                dtile("binary_sensor.rachio_9207aa_rain", "Rain sensor", "mdi:weather-rainy")),
+        section(marquee("Outdoor lights"),
+                native_tile("light.outdoor_dimmer_light_1", "Outdoor 1", "mdi:outdoor-lamp", "light-brightness"),
+                native_tile("light.outdoor_dimmer_light_2", "Outdoor 2", "mdi:outdoor-lamp", "light-brightness"),
+                tile("automation.outdoor_lights_sunset_to_10_pm", "Sunset schedule", "mdi:weather-sunset", 6, "toggle")),
+        section(marquee("Water now (tap a zone)"),
+                tile("switch.rachio_9207aa_front_sprinklers", "Front sprinklers", "mdi:sprinkler-variant"),
+                tile("switch.rachio_9207aa_back_sprinklers", "Back sprinklers", "mdi:sprinkler-variant"),
+                tile("switch.rachio_9207aa_back_drip", "Back drip", "mdi:water-outline"),
+                marquee("Controller"),
+                tile("switch.rachio_9207aa_rain_delay", "Rain delay", "mdi:weather-pouring"),
+                tile("switch.rachio_9207aa_standby", "Standby (pause all)", "mdi:pause-circle"),
+                dtile("binary_sensor.rachio_9207aa_connectivity", "Rachio online", "mdi:wifi")),
+        section(marquee("Schedules (tap to run)"),
+                tile("switch.rachio_9207aa_front_flower_beds_schedule", "Front flower beds", "mdi:flower"),
+                tile("switch.rachio_9207aa_backyard_flower_beds_schedule", "Backyard flower beds", "mdi:flower-tulip"),
+                tile("switch.rachio_9207aa_back_lawn_schedule", "Back lawn", "mdi:grass")),
+    ],
+}
+
+workshop = {
+    "type": "sections", "title": "Workshop", "path": "workshop", "icon": "mdi:printer-3d", "max_columns": 3,
+    "sections": [
+        section(marquee("Icarus \u00b7 Bambu H2S"),
+                {"type": "custom:ha-bambulab-print_status-card", "printer": BAMBU_PRINTER,
+                 "grid_options": {"columns": "full"}},
+                {"type": "custom:button-card", "template": "deco_rows", "entity": f"sensor.{P}_print_status",
+                 "name": "Icarus \u00b7 H2S", "icon": "mdi:printer-3d",
+                 "variables": {"rows": [
+                     {"label": "Job", "entity": f"sensor.{P}_task_name"},
+                     {"label": "Progress", "entity": f"sensor.{P}_print_progress", "unit": "%"},
+                     {"label": "Time left", "entity": f"sensor.{P}_remaining_time", "unit": " h"},
+                     {"label": "Nozzle", "entity": f"sensor.{P}_nozzle_temperature", "unit": "\u00b0", "round": 0},
+                     {"label": "Bed", "entity": f"sensor.{P}_bed_temperature", "unit": "\u00b0", "round": 0},
+                     {"label": "AMS humidity", "entity": f"sensor.{P}_ams_1_humidity", "unit": "%"}]},
+                 "grid_options": {"columns": "full"}},
+                span=2),
+        section(marquee("Filament (AMS)"),
+                {"type": "custom:ha-bambulab-ams-card", "ams": BAMBU_AMS, "printer": BAMBU_PRINTER,
+                 "grid_options": {"columns": "full"}},
+                marquee("Controls"),
+                {"type": "custom:ha-bambulab-print_control-card", "printer": BAMBU_PRINTER,
+                 "grid_options": {"columns": "full"}},
+                tile(f"light.{P}_chamber_light", "Chamber light", "mdi:lightbulb-on-outline"),
+                tile("switch.painting_desk", "Painting desk", "mdi:palette-outline")),
+        section(marquee("Inkjet printer \u00b7 HP OfficeJet"),
+                dtile("sensor.hp_officejet_pro_6970", "Status", "mdi:printer-outline"),
+                dtile("sensor.hp_officejet_pro_6970_black_ink", "Black ink", "mdi:water"),
+                dtile("sensor.hp_officejet_pro_6970_cyan_ink", "Cyan ink", "mdi:water"),
+                dtile("sensor.hp_officejet_pro_6970_magenta_ink", "Magenta ink", "mdi:water"),
+                dtile("sensor.hp_officejet_pro_6970_yellow_ink", "Yellow ink", "mdi:water")),
+    ],
+}
+
+alexandria = {
+    "type": "sections", "title": "Alexandria", "path": "alexandria", "icon": "mdi:server", "max_columns": 4,
+    "sections": [
+        section(marquee("Power (APC UPS)"),
+                dtile("sensor.alexandria_status", "Status", "mdi:power-plug"),
+                {"type": "gauge", "entity": "sensor.alexandria_battery", "name": "Battery", "min": 0, "max": 100,
+                 "needle": True, "severity": {"green": 60, "yellow": 35, "red": 0}},
+                {"type": "gauge", "entity": "sensor.alexandria_load", "name": "Load", "min": 0, "max": 100,
+                 "needle": True, "severity": {"green": 0, "yellow": 60, "red": 80}},
+                dtile("sensor.alexandria_time_left", "Runtime on battery", "mdi:timer-sand"),
+                dtile("sensor.alexandria_input_voltage", "Mains voltage", "mdi:sine-wave"),
+                dtile("sensor.alexandria_battery_replaced", "Battery replaced", "mdi:battery-sync")),
+        section(marquee("Network"),
+                dtile("binary_sensor.q1000k_router_wan_status", "Internet", "mdi:web"),
+                dtile("sensor.q1000k_router_download_speed", "Download", "mdi:download-network"),
+                dtile("sensor.q1000k_router_upload_speed", "Upload", "mdi:upload-network"),
+                tile("switch.pi_hole", "Pi-hole ad blocking", "mdi:shield-check"),
+                dtile("sensor.pi_hole_dns_queries", "DNS queries", "mdi:dns"),
+                dtile("sensor.pi_hole_ads_blocked", "Ads blocked", "mdi:block-helper"),
+                dtile("sensor.pi_hole_seen_clients", "Devices", "mdi:devices")),
+        section(marquee("Storage and backups"),
+                dtile("sensor.sabnzbd_free_disk_space", "Array free", "mdi:harddisk"),
+                dtile("sensor.sabnzbd_total_disk_space", "Array size", "mdi:database"),
+                dtile("sensor.backup_last_successful_automatic_backup", "Last HA backup", "mdi:backup-restore"),
+                dtile("sensor.backup_next_scheduled_automatic_backup", "Next HA backup", "mdi:calendar-sync"),
+                marquee("Photos (Immich)"),
+                dict(dtile("sensor.immich_photos", "Photos", "mdi:image-multiple"),
+                     tap_action={"action": "url", "url_path": "https://photos.salientpoint.net"}),
+                dict(dtile("sensor.immich_videos", "Videos", "mdi:filmstrip-box-multiple"),
+                     tap_action={"action": "url", "url_path": "https://photos.salientpoint.net"})),
+        section(marquee("Last 24 hours"),
+                {"type": "history-graph", "title": "UPS load and battery", "hours_to_show": 24,
+                 "entities": [{"entity": "sensor.alexandria_load", "name": "Load"},
+                              {"entity": "sensor.alexandria_battery", "name": "Battery"}]},
+                {"type": "history-graph", "title": "Mains voltage", "hours_to_show": 24,
+                 "entities": [{"entity": "sensor.alexandria_input_voltage", "name": "Volts"}]},
+                {"type": "history-graph", "title": "Internet traffic", "hours_to_show": 24,
+                 "entities": [{"entity": "sensor.q1000k_router_download_speed", "name": "Down"},
+                              {"entity": "sensor.q1000k_router_upload_speed", "name": "Up"}]},
+                span=2),
+    ],
+}
+
+
 # ---------------------------------------------------------------- other views: headings -> marquees
 DECO_TILE_DOMAINS = ("switch", "light", "sensor", "binary_sensor", "automation", "calendar")
 
@@ -283,9 +416,9 @@ def main():
     out_dir.mkdir(exist_ok=True)
     if not (out_dir / "home-hub.before-phase2.json").exists():
         (out_dir / "home-hub.before-phase2.json").write_text(json.dumps(cur, indent=2), encoding="utf-8")
-    keep = [decorate(v) for v in cur["views"] if v.get("path") in ("media", "yard", "alexandria")]
+    keep = [v for v in cur["views"] if v.get("path") == "omega7"]   # Omega-7 panel is managed by its own installer
     cfg = normalize_styles({"title": cur.get("title", "Home"), "button_card_templates": TEMPLATES,
-                            "views": [home, floor] + keep})
+                            "views": [home, floor, media, yard, workshop, alexandria] + keep})
     cfg = apply_cogitator(apply_seasons(cfg))
     (ROOT / "templates").mkdir(exist_ok=True)
     (ROOT / "templates" / "deco_templates.json").write_text(json.dumps(cfg["button_card_templates"], indent=2), encoding="utf-8")

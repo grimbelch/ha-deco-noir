@@ -1493,6 +1493,72 @@
             {
               "type": "custom:button-card",
               "template": "deco_room",
+              "name": "Kitchen",
+              "variables": {
+                "lamps": [
+                  "switch.dining_room_xmas"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
+                "line2_entity": "media_player.kitchen_speaker",
+                "line2_label": "Kitchen speaker"
+              },
+              "styles": {
+                "card": [
+                  {
+                    "--room-accent": "var(--deco-gold)"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.dining_room_xmas",
+              "name": "Dining Xmas",
+              "icon": "mdi:pine-tree",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "media_player.kitchen_speaker",
+              "name": "Kitchen speaker",
+              "icon": "mdi:speaker",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            }
+          ],
+          "visibility": [
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Les Saisons"
+            },
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_room",
               "name": "Library",
               "variables": {
                 "lamps": [
@@ -1555,6 +1621,72 @@
               "entity": "media_player.library",
               "name": "Speaker",
               "icon": "mdi:speaker",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            }
+          ],
+          "visibility": [
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Les Saisons"
+            },
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Craft Room",
+              "variables": {
+                "lamps": [
+                  "switch.painting_desk"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M196 92 V26 h88 V92\"/><path d=\"M206 92 V36 h68 V92\"/><path d=\"M220 80 h40 M228 70 h24 M236 60 h8\"/><path d=\"M240 26 V12 M226 12 h28\"/></svg>",
+                "line2_entity": "sensor.h2s_0938ac5b0600679_print_status",
+                "line2_label": "Icarus"
+              },
+              "styles": {
+                "card": [
+                  {
+                    "--room-accent": "var(--deco-garnet)"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.painting_desk",
+              "name": "Painting desk",
+              "icon": "mdi:palette-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.h2s_0938ac5b0600679_print_status",
+              "name": "Icarus",
+              "icon": "mdi:printer-3d",
               "grid_options": {
                 "columns": 6,
                 "rows": 2
@@ -1669,12 +1801,9 @@
             {
               "type": "custom:button-card",
               "template": "deco_room",
-              "name": "The House",
+              "name": "Laundry",
               "variables": {
-                "lamps": [
-                  "switch.dining_room_xmas",
-                  "switch.painting_desk"
-                ],
+                "lamps": [],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
                 "line2_entity": "sensor.washer_current_status",
                 "line2_label": "Washer"
@@ -1689,56 +1818,6 @@
               "grid_options": {
                 "columns": "full",
                 "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "switch.dining_room_xmas",
-              "name": "Dining Xmas",
-              "icon": "mdi:pine-tree",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "switch.painting_desk",
-              "name": "Painting desk",
-              "icon": "mdi:palette-outline",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "media_player.kitchen_speaker",
-              "name": "Kitchen",
-              "icon": "mdi:speaker",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970",
-              "name": "Printer",
-              "icon": "mdi:printer-outline",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
               }
             },
             {
@@ -1768,192 +1847,30 @@
               "tap_action": {
                 "action": "more-info"
               }
-            }
-          ],
-          "visibility": [
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
             },
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
               "type": "custom:button-card",
-              "template": "deco_room",
-              "name": "Workshop",
-              "variables": {
-                "lamps": [],
-                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M196 92 V26 h88 V92\"/><path d=\"M206 92 V36 h68 V92\"/><path d=\"M220 80 h40 M228 70 h24 M236 60 h8\"/><path d=\"M240 26 V12 M226 12 h28\"/></svg>",
-                "line2_entity": "sensor.h2s_0938ac5b0600679_print_progress",
-                "line2_label": "Icarus"
-              },
-              "styles": {
-                "card": [
-                  {
-                    "--room-accent": "var(--deco-garnet)"
-                  }
-                ]
-              },
+              "template": "deco_tile",
+              "entity": "fan.air_purifier_fan",
+              "name": "Air purifier",
+              "icon": "mdi:air-purifier",
               "grid_options": {
-                "columns": "full",
+                "columns": 6,
                 "rows": 2
               }
             },
             {
-              "type": "picture-entity",
-              "entity": "camera.h2s_0938ac5b0600679_camera",
-              "camera_view": "auto",
-              "show_name": false,
-              "show_state": false,
-              "grid_options": {
-                "columns": 12
-              }
-            },
-            {
               "type": "custom:button-card",
-              "template": "deco_rows",
-              "entity": "sensor.h2s_0938ac5b0600679_print_status",
-              "name": "Icarus \u00b7 H2S",
-              "icon": "mdi:printer-3d",
-              "variables": {
-                "rows": [
-                  {
-                    "label": "Job",
-                    "entity": "sensor.h2s_0938ac5b0600679_task_name"
-                  },
-                  {
-                    "label": "Progress",
-                    "entity": "sensor.h2s_0938ac5b0600679_print_progress",
-                    "unit": "%"
-                  },
-                  {
-                    "label": "Time left",
-                    "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
-                    "unit": " h"
-                  },
-                  {
-                    "label": "Nozzle",
-                    "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
-                    "unit": "\u00b0",
-                    "round": 0
-                  },
-                  {
-                    "label": "Bed",
-                    "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
-                    "unit": "\u00b0",
-                    "round": 0
-                  },
-                  {
-                    "label": "AMS humidity",
-                    "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
-                    "unit": "%"
-                  }
-                ]
-              },
-              "grid_options": {
-                "columns": 12
-              }
-            }
-          ],
-          "column_span": 2,
-          "visibility": [
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_marquee",
-              "variables": {
-                "title": "Alexandria"
-              },
-              "grid_options": {
-                "columns": "full"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_battery",
-              "name": "UPS battery",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970",
+              "name": "Inkjet printer",
+              "icon": "mdi:printer-outline",
               "grid_options": {
                 "columns": 6,
-                "rows": 3
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_load",
-              "name": "UPS load",
-              "grid_options": {
-                "columns": 6,
-                "rows": 3
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_rows",
-              "entity": "sensor.alexandria_status",
-              "name": "Server",
-              "icon": "mdi:server",
-              "styles": {
-                "custom_fields": {
-                  "badge": [
-                    {
-                      "display": "none"
-                    }
-                  ]
-                }
+                "rows": 2
               },
-              "variables": {
-                "rows": [
-                  {
-                    "label": "Runtime on battery",
-                    "entity": "sensor.alexandria_time_left",
-                    "unit": " min",
-                    "round": 0
-                  },
-                  {
-                    "label": "Mains voltage",
-                    "entity": "sensor.alexandria_input_voltage",
-                    "unit": " V",
-                    "round": 0
-                  },
-                  {
-                    "label": "Array free",
-                    "entity": "sensor.sabnzbd_free_disk_space",
-                    "unit": " GB",
-                    "round": 0
-                  },
-                  {
-                    "label": "Ads blocked today",
-                    "entity": "sensor.pi_hole_ads_blocked"
-                  }
-                ]
-              },
-              "grid_options": {
-                "columns": "full"
+              "tap_action": {
+                "action": "more-info"
               }
             }
           ],
@@ -2207,6 +2124,11 @@
               "condition": "state",
               "entity": "input_select.dashboard_theme",
               "state": "Les Saisons"
+            },
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
             }
           ]
         },
@@ -2216,15 +2138,14 @@
             {
               "type": "custom:button-card",
               "template": "deco_room",
-              "name": "The House",
+              "name": "Kitchen",
               "variables": {
                 "lamps": [
-                  "switch.dining_room_xmas",
-                  "switch.painting_desk"
+                  "switch.dining_room_xmas"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
-                "line2_entity": "sensor.washer_current_status",
-                "line2_label": "Washer"
+                "line2_entity": "media_player.kitchen_speaker",
+                "line2_label": "Kitchen speaker"
               },
               "styles": {
                 "card": [
@@ -2252,6 +2173,61 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
+              "entity": "media_player.kitchen_speaker",
+              "name": "Kitchen speaker",
+              "icon": "mdi:speaker",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            }
+          ],
+          "visibility": [
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state": "Les Saisons"
+            },
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Craft Room",
+              "variables": {
+                "lamps": [
+                  "switch.painting_desk"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M196 92 V26 h88 V92\"/><path d=\"M206 92 V36 h68 V92\"/><path d=\"M220 80 h40 M228 70 h24 M236 60 h8\"/><path d=\"M240 26 V12 M226 12 h28\"/></svg>",
+                "line2_entity": "sensor.h2s_0938ac5b0600679_print_status",
+                "line2_label": "Icarus"
+              },
+              "styles": {
+                "card": [
+                  {
+                    "--room-accent": "var(--deco-garnet)"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "switch.painting_desk",
               "name": "Painting desk",
               "icon": "mdi:palette-outline",
@@ -2263,9 +2239,9 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
-              "entity": "media_player.kitchen_speaker",
-              "name": "Kitchen",
-              "icon": "mdi:speaker",
+              "entity": "sensor.h2s_0938ac5b0600679_print_status",
+              "name": "Icarus",
+              "icon": "mdi:printer-3d",
               "grid_options": {
                 "columns": 6,
                 "rows": 2
@@ -2273,19 +2249,44 @@
               "tap_action": {
                 "action": "more-info"
               }
+            }
+          ],
+          "visibility": [
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state": "Les Saisons"
             },
             {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
               "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970",
-              "name": "Printer",
-              "icon": "mdi:printer-outline",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
+              "template": "deco_room",
+              "name": "Laundry",
+              "variables": {
+                "lamps": [],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
+                "line2_entity": "sensor.washer_current_status",
+                "line2_label": "Washer"
               },
-              "tap_action": {
-                "action": "more-info"
+              "styles": {
+                "card": [
+                  {
+                    "--room-accent": "var(--deco-gold)"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
               }
             },
             {
@@ -2315,92 +2316,30 @@
               "tap_action": {
                 "action": "more-info"
               }
-            }
-          ],
-          "visibility": [
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Les Saisons"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_marquee",
-              "variables": {
-                "title": "Alexandria"
-              },
-              "grid_options": {
-                "columns": "full"
-              }
             },
             {
               "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_battery",
-              "name": "UPS battery",
+              "template": "deco_tile",
+              "entity": "fan.air_purifier_fan",
+              "name": "Air purifier",
+              "icon": "mdi:air-purifier",
               "grid_options": {
                 "columns": 6,
-                "rows": 3
+                "rows": 2
               }
             },
             {
               "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_load",
-              "name": "UPS load",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970",
+              "name": "Inkjet printer",
+              "icon": "mdi:printer-outline",
               "grid_options": {
                 "columns": 6,
-                "rows": 3
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_rows",
-              "entity": "sensor.alexandria_status",
-              "name": "Server",
-              "icon": "mdi:server",
-              "styles": {
-                "custom_fields": {
-                  "badge": [
-                    {
-                      "display": "none"
-                    }
-                  ]
-                }
+                "rows": 2
               },
-              "variables": {
-                "rows": [
-                  {
-                    "label": "Runtime on battery",
-                    "entity": "sensor.alexandria_time_left",
-                    "unit": " min",
-                    "round": 0
-                  },
-                  {
-                    "label": "Mains voltage",
-                    "entity": "sensor.alexandria_input_voltage",
-                    "unit": " V",
-                    "round": 0
-                  },
-                  {
-                    "label": "Array free",
-                    "entity": "sensor.sabnzbd_free_disk_space",
-                    "unit": " GB",
-                    "round": 0
-                  },
-                  {
-                    "label": "Ads blocked today",
-                    "entity": "sensor.pi_hole_ads_blocked"
-                  }
-                ]
-              },
-              "grid_options": {
-                "columns": "full"
+              "tap_action": {
+                "action": "more-info"
               }
             }
           ],
@@ -2409,6 +2348,11 @@
               "condition": "state",
               "entity": "input_select.dashboard_theme",
               "state": "Les Saisons"
+            },
+            {
+              "condition": "state",
+              "entity": "input_select.dashboard_theme",
+              "state_not": "Cogitator"
             }
           ]
         },
@@ -2499,15 +2443,76 @@
                   "icon_height": "24px"
                 }
               ],
+              "purifier_entity": "fan.air_purifier_fan",
+              "rail": [
+                {
+                  "label": "LIGHTS ON",
+                  "count_on": [
+                    "switch.couch_lamp",
+                    "switch.chez_lounge_lamp",
+                    "switch.pappasan_lamp",
+                    "switch.lamp_window",
+                    "switch.grow_lamp",
+                    "switch.torch_light_front",
+                    "switch.torch_light_back",
+                    "switch.basement_fireplace_lights",
+                    "switch.dining_room_xmas",
+                    "switch.painting_desk",
+                    "light.outdoor_dimmer_light_1",
+                    "light.outdoor_dimmer_light_2"
+                  ]
+                },
+                {
+                  "label": "UPS BATTERY",
+                  "entity": "sensor.alexandria_battery",
+                  "unit": "%",
+                  "round": 0
+                },
+                {
+                  "label": "UPS LOAD",
+                  "entity": "sensor.alexandria_load",
+                  "unit": "%",
+                  "round": 0
+                },
+                {
+                  "label": "WAN Mb/s",
+                  "entity": "sensor.q1000k_router_download_speed",
+                  "unit": "",
+                  "round": 0
+                }
+              ],
+              "systems": {
+                "type": "status",
+                "rows": [
+                  {
+                    "name": "Washer",
+                    "entity": "sensor.washer_current_status"
+                  },
+                  {
+                    "name": "Dryer",
+                    "entity": "sensor.dryer_current_status"
+                  },
+                  {
+                    "name": "Icarus",
+                    "entity": "sensor.h2s_0938ac5b0600679_print_status",
+                    "progress": "sensor.h2s_0938ac5b0600679_print_progress"
+                  },
+                  {
+                    "name": "Inkjet",
+                    "entity": "sensor.hp_officejet_pro_6970"
+                  },
+                  {
+                    "name": "UPS",
+                    "entity": "sensor.alexandria_status"
+                  }
+                ]
+              },
               "rooms": [
                 {
                   "title": "Living Room",
-                  "season": "Spring",
-                  "position": 0,
                   "cards": [
                     {
                       "type": "entities",
-                      "show_header_toggle": false,
                       "entities": [
                         {
                           "entity": "switch.couch_lamp",
@@ -2538,13 +2543,28 @@
                   ]
                 },
                 {
-                  "title": "Library",
-                  "season": "Summer",
-                  "position": 33.333333333333336,
+                  "title": "Dining & Kitchen",
                   "cards": [
                     {
                       "type": "entities",
-                      "show_header_toggle": false,
+                      "entities": [
+                        {
+                          "entity": "switch.dining_room_xmas",
+                          "name": "Dining Xmas"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "media-control",
+                      "entity": "media_player.kitchen_speaker"
+                    }
+                  ]
+                },
+                {
+                  "title": "Library",
+                  "cards": [
+                    {
+                      "type": "entities",
                       "entities": [
                         {
                           "entity": "switch.torch_light_front",
@@ -2567,13 +2587,28 @@
                   ]
                 },
                 {
-                  "title": "Outside",
-                  "season": "Autumn",
-                  "position": 66.66666666666667,
+                  "title": "Craft Room",
                   "cards": [
                     {
                       "type": "entities",
-                      "show_header_toggle": false,
+                      "entities": [
+                        {
+                          "entity": "switch.painting_desk",
+                          "name": "Painting desk"
+                        },
+                        {
+                          "entity": "light.h2s_0938ac5b0600679_chamber_light",
+                          "name": "Icarus chamber"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Outside",
+                  "cards": [
+                    {
+                      "type": "entities",
                       "entities": [
                         {
                           "entity": "light.outdoor_dimmer_light_1",
@@ -2596,251 +2631,47 @@
                   ]
                 },
                 {
-                  "title": "Workshop",
-                  "season": "Winter",
-                  "position": 100,
+                  "title": "Weather",
+                  "code": "ENV / 02",
                   "cards": [
                     {
-                      "type": "picture-entity",
-                      "entity": "camera.h2s_0938ac5b0600679_camera",
-                      "show_name": false,
-                      "show_state": false
-                    },
-                    {
-                      "type": "entities",
-                      "show_header_toggle": false,
-                      "entities": [
+                      "type": "status",
+                      "rows": [
                         {
-                          "entity": "sensor.h2s_0938ac5b0600679_print_status",
-                          "name": "Icarus"
+                          "name": "Now",
+                          "entity": "weather.forecast_home",
+                          "attr": "temperature",
+                          "unit": "\u00b0"
                         },
                         {
-                          "entity": "sensor.h2s_0938ac5b0600679_print_progress",
-                          "name": "Progress"
+                          "name": "Sky",
+                          "entity": "weather.forecast_home"
                         },
                         {
-                          "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
-                          "name": "Time remaining"
+                          "name": "Humidity",
+                          "entity": "weather.forecast_home",
+                          "attr": "humidity",
+                          "unit": "%"
                         },
                         {
-                          "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
-                          "name": "Nozzle"
+                          "name": "Wind",
+                          "entity": "weather.forecast_home",
+                          "attr": "wind_speed",
+                          "unit": " mph"
                         },
                         {
-                          "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
-                          "name": "Bed"
-                        },
-                        {
-                          "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
-                          "name": "AMS humidity"
+                          "name": "Rain sensor",
+                          "entity": "binary_sensor.rachio_9207aa_rain",
+                          "map": {
+                            "on": "RAIN",
+                            "off": "DRY"
+                          }
                         }
                       ]
                     }
                   ]
                 }
               ],
-              "grid_options": {
-                "columns": "full"
-              }
-            }
-          ],
-          "visibility": [
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Cogitator"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_room",
-              "name": "The House",
-              "variables": {
-                "lamps": [
-                  "switch.dining_room_xmas",
-                  "switch.painting_desk"
-                ],
-                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
-                "line2_entity": "sensor.washer_current_status",
-                "line2_label": "Washer"
-              },
-              "styles": {
-                "card": [
-                  {
-                    "--room-accent": "var(--deco-gold)"
-                  }
-                ]
-              },
-              "grid_options": {
-                "columns": "full",
-                "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "switch.dining_room_xmas",
-              "name": "Dining Xmas",
-              "icon": "mdi:pine-tree",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "switch.painting_desk",
-              "name": "Painting desk",
-              "icon": "mdi:palette-outline",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "media_player.kitchen_speaker",
-              "name": "Kitchen",
-              "icon": "mdi:speaker",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970",
-              "name": "Printer",
-              "icon": "mdi:printer-outline",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.washer_current_status",
-              "name": "Washer",
-              "icon": "mdi:washing-machine",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.dryer_current_status",
-              "name": "Dryer",
-              "icon": "mdi:tumble-dryer",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            }
-          ],
-          "visibility": [
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Cogitator"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_marquee",
-              "variables": {
-                "title": "Alexandria"
-              },
-              "grid_options": {
-                "columns": "full"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_battery",
-              "name": "UPS battery",
-              "grid_options": {
-                "columns": 6,
-                "rows": 3
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_gauge",
-              "entity": "sensor.alexandria_load",
-              "name": "UPS load",
-              "grid_options": {
-                "columns": 6,
-                "rows": 3
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_rows",
-              "entity": "sensor.alexandria_status",
-              "name": "Server",
-              "icon": "mdi:server",
-              "styles": {
-                "custom_fields": {
-                  "badge": [
-                    {
-                      "display": "none"
-                    }
-                  ]
-                }
-              },
-              "variables": {
-                "rows": [
-                  {
-                    "label": "Runtime on battery",
-                    "entity": "sensor.alexandria_time_left",
-                    "unit": " min",
-                    "round": 0
-                  },
-                  {
-                    "label": "Mains voltage",
-                    "entity": "sensor.alexandria_input_voltage",
-                    "unit": " V",
-                    "round": 0
-                  },
-                  {
-                    "label": "Array free",
-                    "entity": "sensor.sabnzbd_free_disk_space",
-                    "unit": " GB",
-                    "round": 0
-                  },
-                  {
-                    "label": "Ads blocked today",
-                    "entity": "sensor.pi_hole_ads_blocked"
-                  }
-                ]
-              },
               "grid_options": {
                 "columns": "full"
               }
@@ -3414,7 +3245,6 @@
       "sections": [
         {
           "type": "grid",
-          "column_span": 2,
           "cards": [
             {
               "type": "custom:button-card",
@@ -3454,7 +3284,8 @@
                 "action": "more-info"
               }
             }
-          ]
+          ],
+          "column_span": 2
         },
         {
           "type": "grid",
@@ -3513,7 +3344,7 @@
               "type": "custom:button-card",
               "template": "deco_marquee",
               "variables": {
-                "title": "Now playing"
+                "title": "Jellyfin"
               },
               "grid_options": {
                 "columns": "full"
@@ -3607,20 +3438,6 @@
               "tap_action": {
                 "action": "more-info"
               }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.sonarr_upcoming",
-              "name": "Upcoming episodes",
-              "icon": "mdi:television-classic",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
             }
           ]
         },
@@ -3635,6 +3452,20 @@
               },
               "grid_options": {
                 "columns": "full"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.sonarr_upcoming",
+              "name": "Upcoming episodes",
+              "icon": "mdi:television-classic",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
               }
             },
             {
@@ -3700,7 +3531,60 @@
               "type": "custom:button-card",
               "template": "deco_marquee",
               "variables": {
-                "title": "Zones (tap to water now)"
+                "title": "Outdoor lights"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_1",
+              "name": "Outdoor 1",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_2",
+              "name": "Outdoor 2",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "automation.outdoor_lights_sunset_to_10_pm",
+              "name": "Sunset schedule",
+              "icon": "mdi:weather-sunset",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "toggle"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Water now (tap a zone)"
               },
               "grid_options": {
                 "columns": "full"
@@ -3832,40 +3716,230 @@
                 "columns": 6,
                 "rows": 2
               }
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sections",
+      "title": "Workshop",
+      "path": "workshop",
+      "icon": "mdi:printer-3d",
+      "max_columns": 3,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
             {
               "type": "custom:button-card",
               "template": "deco_marquee",
               "variables": {
-                "title": "Outdoor lights"
+                "title": "Icarus \u00b7 Bambu H2S"
               },
               "grid_options": {
                 "columns": "full"
               }
             },
             {
-              "type": "tile",
-              "entity": "light.outdoor_dimmer_light_1",
-              "name": "Outdoor 1",
-              "icon": "mdi:outdoor-lamp",
-              "features": [
-                {
-                  "type": "light-brightness"
-                }
-              ],
-              "features_position": "bottom"
+              "type": "custom:ha-bambulab-print_status-card",
+              "printer": "ffee4738686992f668bd921495f6fb9a",
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "light.outdoor_dimmer_light_2",
-              "name": "Outdoor 2",
-              "icon": "mdi:outdoor-lamp",
-              "features": [
-                {
-                  "type": "light-brightness"
-                }
-              ],
-              "features_position": "bottom"
+              "type": "custom:button-card",
+              "template": "deco_rows",
+              "entity": "sensor.h2s_0938ac5b0600679_print_status",
+              "name": "Icarus \u00b7 H2S",
+              "icon": "mdi:printer-3d",
+              "variables": {
+                "rows": [
+                  {
+                    "label": "Job",
+                    "entity": "sensor.h2s_0938ac5b0600679_task_name"
+                  },
+                  {
+                    "label": "Progress",
+                    "entity": "sensor.h2s_0938ac5b0600679_print_progress",
+                    "unit": "%"
+                  },
+                  {
+                    "label": "Time left",
+                    "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
+                    "unit": " h"
+                  },
+                  {
+                    "label": "Nozzle",
+                    "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
+                    "unit": "\u00b0",
+                    "round": 0
+                  },
+                  {
+                    "label": "Bed",
+                    "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
+                    "unit": "\u00b0",
+                    "round": 0
+                  },
+                  {
+                    "label": "AMS humidity",
+                    "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
+                    "unit": "%"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Filament (AMS)"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "custom:ha-bambulab-ams-card",
+              "ams": "3938769c64fa7bcb59d95b6dc46b6862",
+              "printer": "ffee4738686992f668bd921495f6fb9a",
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Controls"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "custom:ha-bambulab-print_control-card",
+              "printer": "ffee4738686992f668bd921495f6fb9a",
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "light.h2s_0938ac5b0600679_chamber_light",
+              "name": "Chamber light",
+              "icon": "mdi:lightbulb-on-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.painting_desk",
+              "name": "Painting desk",
+              "icon": "mdi:palette-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Inkjet printer \u00b7 HP OfficeJet"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970",
+              "name": "Status",
+              "icon": "mdi:printer-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970_black_ink",
+              "name": "Black ink",
+              "icon": "mdi:water",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970_cyan_ink",
+              "name": "Cyan ink",
+              "icon": "mdi:water",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970_magenta_ink",
+              "name": "Magenta ink",
+              "icon": "mdi:water",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.hp_officejet_pro_6970_yellow_ink",
+              "name": "Yellow ink",
+              "icon": "mdi:water",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
             }
           ]
         }
@@ -3982,64 +4056,7 @@
               "type": "custom:button-card",
               "template": "deco_marquee",
               "variables": {
-                "title": "Last 24 hours"
-              },
-              "grid_options": {
-                "columns": "full"
-              }
-            },
-            {
-              "type": "history-graph",
-              "title": "UPS load and battery",
-              "hours_to_show": 24,
-              "entities": [
-                {
-                  "entity": "sensor.alexandria_load",
-                  "name": "Load"
-                },
-                {
-                  "entity": "sensor.alexandria_battery",
-                  "name": "Battery"
-                }
-              ]
-            },
-            {
-              "type": "history-graph",
-              "title": "Mains voltage",
-              "hours_to_show": 24,
-              "entities": [
-                {
-                  "entity": "sensor.alexandria_input_voltage",
-                  "name": "Volts"
-                }
-              ]
-            },
-            {
-              "type": "history-graph",
-              "title": "Internet traffic",
-              "hours_to_show": 24,
-              "entities": [
-                {
-                  "entity": "sensor.q1000k_router_download_speed",
-                  "name": "Down"
-                },
-                {
-                  "entity": "sensor.q1000k_router_upload_speed",
-                  "name": "Up"
-                }
-              ]
-            }
-          ],
-          "column_span": 2
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_marquee",
-              "variables": {
-                "title": "Pi-hole"
+                "title": "Network"
               },
               "grid_options": {
                 "columns": "full"
@@ -4048,8 +4065,50 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
+              "entity": "binary_sensor.q1000k_router_wan_status",
+              "name": "Internet",
+              "icon": "mdi:web",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.q1000k_router_download_speed",
+              "name": "Download",
+              "icon": "mdi:download-network",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.q1000k_router_upload_speed",
+              "name": "Upload",
+              "icon": "mdi:upload-network",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "switch.pi_hole",
-              "name": "Ad blocking",
+              "name": "Pi-hole ad blocking",
               "icon": "mdi:shield-check",
               "grid_options": {
                 "columns": 6,
@@ -4208,74 +4267,65 @@
                 "action": "url",
                 "url_path": "https://photos.salientpoint.net"
               }
-            },
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
             {
               "type": "custom:button-card",
               "template": "deco_marquee",
               "variables": {
-                "title": "Printer ink"
+                "title": "Last 24 hours"
               },
               "grid_options": {
                 "columns": "full"
               }
             },
             {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970_black_ink",
-              "name": "Black",
-              "icon": "mdi:water",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
+              "type": "history-graph",
+              "title": "UPS load and battery",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.alexandria_load",
+                  "name": "Load"
+                },
+                {
+                  "entity": "sensor.alexandria_battery",
+                  "name": "Battery"
+                }
+              ]
             },
             {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970_cyan_ink",
-              "name": "Cyan",
-              "icon": "mdi:water",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
+              "type": "history-graph",
+              "title": "Mains voltage",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.alexandria_input_voltage",
+                  "name": "Volts"
+                }
+              ]
             },
             {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970_magenta_ink",
-              "name": "Magenta",
-              "icon": "mdi:water",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
-            },
-            {
-              "type": "custom:button-card",
-              "template": "deco_tile",
-              "entity": "sensor.hp_officejet_pro_6970_yellow_ink",
-              "name": "Yellow",
-              "icon": "mdi:water",
-              "grid_options": {
-                "columns": 6,
-                "rows": 2
-              },
-              "tap_action": {
-                "action": "more-info"
-              }
+              "type": "history-graph",
+              "title": "Internet traffic",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.q1000k_router_download_speed",
+                  "name": "Down"
+                },
+                {
+                  "entity": "sensor.q1000k_router_upload_speed",
+                  "name": "Up"
+                }
+              ]
             }
-          ]
+          ],
+          "column_span": 2
         }
       ]
     },

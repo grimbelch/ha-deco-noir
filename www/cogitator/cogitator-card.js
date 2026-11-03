@@ -44,6 +44,20 @@ const style=`
 /* Idle printer collapses to its status line. */
 .panel.idle progress,.panel.idle .printer-metrics{display:none}.panel.idle .printer-head strong{font-size:26px;letter-spacing:.06em}
 @media(max-width:650px){.keys button{min-height:44px;font-size:11px}.bottom{font-size:10px;letter-spacing:.06em}.brand p{font-size:10px}.panel h2 small{font-size:10px}}
+
+/* Phase 2: status rows and rail warnings */
+.status-list{display:grid}
+.status-row{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px;width:100%;text-align:left;padding:6px 2px;background:transparent;border:0;border-bottom:1px solid #24683b;border-radius:0;color:var(--hot);font-size:14px}
+.status-row:last-child{border-bottom:0}.status-row:hover{background:#0b2a15;box-shadow:none}
+.status-label{color:#8fcfa4}.status-value{font-size:13px;letter-spacing:.06em;text-align:right}
+.status-value[data-tone=hot]{color:#001b09;background:#7bf5a0;padding:2px 8px;box-shadow:0 0 10px #58e28466}
+.status-value[data-tone=dim]{color:#6fbd88}.status-value[data-tone=warn]{color:#ffb428;text-shadow:0 0 8px #ffb42888}
+.readout.warn strong{color:#ffb428;text-shadow:0 0 8px #ffb42888}
+.rail .readout{font-size:11px;letter-spacing:.04em}.rail .readout strong{font-size:22px}
+
+/* Phase 2b: 2x2 scenes fill their panel; rail readouts keep value on one line */
+@media(min-width:651px){.middle>.panel:first-child{display:flex;flex-direction:column}.middle .scenes{flex:1;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}.middle .scene{min-height:86px;font-size:13px;flex-direction:row;gap:12px}.middle .scene ha-icon{--mdc-icon-size:30px}}
+.rail .readout{flex-direction:column;align-items:flex-start;gap:2px}.rail .readout strong{white-space:nowrap}
 `;
 class CogitatorHomeCard extends Base {
   connectedCallback(){this.startClock();}
@@ -58,20 +72,44 @@ class CogitatorHomeCard extends Base {
     const options=this.el('div','theme-controls'),label=this.el('label','','TERMINAL PATTERN');label.htmlFor='theme';this.select=this.el('select');this.select.id='theme';this.select.setAttribute('aria-label','Dashboard theme');for(const name of ['Deco Noir','Deco Noir Lite','Les Saisons','Cogitator']){const option=this.el('option','',name);option.value=name;this.select.append(option);}this.select.onchange=()=>this.service('input_select','select_option',{entity_id:this.config.theme_entity,option:this.select.value});
     const fx=this.button('','Reduce phosphor effects',()=>{this.page.dataset.effects=this.page.dataset.effects==='on'?'reduced':'on';try{localStorage.setItem('cogitator-effects',this.page.dataset.effects);}catch{}fx.textContent='PHOSPHOR / '+this.page.dataset.effects.toUpperCase();fx.setAttribute('aria-pressed',String(this.page.dataset.effects==='reduced'));});fx.className='effects';fx.textContent='PHOSPHOR / '+effects.toUpperCase();fx.setAttribute('aria-pressed',String(effects==='reduced'));options.append(label,this.select,fx);header.append(options);this.page.append(header);
     const layout=this.el('div','layout'),rail=this.el('aside','rail'),content=this.el('main','content');layout.append(rail,content);this.page.append(layout);
-    const sigil=this.el('img','sigil');sigil.src='/local/cogitator/cog-skull.png';sigil.alt='Cogitator cog-skull';rail.append(sigil);this.clock=this.el('div','clock');this.date=this.el('div','date');rail.append(this.clock,this.date,this.el('div','rail-label','RELAY STATUS'));
-    const counts={};for(const name of ['ENABLED','STANDBY','UNAVAILABLE']){const row=this.el('div','readout'),value=this.el('strong','','—');row.append(this.el('span','',name),value);rail.append(row);counts[name]=value;}
-    const entityIds=[...new Set(this.config.rooms.filter(r=>r.title!=='Workshop').flatMap(r=>r.cards.filter(c=>c.type==='entities').flatMap(c=>c.entities.map(e=>e.entity))))];
-    this.widgets.push(()=>{const states=entityIds.map(id=>this._hass.states[id]?.state);counts.ENABLED.textContent=states.filter(s=>s==='on').length;counts.STANDBY.textContent=states.filter(s=>s==='off').length;counts.UNAVAILABLE.textContent=states.filter(s=>!s||['unknown','unavailable'].includes(s)).length;});
+    const sigil=this.el('img','sigil');sigil.src='/local/cogitator/cog-skull.png';sigil.alt='Cogitator cog-skull';rail.append(sigil);this.clock=this.el('div','clock');this.date=this.el('div','date');rail.append(this.clock,this.date,this.el('div','rail-label','HOUSE STATUS'));
+    const railFns=[];for(const item of this.config.rail||[]){const row=this.el('div','readout'),value=this.el('strong','','—');row.append(this.el('span','',item.label),value);rail.append(row);
+      if(item.count_on){railFns.push(()=>{const states=item.count_on.map(id=>this._hass.states[id]?.state);value.textContent=states.filter(x=>x==='on').length+'/'+states.length;});}
+      else railFns.push(()=>{const st=this._hass.states[item.entity],n=Number(st?.state);value.textContent=st&&Number.isFinite(n)?n.toFixed(item.round??0)+(item.unit||''):(st?.state&&!['unknown','unavailable'].includes(st.state)?st.state:'—');const lowIsBad=item.label==='UPS BATTERY';row.classList.toggle('warn',Number.isFinite(n)&&(lowIsBad?n<50:item.label==='UPS LOAD'&&n>80));});}
+    this.widgets.push(()=>{for(const fn of railFns)fn();});
     this.connection=this.el('div','rail-foot');rail.append(this.connection);
     const panel=(name,code,parent)=>{const p=this.el('section','panel'),h=this.el('h2','',name);h.append(this.el('small','',code));p.append(h);parent.append(p);return p;};
     const music=panel('Vox-Canticle','SOURCE / SPOTIFY',content);this.media(this.config.music_entity,music,true);const line=this.el('div','timeline');this.elapsed=this.el('span','','0:00');this.duration=this.el('span','','0:00');this.progress=this.el('progress');this.progress.max=100;this.progress.value=0;this.progress.setAttribute('aria-label','Playback progress');line.append(this.elapsed,this.progress,this.duration);music.append(line);
     const middle=this.el('div','middle');content.append(middle);const scenes=this.el('div','scenes');panel('Quick Scenes','SCN / 001—004',middle).append(scenes);
     for(const cfg of this.config.scenes){const b=this.button('',cfg.name,()=>{const a=cfg.tap_action,service=a.service||a.perform_action;if(service){const [d,m]=service.split('.');this.service(d,m,a.service_data||a.data||{},a.target);}});b.className='scene';b.append(this.icon(cfg.icon),this.el('span','',cfg.name));scenes.append(b);}
-    this.climate(this.config.climate_entity,panel('Climate','ENV / 01',middle));const workshop=this.config.rooms.find(r=>r.title==='Workshop');if(workshop)this.printer(workshop.cards,panel('Icarus Printer','FAB / IC-01',middle));
-    const rooms=this.el('div','rooms');content.append(rooms);for(const [index,room]of this.config.rooms.filter(r=>r.title!=='Workshop').entries()){const p=panel(room.title,'RELAY / '+String(index+1).padStart(2,'0'),rooms);for(const cfg of room.cards){if(cfg.type==='entities')this.rows(cfg.entities,p);else if(cfg.type==='media-control'){const block=this.el('div','room-media');p.append(block);this.media(cfg.entity,block);this.widgets.push(()=>{block.classList.toggle('idle',!['playing','paused','buffering'].includes(this._hass.states[cfg.entity]?.state));});}}}
+    const air=panel('Climate & Air','ENV / 01',middle);this.climate(this.config.climate_entity,air);if(this.config.purifier_entity)this.rows([{entity:this.config.purifier_entity,name:'Air purifier'}],air);if(this.config.systems)this.status(this.config.systems.rows,panel('Systems','SYS / 01',middle));
+    const rooms=this.el('div','rooms');content.append(rooms);for(const [index,room]of this.config.rooms.entries()){const p=panel(room.title,room.code||'RELAY / '+String(index+1).padStart(2,'0'),rooms);for(const cfg of room.cards){if(cfg.type==='status')this.status(cfg.rows,p);else if(cfg.type==='entities')this.rows(cfg.entities,p);else if(cfg.type==='media-control'){const block=this.el('div','room-media');p.append(block);this.media(cfg.entity,block);this.widgets.push(()=>{block.classList.toggle('idle',!['playing','paused','buffering'].includes(this._hass.states[cfg.entity]?.state));});}}}
     const footer=this.el('footer','bottom');footer.append(this.el('span','','✠ IN NOMINE OMNISSIAH'),this.el('span','','DOMUS / PATTERN IX'));this.link=this.el('span','','CONNECTING');footer.append(this.link);this.page.append(footer);this.error=this.el('div','error');this.error.setAttribute('role','status');this.page.append(this.error);this.update();this.tick();if(this.isConnected)this.startClock();
   }
   rows(entities,parent){for(const [i,cfg]of entities.entries()){const row=this.el('div','channel'),name=this.button(cfg.name,cfg.name+' details',()=>this.more(cfg.entity));name.className='channel-name';const keys=this.el('div','keys'),on=this.button('ENABLED',cfg.name+' on',()=>this.service(cfg.entity.split('.')[0],'turn_on',{entity_id:cfg.entity})),off=this.button('STANDBY',cfg.name+' off',()=>this.service(cfg.entity.split('.')[0],'turn_off',{entity_id:cfg.entity}));keys.append(on,off);row.append(this.el('span','channel-id','['+String(i+1).padStart(2,'0')+']'),name,keys);parent.append(row);this.widgets.push(()=>{const state=this._hass.states[cfg.entity]?.state,available=['on','off'].includes(state);row.dataset.state=available?state:'unavailable';on.disabled=off.disabled=!available;keys.classList.toggle('unavailable',!available);on.classList.toggle('active',state==='on');off.classList.toggle('active',state==='off');on.setAttribute('aria-pressed',String(state==='on'));off.setAttribute('aria-pressed',String(state==='off'));keys.title=available?state:'Unavailable';});}}
+  status(rows,parent){
+    const list=this.el('div','status-list');parent.append(list);
+    for(const cfg of rows){
+      const row=this.el('button','status-row');row.type='button';row.setAttribute('aria-label',cfg.name+' details');row.onclick=()=>this.more(cfg.entity);
+      const label=this.el('span','status-label',cfg.name),value=this.el('span','status-value','—');row.append(label,value);list.append(row);
+      this.widgets.push(()=>{
+        const st=this._hass.states[cfg.entity];let text,tone='';
+        if(!st||st.state==='unavailable'){text='UNAVAILABLE';tone='warn';}
+        else{
+          const raw=cfg.attr?st.attributes[cfg.attr]:st.state;
+          if(raw===undefined||raw===null||raw==='unknown'){text='—';}
+          else if(cfg.map&&cfg.map[raw]!==undefined){text=cfg.map[raw];tone=raw==='on'?'hot':'';}
+          else if(cfg.attr){const n=Number(raw);text=(Number.isFinite(n)?Math.round(n):raw)+(cfg.unit||'');}
+          else{text=String(raw).replaceAll('_',' ').toUpperCase();}
+          const s=String(st.state).toLowerCase();
+          if(['running','printing','prepare','slicing','heating','drying','washing','rinsing','spinning','cooling','pause','paused','playing'].some(k=>s.includes(k))){tone='hot';if(cfg.progress){const n=Number(this._hass.states[cfg.progress]?.state);if(Number.isFinite(n))text+=' '+Math.round(n)+'%';}}
+          else if(['failed','error','offline'].includes(s)){tone='warn';}
+          else if(['power_off','off','idle','finish','standby','online'].includes(s)&&!cfg.attr&&!cfg.map){tone='dim';}
+        }
+        value.textContent=text;value.dataset.tone=tone;
+      });
+    }
+  }
   printer(cards,parent){const camera=cards.find(c=>c.type==='picture-entity')?.entity,sensors=cards.find(c=>c.type==='entities')?.entities||[];const head=this.el('div','printer-head'),pct=this.el('strong','','—'),status=this.el('span','printer-status');head.append(pct,status);const meter=this.el('progress');meter.max=100;meter.value=0;meter.setAttribute('aria-label','Print progress');parent.append(head,meter);const metrics=this.el('div','printer-metrics');const values=sensors.slice(2,4).map(cfg=>{const item=this.el('div'),value=this.el('strong','','—');item.append(this.el('span','caption',cfg.name),value);metrics.append(item);return{entity:cfg.entity,value};});parent.append(metrics);if(camera){const b=this.button('VIEW PRINTER', 'View printer camera',()=>this.more(camera));b.className='printer-open';parent.append(b);}this.widgets.push(()=>{const raw=this._hass.states[sensors[0]?.entity]?.state||'unavailable';const idle=['finish','idle','offline','unavailable','unknown'].includes(raw);parent.classList.toggle('idle',idle);status.textContent=raw.replaceAll('_',' ');const n=Number(this._hass.states[sensors[1]?.entity]?.state);pct.textContent=idle?({finish:'COMPLETE',idle:'STANDBY',offline:'OFFLINE'}[raw]||'NO SIGNAL'):(Number.isFinite(n)?n+'%':'—');meter.value=Number.isFinite(n)?Math.min(100,Math.max(0,n)):0;for(const{entity,value}of values){const s=this._hass.states[entity];value.textContent=s&&!['unknown','unavailable'].includes(s.state)?s.state+' '+(s.attributes.unit_of_measurement||''):'—';}});}
   tick(){if(!this.clock)return;const now=new Date();this.clock.textContent=now.toLocaleTimeString([],{hour12:false});this.date.textContent=now.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});const connected=!!this._hass?.connection?.connected;this.connection.textContent=connected?'UPLINK / CONNECTED\nHOME ASSISTANT\nPATTERN IX.1':'UPLINK / DISCONNECTED';if(this.link)this.link.textContent=connected?'LINK VERIFIED':'LINK LOST';const s=this._hass?.states[this.config.music_entity],a=s?.attributes||{},duration=Number(a.media_duration)||0;let position=Number(a.media_position)||0;if(s?.state==='playing'&&a.media_position_updated_at){const dt=(Date.now()-Date.parse(a.media_position_updated_at))/1000;if(Number.isFinite(dt))position+=Math.max(0,dt);}position=Math.min(duration,Math.max(0,position));const fmt=n=>Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');if(this.elapsed){this.elapsed.textContent=fmt(position);this.duration.textContent=fmt(duration);this.progress.value=duration?position/duration*100:0;}}
 }
