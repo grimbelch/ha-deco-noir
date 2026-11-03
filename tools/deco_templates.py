@@ -75,7 +75,7 @@ TEMPLATES = {
             "img_cell": ["width: 32px", "height: 32px", "margin-left: 6px", "transform: rotate(45deg)",
                          "border: 1px solid var(--deco-hair-faint)", "background: rgba(255,255,255,.015)"],
             "icon": ["transform: rotate(-45deg)", "width: 18px", "color: rgba(237,230,214,.45)"],
-            "name": ["font-family: var(--deco-label)", "font-size: 11px", "letter-spacing: .14em", "text-transform: uppercase",
+            "name": ["font-family: var(--deco-label)", "font-size: 11px", "letter-spacing: .1em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.6)", "justify-self: start", "margin-top: 8px", "white-space: nowrap",
                      "overflow: hidden", "text-overflow: ellipsis", "max-width: 100%"],
             "state": ["font-family: var(--deco-num)", "font-size: 12px", "color: rgba(237,230,214,.52)", "justify-self: start",
@@ -103,9 +103,10 @@ TEMPLATES = {
         "show_state": False,
         "hold_action": {"action": "none"},
         "styles": {
-            "card": ["padding: 14px 6px 12px", "height: 100%", "box-sizing: border-box"],
-            "grid": ["grid-template-areas: '\"i\" \"n\"'", "grid-template-rows: 1fr min-content"],
-            "icon": ["width: 26px", "color: var(--deco-gold-hi)"],
+            "card": ["padding: 14px 6px 12px", "height: 100%", "min-height: 100px", "box-sizing: border-box"],
+            "grid": ["grid-template-areas: '\"i\" \"n\"'", "grid-template-rows: 40px min-content", "align-content: center"],
+            "img_cell": ["height: 40px", "width: 40px", "justify-self: center"],
+            "icon": ["width: 28px", "color: var(--deco-gold-hi)"],
             "name": ["font-family: var(--deco-label)", "font-size: 10px", "letter-spacing: .2em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.62)", "margin-top: 8px", "white-space: normal", "line-height: 1.3"],
         },
@@ -129,7 +130,7 @@ TEMPLATES = {
 .wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}
 .wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}
-@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}}
+@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}
 """,
         "custom_fields": {
             "left": """[[[
@@ -185,7 +186,7 @@ return `<div class="chips">${out}</div>`;
 const lamps=variables.lamps||[]; const on=lamps.filter(e=>states[e]&&states[e].state==='on').length;
 let l1= lamps.length ? (on===0?'<b>All off</b>':`<b>${on} of ${lamps.length}</b> on`) : '';
 let l2=''; if(variables.line2_entity && states[variables.line2_entity]){ const st=states[variables.line2_entity];
-  let v=st.state; if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} · ${v}${variables.line2_unit||''}`; }
+  let v=helpers.localize(st); if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} · ${v}${variables.line2_unit||''}`; }
 return `${l1}${l1&&l2?'<br>':''}${l2}`;
 ]]]""",
         },
@@ -194,12 +195,15 @@ return `${l1}${l1&&l2?'<br>':''}${l2}`;
                      "background: linear-gradient(180deg, rgba(14,14,20,.35), rgba(14,14,20,.62))"],
             "grid": ["grid-template-areas: '\"n meta\"'", "grid-template-columns: 1fr auto", "align-items: end", "height: 100%"],
             "name": ["font-family: var(--deco-display)", "font-size: 26px", "letter-spacing: .06em", "color: var(--deco-ivory)",
-                     "justify-self: start", "z-index: 1", "align-self: end"],
+                     "justify-self: start", "z-index: 1", "align-self: end", "white-space: nowrap", "overflow: hidden",
+                     "text-overflow: ellipsis", "max-width: 100%", "padding-right: 10px"],
             "custom_fields": {
-                "art": ["position: absolute", "right: 0", "bottom: 0", "width: 300px", "height: 92px", "opacity: .9", "pointer-events: none"],
+                "art": ["position: absolute", "right: 0", "bottom: 0", "width: 300px", "height: 92px", "opacity: .55", "pointer-events: none"],
                 "meta": ["font-family: var(--deco-label)", "font-size: 10px", "line-height: 1.7", "letter-spacing: .22em",
                          "text-transform: uppercase", "color: rgba(237,230,214,.62)", "text-align: right", "z-index: 1",
-                         "text-shadow: 0 1px 8px rgba(0,0,0,.9)", "align-self: end"],
+                         "text-shadow: 0 1px 8px rgba(0,0,0,.9)", "align-self: end",
+                         "background: rgba(11,11,14,.78)", "padding: 5px 9px", "border: 1px solid var(--deco-hair-faint)",
+                         "white-space: nowrap"],
             },
         },
         "extra_styles": ".meta b,#meta b{color:var(--deco-gold-hi);font-weight:600} b{color:var(--deco-gold-hi);font-weight:600}"
@@ -275,12 +279,13 @@ return h+'</div>';
     "deco_marker": {
         "card_mod": PLAIN,
         # deco-marker-mobile: on phones show only the diamond (labels crowd the living room)
-        "extra_styles": "@media (max-width: 600px) { #name { display: none !important; } ha-card { width: 30px !important; } }",
+        "extra_styles": "ha-card::after, ha-card::before { display: none !important; } @media (max-width: 600px) { #name { display: none !important; } ha-card { width: 30px !important; } }",
         "show_state": False,
         "tap_action": {"action": "toggle", "haptic": "light"},
         "hold_action": {"action": "more-info"},
         "styles": {
-            "card": ["background: none", "border: none", "box-shadow: none", "padding: 0", "overflow: visible", "width: 58px"],
+            "card": ["background: none", "border: none", "box-shadow: none", "padding: 0", "overflow: visible", "width: 58px",
+                     "-webkit-backdrop-filter: none", "backdrop-filter: none"],
             "grid": ["grid-template-areas: '\"i\" \"n\"'", "grid-template-rows: 34px auto", "justify-items: center"],
             "img_cell": ["width: 24px", "height: 24px", "transform: rotate(45deg)", "border: 1px solid var(--deco-gold)",
                          "background: rgba(11,11,14,.82)", "transition: box-shadow .4s ease, background .4s ease"],
@@ -307,11 +312,13 @@ return h+'</div>';
     # ------------------------------------------------------------ floor plan light pool (fades with the lamp)
     "deco_glow": {
         "card_mod": PLAIN,
+        # picture-elements children don't get card-mod classes, so opt out of the theme's glass + brackets here
+        "extra_styles": "ha-card::after, ha-card::before { display: none !important; }",
         "show_icon": False, "show_name": False, "show_state": False,
         "tap_action": {"action": "none"}, "hold_action": {"action": "none"},
         "styles": {
             "card": ["background: none", "border: none", "box-shadow: none", "padding: 0", "border-radius: 0",
-                     "width: 100%", "height: 100%",
+                     "-webkit-backdrop-filter: none", "backdrop-filter: none", "width: 100%", "height: 100%",
                      "background-image: [[[ return `url(${variables.img})`; ]]]",
                      "background-size: 100% 100%", "background-repeat: no-repeat",
                      "opacity: [[[ if (!entity || entity.state !== 'on') return 0; const b = entity.attributes.brightness; return b ? (0.35 + 0.65 * b / 255).toFixed(2) : 1; ]]]",

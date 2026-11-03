@@ -125,13 +125,15 @@ home = {
                 scene("Good night", "mdi:weather-night", "script.turn_on", {"entity_id": "script.good_night"}),
                 scene("All lamps off", "mdi:lightbulb-group-off-outline", "switch.turn_off", {"entity_id": LAMPS_ALL}),
                 scene("Pause music", "mdi:pause-circle-outline", "media_player.media_pause", {"entity_id": SPEAKERS}),
+                marquee("Now Playing"),
+                {"type": "media-control", "entity": "media_player.spotify", "name": "Spotify", "grid_options": {"columns": "full"}},
                 span=2),
 
         section(marquee("Climate"),
                 {"type": "thermostat", "entity": "climate.nest_thermostat", "name": "Thermostat",
                  "features": [{"type": "climate-hvac-modes", "hvac_modes": ["off", "heat", "cool", "heat_cool"]}],
                  "grid_options": {"columns": "full"}},
-                span=2),
+                span=1),
 
         section(room("Living Room", "living",
                      ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.lamp_window", "switch.grow_lamp"],
@@ -159,7 +161,7 @@ home = {
                 tile("automation.outdoor_lights_sunset_to_10_pm", "Sunset schedule", "mdi:weather-sunset"),
                 tile("switch.rachio_9207aa_rain_delay", "Rain delay", "mdi:weather-pouring")),
 
-        section(room("Around the House", "house",
+        section(room("The House", "house",
                      ["switch.dining_room_xmas", "switch.painting_desk"], "var(--deco-gold)",
                      ("sensor.washer_current_status", "Washer")),
                 tile("switch.dining_room_xmas", "Dining Xmas", "mdi:pine-tree"),
@@ -170,7 +172,7 @@ home = {
                 tile("sensor.dryer_current_status", "Dryer", "mdi:tumble-dryer", 6, "more-info")),
 
         section(room("Workshop", "workshop", [], "var(--deco-garnet)",
-                     (f"sensor.{P}_print_progress", "Icarus", None, "%")),
+                     (f"sensor.{P}_print_progress", "Icarus")),
                 {"type": "picture-entity", "entity": f"camera.{P}_camera", "camera_view": "auto",
                  "show_name": False, "show_state": False, "grid_options": {"columns": 12}},
                 {"type": "custom:button-card", "template": "deco_rows", "entity": f"sensor.{P}_print_status",
@@ -183,10 +185,6 @@ home = {
                      {"label": "Bed", "entity": f"sensor.{P}_bed_temperature", "unit": "°", "round": 0},
                      {"label": "AMS humidity", "entity": f"sensor.{P}_ams_1_humidity", "unit": "%"}]},
                  "grid_options": {"columns": 12}},
-                span=2),
-
-        section(marquee("Now Playing"),
-                {"type": "media-control", "entity": "media_player.spotify", "name": "Spotify", "grid_options": {"columns": "full"}},
                 span=2),
 
         section(marquee("Alexandria"),
@@ -203,7 +201,7 @@ home = {
                      {"label": "Array free", "entity": "sensor.sabnzbd_free_disk_space", "unit": " GB", "round": 0},
                      {"label": "Ads blocked today", "entity": "sensor.pi_hole_ads_blocked"}]},
                  "grid_options": {"columns": "full"}},
-                span=2),
+                span=1),
     ],
 }
 
@@ -217,7 +215,7 @@ def marker(m):
     if m["kind"] in ("speaker", "climate", "sensor"):
         c["tap_action"] = {"action": "more-info"}
     if m["kind"] == "climate":
-        c["name"] = "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'° · set '+Math.round(a.temperature||0)+'°'; ]]]"
+        c["name"] = "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'° / '+Math.round(a.temperature||0)+'°'; ]]]"
     if m["kind"] == "sensor":
         c["name"] = "[[[ return '" + m["name"] + " · ' + helpers.localize(entity); ]]]"
     return c
@@ -226,8 +224,9 @@ def marker(m):
 def glow(m):
     return {"type": "custom:button-card", "template": "deco_glow", "entity": m["entity"],
             "variables": {"img": f"/local/deco/{m['glow']}?v={ASSET_V}"},
-            "style": {"left": "50%", "top": "50%", "width": "100%", "height": "100%",
-                      "pointer-events": "none", "mix-blend-mode": "screen"}}
+            # button-card sets max-width: fit-content on itself; min-width wins, so the layer spans the plan
+            "style": {"left": "0", "top": "0", "transform": "none", "width": "100%", "height": "100%",
+                      "min-width": "100%", "display": "block", "pointer-events": "none", "mix-blend-mode": "screen"}}
 
 
 def plan(key):
@@ -237,12 +236,11 @@ def plan(key):
 
 
 floor = {
-    "type": "sections", "title": "Floor Plan", "path": "floor-plan", "icon": "mdi:floor-plan", "max_columns": 2,
+    "type": "sections", "title": "Floor Plan", "path": "floor-plan", "icon": "mdi:floor-plan", "max_columns": 3,
     "theme": THEME,
     "sections": [
         section(marquee("Main Floor"), plan("main"), span=2),
-        section(marquee("Upper Floor"), plan("upper")),
-        section(marquee("Lower Floor"), plan("lower")),
+        section(marquee("Upper Floor"), plan("upper"), marquee("Lower Floor"), plan("lower")),
     ],
 }
 

@@ -140,7 +140,7 @@
             "font-size": "11px"
           },
           {
-            "letter-spacing": ".14em"
+            "letter-spacing": ".1em"
           },
           {
             "text-transform": "uppercase"
@@ -294,6 +294,9 @@
             "height": "100%"
           },
           {
+            "min-height": "100px"
+          },
+          {
             "box-sizing": "border-box"
           }
         ],
@@ -302,12 +305,26 @@
             "grid-template-areas": "\"i\" \"n\""
           },
           {
-            "grid-template-rows": "1fr min-content"
+            "grid-template-rows": "40px min-content"
+          },
+          {
+            "align-content": "center"
+          }
+        ],
+        "img_cell": [
+          {
+            "height": "40px"
+          },
+          {
+            "width": "40px"
+          },
+          {
+            "justify-self": "center"
           }
         ],
         "icon": [
           {
-            "width": "26px"
+            "width": "28px"
           },
           {
             "color": "var(--deco-gold-hi)"
@@ -362,7 +379,7 @@
         "sensor.h2s_0938ac5b0600679_print_status",
         "climate.nest_thermostat"
       ],
-      "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}}\n",
+      "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
       "custom_fields": {
         "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
         "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
@@ -420,7 +437,7 @@
       "triggers_update": "all",
       "custom_fields": {
         "art": "[[[ return variables.art_svg || ''; ]]]",
-        "meta": "[[[\nconst lamps=variables.lamps||[]; const on=lamps.filter(e=>states[e]&&states[e].state==='on').length;\nlet l1= lamps.length ? (on===0?'<b>All off</b>':`<b>${on} of ${lamps.length}</b> on`) : '';\nlet l2=''; if(variables.line2_entity && states[variables.line2_entity]){ const st=states[variables.line2_entity];\n  let v=st.state; if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} \u00b7 ${v}${variables.line2_unit||''}`; }\nreturn `${l1}${l1&&l2?'<br>':''}${l2}`;\n]]]"
+        "meta": "[[[\nconst lamps=variables.lamps||[]; const on=lamps.filter(e=>states[e]&&states[e].state==='on').length;\nlet l1= lamps.length ? (on===0?'<b>All off</b>':`<b>${on} of ${lamps.length}</b> on`) : '';\nlet l2=''; if(variables.line2_entity && states[variables.line2_entity]){ const st=states[variables.line2_entity];\n  let v=helpers.localize(st); if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} \u00b7 ${v}${variables.line2_unit||''}`; }\nreturn `${l1}${l1&&l2?'<br>':''}${l2}`;\n]]]"
       },
       "styles": {
         "card": [
@@ -478,6 +495,21 @@
           },
           {
             "align-self": "end"
+          },
+          {
+            "white-space": "nowrap"
+          },
+          {
+            "overflow": "hidden"
+          },
+          {
+            "text-overflow": "ellipsis"
+          },
+          {
+            "max-width": "100%"
+          },
+          {
+            "padding-right": "10px"
           }
         ],
         "custom_fields": {
@@ -498,7 +530,7 @@
               "height": "92px"
             },
             {
-              "opacity": ".9"
+              "opacity": ".55"
             },
             {
               "pointer-events": "none"
@@ -534,6 +566,18 @@
             },
             {
               "align-self": "end"
+            },
+            {
+              "background": "rgba(11,11,14,.78)"
+            },
+            {
+              "padding": "5px 9px"
+            },
+            {
+              "border": "1px solid var(--deco-hair-faint)"
+            },
+            {
+              "white-space": "nowrap"
             }
           ]
         }
@@ -665,7 +709,7 @@
       "card_mod": {
         "class": "deco-plain"
       },
-      "extra_styles": "@media (max-width: 600px) { #name { display: none !important; } ha-card { width: 30px !important; } }",
+      "extra_styles": "ha-card::after, ha-card::before { display: none !important; } @media (max-width: 600px) { #name { display: none !important; } ha-card { width: 30px !important; } }",
       "show_state": false,
       "tap_action": {
         "action": "toggle",
@@ -693,6 +737,12 @@
           },
           {
             "width": "58px"
+          },
+          {
+            "-webkit-backdrop-filter": "none"
+          },
+          {
+            "backdrop-filter": "none"
           }
         ],
         "grid": [
@@ -848,6 +898,7 @@
       "card_mod": {
         "class": "deco-plain"
       },
+      "extra_styles": "ha-card::after, ha-card::before { display: none !important; }",
       "show_icon": false,
       "show_name": false,
       "show_state": false,
@@ -873,6 +924,12 @@
           },
           {
             "border-radius": "0"
+          },
+          {
+            "-webkit-backdrop-filter": "none"
+          },
+          {
+            "backdrop-filter": "none"
           },
           {
             "width": "100%"
@@ -1021,6 +1078,24 @@
                 "columns": 6,
                 "rows": 2
               }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Now Playing"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.spotify",
+              "name": "Spotify",
+              "grid_options": {
+                "columns": "full"
+              }
             }
           ],
           "column_span": 2
@@ -1057,8 +1132,7 @@
                 "columns": "full"
               }
             }
-          ],
-          "column_span": 2
+          ]
         },
         {
           "type": "grid",
@@ -1321,7 +1395,7 @@
             {
               "type": "custom:button-card",
               "template": "deco_room",
-              "name": "Around the House",
+              "name": "The House",
               "variables": {
                 "lamps": [
                   "switch.dining_room_xmas",
@@ -1434,9 +1508,7 @@
                 "lamps": [],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M196 92 V26 h88 V92\"/><path d=\"M206 92 V36 h68 V92\"/><path d=\"M220 80 h40 M228 70 h24 M236 60 h8\"/><path d=\"M240 26 V12 M226 12 h28\"/></svg>",
                 "line2_entity": "sensor.h2s_0938ac5b0600679_print_progress",
-                "line2_label": "Icarus",
-                "line2_attr": null,
-                "line2_unit": "%"
+                "line2_label": "Icarus"
               },
               "styles": {
                 "card": [
@@ -1503,30 +1575,6 @@
               },
               "grid_options": {
                 "columns": 12
-              }
-            }
-          ],
-          "column_span": 2
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "custom:button-card",
-              "template": "deco_marquee",
-              "variables": {
-                "title": "Now Playing"
-              },
-              "grid_options": {
-                "columns": "full"
-              }
-            },
-            {
-              "type": "media-control",
-              "entity": "media_player.spotify",
-              "name": "Spotify",
-              "grid_options": {
-                "columns": "full"
               }
             }
           ],
@@ -1610,8 +1658,7 @@
                 "columns": "full"
               }
             }
-          ],
-          "column_span": 2
+          ]
         }
       ]
     },
@@ -1620,7 +1667,7 @@
       "title": "Floor Plan",
       "path": "floor-plan",
       "icon": "mdi:floor-plan",
-      "max_columns": 2,
+      "max_columns": 3,
       "theme": "deco_noir",
       "sections": [
         {
@@ -1648,10 +1695,13 @@
                     "img": "/local/deco/glow_switch_couch_lamp.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1664,10 +1714,13 @@
                     "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1680,10 +1733,13 @@
                     "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1696,10 +1752,13 @@
                     "img": "/local/deco/glow_switch_lamp_window.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1712,10 +1771,13 @@
                     "img": "/local/deco/glow_switch_grow_lamp.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1728,10 +1790,13 @@
                     "img": "/local/deco/glow_switch_dining_room_xmas.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1744,10 +1809,13 @@
                     "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1760,10 +1828,13 @@
                     "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1841,7 +1912,7 @@
                   "type": "custom:button-card",
                   "template": "deco_marker",
                   "entity": "climate.nest_thermostat",
-                  "name": "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'\u00b0 \u00b7 set '+Math.round(a.temperature||0)+'\u00b0'; ]]]",
+                  "name": "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'\u00b0 / '+Math.round(a.temperature||0)+'\u00b0'; ]]]",
                   "icon": "mdi:thermostat",
                   "style": {
                     "left": "60.78%",
@@ -1941,12 +2012,7 @@
               "grid_options": {
                 "columns": "full"
               }
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
+            },
             {
               "type": "custom:button-card",
               "template": "deco_marquee",
@@ -1969,10 +2035,13 @@
                     "img": "/local/deco/glow_switch_torch_light_front.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -1985,10 +2054,13 @@
                     "img": "/local/deco/glow_switch_torch_light_back.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -2001,10 +2073,13 @@
                     "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
@@ -2017,10 +2092,13 @@
                     "img": "/local/deco/glow_switch_painting_desk.svg?v=4"
                   },
                   "style": {
-                    "left": "50%",
-                    "top": "50%",
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
                     "width": "100%",
                     "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
                     "pointer-events": "none",
                     "mix-blend-mode": "screen"
                   }
