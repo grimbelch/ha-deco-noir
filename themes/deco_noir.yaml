@@ -1,0 +1,176 @@
+# Deco Noir: Art Deco glass theme for Home Assistant
+# https://github.com/grimbelch/ha-deco-noir
+#
+# Requires: card-mod (HACS) for the glass + ornament layer (card-mod-card below).
+# Fonts:    add a dashboard resource (type: css):
+#           https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap
+# Art:      copy www/deco/sunburst.svg to /config/www/deco/sunburst.svg
+
+deco_noir:
+  # ---------- Deco tokens (used by the card-mod layer) ----------
+  deco-ink: "#0B0B0E"
+  deco-midnight: "#11131C"
+  deco-ivory: "#EDE6D6"
+  deco-gold: "#C9A44C"
+  deco-gold-hi: "#E6CF9A"
+  deco-gold-rgb: "201, 164, 76"
+  deco-emerald: "#3E9C82"
+  deco-sapphire: "#5A79C8"
+  deco-garnet: "#B4404F"
+  deco-hair: "rgba(201, 164, 76, 0.38)"
+  deco-hair-faint: "rgba(201, 164, 76, 0.16)"
+  deco-glass: "rgba(14, 14, 20, 0.55)"
+  deco-blur: "18px"
+  deco-display: "'Poiret One', 'Josefin Sans', sans-serif"
+  deco-label: "'Josefin Sans', Roboto, sans-serif"
+  deco-num: "'Jost', 'Josefin Sans', Roboto, sans-serif"
+
+  # ---------- Typography ----------
+  ha-font-family-body: "var(--deco-label)"
+  ha-font-family-heading: "var(--deco-display)"
+  primary-font-family: "var(--deco-label)"
+  paper-font-common-base_-_font-family: "var(--deco-label)"
+  paper-font-headline_-_font-family: "var(--deco-display)"
+
+  # ---------- Core palette ----------
+  primary-color: "#C9A44C"
+  rgb-primary-color: "201, 164, 76"
+  accent-color: "#E6CF9A"
+  rgb-accent-color: "230, 207, 154"
+  primary-background-color: "#0B0B0E"
+  secondary-background-color: "#11131C"
+  primary-text-color: "#EDE6D6"
+  rgb-primary-text-color: "237, 230, 214"
+  secondary-text-color: "rgba(237, 230, 214, 0.62)"
+  disabled-text-color: "rgba(237, 230, 214, 0.32)"
+  text-primary-color: "#0B0B0E"
+  divider-color: "rgba(201, 164, 76, 0.16)"
+  outline-color: "rgba(201, 164, 76, 0.30)"
+  success-color: "#3E9C82"
+  info-color: "#5A79C8"
+  warning-color: "#D9A441"
+  error-color: "#B4404F"
+
+  # ---------- Background: sunburst over midnight ----------
+  lovelace-background: >-
+    url('/local/deco/sunburst.svg') center top / cover no-repeat fixed,
+    radial-gradient(1200px 520px at 50% -8%, #1d1a14 0%, transparent 60%) fixed,
+    radial-gradient(700px 420px at 92% 78%, rgba(62,156,130,0.14), transparent 70%) fixed,
+    radial-gradient(640px 420px at 4% 62%, rgba(90,121,200,0.12), transparent 70%) fixed,
+    linear-gradient(180deg, #11131C, #0B0B0E 55%) fixed
+
+  # ---------- Cards: smoked glass with a gold double hairline ----------
+  card-background-color: "rgba(14, 14, 20, 0.55)"
+  ha-card-background: "rgba(14, 14, 20, 0.55)"
+  ha-card-border-radius: "0px"
+  ha-card-border-width: "1px"
+  ha-card-border-color: "rgba(201, 164, 76, 0.38)"
+  ha-card-box-shadow: "inset 0 0 0 5px rgba(201, 164, 76, 0.10), 0 18px 40px rgba(0, 0, 0, 0.45)"
+  ha-dialog-border-radius: "0px"
+  mdc-dialog-scrim-color: "rgba(5, 5, 8, 0.72)"
+  mdc-theme-surface: "#14141B"
+  dialog-backdrop-filter: "blur(10px)"
+
+  # ---------- Header & sidebar ----------
+  app-header-background-color: "rgba(11, 11, 14, 0.78)"
+  app-header-text-color: "#E6CF9A"
+  app-header-border-bottom: "1px solid rgba(201, 164, 76, 0.25)"
+  app-header-selection-bar-color: "#C9A44C"
+  app-header-edit-background-color: "#1A1712"
+  sidebar-background-color: "#0B0B0E"
+  sidebar-text-color: "rgba(237, 230, 214, 0.72)"
+  sidebar-icon-color: "rgba(201, 164, 76, 0.75)"
+  sidebar-selected-text-color: "#E6CF9A"
+  sidebar-selected-icon-color: "#E6CF9A"
+
+  # ---------- States: "on" glows warm gold, "off" is dim ivory ----------
+  state-icon-color: "rgba(237, 230, 214, 0.45)"
+  state-icon-active-color: "#E6CF9A"
+  state-active-color: "#E6CF9A"
+  state-inactive-color: "rgba(237, 230, 214, 0.32)"
+  state-light-active-color: "#E6CF9A"
+  state-light-on-color: "#E6CF9A"
+  state-switch-active-color: "#E6CF9A"
+  state-switch-on-color: "#E6CF9A"
+  state-media_player-active-color: "#5A79C8"
+  state-automation-active-color: "#C9A44C"
+  state-binary_sensor-active-color: "#3E9C82"
+  state-sun-above_horizon-color: "#E6CF9A"
+  state-sun-below_horizon-color: "#5A79C8"
+  paper-item-icon-color: "rgba(237, 230, 214, 0.45)"
+  paper-item-icon-active-color: "#E6CF9A"
+
+  # ---------- Controls ----------
+  switch-checked-color: "#C9A44C"
+  switch-checked-button-color: "#E6CF9A"
+  switch-checked-track-color: "rgba(201, 164, 76, 0.45)"
+  switch-unchecked-button-color: "#5A5650"
+  switch-unchecked-track-color: "#2A2824"
+  slider-color: "#C9A44C"
+  slider-bar-color: "rgba(201, 164, 76, 0.25)"
+  input-fill-color: "rgba(255, 255, 255, 0.03)"
+  tile-icon-border-radius: "0px"
+  control-button-border-radius: "0px"
+  feature-border-radius: "0px"
+  feature-button-spacing: "8px"
+  ha-badge-border-radius: "0px"
+  ha-badge-background-color: "rgba(14, 14, 20, 0.6)"
+  ha-badge-border-color: "rgba(201, 164, 76, 0.30)"
+  ha-badge-border-width: "1px"
+
+  # ---------- Charts ----------
+  graph-color-1: "#C9A44C"
+  graph-color-2: "#5A79C8"
+  graph-color-3: "#3E9C82"
+  graph-color-4: "#B4404F"
+  graph-color-5: "#E6CF9A"
+  history-unknown-color: "#2A2824"
+  energy-grid-consumption-color: "#C9A44C"
+
+  # ---------- Ornament layer (card-mod) ----------
+  card-mod-theme: deco_noir
+  card-mod-card: |
+    ha-card {
+      -webkit-backdrop-filter: blur(var(--deco-blur)) saturate(120%);
+      backdrop-filter: blur(var(--deco-blur)) saturate(120%);
+    }
+    /* stepped corner brackets on every framed card */
+    ha-card:not(.type-heading) { position: relative; }
+    ha-card:not(.type-heading)::after {
+      content: "";
+      position: absolute; inset: -1px;
+      pointer-events: none; z-index: 2;
+      background:
+        linear-gradient(var(--deco-gold), var(--deco-gold)) top left / 16px 2px no-repeat,
+        linear-gradient(var(--deco-gold), var(--deco-gold)) top left / 2px 16px no-repeat,
+        linear-gradient(var(--deco-gold), var(--deco-gold)) bottom right / 16px 2px no-repeat,
+        linear-gradient(var(--deco-gold), var(--deco-gold)) bottom right / 2px 16px no-repeat;
+      opacity: .9;
+    }
+    /* "on" tiles glow like a lit sconce */
+    ha-card.type-tile.active {
+      border-color: rgba(var(--deco-gold-rgb), .55);
+      box-shadow: 0 0 22px rgba(var(--deco-gold-rgb), .18), inset 0 0 0 1px rgba(var(--deco-gold-rgb), .14);
+      background:
+        radial-gradient(120% 90% at 20% 0%, rgba(var(--deco-gold-rgb), .20), rgba(var(--deco-gold-rgb), .04) 60%, transparent),
+        var(--ha-card-background);
+    }
+    /* section headings: marquee style, no glass box */
+    ha-card.type-heading {
+      background: none; border: none; box-shadow: none;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+      --primary-text-color: var(--deco-gold-hi);
+      --secondary-text-color: var(--deco-gold);
+      font-family: var(--deco-display);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-bottom: 3px double rgba(var(--deco-gold-rgb), .38);
+      border-radius: 0;
+    }
+    /* numbers in the geometric face */
+    .state, .value, .name.value, .info .state, .temp, .attribute {
+      font-family: var(--deco-num);
+    }
+
+  modes:
+    dark: {}

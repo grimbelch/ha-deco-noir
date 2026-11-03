@@ -10,9 +10,24 @@ tablets, and stays editable from the dashboard UI.
 
 ## Status
 
-**Phase 0: mockup.** Open [`mockup/index.html`](mockup/index.html) in a browser. The
-buttons at the top switch the metal (champagne/platinum) and heading font
-(Poiret One/Limelight).
+- **Phase 0: mockup.** Done. Open [`mockup/index.html`](mockup/index.html); chosen: champagne + Poiret One.
+- **Phase 1: theme.** Applied to the `home-hub` dashboard (all views use `theme: deco_noir`).
+
+## Install
+
+1. Install **card-mod** from HACS, and load it early in `configuration.yaml`:
+   ```yaml
+   frontend:
+     extra_module_url:
+       - /hacsfiles/lovelace-card-mod/card-mod.js
+     themes: !include_dir_merge_named themes
+   ```
+2. Copy `themes/deco_noir.yaml` to `/config/themes/` and `www/deco/sunburst.svg` to `/config/www/deco/`.
+3. Add a dashboard resource (type **CSS**):
+   `https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap`
+4. Restart, then set `theme: deco_noir` on your views (or pick it in your profile).
+
+Regenerate the background with `python tools/make_sunburst.py`.
 
 ## Design tokens
 
@@ -36,8 +51,8 @@ headings (rule, ◆ title ◆, rule), diamond icon wells, and a soft gold halo o
 
 ## Plan
 
-1. **Phase 0: mockup.** Done. Iterate on look here first.
-2. **Phase 1: theme.** `themes/deco_noir.yaml` (colors, state colors, fonts) plus a
+1. **Phase 0: mockup.** Done.
+2. **Phase 1: theme.** Done. `themes/deco_noir.yaml` (colors, state colors, fonts) plus a
    `card-mod-theme` for glass, frames, and headings. Fonts are loaded as a dashboard
    resource and the sunburst background lives in `www/deco/`. Requires
    [card-mod](https://github.com/thomasloven/lovelace-card-mod) (HACS).
