@@ -37,6 +37,35 @@ def call(m):
             return r
 
 
+# ---------------------------------------------------------------- button-card style normalisation
+# Templates are written with readable "prop: value" strings; button-card needs [{prop: value}] and
+# grid-template-areas without the YAML-style outer single quotes.
+def _style_item(item):
+    if not isinstance(item, str) or ":" not in item:
+        return item
+    prop, val = item.split(":", 1)
+    val = val.strip()
+    if prop.strip() == "grid-template-areas" and len(val) > 1 and val[0] == "'" and val[-1] == "'":
+        val = val[1:-1]
+    return {prop.strip(): val}
+
+
+def normalize_styles(o):
+    if isinstance(o, dict):
+        out = {}
+        for k, v in o.items():
+            if k == "styles" and isinstance(v, dict):
+                out[k] = {sk: ({fk: [_style_item(i) for i in fv] for fk, fv in sv.items()} if sk == "custom_fields" and isinstance(sv, dict)
+                               else [_style_item(i) for i in sv] if isinstance(sv, list) else normalize_styles(sv))
+                          for sk, sv in v.items()}
+            else:
+                out[k] = normalize_styles(v)
+        return out
+    if isinstance(o, list):
+        return [normalize_styles(x) for x in o]
+    return o
+
+
 # ---------------------------------------------------------------- helpers
 def marquee(title):
     return {"type": "custom:button-card", "template": "deco_marquee", "variables": {"title": title},
@@ -254,9 +283,10 @@ def main():
     if not (out_dir / "home-hub.before-phase2.json").exists():
         (out_dir / "home-hub.before-phase2.json").write_text(json.dumps(cur, indent=2), encoding="utf-8")
     keep = [decorate(v) for v in cur["views"] if v.get("path") in ("media", "yard", "alexandria")]
-    cfg = {"title": cur.get("title", "Home"), "button_card_templates": TEMPLATES, "views": [home, floor] + keep}
+    cfg = normalize_styles({"title": cur.get("title", "Home"), "button_card_templates": TEMPLATES,
+                            "views": [home, floor] + keep})
     (ROOT / "templates").mkdir(exist_ok=True)
-    (ROOT / "templates" / "deco_templates.json").write_text(json.dumps(TEMPLATES, indent=2), encoding="utf-8")
+    (ROOT / "templates" / "deco_templates.json").write_text(json.dumps(cfg["button_card_templates"], indent=2), encoding="utf-8")
     (out_dir / "home-hub.json").write_text(json.dumps(cfg, indent=2), encoding="utf-8")
     if dry:
         print("dry run: wrote dashboards/home-hub.json")
