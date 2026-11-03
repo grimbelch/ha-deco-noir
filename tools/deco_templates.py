@@ -129,8 +129,8 @@ TEMPLATES = {
 .wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}
 .wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}
 .wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}
-@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' 'picker' !important;grid-template-columns:1fr !important}#picker{justify-self:start !important;padding-left:0 !important;border-top:0 !important;margin-top:10px !important;padding-top:0 !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}
 """,
         "custom_fields": {
             "left": """[[[
@@ -164,13 +164,17 @@ out+=chip('','mdi:download-outline','Downloads',s('sensor.sabnzbd_status'));
 out+=chip(pr==='failed'?'bad':(pr==='finish'?'ok':''),'mdi:printer-3d','Icarus',prl);
 return `<div class="chips">${out}</div>`;
 ]]]""",
+            "picker": {"card": {"type": "custom:deco-theme-picker", "entity": "input_select.dashboard_theme"}},
         },
         "styles": {
             "card": ["padding: 22px 22px 18px"],
-            "grid": ["grid-template-areas: '\"left right\" \"chips chips\"'", "grid-template-columns: 1fr auto",
+            "grid": ["grid-template-areas: '\"left right\" \"chips picker\"'", "grid-template-columns: 1fr auto",
                      "align-items: end"],
             "custom_fields": {"left": ["justify-self: start", "text-align: left"], "right": ["justify-self: end"],
-                              "chips": ["justify-self: stretch"]},
+                              "chips": ["justify-self: stretch", "border-top: 1px solid var(--deco-hair-faint)",
+                                        "padding-top: 14px", "margin-top: 14px"],
+                              "picker": ["justify-self: end", "border-top: 1px solid var(--deco-hair-faint)",
+                                         "padding: 14px 0 0 14px", "margin-top: 14px"]},
         },
     },
 

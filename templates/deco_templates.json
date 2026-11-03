@@ -377,11 +377,17 @@
       "sensor.h2s_0938ac5b0600679_print_status",
       "climate.nest_thermostat"
     ],
-    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.chips{display:flex;flex-wrap:wrap;gap:8px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' 'picker' !important;grid-template-columns:1fr !important}#picker{justify-self:start !important;padding-left:0 !important;border-top:0 !important;margin-top:10px !important;padding-top:0 !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
     "custom_fields": {
       "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
       "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
-      "chips": "[[[\nconst s=(e)=>states[e]?states[e].state:'unknown';\nconst ups=s('sensor.alexandria_status'); const batt=Math.round(parseFloat(s('sensor.alexandria_battery')));\nconst onb=ups.includes('ONBATT');\nconst chip=(cls,icon,label,val)=>`<span class=\"chip ${cls}\"><ha-icon icon=\"${icon}\"></ha-icon>${label} <b>${val}</b></span>`;\nconst pr=s('sensor.h2s_0938ac5b0600679_print_status');\nconst prl={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing'}[pr]||pr;\nlet out=chip(onb?'bad':'ok','mdi:lightning-bolt','Power',onb?`On battery \u00b7 ${batt}%`:`On mains \u00b7 ${batt}%`);\nout+=chip(s('switch.pi_hole')==='on'?'ok':'bad','mdi:shield-check-outline','Ad blocking',s('switch.pi_hole')==='on'?'On':'Off');\nout+=chip('','mdi:download-outline','Downloads',s('sensor.sabnzbd_status'));\nout+=chip(pr==='failed'?'bad':(pr==='finish'?'ok':''),'mdi:printer-3d','Icarus',prl);\nreturn `<div class=\"chips\">${out}</div>`;\n]]]"
+      "chips": "[[[\nconst s=(e)=>states[e]?states[e].state:'unknown';\nconst ups=s('sensor.alexandria_status'); const batt=Math.round(parseFloat(s('sensor.alexandria_battery')));\nconst onb=ups.includes('ONBATT');\nconst chip=(cls,icon,label,val)=>`<span class=\"chip ${cls}\"><ha-icon icon=\"${icon}\"></ha-icon>${label} <b>${val}</b></span>`;\nconst pr=s('sensor.h2s_0938ac5b0600679_print_status');\nconst prl={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing'}[pr]||pr;\nlet out=chip(onb?'bad':'ok','mdi:lightning-bolt','Power',onb?`On battery \u00b7 ${batt}%`:`On mains \u00b7 ${batt}%`);\nout+=chip(s('switch.pi_hole')==='on'?'ok':'bad','mdi:shield-check-outline','Ad blocking',s('switch.pi_hole')==='on'?'On':'Off');\nout+=chip('','mdi:download-outline','Downloads',s('sensor.sabnzbd_status'));\nout+=chip(pr==='failed'?'bad':(pr==='finish'?'ok':''),'mdi:printer-3d','Icarus',prl);\nreturn `<div class=\"chips\">${out}</div>`;\n]]]",
+      "picker": {
+        "card": {
+          "type": "custom:deco-theme-picker",
+          "entity": "input_select.dashboard_theme"
+        }
+      }
     },
     "styles": {
       "card": [
@@ -391,7 +397,7 @@
       ],
       "grid": [
         {
-          "grid-template-areas": "\"left right\" \"chips chips\""
+          "grid-template-areas": "\"left right\" \"chips picker\""
         },
         {
           "grid-template-columns": "1fr auto"
@@ -417,6 +423,29 @@
         "chips": [
           {
             "justify-self": "stretch"
+          },
+          {
+            "border-top": "1px solid var(--deco-hair-faint)"
+          },
+          {
+            "padding-top": "14px"
+          },
+          {
+            "margin-top": "14px"
+          }
+        ],
+        "picker": [
+          {
+            "justify-self": "end"
+          },
+          {
+            "border-top": "1px solid var(--deco-hair-faint)"
+          },
+          {
+            "padding": "14px 0 0 14px"
+          },
+          {
+            "margin-top": "14px"
           }
         ]
       }

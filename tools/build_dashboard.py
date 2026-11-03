@@ -131,8 +131,6 @@ home = {
                 scene("Good night", "mdi:weather-night", "script.turn_on", {"entity_id": "script.good_night"}),
                 scene("All lamps off", "mdi:lightbulb-group-off-outline", "switch.turn_off", {"entity_id": LAMPS_ALL}),
                 scene("Pause music", "mdi:pause-circle-outline", "media_player.media_pause", {"entity_id": SPEAKERS}),
-                {"type": "custom:button-card", "template": "deco_theme_toggle", "entity": "input_select.dashboard_theme",
-                 "grid_options": {"columns": "full", "rows": 1}},
                 marquee("Now Playing"),
                 {"type": "media-control", "entity": "media_player.spotify", "name": "Spotify", "grid_options": {"columns": "full"}},
                 span=2),
