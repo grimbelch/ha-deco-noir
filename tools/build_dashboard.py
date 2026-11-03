@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
-THEME = "deco_noir"
+THEME = None  # theme comes from the HA default (toggled via input_select.dashboard_theme)
 ASSET_V = "4"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
@@ -115,7 +115,7 @@ SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitch
 
 # ---------------------------------------------------------------- HOME
 home = {
-    "type": "sections", "title": "Home", "path": "home", "icon": "mdi:home-heart", "max_columns": 4, "theme": THEME,
+    "type": "sections", "title": "Home", "path": "home", "icon": "mdi:home-heart", "max_columns": 4,
     "sections": [
         section({"type": "custom:button-card", "template": "deco_lobby", "grid_options": {"columns": "full"}}, span=4),
 
@@ -125,6 +125,8 @@ home = {
                 scene("Good night", "mdi:weather-night", "script.turn_on", {"entity_id": "script.good_night"}),
                 scene("All lamps off", "mdi:lightbulb-group-off-outline", "switch.turn_off", {"entity_id": LAMPS_ALL}),
                 scene("Pause music", "mdi:pause-circle-outline", "media_player.media_pause", {"entity_id": SPEAKERS}),
+                {"type": "custom:button-card", "template": "deco_theme_toggle", "entity": "input_select.dashboard_theme",
+                 "grid_options": {"columns": "full", "rows": 1}},
                 marquee("Now Playing"),
                 {"type": "media-control", "entity": "media_player.spotify", "name": "Spotify", "grid_options": {"columns": "full"}},
                 span=2),
@@ -237,7 +239,6 @@ def plan(key):
 
 floor = {
     "type": "sections", "title": "Floor Plan", "path": "floor-plan", "icon": "mdi:floor-plan", "max_columns": 3,
-    "theme": THEME,
     "sections": [
         section(marquee("Main Floor"), plan("main"), span=2),
         section(marquee("Upper Floor"), plan("upper"), marquee("Lower Floor"), plan("lower")),
@@ -266,7 +267,7 @@ def convert(c):
 
 def decorate(view):
     view = json.loads(json.dumps(view))
-    view["theme"] = THEME
+    view.pop("theme", None)
     for s in view.get("sections", []):
         s["cards"] = [convert(c) for c in s.get("cards", [])]
     view.pop("badges", None) if view.get("path") == "home" else None
