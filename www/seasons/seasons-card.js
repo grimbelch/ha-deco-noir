@@ -92,7 +92,7 @@ class SaisonsHomeCard extends HTMLElement {
     let background;
     if(hero){parent.classList.add('music-hero');background=this.el('img','hero-art');background.alt='';background.hidden=true;background.onload=()=>parent.classList.add('has-art');background.onerror=()=>{parent.classList.remove('has-art');background.hidden=true;};parent.prepend(background);}
     const media=this.el('div','media');parent.append(media);const heading=this.el('div','media-heading');media.append(heading);
-    const album=this.el('img','album');album.alt='';album.hidden=true;heading.append(album);const copy=this.el('div','media-copy');heading.append(copy);const title=this.el('div','media-title'),sub=this.el('div','media-sub');copy.append(title,sub);
+    const album=this.el('img','album');album.alt='';album.hidden=true;album.onerror=()=>{album.style.display='none';};album.onload=()=>{album.style.display='';};heading.append(album);const copy=this.el('div','media-copy');heading.append(copy);const title=this.el('div','media-title'),sub=this.el('div','media-sub');copy.append(title,sub);
     const controls=this.el('div','transport');media.append(controls);
     const prev=this.button('‹','Previous track',()=>this.service('media_player','media_previous_track',{entity_id:entity}));
     const play=this.button('▶','Play',()=>{const s=this._hass.states[entity];this.service('media_player',s?.state==='playing'?'media_pause':'media_play',{entity_id:entity});});play.classList.add('accent');
