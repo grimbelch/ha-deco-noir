@@ -17,6 +17,16 @@ Tabs are ordered by how often they are used, and each answers one question:
 `tools/build_dashboard.py` is the source of truth for every tab except Omega-7. Run it, then
 `tools/install_seasons.py` (registers module versions and keeps the selected theme).
 
+## Floor plans follow the theme
+
+`tools/make_floorplan.py` writes three palettes of every floor plan and light-pool overlay:
+gold (`floor_<key>.svg`, Deco Noir and Lite), green (`*_cog.svg`, Cogitator) and ivory/terracotta
+(`*_sea.svg`, Les Saisons; light pools use `multiply` instead of `screen`). `tools/build_dashboard.py`
+emits one picture-elements card per palette with a `visibility` condition on
+`input_select.dashboard_theme`, so only the matching map shows. Copy new SVGs with
+`tools/deploy_seasons_assets.py --floorplans`, bump `ASSET_V` in the builder, then run the builder.
+Fonts are subset (`tools/fonts/*-sub.ttf`) and embedded so the SVGs render as images.
+
 ## Optional Cogitator theme
 
 **Cogitator** is the fourth selector option, based on the approved A1 / Pattern IX

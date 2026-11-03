@@ -13,9 +13,28 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 FONTS = ROOT / "tools" / "fonts"
 OUT = ROOT / "www" / "deco"
 
-GOLD = "#C9A44C"
-GOLD_HI = "#E6CF9A"
-IVORY = "#EDE6D6"
+# Palettes: one set of floor plans per theme so maps never clash with the page.
+#   gold  -> Deco Noir / Deco Noir Lite (dark page)   files: floor_<key>.svg, glow_<entity>.svg
+#   cog   -> Cogitator (green phosphor, dark page)    files: floor_<key>_cog.svg, glow_cog_<entity>.svg
+#   sea   -> Les Saisons (ivory page, terracotta)     files: floor_<key>_sea.svg, glow_sea_<entity>.svg
+PALETTES = {
+    "gold": dict(suffix="", glow_prefix="glow_", main="#C9A44C", hi="#E6CF9A", text="#EDE6D6", wall_rgb="201,164,76",
+                 wall_fill=".035", out_fill=".02", wall_op=".55", glow_rgb=None, name_font="'Poiret One',sans-serif",
+                 dim_font="'Josefin Sans',sans-serif", name_size="13px", name_sp="2.2px", sm_size="9.5px", sm_sp="1.6px",
+                 title_size="13px", title_sp="4px", dim_op=".42", italic="normal", out_op=".45", stairs_op=".45", fire_op=".7", dim_size="7.5px", dim_sp="1.4px",
+                 fonts=lambda: font_face("Poiret One", "poiret.woff2") + font_face("Josefin Sans", "josefin.woff2")),
+    "cog": dict(suffix="_cog", glow_prefix="glow_cog_", main="#58e284", hi="#befacc", text="#befacc", wall_rgb="88,226,132",
+                wall_fill=".05", out_fill=".025", wall_op=".7", glow_rgb="110,255,165", name_font="'Cog Data','Courier New',monospace",
+                dim_font="'Cog Data','Courier New',monospace", name_size="12px", name_sp="1.4px", sm_size="9px", sm_sp="1px",
+                title_size="12px", title_sp="3.4px", dim_op=".6", italic="normal", out_op=".55", stairs_op=".5", fire_op=".8", dim_size="8px", dim_sp="1.2px",
+                fonts=lambda: ttf_face("Cog Data", "cog-data-sub.ttf")),
+    "sea": dict(suffix="_sea", glow_prefix="glow_sea_", main="#8b5b36", hi="#633e25", text="#49311f", wall_rgb="139,91,54",
+                wall_fill=".07", out_fill=".04", wall_op=".8", glow_rgb="255,178,72", name_font="'Cormorant Garamond',Georgia,serif",
+                dim_font="'Cormorant Garamond',Georgia,serif", name_size="15px", name_sp="1.2px", sm_size="11.5px", sm_sp="1px",
+                title_size="15px", title_sp="3px", dim_op=".75", italic="italic", out_op=".6", stairs_op=".55", fire_op=".85", dim_size="10px", dim_sp="1px",
+                fonts=lambda: ttf_face("Cormorant Garamond", "seasons-display-sub.ttf")),
+}
+PAL = PALETTES["gold"]   # set per variant by main_()
 
 
 def font_face(name, file):
@@ -23,28 +42,31 @@ def font_face(name, file):
     return f"@font-face{{font-family:'{name}';src:url(data:font/woff2;base64,{b64}) format('woff2');}}"
 
 
-STYLE = (
-    font_face("Poiret One", "poiret.woff2")
-    + font_face("Josefin Sans", "josefin.woff2")
-    + f"""
-.wall{{fill:rgba(201,164,76,.035);stroke:{GOLD};stroke-opacity:.55;stroke-width:1.3}}
-.ext{{fill:none;stroke:{GOLD};stroke-width:3.2;stroke-linejoin:miter}}
-.ext2{{fill:none;stroke:{GOLD};stroke-opacity:.35;stroke-width:1;stroke-linejoin:miter}}
-.out{{fill:rgba(201,164,76,.02);stroke:{GOLD};stroke-opacity:.45;stroke-width:1.1;stroke-dasharray:5 4}}
-.stairs{{stroke:{GOLD};stroke-opacity:.45;stroke-width:1}}
-.fire{{fill:url(#hatch);stroke:{GOLD};stroke-opacity:.7;stroke-width:1}}
-.name{{font-family:'Poiret One',sans-serif;fill:{GOLD_HI};font-size:13px;letter-spacing:2.2px;text-anchor:middle}}
-.name.sm{{font-size:9.5px;letter-spacing:1.6px}}
-.dim{{font-family:'Josefin Sans',sans-serif;fill:{IVORY};fill-opacity:.42;font-size:7.5px;letter-spacing:1.4px;text-anchor:middle}}
-.title{{font-family:'Poiret One',sans-serif;fill:{GOLD_HI};font-size:13px;letter-spacing:4px}}
-.orn{{fill:{GOLD}}}
-"""
-)
+def ttf_face(name, file):
+    b64 = base64.b64encode((FONTS / file).read_bytes()).decode()
+    return f"@font-face{{font-family:'{name}';src:url(data:font/ttf;base64,{b64}) format('truetype');}}"
 
-DEFS = f"""<defs>
-<pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-<line x1="0" y1="0" x2="0" y2="4" stroke="{GOLD}" stroke-opacity=".6" stroke-width="1"/></pattern>
-</defs>"""
+
+def style_css(p):
+    g, hi, tx = p["main"], p["hi"], p["text"]
+    return (p["fonts"]() + f"""
+.wall{{fill:rgba({p["wall_rgb"]},{p["wall_fill"]});stroke:{g};stroke-opacity:{p["wall_op"]};stroke-width:1.3}}
+.ext{{fill:none;stroke:{g};stroke-width:3.2;stroke-linejoin:miter}}
+.ext2{{fill:none;stroke:{g};stroke-opacity:.35;stroke-width:1;stroke-linejoin:miter}}
+.out{{fill:rgba({p["wall_rgb"]},{p["out_fill"]});stroke:{g};stroke-opacity:{p["out_op"]};stroke-width:1.1;stroke-dasharray:5 4}}
+.stairs{{stroke:{g};stroke-opacity:{p["stairs_op"]};stroke-width:1}}
+.fire{{fill:url(#hatch);stroke:{g};stroke-opacity:{p["fire_op"]};stroke-width:1}}
+.name{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};font-size:{p["name_size"]};letter-spacing:{p["name_sp"]};text-anchor:middle}}
+.name.sm{{font-size:{p["sm_size"]};letter-spacing:{p["sm_sp"]}}}
+.dim{{font-family:{p["dim_font"]};font-style:{p["italic"]};fill:{tx};fill-opacity:{p["dim_op"]};font-size:{p["dim_size"]};letter-spacing:{p["dim_sp"]};text-anchor:middle}}
+.title{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};font-size:{p["title_size"]};letter-spacing:{p["title_sp"]}}}
+.orn{{fill:{g}}}
+""")
+
+
+def defs_xml(p):
+    return (f'<defs><pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+            f'<line x1="0" y1="0" x2="0" y2="4" stroke="{p["main"]}" stroke-opacity=".6" stroke-width="1"/></pattern></defs>')
 
 
 def rect(x1, y1, x2, y2, cls="wall"):
@@ -79,8 +101,8 @@ def corner_ornaments(vb):
     L, o = 16, 4
     pts = []
     for cx, cy, sx, sy in ((x + o, y + o, 1, 1), (x + w - o, y + h - o, -1, -1)):
-        pts.append(f'<path d="M{cx} {cy + sy * L} V{cy} H{cx + sx * L}" fill="none" stroke="{GOLD}" stroke-width="2"/>')
-        pts.append(f'<path d="M{cx + sx * 5} {cy + sy * (L - 5)} V{cy + sy * 5} H{cx + sx * (L - 5)}" fill="none" stroke="{GOLD}" stroke-opacity=".5" stroke-width="1"/>')
+        pts.append(f'<path d="M{cx} {cy + sy * L} V{cy} H{cx + sx * L}" fill="none" stroke="{PAL["main"]}" stroke-width="2"/>')
+        pts.append(f'<path d="M{cx + sx * 5} {cy + sy * (L - 5)} V{cy + sy * 5} H{cx + sx * (L - 5)}" fill="none" stroke="{PAL["main"]}" stroke-opacity=".5" stroke-width="1"/>')
     return "".join(pts)
 
 
@@ -90,11 +112,11 @@ def svg(vb, body, title, title_xy):
     t = (f'<text class="title" x="{tx}" y="{ty}">{title.upper()}</text>'
          f'<path class="orn" d="M{tx - 12} {ty - 5} l4 -4 4 4 -4 4z"/>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x} {y} {w} {h}">'
-            f"<style>{STYLE}</style>{DEFS}{body}{t}{corner_ornaments(vb)}</svg>")
+            f"<style>{style_css(PAL)}</style>{defs_xml(PAL)}{body}{t}{corner_ornaments(vb)}</svg>")
 
 
 # ---------------------------------------------------------------- MAIN FLOOR
-MAIN_VB = (408, 150, 464, 612)
+MAIN_VB = (408, 150, 464, 636)
 main_ext = [(533, 365), (790, 365), (790, 390), (858, 390), (858, 633), (793, 633), (793, 686),
             (721, 686), (721, 747), (533, 747)]
 main = "".join([
@@ -146,7 +168,7 @@ lower = "".join([
 ])
 
 FLOORS = {
-    "main": (MAIN_VB, main, "Main Floor", (430, 740)),
+    "main": (MAIN_VB, main, "Main Floor", (572, 775)),
     "upper": (UPPER_VB, upper, "Upper Floor", (957, 330)),
     "lower": (LOWER_VB, lower, "Lower Floor", (772, 750)),
 }
@@ -224,22 +246,30 @@ def pct(vb, x, y):
 
 
 def main_():
+    global PAL
     OUT.mkdir(parents=True, exist_ok=True)
     markers = {}
-    for key, (vb, body, title, txy) in FLOORS.items():
-        p = OUT / f"floor_{key}.svg"
-        p.write_text(svg(vb, body, title, txy), encoding="utf-8")
-        print(p.name, p.stat().st_size, "bytes")
-        markers[key] = []
-        for e, n, i, x, y, k in MARKERS.get(key, []):
-            m = {"entity": e, "name": n, "icon": i, "kind": k, "left": pct(vb, x, y)[0], "top": pct(vb, x, y)[1]}
-            if e in GLOW_ROOMS:
-                room, rgb, r = GLOW_ROOMS[e]
-                fn = "glow_" + e.replace(".", "_") + ".svg"
-                (OUT / fn).write_text(glow_svg(vb, room, rgb, r, x, y), encoding="utf-8")
-                m["glow"] = fn
-            markers[key].append(m)
-        markers[key + "_aspect"] = round(vb[2] / vb[3], 4)
+    for name, pal in PALETTES.items():
+        PAL = pal
+        for key, (vb, body, title, txy) in FLOORS.items():
+            p = OUT / f"floor_{key}{pal['suffix']}.svg"
+            p.write_text(svg(vb, body, title, txy), encoding="utf-8")
+            print(p.name, p.stat().st_size, "bytes")
+            if name != "gold":
+                continue
+            markers[key] = []
+            for e, n, i, x, y, k in MARKERS.get(key, []):
+                m = {"entity": e, "name": n, "icon": i, "kind": k, "left": pct(vb, x, y)[0], "top": pct(vb, x, y)[1]}
+                if e in GLOW_ROOMS:
+                    m["glow"] = "glow_" + e.replace(".", "_") + ".svg"
+                markers[key].append(m)
+            markers[key + "_aspect"] = round(vb[2] / vb[3], 4)
+        for key, (vb, body, title, txy) in FLOORS.items():
+            for e, n, i, x, y, k in MARKERS.get(key, []):
+                if e in GLOW_ROOMS:
+                    room, rgb, r = GLOW_ROOMS[e]
+                    fn = pal["glow_prefix"] + e.replace(".", "_") + ".svg"
+                    (OUT / fn).write_text(glow_svg(vb, room, pal["glow_rgb"] or rgb, r, x, y), encoding="utf-8")
     (ROOT / "tools" / "floor_markers.json").write_text(json.dumps(markers, indent=2), encoding="utf-8")
 
 

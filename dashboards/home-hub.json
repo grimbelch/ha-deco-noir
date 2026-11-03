@@ -2813,14 +2813,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main.svg?v=4",
+              "image": "/local/deco/floor_main.svg?v=6",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=4"
+                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2839,7 +2839,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=4"
+                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2858,7 +2858,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=4"
+                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2877,7 +2877,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_switch_lamp_window.svg?v=4"
+                    "img": "/local/deco/glow_switch_lamp_window.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2896,7 +2896,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_grow_lamp.svg?v=4"
+                    "img": "/local/deco/glow_switch_grow_lamp.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2915,7 +2915,7 @@
                   "template": "deco_glow",
                   "entity": "switch.dining_room_xmas",
                   "variables": {
-                    "img": "/local/deco/glow_switch_dining_room_xmas.svg?v=4"
+                    "img": "/local/deco/glow_switch_dining_room_xmas.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2934,7 +2934,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=4"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2953,7 +2953,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=4"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -2975,7 +2975,7 @@
                   "icon": "mdi:lamp",
                   "style": {
                     "left": "62.93%",
-                    "top": "62.09%"
+                    "top": "59.75%"
                   }
                 },
                 {
@@ -2986,7 +2986,7 @@
                   "icon": "mdi:lamp",
                   "style": {
                     "left": "90.95%",
-                    "top": "62.09%"
+                    "top": "59.75%"
                   }
                 },
                 {
@@ -2997,7 +2997,7 @@
                   "icon": "mdi:floor-lamp",
                   "style": {
                     "left": "90.95%",
-                    "top": "75.49%"
+                    "top": "72.64%"
                   }
                 },
                 {
@@ -3008,7 +3008,7 @@
                   "icon": "mdi:lamp",
                   "style": {
                     "left": "76.94%",
-                    "top": "75.49%"
+                    "top": "72.64%"
                   }
                 },
                 {
@@ -3019,7 +3019,7 @@
                   "icon": "mdi:sprout",
                   "style": {
                     "left": "62.93%",
-                    "top": "75.49%"
+                    "top": "72.64%"
                   }
                 },
                 {
@@ -3030,7 +3030,7 @@
                   "icon": "mdi:speaker",
                   "style": {
                     "left": "76.94%",
-                    "top": "62.09%"
+                    "top": "59.75%"
                   },
                   "tap_action": {
                     "action": "more-info"
@@ -3044,7 +3044,7 @@
                   "icon": "mdi:thermostat",
                   "style": {
                     "left": "60.78%",
-                    "top": "54.25%"
+                    "top": "52.2%"
                   },
                   "tap_action": {
                     "action": "more-info"
@@ -3058,7 +3058,7 @@
                   "icon": "mdi:speaker",
                   "style": {
                     "left": "32.76%",
-                    "top": "78.1%"
+                    "top": "75.16%"
                   },
                   "tap_action": {
                     "action": "more-info"
@@ -3072,7 +3072,7 @@
                   "icon": "mdi:pine-tree",
                   "style": {
                     "left": "54.53%",
-                    "top": "92.81%"
+                    "top": "89.31%"
                   }
                 },
                 {
@@ -3083,7 +3083,7 @@
                   "icon": "mdi:outdoor-lamp",
                   "style": {
                     "left": "38.15%",
-                    "top": "31.86%"
+                    "top": "30.66%"
                   }
                 },
                 {
@@ -3094,13 +3094,621 @@
                   "icon": "mdi:outdoor-lamp",
                   "style": {
                     "left": "60.78%",
-                    "top": "31.86%"
+                    "top": "30.66%"
                   }
                 }
               ],
               "grid_options": {
                 "columns": "full"
-              }
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Cogitator"
+                },
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Les Saisons"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_main_cog.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.couch_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_couch_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.chez_lounge_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_chez_lounge_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.pappasan_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_pappasan_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.lamp_window",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_lamp_window.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.grow_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_grow_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.dining_room_xmas",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_dining_room_xmas.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "light.outdoor_dimmer_light_1",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_1.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "light.outdoor_dimmer_light_2",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_2.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.couch_lamp",
+                  "name": "Couch",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "59.75%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.chez_lounge_lamp",
+                  "name": "Chez Lounge",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "59.75%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.pappasan_lamp",
+                  "name": "Pappasan",
+                  "icon": "mdi:floor-lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.lamp_window",
+                  "name": "Window",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.grow_lamp",
+                  "name": "Grow lamp",
+                  "icon": "mdi:sprout",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.billie_2",
+                  "name": "Billie",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "59.75%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "climate.nest_thermostat",
+                  "name": "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'\u00b0 / '+Math.round(a.temperature||0)+'\u00b0'; ]]]",
+                  "icon": "mdi:thermostat",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "52.2%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.kitchen_speaker",
+                  "name": "Kitchen",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "32.76%",
+                    "top": "75.16%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.dining_room_xmas",
+                  "name": "Dining Xmas",
+                  "icon": "mdi:pine-tree",
+                  "style": {
+                    "left": "54.53%",
+                    "top": "89.31%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_1",
+                  "name": "Outdoor 1",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "38.15%",
+                    "top": "30.66%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_2",
+                  "name": "Outdoor 2",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "30.66%"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Cogitator"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_main_sea.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.couch_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_couch_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.chez_lounge_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_chez_lounge_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.pappasan_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_pappasan_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.lamp_window",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_lamp_window.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.grow_lamp",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_grow_lamp.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.dining_room_xmas",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_dining_room_xmas.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "light.outdoor_dimmer_light_1",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_1.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "light.outdoor_dimmer_light_2",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_2.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.couch_lamp",
+                  "name": "Couch",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "59.75%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.chez_lounge_lamp",
+                  "name": "Chez Lounge",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "59.75%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.pappasan_lamp",
+                  "name": "Pappasan",
+                  "icon": "mdi:floor-lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.lamp_window",
+                  "name": "Window",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.grow_lamp",
+                  "name": "Grow lamp",
+                  "icon": "mdi:sprout",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "72.64%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.billie_2",
+                  "name": "Billie",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "59.75%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "climate.nest_thermostat",
+                  "name": "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'\u00b0 / '+Math.round(a.temperature||0)+'\u00b0'; ]]]",
+                  "icon": "mdi:thermostat",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "52.2%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.kitchen_speaker",
+                  "name": "Kitchen",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "32.76%",
+                    "top": "75.16%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.dining_room_xmas",
+                  "name": "Dining Xmas",
+                  "icon": "mdi:pine-tree",
+                  "style": {
+                    "left": "54.53%",
+                    "top": "89.31%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_1",
+                  "name": "Outdoor 1",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "38.15%",
+                    "top": "30.66%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_2",
+                  "name": "Outdoor 2",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "30.66%"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Les Saisons"
+                }
+              ]
             }
           ],
           "column_span": 2
@@ -3120,7 +3728,7 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper.svg?v=4",
+              "image": "/local/deco/floor_upper.svg?v=6",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -3139,7 +3747,79 @@
               ],
               "grid_options": {
                 "columns": "full"
-              }
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Cogitator"
+                },
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Les Saisons"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_upper_cog.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.hp_officejet_pro_6970",
+                  "name": "[[[ return 'Printer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer",
+                  "style": {
+                    "left": "40.06%",
+                    "top": "89.22%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Cogitator"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_upper_sea.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.hp_officejet_pro_6970",
+                  "name": "[[[ return 'Printer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer",
+                  "style": {
+                    "left": "40.06%",
+                    "top": "89.22%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Les Saisons"
+                }
+              ]
             },
             {
               "type": "custom:button-card",
@@ -3153,14 +3833,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower.svg?v=4",
+              "image": "/local/deco/floor_lower.svg?v=6",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=4"
+                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -3179,7 +3859,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=4"
+                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -3198,7 +3878,7 @@
                   "template": "deco_glow",
                   "entity": "switch.basement_fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=4"
+                    "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -3217,7 +3897,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_switch_painting_desk.svg?v=4"
+                    "img": "/local/deco/glow_switch_painting_desk.svg?v=6"
                   },
                   "style": {
                     "left": "0",
@@ -3334,7 +4014,403 @@
               ],
               "grid_options": {
                 "columns": "full"
-              }
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Cogitator"
+                },
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state_not": "Les Saisons"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_lower_cog.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.torch_light_front",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_torch_light_front.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.torch_light_back",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_torch_light_back.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.basement_fireplace_lights",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_basement_fireplace_lights.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.painting_desk",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_painting_desk.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_front",
+                  "name": "Torch front",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_back",
+                  "name": "Torch back",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.basement_fireplace_lights",
+                  "name": "Fireplace",
+                  "icon": "mdi:fireplace",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "61.41%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.library",
+                  "name": "Library",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "61.41%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.painting_desk",
+                  "name": "Painting desk",
+                  "icon": "mdi:palette",
+                  "style": {
+                    "left": "68.29%",
+                    "top": "41.28%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.h2s_0938ac5b0600679_print_status",
+                  "name": "[[[ return 'Icarus \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer-3d",
+                  "style": {
+                    "left": "86.86%",
+                    "top": "41.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.washer_current_status",
+                  "name": "[[[ return 'Washer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:washing-machine",
+                  "style": {
+                    "left": "15.43%",
+                    "top": "42.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.dryer_current_status",
+                  "name": "[[[ return 'Dryer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:tumble-dryer",
+                  "style": {
+                    "left": "45.43%",
+                    "top": "42.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Cogitator"
+                }
+              ]
+            },
+            {
+              "type": "picture-elements",
+              "image": "/local/deco/floor_lower_sea.svg?v=6",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.torch_light_front",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_torch_light_front.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.torch_light_back",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_torch_light_back.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.basement_fireplace_lights",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_basement_fireplace_lights.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.painting_desk",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_painting_desk.svg?v=6"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_front",
+                  "name": "Torch front",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_back",
+                  "name": "Torch back",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.basement_fireplace_lights",
+                  "name": "Fireplace",
+                  "icon": "mdi:fireplace",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "61.41%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.library",
+                  "name": "Library",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "61.41%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.painting_desk",
+                  "name": "Painting desk",
+                  "icon": "mdi:palette",
+                  "style": {
+                    "left": "68.29%",
+                    "top": "41.28%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.h2s_0938ac5b0600679_print_status",
+                  "name": "[[[ return 'Icarus \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer-3d",
+                  "style": {
+                    "left": "86.86%",
+                    "top": "41.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.washer_current_status",
+                  "name": "[[[ return 'Washer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:washing-machine",
+                  "style": {
+                    "left": "15.43%",
+                    "top": "42.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.dryer_current_status",
+                  "name": "[[[ return 'Dryer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:tumble-dryer",
+                  "style": {
+                    "left": "45.43%",
+                    "top": "42.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              },
+              "visibility": [
+                {
+                  "condition": "state",
+                  "entity": "input_select.dashboard_theme",
+                  "state": "Les Saisons"
+                }
+              ]
             }
           ]
         }

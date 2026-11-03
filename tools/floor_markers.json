@@ -6,7 +6,7 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 62.93,
-      "top": 62.09,
+      "top": 59.75,
       "glow": "glow_switch_couch_lamp.svg"
     },
     {
@@ -15,7 +15,7 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 90.95,
-      "top": 62.09,
+      "top": 59.75,
       "glow": "glow_switch_chez_lounge_lamp.svg"
     },
     {
@@ -24,7 +24,7 @@
       "icon": "mdi:floor-lamp",
       "kind": "lamp",
       "left": 90.95,
-      "top": 75.49,
+      "top": 72.64,
       "glow": "glow_switch_pappasan_lamp.svg"
     },
     {
@@ -33,7 +33,7 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 76.94,
-      "top": 75.49,
+      "top": 72.64,
       "glow": "glow_switch_lamp_window.svg"
     },
     {
@@ -42,7 +42,7 @@
       "icon": "mdi:sprout",
       "kind": "lamp",
       "left": 62.93,
-      "top": 75.49,
+      "top": 72.64,
       "glow": "glow_switch_grow_lamp.svg"
     },
     {
@@ -51,7 +51,7 @@
       "icon": "mdi:speaker",
       "kind": "speaker",
       "left": 76.94,
-      "top": 62.09
+      "top": 59.75
     },
     {
       "entity": "climate.nest_thermostat",
@@ -59,7 +59,7 @@
       "icon": "mdi:thermostat",
       "kind": "climate",
       "left": 60.78,
-      "top": 54.25
+      "top": 52.2
     },
     {
       "entity": "media_player.kitchen_speaker",
@@ -67,7 +67,7 @@
       "icon": "mdi:speaker",
       "kind": "speaker",
       "left": 32.76,
-      "top": 78.1
+      "top": 75.16
     },
     {
       "entity": "switch.dining_room_xmas",
@@ -75,7 +75,7 @@
       "icon": "mdi:pine-tree",
       "kind": "lamp",
       "left": 54.53,
-      "top": 92.81,
+      "top": 89.31,
       "glow": "glow_switch_dining_room_xmas.svg"
     },
     {
@@ -84,7 +84,7 @@
       "icon": "mdi:outdoor-lamp",
       "kind": "lamp",
       "left": 38.15,
-      "top": 31.86,
+      "top": 30.66,
       "glow": "glow_light_outdoor_dimmer_light_1.svg"
     },
     {
@@ -93,11 +93,11 @@
       "icon": "mdi:outdoor-lamp",
       "kind": "lamp",
       "left": 60.78,
-      "top": 31.86,
+      "top": 30.66,
       "glow": "glow_light_outdoor_dimmer_light_2.svg"
     }
   ],
-  "main_aspect": 0.7582,
+  "main_aspect": 0.7296,
   "upper": [
     {
       "entity": "sensor.hp_officejet_pro_6970",

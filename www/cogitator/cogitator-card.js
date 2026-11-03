@@ -58,6 +58,32 @@ const style=`
 /* Phase 2b: 2x2 scenes fill their panel; rail readouts keep value on one line */
 @media(min-width:651px){.middle>.panel:first-child{display:flex;flex-direction:column}.middle .scenes{flex:1;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}.middle .scene{min-height:86px;font-size:13px;flex-direction:row;gap:12px}.middle .scene ha-icon{--mdc-icon-size:30px}}
 .rail .readout{flex-direction:column;align-items:flex-start;gap:2px}.rail .readout strong{white-space:nowrap}
+
+/* Phase 3: player panel (framed cover art), lighter glow, collapsible phone panels */
+.terminal{text-shadow:none}
+.terminal h1,.terminal h2,.terminal .clock,.terminal .media-title,.terminal .readout strong,.terminal .status-value[data-tone=hot]{text-shadow:0 0 8px #58e28466}
+@media(min-width:651px){
+  .music-hero{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:22px;min-height:0;padding:14px 18px 16px}
+  .music-hero.has-art{grid-template-columns:200px minmax(0,1fr)}
+  .music-hero:after{display:none}
+  .music-hero h2{grid-column:1/-1;margin-bottom:14px}
+  .music-hero .hero-art{position:static;z-index:auto;grid-column:1;grid-row:2/4;width:200px;height:200px;border:1px solid #3b9e60;padding:3px;background:#001006;object-fit:cover;filter:grayscale(1) sepia(1) saturate(3.5) hue-rotate(76deg) brightness(.9) contrast(1.1);box-shadow:0 0 14px #58e28433}
+  .music-hero .media,.music-hero .timeline{grid-column:1/-1;max-width:none}
+  .music-hero.has-art .media,.music-hero.has-art .timeline{grid-column:2}
+  .music-hero .media{grid-row:2;align-self:start}.music-hero .timeline{grid-row:3;align-self:end}
+  .music-hero .volume-row{max-width:320px}
+  .music-hero .media-title{font-size:30px}
+}
+.transport button:last-child{width:auto;min-width:72px;padding:0 12px;font-size:11px;letter-spacing:.1em}
+.volume-row:before{content:'VOL';font-size:10px;letter-spacing:.14em;color:#8fcfa4;order:2;margin-left:auto}
+.volume-row input{order:1}
+@media(max-width:650px){
+  .panel.collapsible>h2{cursor:pointer;min-height:44px}
+  .panel.collapsible>h2:after{content:'▾';margin-left:8px;color:var(--hot)}
+  .panel.collapsible.collapsed>h2:after{content:'▸'}
+  .panel.collapsible.collapsed>:not(h2){display:none}
+  .panel.collapsible.collapsed>h2{margin-bottom:0;border-bottom:0;padding-bottom:0}
+}
 `;
 class CogitatorHomeCard extends Base {
   connectedCallback(){this.startClock();}
@@ -66,7 +92,7 @@ class CogitatorHomeCard extends Base {
   build(){
     this.cards=[];this.widgets=[];this.shadowRoot.innerHTML=`<style>${style}</style>`;
     this.page=this.el('div','terminal');this.shadowRoot.append(this.page);
-    let effects='on';try{effects=localStorage.getItem('cogitator-effects')||'on';}catch{}this.page.dataset.effects=effects;
+    const lowPower=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2;let effects=lowPower?'reduced':'on';try{effects=localStorage.getItem('cogitator-effects')||effects;}catch{}this.page.dataset.effects=effects;
     const header=this.el('header','masthead');header.append(this.el('div','designation','PATTERN IX / DOMUS-01\nARCHIVE: HOME-HUB\nCLASS: IMPERIAL'));
     const brand=this.el('div','brand');brand.append(this.el('h1','','Domus Cogitator'),this.el('p','','ADEPTUS MECHANICUS / HOUSEHOLD AUTOMATION'));header.append(brand);
     const options=this.el('div','theme-controls'),label=this.el('label','','TERMINAL PATTERN');label.htmlFor='theme';this.select=this.el('select');this.select.id='theme';this.select.setAttribute('aria-label','Dashboard theme');for(const name of ['Deco Noir','Deco Noir Lite','Les Saisons','Cogitator']){const option=this.el('option','',name);option.value=name;this.select.append(option);}this.select.onchange=()=>this.service('input_select','select_option',{entity_id:this.config.theme_entity,option:this.select.value});
@@ -78,7 +104,12 @@ class CogitatorHomeCard extends Base {
       else railFns.push(()=>{const st=this._hass.states[item.entity],n=Number(st?.state);value.textContent=st&&Number.isFinite(n)?n.toFixed(item.round??0)+(item.unit||''):(st?.state&&!['unknown','unavailable'].includes(st.state)?st.state:'—');const lowIsBad=item.label==='UPS BATTERY';row.classList.toggle('warn',Number.isFinite(n)&&(lowIsBad?n<50:item.label==='UPS LOAD'&&n>80));});}
     this.widgets.push(()=>{for(const fn of railFns)fn();});
     this.connection=this.el('div','rail-foot');rail.append(this.connection);
-    const panel=(name,code,parent)=>{const p=this.el('section','panel'),h=this.el('h2','',name);h.append(this.el('small','',code));p.append(h);parent.append(p);return p;};
+    const phone=matchMedia('(max-width:650px)').matches;let collapsed=['Weather'];try{collapsed=JSON.parse(localStorage.getItem('cogitator-collapsed')||'null')||collapsed;}catch{}
+    const panel=(name,code,parent)=>{const p=this.el('section','panel'),h=this.el('h2','',name);h.append(this.el('small','',code));p.append(h);parent.append(p);
+      if(phone&&parent!==content){p.classList.add('collapsible');p.classList.toggle('collapsed',collapsed.includes(name));h.setAttribute('role','button');h.tabIndex=0;h.setAttribute('aria-expanded',String(!p.classList.contains('collapsed')));
+        const flip=()=>{const c=p.classList.toggle('collapsed');h.setAttribute('aria-expanded',String(!c));const set=new Set(collapsed);c?set.add(name):set.delete(name);collapsed=[...set];try{localStorage.setItem('cogitator-collapsed',JSON.stringify(collapsed));}catch{}};
+        h.onclick=flip;h.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}};}
+      return p;};
     const music=panel('Vox-Canticle','SOURCE / SPOTIFY',content);this.media(this.config.music_entity,music,true);const line=this.el('div','timeline');this.elapsed=this.el('span','','0:00');this.duration=this.el('span','','0:00');this.progress=this.el('progress');this.progress.max=100;this.progress.value=0;this.progress.setAttribute('aria-label','Playback progress');line.append(this.elapsed,this.progress,this.duration);music.append(line);
     const middle=this.el('div','middle');content.append(middle);const scenes=this.el('div','scenes');panel('Quick Scenes','SCN / 001—004',middle).append(scenes);
     for(const cfg of this.config.scenes){const b=this.button('',cfg.name,()=>{const a=cfg.tap_action,service=a.service||a.perform_action;if(service){const [d,m]=service.split('.');this.service(d,m,a.service_data||a.data||{},a.target);}});b.className='scene';b.append(this.icon(cfg.icon),this.el('span','',cfg.name));scenes.append(b);}
@@ -87,6 +118,7 @@ class CogitatorHomeCard extends Base {
     const footer=this.el('footer','bottom');footer.append(this.el('span','','✠ IN NOMINE OMNISSIAH'),this.el('span','','DOMUS / PATTERN IX'));this.link=this.el('span','','CONNECTING');footer.append(this.link);this.page.append(footer);this.error=this.el('div','error');this.error.setAttribute('role','status');this.page.append(this.error);this.update();this.tick();if(this.isConnected)this.startClock();
   }
   rows(entities,parent){for(const [i,cfg]of entities.entries()){const row=this.el('div','channel'),name=this.button(cfg.name,cfg.name+' details',()=>this.more(cfg.entity));name.className='channel-name';const keys=this.el('div','keys'),on=this.button('ENABLED',cfg.name+' on',()=>this.service(cfg.entity.split('.')[0],'turn_on',{entity_id:cfg.entity})),off=this.button('STANDBY',cfg.name+' off',()=>this.service(cfg.entity.split('.')[0],'turn_off',{entity_id:cfg.entity}));keys.append(on,off);row.append(this.el('span','channel-id','['+String(i+1).padStart(2,'0')+']'),name,keys);parent.append(row);this.widgets.push(()=>{const state=this._hass.states[cfg.entity]?.state,available=['on','off'].includes(state);row.dataset.state=available?state:'unavailable';on.disabled=off.disabled=!available;keys.classList.toggle('unavailable',!available);on.classList.toggle('active',state==='on');off.classList.toggle('active',state==='off');on.setAttribute('aria-pressed',String(state==='on'));off.setAttribute('aria-pressed',String(state==='off'));keys.title=available?state:'Unavailable';});}}
+  media(entity,parent,hero=false){super.media(entity,parent,hero);const b=parent.querySelector('.transport button:last-child');if(b)b.textContent='MORE';}
   status(rows,parent){
     const list=this.el('div','status-list');parent.append(list);
     for(const cfg of rows){

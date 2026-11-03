@@ -19,7 +19,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = None  # theme comes from the HA default (toggled via input_select.dashboard_theme)
-ASSET_V = "4"  # bump to bust caches when SVGs change
+ASSET_V = "6"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -207,25 +207,44 @@ def marker(m):
     return c
 
 
-def glow(m):
+THEME_HELPER = "input_select.dashboard_theme"
+# (kind, svg suffix, glow file prefix, glow blend mode, visibility): every theme gets its own map palette
+PLAN_VARIANTS = [
+    ("deco", "", "glow_", "screen",
+     [{"condition": "state", "entity": THEME_HELPER, "state_not": "Cogitator"},
+      {"condition": "state", "entity": THEME_HELPER, "state_not": "Les Saisons"}]),
+    ("cog", "_cog", "glow_cog_", "screen",
+     [{"condition": "state", "entity": THEME_HELPER, "state": "Cogitator"}]),
+    ("sea", "_sea", "glow_sea_", "multiply",
+     [{"condition": "state", "entity": THEME_HELPER, "state": "Les Saisons"}]),
+]
+
+
+def glow(m, prefix, blend):
+    img = prefix + m["glow"][len("glow_"):]
     return {"type": "custom:button-card", "template": "deco_glow", "entity": m["entity"],
-            "variables": {"img": f"/local/deco/{m['glow']}?v={ASSET_V}"},
+            "variables": {"img": f"/local/deco/{img}?v={ASSET_V}"},
             # button-card sets max-width: fit-content on itself; min-width wins, so the layer spans the plan
             "style": {"left": "0", "top": "0", "transform": "none", "width": "100%", "height": "100%",
-                      "min-width": "100%", "display": "block", "pointer-events": "none", "mix-blend-mode": "screen"}}
+                      "min-width": "100%", "display": "block", "pointer-events": "none", "mix-blend-mode": blend}}
 
 
 def plan(key):
-    pools = [glow(m) for m in markers[key] if m.get("glow")]
-    return {"type": "picture-elements", "image": f"/local/deco/floor_{key}.svg?v={ASSET_V}",
-            "elements": pools + [marker(m) for m in markers[key]], "grid_options": {"columns": "full"}}
+    """One picture-elements card per theme variant; HA shows only the one whose visibility matches."""
+    cards = []
+    for kind, suffix, prefix, blend, vis in PLAN_VARIANTS:
+        pools = [glow(m, prefix, blend) for m in markers[key] if m.get("glow")]
+        cards.append({"type": "picture-elements", "image": f"/local/deco/floor_{key}{suffix}.svg?v={ASSET_V}",
+                      "elements": pools + [marker(m) for m in markers[key]], "grid_options": {"columns": "full"},
+                      "visibility": vis})
+    return cards
 
 
 floor = {
     "type": "sections", "title": "Floor Plan", "path": "floor-plan", "icon": "mdi:floor-plan", "max_columns": 3,
     "sections": [
-        section(marquee("Main Floor"), plan("main"), span=2),
-        section(marquee("Upper Floor"), plan("upper"), marquee("Lower Floor"), plan("lower")),
+        section(marquee("Main Floor"), *plan("main"), span=2),
+        section(marquee("Upper Floor"), *plan("upper"), marquee("Lower Floor"), *plan("lower")),
     ],
 }
 

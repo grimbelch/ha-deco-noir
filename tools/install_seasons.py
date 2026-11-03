@@ -17,7 +17,7 @@ for name,value in [('dashboard',cfg),('helper',helper),('automation',automation)
 out=apply_cogitator(apply_seasons(cfg))
 resources=ha.call(type='lovelace/resources')
 (backup/'resources.json').write_text(json.dumps(resources,indent=2),encoding='utf-8')
-for resource_url in ['/local/seasons/seasons-card.js?v=6','/local/cogitator/cogitator-card.js?v=6']:
+for resource_url in ['/local/seasons/seasons-card.js?v=6','/local/cogitator/cogitator-card.js?v=7']:
     existing=next((r for r in resources if r['url'].split('?')[0]==resource_url.split('?')[0]),None)
     if existing:
         ha.call(type='lovelace/resources/update',resource_id=existing['id'],url=resource_url,res_type='module')
