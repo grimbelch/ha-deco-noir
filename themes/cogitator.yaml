@@ -75,6 +75,20 @@ cogitator:
   deco-label: '''Cog Data'', monospace'
   deco-num: '''Cog Data'', monospace'
   deco-img-filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(75deg)
+  # HA 2026 design tokens: ha-button, dialogs, chips and other native controls derive from this
+  # palette. Overriding it keeps native controls (e.g. Bambu print controls) phosphor green.
+  ha-color-primary-05: '#0f5a2b'
+  ha-color-primary-10: '#1c7a3c'
+  ha-color-primary-20: '#2a9a52'
+  ha-color-primary-30: '#3fbf6b'
+  ha-color-primary-40: '#58e284'
+  ha-color-primary-50: '#7bf5a0'
+  ha-color-primary-60: '#a6ffc3'
+  ha-color-primary-70: '#2f8c4e'
+  ha-color-primary-80: '#1f5d36'
+  ha-color-primary-90: '#0f3a20'
+  ha-color-primary-95: '#082512'
+  ha-color-on-primary-loud: '#001b09'
   card-mod-theme: cogitator
   card-mod-card: "ha-card {\n  color: var(--primary-text-color);\n  background: var(--ha-card-background);\n\
     \  border: 1px solid var(--ha-card-border-color);\n  border-radius: 2px;\n  backdrop-filter:\
