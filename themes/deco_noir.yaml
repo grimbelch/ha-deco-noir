@@ -92,7 +92,7 @@ deco_noir:
   state-light-on-color: "#E6CF9A"
   state-switch-active-color: "#E6CF9A"
   state-switch-on-color: "#E6CF9A"
-  state-media_player-active-color: "#5A79C8"
+  state-media_player-active-color: "#C9A44C"
   state-automation-active-color: "#C9A44C"
   state-binary_sensor-active-color: "#3E9C82"
   state-sun-above_horizon-color: "#E6CF9A"
@@ -130,13 +130,15 @@ deco_noir:
   # ---------- Ornament layer (card-mod) ----------
   card-mod-theme: deco_noir
   card-mod-card: |
+    /* card-mod tags the card element (the shadow host) with .type-<card>,
+       so target it with :host(...) and style the inner ha-card. */
     ha-card {
       -webkit-backdrop-filter: blur(var(--deco-blur)) saturate(120%);
       backdrop-filter: blur(var(--deco-blur)) saturate(120%);
     }
     /* stepped corner brackets on every framed card */
-    ha-card:not(.type-heading) { position: relative; }
-    ha-card:not(.type-heading)::after {
+    :host(:not(.type-heading)) ha-card { position: relative; }
+    :host(:not(.type-heading)) ha-card::after {
       content: "";
       position: absolute; inset: -1px;
       pointer-events: none; z-index: 2;
@@ -148,27 +150,33 @@ deco_noir:
       opacity: .9;
     }
     /* "on" tiles glow like a lit sconce */
-    ha-card.type-tile.active {
+    :host(.type-tile) ha-card.active {
       border-color: rgba(var(--deco-gold-rgb), .55);
       box-shadow: 0 0 22px rgba(var(--deco-gold-rgb), .18), inset 0 0 0 1px rgba(var(--deco-gold-rgb), .14);
       background:
         radial-gradient(120% 90% at 20% 0%, rgba(var(--deco-gold-rgb), .20), rgba(var(--deco-gold-rgb), .04) 60%, transparent),
         var(--ha-card-background);
     }
-    /* section headings: marquee style, no glass box */
-    ha-card.type-heading {
-      background: none; border: none; box-shadow: none;
-      -webkit-backdrop-filter: none; backdrop-filter: none;
+    /* section headings: Poiret One marquee over a gold double rule, no glass box */
+    :host(.type-heading) {
+      --ha-font-family-body: var(--deco-display);
+      --ha-font-family-heading: var(--deco-display);
       --primary-text-color: var(--deco-gold-hi);
       --secondary-text-color: var(--deco-gold);
+      --state-icon-color: var(--deco-gold);
+    }
+    :host(.type-heading) ha-card {
+      background: none; box-shadow: none;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+      border: none;
+      border-bottom: 3px double rgba(var(--deco-gold-rgb), .38);
+      border-radius: 0;
       font-family: var(--deco-display);
       letter-spacing: .14em;
       text-transform: uppercase;
-      border-bottom: 3px double rgba(var(--deco-gold-rgb), .38);
-      border-radius: 0;
     }
     /* numbers in the geometric face */
-    .state, .value, .name.value, .info .state, .temp, .attribute {
+    .state, .value, .info .state, .temp, .attribute {
       font-family: var(--deco-num);
     }
 
