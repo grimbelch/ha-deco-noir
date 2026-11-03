@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "sources": [
+    "C:/Users/seans/servoskull/personalities/omega7/classic/_phosphor.py",
+    "C:/Users/seans/servoskull/personalities/omega7/lore/space_hulk_auspex.py",
+    "C:/Users/seans/servoskull/personalities/omega7/lore/galactic_orrery.py",
+    "C:/Users/seans/Coding/Cogitator/ui/phos.h",
+    "C:/Users/seans/Coding/Cogitator/ui/phos_post.c",
+    "C:/Users/seans/Coding/Cogitator/docs/images/sim-main.png",
+    "C:/Users/seans/Coding/Cogitator/docs/images/sim-shelf-top.png"
+  ],
+  "implementation_notes": [
+    "Keep as optional fourth theme, alongside Deco Noir, Deco Noir Lite, Les Saisons.",
+    "Artwork should support real HA controls; numerical readings in mockups are illustrative.",
+    "Animate auspex sweep, servo-skull and phosphor trails in chosen implementation; keep text static and crisp.",
+    "Provide reduced-motion option and responsive phone composition; no rapid flicker.",
+    "Preserve full-width album art, with monochrome phosphor treatment and contrast overlay."
+  ]
+}

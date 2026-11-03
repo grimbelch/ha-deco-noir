@@ -1,0 +1,84 @@
+cogitator:
+  seasons-text: '#befacc'
+  seasons-surface: '#04140b'
+  primary-color: '#58e284'
+  accent-color: '#58e284'
+  rgb-primary-color: 88, 226, 132
+  rgb-accent-color: 88, 226, 132
+  primary-background-color: '#000a04'
+  secondary-background-color: '#062010'
+  primary-text-color: '#befacc'
+  rgb-primary-text-color: 190, 250, 204
+  secondary-text-color: '#65b97f'
+  disabled-text-color: '#39704a'
+  text-primary-color: '#001b09'
+  divider-color: '#245d37'
+  outline-color: '#3c9c60'
+  card-background-color: '#04140b'
+  ha-card-background: '#04140b'
+  ha-card-border-color: '#31824d'
+  ha-card-border-width: 1px
+  ha-card-border-radius: 2px
+  ha-card-box-shadow: inset 0 0 16px rgba(88,226,132,.04)
+  ha-dialog-border-radius: 2px
+  mdc-theme-surface: '#04140b'
+  app-header-background-color: '#031409'
+  app-header-text-color: '#befacc'
+  app-header-selection-bar-color: '#58e284'
+  sidebar-background-color: '#000a04'
+  sidebar-text-color: '#befacc'
+  sidebar-icon-color: '#65b97f'
+  sidebar-selected-text-color: '#a6ffc3'
+  sidebar-selected-icon-color: '#a6ffc3'
+  input-fill-color: '#082512'
+  input-ink-color: '#befacc'
+  input-label-ink-color: '#65b97f'
+  input-dropdown-icon-color: '#65b97f'
+  switch-checked-color: '#58e284'
+  switch-checked-button-color: '#c4ffd5'
+  switch-checked-track-color: '#58e284'
+  switch-unchecked-button-color: '#c4ffd5'
+  switch-unchecked-track-color: '#19482a'
+  state-active-color: '#58e284'
+  state-inactive-color: '#326846'
+  state-icon-color: '#65b97f'
+  state-icon-active-color: '#58e284'
+  state-light-on-color: '#58e284'
+  state-switch-on-color: '#58e284'
+  state-automation-active-color: '#58e284'
+  slider-color: '#58e284'
+  slider-secondary-color: '#123a21'
+  slider-track-color: '#19482a'
+  success-color: '#58e284'
+  warning-color: '#ffb428'
+  error-color: '#ff4030'
+  info-color: '#89e9a7'
+  primary-font-family: '''Cog Data'', ''Courier New'', monospace'
+  ha-font-family-body: '''Cog Data'', ''Courier New'', monospace'
+  ha-font-family-heading: '''Cog Title'', serif'
+  lovelace-background: '#000a04'
+  deco-ink: '#000a04'
+  deco-midnight: '#062010'
+  deco-ivory: '#befacc'
+  deco-gold: '#58e284'
+  deco-gold-hi: '#befacc'
+  deco-gold-rgb: 88, 226, 132
+  deco-emerald: '#58e284'
+  deco-sapphire: '#89e9a7'
+  deco-garnet: '#ff4030'
+  deco-hair: '#31824d'
+  deco-hair-faint: '#245d37'
+  deco-glass: '#04140b'
+  deco-blur: 0px
+  deco-backdrop: none
+  deco-display: '''Cog Title'', serif'
+  deco-label: '''Cog Data'', monospace'
+  deco-num: '''Cog Data'', monospace'
+  card-mod-theme: cogitator
+  card-mod-card: "ha-card {\n  color: var(--primary-text-color);\n  background: var(--ha-card-background);\n\
+    \  border: 1px solid var(--ha-card-border-color);\n  border-radius: 2px;\n  backdrop-filter:\
+    \ none;\n  -webkit-backdrop-filter: none;\n}\nh1, h2, .card-header {\n  font-family:\
+    \ var(--deco-display);\n  color: var(--primary-text-color);\n  letter-spacing:\
+    \ .015em;\n}\n:host(.type-custom-button-card) #name,\n:host(.type-custom-button-card)\
+    \ #state,\n:host(.type-custom-button-card) #meta {\n  color: var(--primary-text-color)\
+    \ !important;\n  text-shadow: none !important;\n}\n"
