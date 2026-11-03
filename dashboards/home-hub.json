@@ -21,6 +21,14 @@
         },
         {
           "type": "entity",
+          "entity": "climate.nest_thermostat",
+          "name": "Inside",
+          "icon": "mdi:home-thermometer",
+          "show_name": true,
+          "state_content": "current_temperature"
+        },
+        {
+          "type": "entity",
           "entity": "sensor.alexandria_status",
           "name": "Power",
           "icon": "mdi:power-plug-battery",
@@ -63,6 +71,22 @@
               "forecast_type": "daily",
               "show_current": true,
               "show_forecast": true
+            },
+            {
+              "type": "thermostat",
+              "entity": "climate.nest_thermostat",
+              "name": "Thermostat",
+              "features": [
+                {
+                  "type": "climate-hvac-modes",
+                  "hvac_modes": [
+                    "off",
+                    "heat",
+                    "cool",
+                    "heat_cool"
+                  ]
+                }
+              ]
             },
             {
               "type": "button",
