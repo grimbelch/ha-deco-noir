@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +21,7 @@ import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
@@ -84,7 +84,7 @@ fun TopDialog(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.8f))
+                .background(Deco.Scrim)
                 // Esc (keyboards, the emulator) closes it like Back does
                 .onPreviewKeyEvent { event ->
                     if (event.key != Key.Escape) return@onPreviewKeyEvent false
@@ -95,12 +95,13 @@ fun TopDialog(
         ) {
             Surface(
                 modifier = Modifier.padding(top = TopPadding).then(if (fullWidth) Modifier.padding(horizontal = EdgePadding) else Modifier),
-                shape = RoundedCornerShape(16.dp),
-                colors = SurfaceDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                shape = RectangleShape,
+                // Opaque: a dialog over the busy home screen needs a quiet ground
+                colors = SurfaceDefaults.colors(containerColor = Deco.Raised),
             ) {
-                Column(modifier = (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(640.dp)).padding(16.dp)) {
+                Column(modifier = (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(640.dp)).decoFrame().padding(16.dp)) {
                     // Buttons are filled with surfaceVariant: a step up, or they'd vanish into the dialog
-                    val raised = MaterialTheme.colorScheme.copy(surfaceVariant = RaisedSurface)
+                    val raised = MaterialTheme.colorScheme.copy(surfaceVariant = Deco.RaisedHi)
                     Row(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -109,7 +110,7 @@ fun TopDialog(
                         if (tabs != null) {
                             Row(modifier = Modifier.height(44.dp), content = tabs)
                         } else {
-                            Text(title, style = MaterialTheme.typography.titleMedium)
+                            Text(title.uppercase(), style = MaterialTheme.typography.titleLarge.marquee(), color = Deco.GoldHi)
                         }
                         Spacer(Modifier.weight(1f))
                         if (info != null) {

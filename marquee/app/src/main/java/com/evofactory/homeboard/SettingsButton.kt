@@ -56,7 +56,13 @@ fun SettingsButton(
         IconButton(
             onClick = { menuOpen = true },
             modifier = Modifier.size(SettingsButtonSize).onFocusChanged { focused = it.isFocused },
-            colors = IconButtonDefaults.colors(contentColor = MaterialTheme.colorScheme.onSurfaceVariant),
+            shape = IconButtonDefaults.shape(DecoWellShape),
+            colors = IconButtonDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = Deco.Gold,
+                focusedContainerColor = MaterialTheme.colorScheme.inverseSurface,
+                focusedContentColor = MaterialTheme.colorScheme.inverseOnSurface,
+            ),
         ) {
             Icon(painter = painterResource(R.drawable.ic_settings), contentDescription = "Settings")
         }
@@ -69,7 +75,7 @@ fun SettingsButton(
                     MenuAction(if (context.isGoogleTv()) "Google TV settings" else "Android TV settings") {
                         context.openSystemSettings()
                     },
-                    MenuAction("HomeBoard settings", onOpenLauncherSettings),
+                    MenuAction("Marquee settings", onOpenLauncherSettings),
                     MenuAction("Cameras", onOpenCameras),
                     MenuAction("Home Assistant") {
                         if (homeAssistantSet) homeAssistantMenuOpen = true else onOpenHomeAssistant(HaPick.Sensors)

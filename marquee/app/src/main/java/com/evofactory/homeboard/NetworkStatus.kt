@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -41,6 +42,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ClickableSurfaceDefaults
+import androidx.tv.material3.Border
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.OutlinedButton
@@ -191,11 +193,12 @@ fun NetworkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .onFocusChanged { focused = it.isFocused }
                 .semantics { contentDescription = name },
-            shape = ClickableSurfaceDefaults.shape(CircleShape),
+            shape = ClickableSurfaceDefaults.shape(DecoWellShape),
+                    border = ClickableSurfaceDefaults.border(border = Border(BorderStroke(1.dp, Deco.Hair), shape = DecoWellShape)),
             colors = ClickableSurfaceDefaults.colors(
                 containerColor = colors.surfaceVariant,
-                contentColor = if (broken) ErrorColor else colors.onSurfaceVariant,
-                focusedContainerColor = colors.onSurface,
+                contentColor = if (broken) ErrorColor else Deco.Gold,
+                focusedContainerColor = colors.inverseSurface,
                 focusedContentColor = colors.inverseOnSurface,
             ),
         ) {
@@ -340,8 +343,8 @@ fun NetworkStatusDialog(frigate: FrigateFeed?, onOpenPing: () -> Unit, onDismiss
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Spacer(Modifier.weight(1f))
-            OutlinedButton(onClick = onOpenPing, modifier = Modifier.focusRequester(ping)) { Text("Ping utility") }
-            OutlinedButton(onClick = onDismiss) { Text("Close") }
+            DecoOutlinedButton(onClick = onOpenPing, modifier = Modifier.focusRequester(ping)) { Text("Ping utility") }
+            DecoOutlinedButton(onClick = onDismiss) { Text("Close") }
         }
         LaunchedEffect(Unit) { ping.requestFocus() }
     }

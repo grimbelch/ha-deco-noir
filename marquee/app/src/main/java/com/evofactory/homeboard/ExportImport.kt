@@ -203,7 +203,7 @@ fun ChecklistDialog(
         actions = {
             if (allKeys.isNotEmpty()) {
                 // Partly checked counts as checked: one press clears the list
-                OutlinedButton(
+                DecoOutlinedButton(
                     onClick = {
                         unchecked.clear()
                         if (canConfirm) unchecked.addAll(allKeys)
@@ -214,12 +214,12 @@ fun ChecklistDialog(
                     },
                 ) { Text(if (canConfirm) "Uncheck all" else "Check all") }
             }
-            Button(
+            DecoButton(
                 onClick = { onConfirm(file.only(allKeys.toSet() - unchecked.toSet())) },
                 enabled = canConfirm,
                 modifier = Modifier.focusRequester(confirm).focusProperties { down = rows.current(allKeys) },
             ) { Text(confirmLabel) }
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onDismiss,
                 modifier = Modifier.focusRequester(cancel).focusProperties {
                     right = rows.current(allKeys)
@@ -256,7 +256,7 @@ fun ChecklistDialog(
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = CheckedBox,
                                     uncheckedColor = UncheckedBox,
-                                    checkmarkColor = Color.White,
+                                    checkmarkColor = Deco.GoldHi,
                                 ),
                             )
                         },
@@ -274,8 +274,8 @@ fun ChecklistDialog(
     }
 }
 
-private val CheckedBox = Color(0xFF5A595F)
-private val UncheckedBox = Color(0xFF8E8C92)
+private val CheckedBox = Deco.GoldDeep
+private val UncheckedBox = Deco.IvoryFaint
 
 /** To another TV on the network, or to a file. */
 @Composable
@@ -399,7 +399,7 @@ private fun FileBrowser(title: String, defaultName: String?, onPick: (File) -> U
     val askPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         allowed = granted
         if (!granted) {
-            Toast.makeText(context, "HomeBoard needs access to storage to do this", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Marquee needs access to storage to do this", Toast.LENGTH_LONG).show()
             onDismiss()
         }
     }
@@ -496,18 +496,18 @@ private fun FileBrowser(title: String, defaultName: String?, onPick: (File) -> U
         onDismiss = ::goUp,
         actions = {
             if (defaultName != null) {
-                OutlinedButton(
+                DecoOutlinedButton(
                     onClick = { newFolder = "" },
                     enabled = current != null,
                     modifier = Modifier.focusProperties { left = rowFocus.current(rowKeys) },
                 ) { Text("New folder") }
-                Button(
+                DecoButton(
                     onClick = { target?.let(onPick) },
                     enabled = target != null,
                     modifier = Modifier.focusRequester(saveButton),
                 ) { Text(if (target?.exists() == true) "Replace" else "Save") }
             }
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onDismiss,
                 modifier = Modifier.focusRequester(cancel).focusProperties {
                     right = rowFocus.current(rowKeys)

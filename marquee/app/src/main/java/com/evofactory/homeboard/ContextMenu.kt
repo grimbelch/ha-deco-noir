@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.Key
@@ -80,13 +80,14 @@ fun ContextMenu(
                 }
                 waitingForFreshPress
             },
-            shape = RoundedCornerShape(12.dp),
+            shape = RectangleShape,
             colors = SurfaceDefaults.colors(containerColor = RaisedSurface),
         ) {
-            Column(modifier = Modifier.width(300.dp).padding(8.dp)) {
+            Column(modifier = Modifier.width(300.dp).decoFrame().padding(8.dp)) {
                 Text(
-                    title,
-                    style = MaterialTheme.typography.titleSmall,
+                    title.uppercase(),
+                    style = MaterialTheme.typography.titleMedium.marquee(),
+                    color = Deco.GoldHi,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
@@ -116,7 +117,7 @@ fun MenuDivider(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 4.dp)
             .height(1.dp)
-            .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
+            .background(Deco.Hair),
     )
 }
 

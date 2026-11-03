@@ -14,11 +14,12 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.evofactory.homeboard"
+        // Its own id: installs next to stock HomeBoard rather than over it
+        applicationId = "com.grimbelch.marquee"
         minSdk = 28 // Android 9
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0-deco"
         buildConfigField("long", "BUILD_TIME", "${System.currentTimeMillis()}L")
     }
 

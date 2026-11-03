@@ -34,8 +34,10 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import androidx.compose.ui.graphics.Color
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
+import androidx.tv.material3.SurfaceDefaults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -104,8 +106,11 @@ class MainActivity : ComponentActivity() {
         // Android stops asking by itself after it's been refused. Answering comes back to onResume.
         if (!canReadWatchNext()) requestPermissions(arrayOf(READ_TV_LISTINGS), 0)
         setContent {
-            MaterialTheme(colorScheme = AppColorScheme) {
-                Surface(modifier = Modifier.fillMaxSize()) {
+            MaterialTheme(colorScheme = AppColorScheme, shapes = DecoShapes, typography = DecoTypography) {
+                Surface(
+                    modifier = Modifier.fillMaxSize().decoBackdrop(),
+                    colors = SurfaceDefaults.colors(containerColor = Color.Transparent),
+                ) {
                     val all = installed
                     val visible = remember(all, order, hidden) { all?.let { arrange(it, order, hidden) } }
                     val hiddenApps = remember(all, hidden) {
@@ -285,6 +290,7 @@ class MainActivity : ComponentActivity() {
                                                     modifier = Modifier
                                                         .fillMaxWidth()
                                                         .aspectRatio(16f / 9f)
+                                                        .decoFrame(innerBand = false)
                                                         .focusRequester(mainCameraFocus)
                                                         .focusProperties { up = secondTabFocus },
                                                 )

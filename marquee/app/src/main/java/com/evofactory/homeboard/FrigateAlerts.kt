@@ -359,6 +359,9 @@ fun FrigateAlertsRow(
                     val requester = requesters.getOrPut(alert.id) { FocusRequester() }
                     Card(
                         onClick = { feed.playing = alert },
+                        shape = DecoCardShape,
+                        glow = DecoCardGlow,
+                        border = DecoCardBorder,
                         modifier = Modifier
                             .width(cardWidth)
                             .aspectRatio(16f / 9f)
@@ -408,7 +411,7 @@ fun SettingsPrompt(
                     modifier = Modifier.padding(start = EdgePadding, end = EdgePadding, bottom = EdgePadding),
                 )
             }
-            Button(onClick = onClick, modifier = buttonModifier) { Text(label) }
+            DecoButton(onClick = onClick, modifier = buttonModifier) { Text(label) }
         }
     }
 }

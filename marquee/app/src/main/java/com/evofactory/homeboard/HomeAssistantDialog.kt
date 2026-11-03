@@ -179,7 +179,7 @@ fun HomeAssistantDialog(
             )
             Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp)) {
                 Spacer(Modifier.weight(1f))
-                OutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
+                DecoOutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
             }
             LaunchedEffect(Unit) {
                 closeButton.requestFocus()
@@ -273,7 +273,7 @@ fun HomeAssistantDialog(
             ) {
                 // Greyed out until everything needed is filled in. Stays enabled while connecting
                 // (presses are ignored), so the remote keeps its place on it
-                Button(onClick = ::connect, enabled = canConnect, modifier = Modifier.focusRequester(connectButton)) {
+                DecoButton(onClick = ::connect, enabled = canConnect, modifier = Modifier.focusRequester(connectButton)) {
                     Text(
                         when {
                             useToken || reuseLogin -> "Connect"
@@ -283,7 +283,7 @@ fun HomeAssistantDialog(
                     )
                 }
                 Spacer(Modifier.weight(1f))
-                OutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeLoginButton)) { Text("Close") }
+                DecoOutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeLoginButton)) { Text("Close") }
             }
             Text(
                 status ?: when {
@@ -387,14 +387,14 @@ fun HomeAssistantDialog(
             ) {
                 // Only when logging in here: to change the login
                 if (showLogin) {
-                    OutlinedButton(onClick = {
+                    DecoOutlinedButton(onClick = {
                         available = null
                         connected = null
                     }) { Text("Back") }
                 }
                 Spacer(Modifier.weight(1f))
                 // On the right, where Down from the list lands
-                Button(
+                DecoButton(
                     onClick = {
                         // Drops entities that no longer exist
                         val ids = entities.map { it.id }.toSet()
@@ -405,7 +405,7 @@ fun HomeAssistantDialog(
                     // Left goes back into the list, where it was
                     modifier = Modifier.focusRequester(saveButton).focusProperties { listFocus()?.let { left = it } },
                 ) { Text("Save") }
-                OutlinedButton(
+                DecoOutlinedButton(
                     onClick = onDismiss,
                     modifier = Modifier.focusRequester(closeButton).focusProperties { listFocus()?.let { right = it } },
                 ) { Text("Close") }

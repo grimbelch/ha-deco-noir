@@ -106,7 +106,7 @@ fun LauncherSettingsDialog(
     }
 
     TopDialog(
-        title = "HomeBoard settings",
+        title = "Marquee settings",
         onDismiss = onDismiss,
         tabs = {
             TabButton(
@@ -126,7 +126,7 @@ fun LauncherSettingsDialog(
             )
         },
         actions = {
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onDismiss,
                 modifier = Modifier.focusRequester(closeButton).focusProperties {
                     left = advancedTab
@@ -190,7 +190,7 @@ fun LauncherSettingsDialog(
             }
         }
         Text(status, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(12.dp))
-        Button(
+        DecoButton(
             onClick = { context.openSystemSettings(Settings.ACTION_ACCESSIBILITY_SETTINGS) },
             modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).jumpToActions(left = exportButton, right = closeButton),
         ) {
@@ -202,12 +202,12 @@ fun LauncherSettingsDialog(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onExport,
                 modifier = Modifier.focusRequester(exportButton).focusProperties { left = toggle },
             ) { Text("Export settings") }
-            OutlinedButton(onClick = onImport) { Text("Import settings") }
-            OutlinedButton(onClick = { context.restartApp() }) { Text("Restart app") }
+            DecoOutlinedButton(onClick = onImport) { Text("Import settings") }
+            DecoOutlinedButton(onClick = { context.restartApp() }) { Text("Restart app") }
             Spacer(Modifier.weight(1f))
             BuildInfo()
         }
@@ -279,9 +279,9 @@ private fun LauncherAdvancedSettings(
     ) {
         Text("Hours of log to keep", style = MaterialTheme.typography.titleSmall)
         Spacer(Modifier.weight(1f))
-        OutlinedButton(onClick = { setHours(hours - 1) }, modifier = firstModifier) { Text("−") }
+        DecoOutlinedButton(onClick = { setHours(hours - 1) }, modifier = firstModifier) { Text("−") }
         Text("$hours", style = MaterialTheme.typography.titleMedium)
-        OutlinedButton(onClick = { setHours(hours + 1) }, modifier = lastModifier) { Text("+") }
+        DecoOutlinedButton(onClick = { setHours(hours + 1) }, modifier = lastModifier) { Text("+") }
     }
     Text(
         "Log size: ${size?.let { Formatter.formatShortFileSize(context, it) } ?: "…"}",
@@ -323,8 +323,8 @@ private fun HomeOverrideConsentDialog(onAccept: () -> Unit, onDecline: () -> Uni
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Spacer(Modifier.weight(1f))
-            OutlinedButton(onClick = onDecline) { Text("Not now") }
-            Button(onClick = onAccept, modifier = Modifier.focusRequester(accept)) { Text("Accept") }
+            DecoOutlinedButton(onClick = onDecline) { Text("Not now") }
+            DecoButton(onClick = onAccept, modifier = Modifier.focusRequester(accept)) { Text("Accept") }
         }
         LaunchedEffect(Unit) { accept.requestFocus() }
     }
@@ -352,7 +352,7 @@ fun HomeOption(title: String, description: String, checked: Boolean, onClick: ()
                 onCheckedChange = null,
                 // Neutral: reads on the dialog and on the light background of the selected row
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = Color.White,
+                    checkedThumbColor = Deco.GoldHi,
                     checkedTrackColor = SwitchOnTrack,
                     checkedBorderColor = SwitchOnTrack,
                     uncheckedThumbColor = SwitchOff,
@@ -410,6 +410,6 @@ fun HomeHelperWarning(replaceHome: Boolean, onClick: () -> Unit, modifier: Modif
 private const val HELPER_START_GRACE_MS = 3_000L
 private const val LOG_SIZE_REFRESH_MS = 5_000L
 
-private val RunningColor = Color(0xFF7BD88F)
-private val SwitchOnTrack = Color(0xFF5A595F)
-private val SwitchOff = Color(0xFF8E8C92)
+private val RunningColor = Deco.Emerald
+private val SwitchOnTrack = Deco.GoldDeep
+private val SwitchOff = Deco.IvoryFaint

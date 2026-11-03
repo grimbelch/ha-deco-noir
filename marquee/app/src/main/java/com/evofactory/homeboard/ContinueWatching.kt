@@ -41,6 +41,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
@@ -450,8 +452,20 @@ private fun WatchCard(
         value = withContext(Dispatchers.IO) { loadPoster(context, uri) }
     }
     Box(modifier = modifier.width(width).aspectRatio(16f / 9f)) {
-        Card(onClick = onClick, onLongClick = onLongClick, modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant)) {
+        Card(
+            onClick = onClick,
+            onLongClick = onLongClick,
+            modifier = Modifier.fillMaxSize(),
+            shape = DecoCardShape,
+            glow = DecoCardGlow,
+            border = DecoCardBorder,
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant).drawWithContent {
+                    drawContent()
+                    drawCornerBrackets()
+                },
+            ) {
                 poster?.let {
                     Image(
                         bitmap = it,
@@ -465,20 +479,20 @@ private fun WatchCard(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .fillMaxWidth()
-                        .background(Color.Black.copy(alpha = 0.7f))
+                        .background(Brush.verticalGradient(listOf(Deco.Ink.copy(alpha = 0.55f), Deco.Ink.copy(alpha = 0.92f))))
                         .padding(horizontal = 8.dp, vertical = 4.dp),
                 ) {
                     Text(
                         item.title,
                         style = MaterialTheme.typography.labelMedium,
-                        color = Color.White,
+                        color = Deco.GoldHi,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
                     Text(
                         listOfNotNull(appLabel, item.episode, timeLeft(item)).joinToString(" · "),
                         style = MaterialTheme.typography.labelSmall,
-                        color = Color.White.copy(alpha = 0.7f),
+                        color = Deco.Ivory.copy(alpha = 0.75f),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -489,7 +503,7 @@ private fun WatchCard(
                             .align(Alignment.BottomStart)
                             .fillMaxWidth(progress)
                             .height(3.dp)
-                            .background(MaterialTheme.colorScheme.onSurface),
+                            .background(Deco.Gold),
                     )
                 }
             }

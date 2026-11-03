@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,7 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
@@ -46,6 +46,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.tv.material3.ClickableSurfaceDefaults
+import androidx.tv.material3.Border
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
@@ -158,7 +159,8 @@ fun HomeAssistantPanel(
                 modifier = Modifier
                     .fillMaxWidth()
                     .selectableTile(if (index == 0) upFocus else null)
-                    .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                    .decoFrame()
                     .padding(horizontal = 16.dp, vertical = 10.dp),
             ) {
                 WeatherReading(entities[id], connection.hourly[id], connection.daily[id])
@@ -172,8 +174,9 @@ fun HomeAssistantPanel(
                 .weight(1f)
                 .focusRequester(sensorsFocus)
                 .selectableTile(if (weatherIds.isEmpty()) upFocus else null)
-                .clip(RoundedCornerShape(12.dp))
-                .background(cardColor),
+                .clipToBounds()
+                .background(cardColor)
+                .decoFrame(),
         ) {
             Column(
                 modifier = Modifier
@@ -186,14 +189,17 @@ fun HomeAssistantPanel(
             ) {
                 rooms.forEachIndexed { index, (room, ids) ->
                     if (room != null) {
-                        Text(
-                            room,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.padding(top = if (index > 0) 4.dp else 0.dp),
-                        )
+                        // A marquee heading: ◆ ROOM in gold Poiret One over a hairline
+                        Column(Modifier.padding(top = if (index > 0) 6.dp else 0.dp)) {
+                            Text(
+                                "◆  " + room.uppercase(),
+                                style = MaterialTheme.typography.titleSmall.marquee(),
+                                color = Deco.GoldHi,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                            Box(Modifier.padding(top = 2.dp).fillMaxWidth().height(1.dp).background(Deco.HairFaint))
+                        }
                     }
                     ids.forEach { id -> SensorReading(id, entities[id]) }
                 }
@@ -221,12 +227,11 @@ fun HomeAssistantPanel(
 @Composable
 private fun Modifier.selectableTile(up: FocusRequester?): Modifier {
     var focused by remember { mutableStateOf(false) }
-    val border = MaterialTheme.colorScheme.border
     return this
         .onFocusChanged { focused = it.isFocused }
         .focusProperties { if (up != null) this.up = up }
         .focusable()
-        .then(if (focused) Modifier.border(3.dp, border, RoundedCornerShape(12.dp)) else Modifier)
+        .then(if (focused) Modifier.border(3.dp, Deco.GoldHi) else Modifier)
 }
 
 /**
@@ -266,11 +271,12 @@ fun HaActionButtons(connection: HaConnection, actionIds: List<String>) {
                         .fillMaxSize()
                         .onFocusChanged { focused = it.isFocused }
                         .semantics { contentDescription = name },
-                    shape = ClickableSurfaceDefaults.shape(CircleShape),
+                    shape = ClickableSurfaceDefaults.shape(DecoWellShape),
+                    border = ClickableSurfaceDefaults.border(border = Border(BorderStroke(1.dp, Deco.Hair), shape = DecoWellShape)),
                     colors = ClickableSurfaceDefaults.colors(
                         containerColor = colors.surfaceVariant,
-                        contentColor = if (session != null && running == null) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.5f),
-                        focusedContainerColor = colors.onSurface,
+                        contentColor = if (session != null && running == null) Deco.Gold else Deco.Gold.copy(alpha = 0.5f),
+                        focusedContainerColor = colors.inverseSurface,
                         focusedContentColor = colors.inverseOnSurface,
                     ),
                 ) {
@@ -287,7 +293,7 @@ fun HaActionButtons(connection: HaConnection, actionIds: List<String>) {
 @Composable
 private fun SensorReading(id: String, entity: HaEntity?) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        MdiIcon(entity?.icon ?: "", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        MdiIcon(entity?.icon ?: "", color = Deco.Gold)
         Text(
             entity?.name ?: id,
             style = MaterialTheme.typography.bodyMedium,
@@ -306,7 +312,8 @@ private fun SensorReading(id: String, entity: HaEntity?) {
                     append(unit)
                 }
             },
-            style = MaterialTheme.typography.titleMedium,
+            // Figures in Jost, like the dashboard's states
+            style = MaterialTheme.typography.titleMedium.figures(FontWeight.Normal),
             maxLines = 1,
         )
     }

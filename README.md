@@ -81,8 +81,17 @@ themes/        Home Assistant theme YAML (Phase 1)
 www/deco/      background art, fonts CSS (Phase 1)
 templates/     button-card templates (Phase 2)
 dashboards/    dashboard config exports (Phase 2)
+marquee/       Marquee: Deco Noir Android TV launcher (fork of HomeBoard)
 ```
+
+## Marquee: Deco Noir on the TV
+
+[`marquee/`](marquee/) is **Marquee**, an Android TV / Google TV launcher forked from
+[HomeBoard](https://github.com/fplanque/HomeBoard) and restyled in Deco Noir: sunburst
+background, smoked-glass panels with gold hairlines and corner brackets, Poiret One marquee
+tabs and clock. It shows your apps, cameras, Frigate alerts and Home Assistant sensors and
+scenes. See [`marquee/README.md`](marquee/README.md) to build and sideload it.
 
 ## License
 
-MIT
+MIT for the theme. `marquee/` is Apache-2.0 (see `marquee/LICENSE` and `marquee/NOTICE`).

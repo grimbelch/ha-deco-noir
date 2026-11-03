@@ -418,14 +418,14 @@ private fun PeerList(
         info = link.name,
         onDismiss = onDismiss,
         actions = {
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onFile,
                 modifier = Modifier.focusRequester(fileButton).focusProperties {
                     left = rows.current(keys)
                     down = rows.current(keys)
                 },
             ) { Text(fileLabel) }
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onDismiss,
                 modifier = Modifier.focusRequester(close).focusProperties {
                     right = rows.current(keys)
@@ -509,7 +509,7 @@ fun ExportToTv(file: SettingsFile, onSaveToFile: () -> Unit, onDismiss: () -> Un
         PeerList(
             title = "Export settings",
             link = link,
-            hint = "Looking for other TVs. Open HomeBoard settings > Import settings on the other TV and it appears here.",
+            hint = "Looking for other TVs. Open Marquee settings > Import settings on the other TV and it appears here.",
             fileLabel = "Save to a file",
             onFile = onSaveToFile,
             onDismiss = onDismiss,
@@ -565,7 +565,7 @@ fun ImportFromTv(onImport: (SettingsFile) -> Unit, onOpenFile: () -> Unit, onDis
         PeerList(
             title = "Import settings",
             link = link,
-            hint = "Looking for other TVs. Open HomeBoard settings > Export settings on the other TV and it appears here.",
+            hint = "Looking for other TVs. Open Marquee settings > Export settings on the other TV and it appears here.",
             fileLabel = "Open a file",
             onFile = onOpenFile,
             onDismiss = onDismiss,
@@ -576,7 +576,7 @@ fun ImportFromTv(onImport: (SettingsFile) -> Unit, onOpenFile: () -> Unit, onDis
             title = "Import from ${session.peer.name}",
             onDismiss = { link.chosenId = null },
             actions = {
-                OutlinedButton(onClick = { link.chosenId = null }, modifier = Modifier.focusRequester(cancel)) { Text("Cancel") }
+                DecoOutlinedButton(onClick = { link.chosenId = null }, modifier = Modifier.focusRequester(cancel)) { Text("Cancel") }
             },
         ) {
             CodeLine(session)

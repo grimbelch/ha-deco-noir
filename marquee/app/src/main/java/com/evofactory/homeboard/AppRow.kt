@@ -23,8 +23,9 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.border
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -91,7 +92,8 @@ private const val VisibleTiles = 5.5f
 internal const val FocusSlot = 2
 internal const val LastFocusSlot = 3
 
-private val MoveHighlight = Color(0xFF60A5FA)
+// Moving a tile: sapphire, so it reads apart from the gold of the selection
+private val MoveHighlight = Deco.Sapphire
 
 private const val NO_ALERTS_TILE_KEY = "no-recent-alerts"
 
@@ -139,6 +141,9 @@ fun AppRowPlaceholder() {
             items(VisibleTiles.toInt() + 1) { index ->
                 Card(
                     onClick = {},
+                    shape = DecoCardShape,
+                    glow = DecoCardGlow,
+                    border = DecoCardBorder,
                     modifier = Modifier
                         .width(width)
                         .aspectRatio(16f / 9f)
@@ -152,7 +157,7 @@ fun AppRowPlaceholder() {
                             },
                         ),
                 ) {
-                    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant))
+                    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant).decoFrame())
                 }
             }
         }
@@ -433,14 +438,14 @@ fun showHiddenAction(showHidden: Boolean, hiddenCount: Int, onClick: () -> Unit)
 /** Says Frigate has nothing to show, where the row of alerts would otherwise be above the tiles */
 @Composable
 private fun NoAlertsTile(width: Dp, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Card(onClick = onClick, modifier = modifier.width(width).aspectRatio(16f / 9f)) {
+    Card(onClick = onClick, modifier = modifier.width(width).aspectRatio(16f / 9f), shape = DecoCardShape, glow = DecoCardGlow, border = DecoCardBorder) {
         Column(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp),
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant).decoFrame().padding(8.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            MdiIcon("mdi:cctv", size = 40.dp)
-            Text("No Recent Alerts", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
+            MdiIcon("mdi:cctv", size = 40.dp, color = Deco.Gold)
+            Text("NO RECENT ALERTS", style = MaterialTheme.typography.labelMedium, color = Deco.GoldHi, modifier = Modifier.padding(top = 8.dp))
         }
     }
 }
@@ -465,14 +470,20 @@ private fun AppTile(
         Card(
             onClick = onClick,
             onLongClick = onLongClick,
+            shape = DecoCardShape,
+            glow = DecoCardGlow,
             border = if (moving) {
-                CardDefaults.border(focusedBorder = Border(BorderStroke(4.dp, MoveHighlight)))
+                CardDefaults.border(focusedBorder = Border(BorderStroke(4.dp, MoveHighlight), shape = RectangleShape))
             } else {
-                CardDefaults.border()
+                DecoCardBorder
             },
             modifier = Modifier.fillMaxSize(),
         ) {
-            val content = Modifier.fillMaxSize().alpha(if (hidden) 0.35f else 1f)
+            // Every tile wears the Deco corner brackets, over its banner
+            val content = Modifier.fillMaxSize().alpha(if (hidden) 0.35f else 1f).drawWithContent {
+                drawContent()
+                drawCornerBrackets()
+            }
             val tile = image
             when {
                 tile == null -> Box(content.background(MaterialTheme.colorScheme.surfaceVariant))
@@ -500,14 +511,15 @@ private fun AppTile(
 @Composable
 private fun BoxScope.HiddenBadge() {
     Text(
-        "Hidden",
+        "HIDDEN",
         style = MaterialTheme.typography.labelMedium,
-        color = MaterialTheme.colorScheme.onSurface,
+        color = Deco.GoldHi,
         modifier = Modifier
             .align(Alignment.TopStart)
             .zIndex(1f) // the focused Card raises itself; stay above it
             .padding(6.dp)
-            .background(Color.Black.copy(alpha = 0.7f), RoundedCornerShape(6.dp))
+            .background(Deco.Ink.copy(alpha = 0.8f))
+            .border(1.dp, Deco.Hair)
             .padding(horizontal = 8.dp, vertical = 2.dp),
     )
 }
@@ -521,9 +533,9 @@ private fun BoxScope.MoveArrow(symbol: String, alignment: Alignment) {
             .zIndex(1f) // the focused Card raises itself; stay above it
             .padding(horizontal = 6.dp)
             .size(36.dp)
-            .background(MoveHighlight, CircleShape),
+            .background(MoveHighlight, DecoWellShape),
         contentAlignment = Alignment.Center,
     ) {
-        Text(symbol, style = MaterialTheme.typography.titleLarge, color = Color.White)
+        Text(symbol, style = MaterialTheme.typography.titleLarge, color = Deco.Ivory)
     }
 }

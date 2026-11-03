@@ -151,15 +151,15 @@ fun FrigateDialog(
         ) {
             // Greyed out until everything needed is filled in. Stays enabled while connecting
             // (presses are ignored), so the remote keeps its place on it
-            Button(onClick = ::connect, enabled = canConnect, modifier = Modifier.focusRequester(connectButton)) { Text("Connect") }
+            DecoButton(onClick = ::connect, enabled = canConnect, modifier = Modifier.focusRequester(connectButton)) { Text("Connect") }
             if (initial != FrigateServer()) {
-                OutlinedButton(onClick = {
+                DecoOutlinedButton(onClick = {
                     onSave(FrigateServer())
                     onDismiss()
                 }) { Text("Remove") }
             }
             Spacer(Modifier.weight(1f))
-            OutlinedButton(onClick = ::close, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
+            DecoOutlinedButton(onClick = ::close, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
         }
         Text(
             status ?: ("The password is stored on this TV, to log in again when the login expires: " +

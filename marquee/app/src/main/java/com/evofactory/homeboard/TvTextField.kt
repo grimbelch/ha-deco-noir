@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,6 +20,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -58,8 +58,8 @@ fun TvTextField(
             .onFocusChanged { focused = it.hasFocus }
             .clickable(enabled = !editing) { editing = true }
             .border(
-                BorderStroke(if (focused) 3.dp else 1.dp, colors.border),
-                RoundedCornerShape(8.dp),
+                BorderStroke(if (focused) 3.dp else 1.dp, if (focused) Deco.GoldHi else Deco.Hair),
+                RectangleShape,
             )
             .padding(horizontal = 16.dp, vertical = 12.dp),
     ) {
@@ -77,7 +77,7 @@ fun TvTextField(
             onValueChange = onValueChange,
             singleLine = true,
             textStyle = MaterialTheme.typography.titleMedium.copy(color = colors.onSurface),
-            cursorBrush = SolidColor(colors.onSurface),
+            cursorBrush = SolidColor(Deco.GoldHi),
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
             keyboardActions = KeyboardActions(onAny = { onImeAction() }),
             visualTransformation = visualTransformation,

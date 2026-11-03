@@ -2,6 +2,7 @@ package com.evofactory.homeboard
 
 import android.app.ActivityManager
 import android.text.format.DateFormat
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,20 +16,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
@@ -107,33 +109,29 @@ fun TabButton(label: String, selected: Boolean, onSelect: () -> Unit, modifier: 
     Surface(
         onClick = onSelect,
         modifier = modifier.fillMaxHeight(),
-        shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(8.dp)),
+        shape = ClickableSurfaceDefaults.shape(DecoButtonShape),
         // Stays in place, so the underline doesn't move
         scale = ClickableSurfaceDefaults.scale(focusedScale = 1f),
         colors = ClickableSurfaceDefaults.colors(
             containerColor = Color.Transparent,
-            contentColor = if (selected) colors.onSurface else colors.onSurfaceVariant,
-            focusedContainerColor = colors.onSurface,
+            contentColor = if (selected) Deco.GoldHi else colors.onSurfaceVariant,
+            focusedContainerColor = colors.inverseSurface,
             focusedContentColor = colors.inverseOnSurface,
         ),
     ) {
-        Box(Modifier.fillMaxHeight().padding(horizontal = 12.dp), contentAlignment = Alignment.Center) {
+        Box(Modifier.fillMaxHeight().padding(horizontal = 14.dp), contentAlignment = Alignment.Center) {
             Column(Modifier.width(IntrinsicSize.Max)) {
-                Text(label, style = MaterialTheme.typography.titleMedium)
-                Box(
-                    Modifier
-                        .padding(top = 2.dp)
-                        .fillMaxWidth()
-                        .height(TabUnderline)
-                        // The text's color: it reverses with the tab when the remote is on it
-                        .background(if (selected) LocalContentColor.current else Color.Transparent, RoundedCornerShape(TabUnderline / 2)),
+                // Poiret One in spaced capitals, like the dashboard's marquee headings
+                Text(label.uppercase(), style = MaterialTheme.typography.titleLarge.marquee())
+                // The open tab sits on a gold double rule. The text's color: it reverses with the tab when the remote is on it
+                DecoDoubleRule(
+                    Modifier.padding(top = 2.dp),
+                    color = if (selected) LocalContentColor.current else Color.Transparent,
                 )
             }
         }
     }
 }
-
-private val TabUnderline = 4.dp
 
 /** Something needs attention: a red pill, OK says more. [text] is short, it shares the bar with the action buttons. */
 @Composable
@@ -141,21 +139,22 @@ fun TopBarWarning(text: String, onClick: () -> Unit, modifier: Modifier = Modifi
     Surface(
         onClick = onClick,
         modifier = modifier.fillMaxHeight(),
-        shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(50)),
+        shape = ClickableSurfaceDefaults.shape(DecoButtonShape),
         colors = ClickableSurfaceDefaults.colors(
             containerColor = ErrorColor.copy(alpha = 0.2f),
             contentColor = ErrorColor,
             focusedContainerColor = ErrorColor,
-            focusedContentColor = Color.Black,
+            focusedContentColor = Deco.Ink,
         ),
+        border = ClickableSurfaceDefaults.border(border = Border(BorderStroke(1.dp, ErrorColor.copy(alpha = 0.5f)), shape = DecoButtonShape)),
     ) {
         Row(
             modifier = Modifier.fillMaxHeight().padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // The text's color: a red dot would vanish on the red fill when selected
-            Box(Modifier.size(10.dp).background(LocalContentColor.current, CircleShape))
+            // The text's color: a red diamond would vanish on the red fill when selected
+            Box(Modifier.size(9.dp).rotate(45f).background(LocalContentColor.current))
             Text(
                 text,
                 style = MaterialTheme.typography.titleSmall,
@@ -184,7 +183,7 @@ private fun FreeMemory() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             if (megabytes >= 1024) "%.1f GB".format(megabytes / 1024f) else "$megabytes MB",
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.labelSmall.figures(FontWeight.Normal),
             color = color,
             maxLines = 1,
         )
@@ -209,7 +208,8 @@ private fun Clock() {
         }
     }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(timeFormat.format(now), style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
-        Text(dateFormat.format(now), style = MaterialTheme.typography.labelMedium, color = FaintText, maxLines = 1)
+        // A marquee clock: gold Poiret One over the date in spaced capitals
+        Text(timeFormat.format(now), style = MaterialTheme.typography.titleLarge.marquee(), color = Deco.GoldHi, maxLines = 1)
+        Text(dateFormat.format(now).uppercase(), style = MaterialTheme.typography.labelSmall, color = Deco.Gold, maxLines = 1)
     }
 }

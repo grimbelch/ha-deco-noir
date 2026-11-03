@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -38,8 +39,8 @@ fun WeatherReading(entity: HaEntity?, hourly: List<HaForecast>?, daily: List<HaF
 
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            MdiIcon(weatherIcon(condition), size = 32.dp)
-            Text(entity?.temperature?.let(::degrees) ?: "—", style = MaterialTheme.typography.headlineSmall)
+            MdiIcon(weatherIcon(condition), size = 32.dp, color = Deco.Gold)
+            Text(entity?.temperature?.let(::degrees) ?: "—", style = MaterialTheme.typography.headlineMedium.figures(FontWeight.ExtraLight), color = Deco.GoldHi)
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     weatherLabel(condition) ?: entity?.name ?: "",
@@ -72,7 +73,7 @@ fun WeatherReading(entity: HaEntity?, hourly: List<HaForecast>?, daily: List<HaF
                     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(1.dp)) {
                         Text(hour.time?.format(hourFormat).orEmpty(), style = MaterialTheme.typography.labelSmall, color = dim)
                         MdiIcon(weatherIcon(hour.condition), size = 20.dp)
-                        Text(hour.temperature?.let(::degrees) ?: "—", style = MaterialTheme.typography.bodyMedium)
+                        Text(hour.temperature?.let(::degrees) ?: "—", style = MaterialTheme.typography.bodyMedium.figures(FontWeight.Normal))
                         if (rains.any { it != null }) {
                             Text(rains[index].orEmpty(), style = MaterialTheme.typography.labelSmall, color = dim)
                         }

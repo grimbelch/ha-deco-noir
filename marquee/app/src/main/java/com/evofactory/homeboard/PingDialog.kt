@@ -122,14 +122,14 @@ fun PingDialog(initialHost: String, onHostEntered: (String) -> Unit, onDismiss: 
             )
             // Greyed out (and skipped by the remote) until the address is a valid IPv4
             // address, and while a ping runs
-            Button(
+            DecoButton(
                 onClick = ::start,
                 enabled = valid && !running,
                 modifier = Modifier.focusRequester(pingButton),
             ) {
                 Text("Ping")
             }
-            OutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
+            DecoOutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(closeButton)) { Text("Close") }
         }
         status?.let {
             Text(it, style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(horizontal = 12.dp))

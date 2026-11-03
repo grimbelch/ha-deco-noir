@@ -143,10 +143,10 @@ private const val SETTLED_SNAPSHOT_DELAY_MS = 4_000L
 private const val SNAPSHOT_SAVE_INTERVAL_MS = 300_000L
 
 // Same corners as the app tiles (TV Material's default card shape)
-val CameraShape = RoundedCornerShape(8.dp)
+val CameraShape = RoundedCornerShape(0.dp)
 
 // Error line of the status: readable on the dark chip, clearly not the normal text
-val ErrorColor = Color(0xFFFFB4AB)
+val ErrorColor = Deco.Garnet
 
 private enum class Phase {
     /** Streaming attempt in progress, waiting for the first picture */

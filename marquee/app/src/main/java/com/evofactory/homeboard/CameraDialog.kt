@@ -104,10 +104,10 @@ fun CameraDialog(
             FilterChip(selected = !useTcp, onClick = { useTcp = false }) { Text("UDP") }
             Spacer(Modifier.weight(1f))
             // Greyed out until there's a name and a valid rtsp:// address
-            Button(onClick = ::save, enabled = canSave, modifier = Modifier.focusRequester(saveButton)) {
+            DecoButton(onClick = ::save, enabled = canSave, modifier = Modifier.focusRequester(saveButton)) {
                 Text("Save")
             }
-            OutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(cancelButton)) { Text("Cancel") }
+            DecoOutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(cancelButton)) { Text("Cancel") }
         }
         Text(
             if (useTcp) {

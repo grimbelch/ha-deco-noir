@@ -152,9 +152,9 @@ fun StuckPlayersDialog(onDismiss: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Spacer(Modifier.weight(1f))
-            OutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(close)) { Text("Close") }
+            DecoOutlinedButton(onClick = onDismiss, modifier = Modifier.focusRequester(close)) { Text("Close") }
             if (count > 0) {
-                OutlinedButton(onClick = { context.restartApp() }, modifier = Modifier.focusRequester(restart)) {
+                DecoOutlinedButton(onClick = { context.restartApp() }, modifier = Modifier.focusRequester(restart)) {
                     Text("Restart app")
                 }
             }

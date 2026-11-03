@@ -170,7 +170,7 @@ fun MainCamera(
         }
         // Selected: left and right switch cameras
         if (focused) {
-            Box(Modifier.matchParentSize().border(3.dp, MaterialTheme.colorScheme.border, CameraShape))
+            Box(Modifier.matchParentSize().border(3.dp, Deco.GoldHi, CameraShape))
             if (cameras.size > 1) {
                 SwitchChevron("mdi:chevron-left", Modifier.align(Alignment.CenterStart))
                 SwitchChevron("mdi:chevron-right", Modifier.align(Alignment.CenterEnd))
@@ -347,7 +347,10 @@ fun <T> TwoRowGrid(
                         shape = CardDefaults.shape(CameraShape),
                         // A border shows the selection instead of growing into the neighbours
                         scale = CardDefaults.scale(focusedScale = 1f),
-                        border = CardDefaults.border(focusedBorder = Border(BorderStroke(3.dp, MaterialTheme.colorScheme.border), shape = CameraShape)),
+                        border = CardDefaults.border(
+                            border = Border(BorderStroke(1.dp, Deco.HairFaint), shape = CameraShape),
+                            focusedBorder = Border(BorderStroke(3.dp, Deco.GoldHi), shape = CameraShape),
+                        ),
                     ) {
                         tile(item)
                     }
@@ -450,7 +453,7 @@ fun CamerasDialog(
         },
         actions = {
             if (!advanced) {
-                Button(
+                DecoButton(
                     onClick = { editing = Camera(name = "", url = "") },
                     modifier = Modifier
                         .focusRequester(addButton)
@@ -461,7 +464,7 @@ fun CamerasDialog(
                         },
                 ) { Text("Add camera") }
             }
-            OutlinedButton(
+            DecoOutlinedButton(
                 onClick = onDismiss,
                 modifier = Modifier
                     .focusRequester(closeButton)

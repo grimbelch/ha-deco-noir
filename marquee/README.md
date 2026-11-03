@@ -1,4 +1,52 @@
-# HomeBoard
+# Marquee
+
+**HomeBoard in Deco Noir.** Marquee is a fork of [HomeBoard](https://github.com/fplanque/HomeBoard)
+(Evo Factory, Apache-2.0), the Android TV / Google TV launcher, restyled with this repo's
+[Deco Noir](../themes/deco_noir.yaml) Home Assistant theme so the TV matches the dashboards.
+
+![Marquee banner](app/src/main/res/drawable-xhdpi/banner.png)
+
+## What changed from HomeBoard
+
+- **Theme:** [`DecoKit.kt`](app/src/main/java/com/evofactory/homeboard/DecoKit.kt) carries the Deco Noir tokens
+  (ink, midnight, ivory, gold, gold-hi, emerald, sapphire, garnet) and [`Theme.kt`](app/src/main/java/com/evofactory/homeboard/Theme.kt)
+  maps them onto the TV Material color scheme. Selection is gold-hi on ink instead of light grey.
+- **Background:** the dashboard's sunburst, painted in Compose (`decoBackdrop()`, ported from `tools/make_sunburst.py`):
+  gold rays and halo rings from the top centre, emerald and sapphire pools, bottom fans and edge pinstripes.
+- **Ornaments:** square corners everywhere, smoked-glass panels with a gold hairline, the faint inner band and
+  stepped corner brackets (`decoFrame()`), gold double rules under tabs, cut-corner "octagon" wells instead of round buttons.
+- **Type:** Poiret One for tabs, titles, room headings and the clock (spaced capitals); Josefin Sans for text and labels;
+  Jost for readings and temperatures. Bundled in `res/font/` (SIL OFL 1.1, see `app/src/main/assets/fonts_LICENSE.txt`).
+- **Identity:** app name **Marquee**, application id `com.grimbelch.marquee` (installs next to stock HomeBoard),
+  new Deco banner (`tools/make_banner.ps1`). Kotlin package names are unchanged so upstream fixes merge cleanly.
+
+## Build
+
+Needs JDK 25 and the Android SDK (platform 37, build-tools 37). On Windows:
+
+```powershell
+$env:JAVA_HOME = "$HOME\.jdks\jdk-25.0.5+8"
+cd marquee
+.\gradlew.bat assembleDebug   # appuild\outputspk\debugpp-debug.apk
+```
+
+Sideload with `adb install -r appuild\outputspk\debugpp-debug.apk` (see "Install the APK" below).
+
+## Pull upstream changes
+
+The original HomeBoard commit history is kept (imported with `git subtree`). To merge a newer HomeBoard:
+
+```sh
+git subtree pull --prefix=marquee https://github.com/fplanque/HomeBoard.git main
+```
+
+Conflicts land in the styled files only (`Theme.kt`, `DecoKit.kt` is new, plus the composables listed above).
+
+---
+
+*The upstream HomeBoard README follows, unchanged.*
+
+## HomeBoard (upstream README)
 
 A launcher for Android TV and Google TV that puts your apps, cameras, alerts and Home Assistant on one calm screen. No banners to scroll past, no account to create.
 
