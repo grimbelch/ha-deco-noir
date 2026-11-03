@@ -17,7 +17,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = "deco_noir"
-ASSET_V = "3"  # bump to bust caches when SVGs change
+ASSET_V = "4"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -194,9 +194,17 @@ def marker(m):
     return c
 
 
+def glow(m):
+    return {"type": "custom:button-card", "template": "deco_glow", "entity": m["entity"],
+            "variables": {"img": f"/local/deco/{m['glow']}?v={ASSET_V}"},
+            "style": {"left": "50%", "top": "50%", "width": "100%", "height": "100%",
+                      "pointer-events": "none", "mix-blend-mode": "screen"}}
+
+
 def plan(key):
+    pools = [glow(m) for m in markers[key] if m.get("glow")]
     return {"type": "picture-elements", "image": f"/local/deco/floor_{key}.svg?v={ASSET_V}",
-            "elements": [marker(m) for m in markers[key]], "grid_options": {"columns": "full"}}
+            "elements": pools + [marker(m) for m in markers[key]], "grid_options": {"columns": "full"}}
 
 
 floor = {
@@ -211,11 +219,29 @@ floor = {
 
 
 # ---------------------------------------------------------------- other views: headings -> marquees
+DECO_TILE_DOMAINS = ("switch", "light", "sensor", "binary_sensor", "automation", "calendar")
+
+
+def convert(c):
+    if c.get("type") == "heading":
+        return marquee(c.get("heading", ""))
+    # plain tiles (no slider/feature) become Deco tiles; tiles with features keep native controls
+    if c.get("type") == "tile" and not c.get("features") and c.get("entity", "").split(".")[0] in DECO_TILE_DOMAINS:
+        dom = c["entity"].split(".")[0]
+        action = None if dom in ("switch", "light", "automation") else "more-info"
+        out = tile(c["entity"], c.get("name") or c["entity"].split(".")[1].replace("_", " ").title(),
+                   c.get("icon") or "mdi:circle-outline", 6, action)
+        if c.get("tap_action", {}).get("action") == "url":
+            out["tap_action"] = c["tap_action"]
+        return out
+    return c
+
+
 def decorate(view):
     view = json.loads(json.dumps(view))
     view["theme"] = THEME
     for s in view.get("sections", []):
-        s["cards"] = [marquee(c.get("heading", "")) if c.get("type") == "heading" else c for c in s.get("cards", [])]
+        s["cards"] = [convert(c) for c in s.get("cards", [])]
     view.pop("badges", None) if view.get("path") == "home" else None
     return view
 

@@ -6,7 +6,8 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 62.93,
-      "top": 62.09
+      "top": 62.09,
+      "glow": "glow_switch_couch_lamp.svg"
     },
     {
       "entity": "switch.chez_lounge_lamp",
@@ -14,7 +15,8 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 90.95,
-      "top": 62.09
+      "top": 62.09,
+      "glow": "glow_switch_chez_lounge_lamp.svg"
     },
     {
       "entity": "switch.pappasan_lamp",
@@ -22,7 +24,8 @@
       "icon": "mdi:floor-lamp",
       "kind": "lamp",
       "left": 90.95,
-      "top": 75.49
+      "top": 75.49,
+      "glow": "glow_switch_pappasan_lamp.svg"
     },
     {
       "entity": "switch.lamp_window",
@@ -30,7 +33,8 @@
       "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 76.94,
-      "top": 75.49
+      "top": 75.49,
+      "glow": "glow_switch_lamp_window.svg"
     },
     {
       "entity": "switch.grow_lamp",
@@ -38,7 +42,8 @@
       "icon": "mdi:sprout",
       "kind": "lamp",
       "left": 62.93,
-      "top": 75.49
+      "top": 75.49,
+      "glow": "glow_switch_grow_lamp.svg"
     },
     {
       "entity": "media_player.billie_2",
@@ -70,7 +75,8 @@
       "icon": "mdi:pine-tree",
       "kind": "lamp",
       "left": 54.53,
-      "top": 92.81
+      "top": 92.81,
+      "glow": "glow_switch_dining_room_xmas.svg"
     },
     {
       "entity": "light.outdoor_dimmer_light_1",
@@ -78,7 +84,8 @@
       "icon": "mdi:outdoor-lamp",
       "kind": "lamp",
       "left": 38.15,
-      "top": 31.86
+      "top": 31.86,
+      "glow": "glow_light_outdoor_dimmer_light_1.svg"
     },
     {
       "entity": "light.outdoor_dimmer_light_2",
@@ -86,7 +93,8 @@
       "icon": "mdi:outdoor-lamp",
       "kind": "lamp",
       "left": 60.78,
-      "top": 31.86
+      "top": 31.86,
+      "glow": "glow_light_outdoor_dimmer_light_2.svg"
     }
   ],
   "main_aspect": 0.7582,
@@ -108,7 +116,8 @@
       "icon": "mdi:torch",
       "kind": "lamp",
       "left": 51.14,
-      "top": 83.22
+      "top": 83.22,
+      "glow": "glow_switch_torch_light_front.svg"
     },
     {
       "entity": "switch.torch_light_back",
@@ -116,7 +125,8 @@
       "icon": "mdi:torch",
       "kind": "lamp",
       "left": 85.43,
-      "top": 83.22
+      "top": 83.22,
+      "glow": "glow_switch_torch_light_back.svg"
     },
     {
       "entity": "switch.basement_fireplace_lights",
@@ -124,7 +134,8 @@
       "icon": "mdi:fireplace",
       "kind": "lamp",
       "left": 51.14,
-      "top": 61.41
+      "top": 61.41,
+      "glow": "glow_switch_basement_fireplace_lights.svg"
     },
     {
       "entity": "media_player.library",
@@ -140,7 +151,8 @@
       "icon": "mdi:palette",
       "kind": "lamp",
       "left": 68.29,
-      "top": 41.28
+      "top": 41.28,
+      "glow": "glow_switch_painting_desk.svg"
     },
     {
       "entity": "sensor.h2s_0938ac5b0600679_print_status",

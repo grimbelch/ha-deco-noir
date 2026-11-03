@@ -183,6 +183,41 @@ MARKERS = {
 }
 
 
+# ---------------------------------------------------------------- LIGHT POOLS
+# Each lamp lights only its own room: a warm radial glow clipped to the room shape.
+LIVING = [(672, 505), (858, 505), (858, 633), (672, 633)]
+DINING = [(601, 633), (721, 633), (721, 747), (601, 747)]
+PATIO = [(533, 165), (643, 165), (643, 255), (740, 255), (740, 365), (533, 365)]
+LIBRARY = [(758, 873), (1083, 873), (1083, 1006), (878, 1006), (878, 947), (820, 947), (820, 923), (758, 923)]
+CRAFT = [(948, 763), (1083, 763), (1083, 873), (948, 873)]
+GLOW_ROOMS = {
+    "switch.couch_lamp": (LIVING, "255,196,120", 120),
+    "switch.chez_lounge_lamp": (LIVING, "255,196,120", 120),
+    "switch.pappasan_lamp": (LIVING, "255,190,110", 130),
+    "switch.lamp_window": (LIVING, "255,200,130", 110),
+    "switch.grow_lamp": (LIVING, "214,110,255", 95),
+    "switch.dining_room_xmas": (DINING, "255,170,90", 110),
+    "light.outdoor_dimmer_light_1": (PATIO, "255,205,140", 150),
+    "light.outdoor_dimmer_light_2": (PATIO, "255,205,140", 150),
+    "switch.torch_light_front": (LIBRARY, "255,170,80", 140),
+    "switch.torch_light_back": (LIBRARY, "255,170,80", 140),
+    "switch.basement_fireplace_lights": (LIBRARY, "255,140,60", 150),
+    "switch.painting_desk": (CRAFT, "255,214,160", 110),
+}
+
+
+def glow_svg(vb, room, rgb, radius, x, y):
+    vx, vy, vw, vh = vb
+    pts = " ".join(f"{a},{b}" for a, b in room)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}">'
+            f'<defs><clipPath id="c"><polygon points="{pts}"/></clipPath>'
+            f'<radialGradient id="g" cx="{x}" cy="{y}" r="{radius}" gradientUnits="userSpaceOnUse">'
+            f'<stop offset="0" stop-color="rgb({rgb})" stop-opacity=".62"/>'
+            f'<stop offset=".45" stop-color="rgb({rgb})" stop-opacity=".26"/>'
+            f'<stop offset="1" stop-color="rgb({rgb})" stop-opacity="0"/></radialGradient></defs>'
+            f'<rect x="{vx}" y="{vy}" width="{vw}" height="{vh}" fill="url(#g)" clip-path="url(#c)"/></svg>')
+
+
 def pct(vb, x, y):
     vx, vy, vw, vh = vb
     return round((x - vx) / vw * 100, 2), round((y - vy) / vh * 100, 2)
@@ -195,10 +230,15 @@ def main_():
         p = OUT / f"floor_{key}.svg"
         p.write_text(svg(vb, body, title, txy), encoding="utf-8")
         print(p.name, p.stat().st_size, "bytes")
-        markers[key] = [
-            {"entity": e, "name": n, "icon": i, "kind": k, "left": pct(vb, x, y)[0], "top": pct(vb, x, y)[1]}
-            for e, n, i, x, y, k in MARKERS.get(key, [])
-        ]
+        markers[key] = []
+        for e, n, i, x, y, k in MARKERS.get(key, []):
+            m = {"entity": e, "name": n, "icon": i, "kind": k, "left": pct(vb, x, y)[0], "top": pct(vb, x, y)[1]}
+            if e in GLOW_ROOMS:
+                room, rgb, r = GLOW_ROOMS[e]
+                fn = "glow_" + e.replace(".", "_") + ".svg"
+                (OUT / fn).write_text(glow_svg(vb, room, rgb, r, x, y), encoding="utf-8")
+                m["glow"] = fn
+            markers[key].append(m)
         markers[key + "_aspect"] = round(vb[2] / vb[3], 4)
     (ROOT / "tools" / "floor_markers.json").write_text(json.dumps(markers, indent=2), encoding="utf-8")
 

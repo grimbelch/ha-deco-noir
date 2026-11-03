@@ -6,7 +6,7 @@
 #           https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap
 # Art:      copy www/deco/sunburst.svg to /config/www/deco/sunburst.svg
 
-deco_noir:
+deco_noir: &deco_noir
   # ---------- Deco tokens (used by the card-mod layer) ----------
   deco-ink: "#0B0B0E"
   deco-midnight: "#11131C"
@@ -16,11 +16,12 @@ deco_noir:
   deco-gold-rgb: "201, 164, 76"
   deco-emerald: "#3E9C82"
   deco-sapphire: "#5A79C8"
-  deco-garnet: "#B4404F"
+  deco-garnet: "#CF5B6B"
   deco-hair: "rgba(201, 164, 76, 0.38)"
   deco-hair-faint: "rgba(201, 164, 76, 0.16)"
   deco-glass: "rgba(14, 14, 20, 0.55)"
   deco-blur: "18px"
+  deco-backdrop: "blur(18px) saturate(120%)"
   deco-display: "'Poiret One', 'Josefin Sans', sans-serif"
   deco-label: "'Josefin Sans', Roboto, sans-serif"
   deco-num: "'Jost', 'Josefin Sans', Roboto, sans-serif"
@@ -49,7 +50,7 @@ deco_noir:
   success-color: "#3E9C82"
   info-color: "#5A79C8"
   warning-color: "#D9A441"
-  error-color: "#B4404F"
+  error-color: "#CF5B6B"
 
   # ---------- Background: sunburst over midnight ----------
   lovelace-background: >-
@@ -122,7 +123,7 @@ deco_noir:
   graph-color-1: "#C9A44C"
   graph-color-2: "#5A79C8"
   graph-color-3: "#3E9C82"
-  graph-color-4: "#B4404F"
+  graph-color-4: "#CF5B6B"
   graph-color-5: "#E6CF9A"
   history-unknown-color: "#2A2824"
   energy-grid-consumption-color: "#C9A44C"
@@ -133,8 +134,8 @@ deco_noir:
     /* card-mod tags the card element (the shadow host) with .type-<card>,
        so target it with :host(...) and style the inner ha-card. */
     ha-card {
-      -webkit-backdrop-filter: blur(var(--deco-blur)) saturate(120%);
-      backdrop-filter: blur(var(--deco-blur)) saturate(120%);
+      -webkit-backdrop-filter: var(--deco-backdrop);
+      backdrop-filter: var(--deco-backdrop);
     }
     /* stepped corner brackets on every framed card */
     :host(:not(.type-heading):not(.deco-plain)) ha-card { position: relative; }
@@ -187,3 +188,12 @@ deco_noir:
 
   modes:
     dark: {}
+
+# Same look without the backdrop blur: for older tablets / low-power wall panels.
+# Cards get a slightly more opaque surface to compensate.
+deco_noir_lite:
+  <<: *deco_noir
+  deco-backdrop: "none"
+  deco-glass: "rgba(16, 16, 22, 0.86)"
+  card-background-color: "rgba(16, 16, 22, 0.86)"
+  ha-card-background: "rgba(16, 16, 22, 0.86)"

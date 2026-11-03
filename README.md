@@ -17,6 +17,10 @@ tablets, and stays editable from the dashboard UI.
   New **Floor Plan** tab: `tools/make_floorplan.py` draws `www/deco/floor_{main,upper,lower}.svg`
   (Poiret One + Josefin Sans embedded, SIL OFL) and `tools/floor_markers.json`; markers glow when lamps are on.
   Rebuild/push with `HA_TOKEN_FILE=... python tools/build_dashboard.py`.
+- **Phase 3: polish.** WCAG contrast pass (all body text ≥ 4.5:1), `deco_noir_lite` theme (no backdrop blur,
+  for low-power tablets), phone-friendly floor markers, Deco tiles on every tab, and **light pools**: each lamp
+  has a glow layer clipped to its room (`www/deco/glow_*.svg`) that fades in over 1.2s with `mix-blend-mode: screen`,
+  scaled by dimmer brightness (`deco_glow` template).
 
 ## Install
 
@@ -64,7 +68,7 @@ headings (rule, ◆ title ◆, rule), diamond icon wells, and a soft gold halo o
 3. **Phase 2: cards.** Done. [button-card](https://github.com/custom-cards/button-card)
    templates for the lobby clock, room banners, Deco tiles, gauges, and printer, with
    optional [Bubble Card](https://github.com/Clooos/Bubble-Card) room pop-ups.
-4. **Phase 3: polish.** Phone layout, a no-blur "Lite" variant for low-power tablets,
+4. **Phase 3: polish.** Done. Phone layout, a no-blur "Lite" variant for low-power tablets,
    a WCAG contrast pass, and optional kiosk mode.
 
 Only HACS-maintained dependencies; no hand-installed forks.

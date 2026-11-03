@@ -74,11 +74,11 @@ TEMPLATES = {
                      "grid-template-columns: 1fr", "justify-items: start", "align-items: center"],
             "img_cell": ["width: 32px", "height: 32px", "margin-left: 6px", "transform: rotate(45deg)",
                          "border: 1px solid var(--deco-hair-faint)", "background: rgba(255,255,255,.015)"],
-            "icon": ["transform: rotate(-45deg)", "width: 18px", "color: rgba(237,230,214,.38)"],
+            "icon": ["transform: rotate(-45deg)", "width: 18px", "color: rgba(237,230,214,.45)"],
             "name": ["font-family: var(--deco-label)", "font-size: 11px", "letter-spacing: .14em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.6)", "justify-self: start", "margin-top: 8px", "white-space: nowrap",
                      "overflow: hidden", "text-overflow: ellipsis", "max-width: 100%"],
-            "state": ["font-family: var(--deco-num)", "font-size: 12px", "color: rgba(237,230,214,.34)", "justify-self: start",
+            "state": ["font-family: var(--deco-num)", "font-size: 12px", "color: rgba(237,230,214,.52)", "justify-self: start",
                       "margin-top: 3px", "letter-spacing: .04em"],
         },
         "state": [
@@ -274,6 +274,8 @@ return h+'</div>';
     # ------------------------------------------------------------ floor plan marker
     "deco_marker": {
         "card_mod": PLAIN,
+        # deco-marker-mobile: on phones show only the diamond (labels crowd the living room)
+        "extra_styles": "@media (max-width: 600px) { #name { display: none !important; } ha-card { width: 30px !important; } }",
         "show_state": False,
         "tap_action": {"action": "toggle", "haptic": "light"},
         "hold_action": {"action": "more-info"},
@@ -300,5 +302,20 @@ return h+'</div>';
             {"value": "cool", "styles": {"img_cell": ["border-color: var(--deco-sapphire)", "box-shadow: 0 0 12px 3px rgba(90,121,200,.35)"],
                                          "icon": ["color: #AFC2F0"]}},
         ],
+    },
+
+    # ------------------------------------------------------------ floor plan light pool (fades with the lamp)
+    "deco_glow": {
+        "card_mod": PLAIN,
+        "show_icon": False, "show_name": False, "show_state": False,
+        "tap_action": {"action": "none"}, "hold_action": {"action": "none"},
+        "styles": {
+            "card": ["background: none", "border: none", "box-shadow: none", "padding: 0", "border-radius: 0",
+                     "width: 100%", "height: 100%",
+                     "background-image: [[[ return `url(${variables.img})`; ]]]",
+                     "background-size: 100% 100%", "background-repeat: no-repeat",
+                     "opacity: [[[ if (!entity || entity.state !== 'on') return 0; const b = entity.attributes.brightness; return b ? (0.35 + 0.65 * b / 255).toFixed(2) : 1; ]]]",
+                     "transition: opacity 1.2s ease"],
+        },
     },
 }
