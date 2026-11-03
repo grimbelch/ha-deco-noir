@@ -1,0 +1,11 @@
+{
+  "domain": "omega7_bridge",
+  "name": "Omega-7 Servoskull Bridge",
+  "version": "1.0.0",
+  "documentation": "https://github.com/grimbelch/servoskull",
+  "dependencies": [
+    "websocket_api"
+  ],
+  "codeowners": [],
+  "iot_class": "local_polling"
+}
