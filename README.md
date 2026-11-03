@@ -12,6 +12,11 @@ tablets, and stays editable from the dashboard UI.
 
 - **Phase 0: mockup.** Done. Open [`mockup/index.html`](mockup/index.html); chosen: champagne + Poiret One.
 - **Phase 1: theme.** Applied to the `home-hub` dashboard (all views use `theme: deco_noir`).
+- **Phase 2: cards.** button-card templates (`tools/deco_templates.py` → `templates/deco_templates.json`):
+  `deco_lobby`, `deco_marquee`, `deco_room`, `deco_tile`, `deco_scene`, `deco_gauge`, `deco_rows`, `deco_marker`.
+  New **Floor Plan** tab: `tools/make_floorplan.py` draws `www/deco/floor_{main,upper,lower}.svg`
+  (Poiret One + Josefin Sans embedded, SIL OFL) and `tools/floor_markers.json`; markers glow when lamps are on.
+  Rebuild/push with `HA_TOKEN_FILE=... python tools/build_dashboard.py`.
 
 ## Install
 
@@ -56,7 +61,7 @@ headings (rule, ◆ title ◆, rule), diamond icon wells, and a soft gold halo o
    `card-mod-theme` for glass, frames, and headings. Fonts are loaded as a dashboard
    resource and the sunburst background lives in `www/deco/`. Requires
    [card-mod](https://github.com/thomasloven/lovelace-card-mod) (HACS).
-3. **Phase 2: cards.** [button-card](https://github.com/custom-cards/button-card)
+3. **Phase 2: cards.** Done. [button-card](https://github.com/custom-cards/button-card)
    templates for the lobby clock, room banners, Deco tiles, gauges, and printer, with
    optional [Bubble Card](https://github.com/Clooos/Bubble-Card) room pop-ups.
 4. **Phase 3: polish.** Phone layout, a no-blur "Lite" variant for low-power tablets,

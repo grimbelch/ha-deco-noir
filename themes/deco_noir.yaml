@@ -137,8 +137,8 @@ deco_noir:
       backdrop-filter: blur(var(--deco-blur)) saturate(120%);
     }
     /* stepped corner brackets on every framed card */
-    :host(:not(.type-heading)) ha-card { position: relative; }
-    :host(:not(.type-heading)) ha-card::after {
+    :host(:not(.type-heading):not(.deco-plain)) ha-card { position: relative; }
+    :host(:not(.type-heading):not(.deco-plain)) ha-card::after {
       content: "";
       position: absolute; inset: -1px;
       pointer-events: none; z-index: 2;
@@ -174,6 +174,11 @@ deco_noir:
       font-family: var(--deco-display);
       letter-spacing: .14em;
       text-transform: uppercase;
+    }
+    /* button-card pieces that draw their own frame (marquees, floor markers) */
+    :host(.deco-plain) ha-card {
+      background: none; border: none; box-shadow: none;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
     }
     /* numbers in the geometric face */
     .state, .value, .info .state, .temp, .attribute {

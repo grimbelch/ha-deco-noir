@@ -1,5 +1,489 @@
 {
   "title": "Home",
+  "button_card_templates": {
+    "deco_marquee": {
+      "card_mod": {
+        "class": "deco-plain"
+      },
+      "show_icon": false,
+      "show_name": false,
+      "show_state": false,
+      "tap_action": {
+        "action": "none"
+      },
+      "hold_action": {
+        "action": "none"
+      },
+      "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
+      "custom_fields": {
+        "m": "[[[ return `<div class='mq'><span class='r'></span><span class='t'><span class='d'>\u25c6</span>${variables.title}<span class='d'>\u25c6</span></span><span class='r'></span></div>`; ]]]"
+      },
+      "styles": {
+        "card": [
+          "background: none",
+          "border: none",
+          "box-shadow: none",
+          "padding: 14px 2px 4px",
+          "overflow: visible"
+        ],
+        "grid": [
+          "grid-template-areas: '\"m\"'",
+          "grid-template-columns: 1fr"
+        ],
+        "custom_fields": {
+          "m": [
+            "width: 100%"
+          ]
+        }
+      },
+      "variables": {
+        "title": "Section"
+      }
+    },
+    "deco_tile": {
+      "show_state": true,
+      "tap_action": {
+        "action": "toggle",
+        "haptic": "light"
+      },
+      "hold_action": {
+        "action": "more-info"
+      },
+      "state_display": "[[[ if (entity && entity.state === 'on' && entity.attributes.brightness) return Math.round(entity.attributes.brightness/2.55) + '%'; if (entity && entity.attributes.volume_level !== undefined && entity.state !== 'off') return (entity.state.charAt(0).toUpperCase()+entity.state.slice(1)) + ' \u00b7 ' + Math.round(entity.attributes.volume_level*100) + '%'; return helpers.localize(entity); ]]]",
+      "styles": {
+        "card": [
+          "padding: 12px 12px 11px",
+          "height: 100%",
+          "box-sizing: border-box",
+          "border-radius: 0",
+          "transition: box-shadow .3s ease, background .3s ease"
+        ],
+        "grid": [
+          "grid-template-areas: '\"i\" \"n\" \"s\"'",
+          "grid-template-rows: 44px min-content min-content",
+          "grid-template-columns: 1fr",
+          "justify-items: start",
+          "align-items: center"
+        ],
+        "img_cell": [
+          "width: 32px",
+          "height: 32px",
+          "margin-left: 6px",
+          "transform: rotate(45deg)",
+          "border: 1px solid var(--deco-hair-faint)",
+          "background: rgba(255,255,255,.015)"
+        ],
+        "icon": [
+          "transform: rotate(-45deg)",
+          "width: 18px",
+          "color: rgba(237,230,214,.38)"
+        ],
+        "name": [
+          "font-family: var(--deco-label)",
+          "font-size: 11px",
+          "letter-spacing: .14em",
+          "text-transform: uppercase",
+          "color: rgba(237,230,214,.6)",
+          "justify-self: start",
+          "margin-top: 8px",
+          "white-space: nowrap",
+          "overflow: hidden",
+          "text-overflow: ellipsis",
+          "max-width: 100%"
+        ],
+        "state": [
+          "font-family: var(--deco-num)",
+          "font-size: 12px",
+          "color: rgba(237,230,214,.34)",
+          "justify-self: start",
+          "margin-top: 3px",
+          "letter-spacing: .04em"
+        ]
+      },
+      "state": [
+        {
+          "value": "on",
+          "styles": {
+            "card": [
+              "border-color: rgba(201,164,76,.55)",
+              "background: radial-gradient(120% 90% at 20% 0%, rgba(201,164,76,.22), rgba(201,164,76,.04) 60%, transparent), var(--ha-card-background)",
+              "box-shadow: 0 0 22px rgba(201,164,76,.18), inset 0 0 0 1px rgba(201,164,76,.14)"
+            ],
+            "img_cell": [
+              "border-color: var(--deco-gold)",
+              "background: rgba(201,164,76,.14)",
+              "box-shadow: 0 0 14px rgba(201,164,76,.35)"
+            ],
+            "icon": [
+              "color: var(--deco-gold-hi)"
+            ],
+            "name": [
+              "color: var(--deco-ivory)"
+            ],
+            "state": [
+              "color: var(--deco-gold-hi)"
+            ]
+          }
+        },
+        {
+          "value": "playing",
+          "id": "playing",
+          "styles": {
+            "card": [
+              "border-color: rgba(201,164,76,.55)",
+              "box-shadow: 0 0 22px rgba(201,164,76,.14)"
+            ],
+            "img_cell": [
+              "border-color: var(--deco-gold)",
+              "background: rgba(201,164,76,.14)"
+            ],
+            "icon": [
+              "color: var(--deco-gold-hi)"
+            ],
+            "name": [
+              "color: var(--deco-ivory)"
+            ],
+            "state": [
+              "color: var(--deco-gold-hi)"
+            ]
+          }
+        },
+        {
+          "value": "unavailable",
+          "styles": {
+            "card": [
+              "opacity: .45"
+            ]
+          }
+        }
+      ]
+    },
+    "deco_scene": {
+      "show_state": false,
+      "hold_action": {
+        "action": "none"
+      },
+      "styles": {
+        "card": [
+          "padding: 14px 6px 12px",
+          "height: 100%",
+          "box-sizing: border-box"
+        ],
+        "grid": [
+          "grid-template-areas: '\"i\" \"n\"'",
+          "grid-template-rows: 1fr min-content"
+        ],
+        "icon": [
+          "width: 26px",
+          "color: var(--deco-gold-hi)"
+        ],
+        "name": [
+          "font-family: var(--deco-label)",
+          "font-size: 10px",
+          "letter-spacing: .2em",
+          "text-transform: uppercase",
+          "color: rgba(237,230,214,.62)",
+          "margin-top: 8px",
+          "white-space: normal",
+          "line-height: 1.3"
+        ]
+      }
+    },
+    "deco_lobby": {
+      "entity": "sensor.time",
+      "show_icon": false,
+      "show_name": false,
+      "show_state": false,
+      "tap_action": {
+        "action": "none"
+      },
+      "hold_action": {
+        "action": "none"
+      },
+      "triggers_update": [
+        "sensor.time",
+        "weather.forecast_home",
+        "sensor.alexandria_status",
+        "sensor.alexandria_battery",
+        "switch.pi_hole",
+        "sensor.sabnzbd_status",
+        "sensor.h2s_0938ac5b0600679_print_status",
+        "climate.nest_thermostat"
+      ],
+      "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}}\n",
+      "custom_fields": {
+        "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
+        "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
+        "chips": "[[[\nconst s=(e)=>states[e]?states[e].state:'unknown';\nconst ups=s('sensor.alexandria_status'); const batt=Math.round(parseFloat(s('sensor.alexandria_battery')));\nconst onb=ups.includes('ONBATT');\nconst chip=(cls,icon,label,val)=>`<span class=\"chip ${cls}\"><ha-icon icon=\"${icon}\"></ha-icon>${label} <b>${val}</b></span>`;\nconst pr=s('sensor.h2s_0938ac5b0600679_print_status');\nconst prl={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing'}[pr]||pr;\nlet out=chip(onb?'bad':'ok','mdi:lightning-bolt','Power',onb?`On battery \u00b7 ${batt}%`:`On mains \u00b7 ${batt}%`);\nout+=chip(s('switch.pi_hole')==='on'?'ok':'bad','mdi:shield-check-outline','Ad blocking',s('switch.pi_hole')==='on'?'On':'Off');\nout+=chip('','mdi:download-outline','Downloads',s('sensor.sabnzbd_status'));\nout+=chip(pr==='failed'?'bad':(pr==='finish'?'ok':''),'mdi:printer-3d','Icarus',prl);\nreturn `<div class=\"chips\">${out}</div>`;\n]]]"
+      },
+      "styles": {
+        "card": [
+          "padding: 22px 22px 18px"
+        ],
+        "grid": [
+          "grid-template-areas: '\"left right\" \"chips chips\"'",
+          "grid-template-columns: 1fr auto",
+          "align-items: end"
+        ],
+        "custom_fields": {
+          "left": [
+            "justify-self: start",
+            "text-align: left"
+          ],
+          "right": [
+            "justify-self: end"
+          ],
+          "chips": [
+            "justify-self: stretch"
+          ]
+        }
+      }
+    },
+    "deco_room": {
+      "show_icon": false,
+      "show_state": false,
+      "tap_action": {
+        "action": "navigate",
+        "navigation_path": "/home-hub/floor-plan"
+      },
+      "hold_action": {
+        "action": "none"
+      },
+      "triggers_update": "all",
+      "custom_fields": {
+        "art": "[[[ return variables.art_svg || ''; ]]]",
+        "meta": "[[[\nconst lamps=variables.lamps||[]; const on=lamps.filter(e=>states[e]&&states[e].state==='on').length;\nlet l1= lamps.length ? (on===0?'<b>All off</b>':`<b>${on} of ${lamps.length}</b> on`) : '';\nlet l2=''; if(variables.line2_entity && states[variables.line2_entity]){ const st=states[variables.line2_entity];\n  let v=st.state; if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} \u00b7 ${v}${variables.line2_unit||''}`; }\nreturn `${l1}${l1&&l2?'<br>':''}${l2}`;\n]]]"
+      },
+      "styles": {
+        "card": [
+          "padding: 0 18px 12px",
+          "height: 100%",
+          "min-height: 92px",
+          "box-sizing: border-box",
+          "overflow: hidden",
+          "background: linear-gradient(180deg, rgba(14,14,20,.35), rgba(14,14,20,.62))"
+        ],
+        "grid": [
+          "grid-template-areas: '\"n meta\"'",
+          "grid-template-columns: 1fr auto",
+          "align-items: end",
+          "height: 100%"
+        ],
+        "name": [
+          "font-family: var(--deco-display)",
+          "font-size: 26px",
+          "letter-spacing: .06em",
+          "color: var(--deco-ivory)",
+          "justify-self: start",
+          "z-index: 1",
+          "align-self: end"
+        ],
+        "custom_fields": {
+          "art": [
+            "position: absolute",
+            "right: 0",
+            "bottom: 0",
+            "width: 300px",
+            "height: 92px",
+            "opacity: .9",
+            "pointer-events: none"
+          ],
+          "meta": [
+            "font-family: var(--deco-label)",
+            "font-size: 10px",
+            "line-height: 1.7",
+            "letter-spacing: .22em",
+            "text-transform: uppercase",
+            "color: rgba(237,230,214,.62)",
+            "text-align: right",
+            "z-index: 1",
+            "text-shadow: 0 1px 8px rgba(0,0,0,.9)",
+            "align-self: end"
+          ]
+        }
+      },
+      "extra_styles": ".meta b,#meta b{color:var(--deco-gold-hi);font-weight:600} b{color:var(--deco-gold-hi);font-weight:600} ha-card::before{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--room-accent,var(--deco-gold)),transparent);opacity:.85}",
+      "variables": {
+        "lamps": [],
+        "art_svg": ""
+      }
+    },
+    "deco_gauge": {
+      "show_icon": false,
+      "show_state": false,
+      "tap_action": {
+        "action": "more-info"
+      },
+      "custom_fields": {
+        "g": "[[[\nconst v=Math.max(0,Math.min(100,parseFloat(entity.state)||0)); const L=201; const dash=(v/100*L).toFixed(1);\nreturn `<svg viewBox=\"0 0 160 96\" style=\"width:100%;max-width:170px;display:block;margin:0 auto\">\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.16)\" stroke-width=\"6\"/>\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:var(--deco-gold)\" stroke-width=\"6\" stroke-dasharray=\"${dash} ${L}\"/>\n<path d=\"M8 86 A72 72 0 0 1 152 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.35)\" stroke-width=\"1\"/>\n<g style=\"stroke:rgba(201,164,76,.5)\"><path d=\"M80 10 v8\"/><path d=\"M24 30 l6 6\"/><path d=\"M136 30 l-6 6\"/></g></svg>\n<div style=\"font:200 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px\">${Math.round(v)}<span style=\"font-size:13px;color:var(--deco-gold-hi)\">%</span></div>`;\n]]]"
+      },
+      "styles": {
+        "card": [
+          "padding: 14px 10px 14px"
+        ],
+        "grid": [
+          "grid-template-areas: '\"g\" \"n\"'",
+          "grid-template-rows: auto min-content"
+        ],
+        "name": [
+          "font-family: var(--deco-label)",
+          "font-size: 10px",
+          "letter-spacing: .28em",
+          "text-transform: uppercase",
+          "color: rgba(237,230,214,.62)",
+          "margin-top: 10px",
+          "white-space: normal"
+        ]
+      }
+    },
+    "deco_rows": {
+      "show_icon": true,
+      "show_state": false,
+      "tap_action": {
+        "action": "more-info"
+      },
+      "triggers_update": "all",
+      "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
+      "custom_fields": {
+        "badge": "[[[\nif(!entity) return ''; const v=entity.state;\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[v]||v;\nconst cls=v==='finish'?'ok':(v==='failed'||v==='offline'?'bad':'');\nreturn `<span class=\"badge ${cls}\">${lab}</span>`;\n]]]",
+        "rows": "[[[\nconst rows=variables.rows||[]; let h='<div class=\"rows\">';\nfor(const r of rows){ const st=states[r.entity]; if(!st) continue; let v=r.attr?st.attributes[r.attr]:st.state;\n  const num=parseFloat(v); if(r.round!==undefined && !isNaN(num)) v=num.toFixed(r.round);\n  h+=`<div class=\"row\"><span>${r.label}</span><b>${v}${r.unit?`<em style=\"font-style:normal;font-size:12px;color:var(--deco-gold-hi);margin-left:2px\">${r.unit}</em>`:''}</b></div>`; }\nreturn h+'</div>';\n]]]"
+      },
+      "styles": {
+        "card": [
+          "padding: 16px 18px 10px"
+        ],
+        "grid": [
+          "grid-template-areas: '\"i n badge\" \"rows rows rows\"'",
+          "grid-template-columns: 34px 1fr auto",
+          "align-items: center",
+          "column-gap: 10px"
+        ],
+        "icon": [
+          "width: 26px",
+          "color: var(--deco-gold-hi)"
+        ],
+        "name": [
+          "font-family: var(--deco-display)",
+          "font-size: 22px",
+          "letter-spacing: .05em",
+          "justify-self: start",
+          "color: var(--deco-ivory)"
+        ],
+        "custom_fields": {
+          "rows": [
+            "margin-top: 6px"
+          ]
+        }
+      },
+      "variables": {
+        "rows": []
+      }
+    },
+    "deco_marker": {
+      "card_mod": {
+        "class": "deco-plain"
+      },
+      "show_state": false,
+      "tap_action": {
+        "action": "toggle",
+        "haptic": "light"
+      },
+      "hold_action": {
+        "action": "more-info"
+      },
+      "styles": {
+        "card": [
+          "background: none",
+          "border: none",
+          "box-shadow: none",
+          "padding: 0",
+          "overflow: visible",
+          "width: 58px"
+        ],
+        "grid": [
+          "grid-template-areas: '\"i\" \"n\"'",
+          "grid-template-rows: 34px auto",
+          "justify-items: center"
+        ],
+        "img_cell": [
+          "width: 24px",
+          "height: 24px",
+          "transform: rotate(45deg)",
+          "border: 1px solid var(--deco-gold)",
+          "background: rgba(11,11,14,.82)",
+          "transition: box-shadow .4s ease, background .4s ease"
+        ],
+        "icon": [
+          "transform: rotate(-45deg)",
+          "width: 14px",
+          "color: rgba(237,230,214,.55)"
+        ],
+        "name": [
+          "font-family: var(--deco-label)",
+          "font-size: 8px",
+          "letter-spacing: .12em",
+          "text-transform: uppercase",
+          "color: rgba(237,230,214,.72)",
+          "white-space: nowrap",
+          "margin-top: 2px",
+          "text-shadow: 0 1px 4px #000, 0 0 2px #000"
+        ]
+      },
+      "state": [
+        {
+          "value": "on",
+          "styles": {
+            "img_cell": [
+              "background: rgba(201,164,76,.32)",
+              "box-shadow: 0 0 14px 4px rgba(230,207,154,.55), 0 0 46px 22px rgba(201,164,76,.22)"
+            ],
+            "icon": [
+              "color: #FFF4D6"
+            ],
+            "name": [
+              "color: var(--deco-gold-hi)"
+            ]
+          }
+        },
+        {
+          "value": "playing",
+          "styles": {
+            "img_cell": [
+              "background: rgba(201,164,76,.25)",
+              "box-shadow: 0 0 12px 3px rgba(230,207,154,.4)"
+            ],
+            "icon": [
+              "color: var(--deco-gold-hi)"
+            ]
+          }
+        },
+        {
+          "value": "heat",
+          "styles": {
+            "img_cell": [
+              "border-color: #D9824A",
+              "box-shadow: 0 0 12px 3px rgba(217,130,74,.35)"
+            ],
+            "icon": [
+              "color: #F0B489"
+            ]
+          }
+        },
+        {
+          "value": "cool",
+          "styles": {
+            "img_cell": [
+              "border-color: var(--deco-sapphire)",
+              "box-shadow: 0 0 12px 3px rgba(90,121,200,.35)"
+            ],
+            "icon": [
+              "color: #AFC2F0"
+            ]
+          }
+        }
+      ]
+    }
+  },
   "views": [
     {
       "type": "sections",
@@ -7,92 +491,77 @@
       "path": "home",
       "icon": "mdi:home-heart",
       "max_columns": 4,
-      "badges": [
-        {
-          "type": "entity",
-          "entity": "person.sean",
-          "show_name": false
-        },
-        {
-          "type": "entity",
-          "entity": "weather.forecast_home",
-          "show_name": false,
-          "show_state": true
-        },
-        {
-          "type": "entity",
-          "entity": "climate.nest_thermostat",
-          "name": "Inside",
-          "icon": "mdi:home-thermometer",
-          "show_name": true,
-          "state_content": "current_temperature"
-        },
-        {
-          "type": "entity",
-          "entity": "sensor.alexandria_status",
-          "name": "Power",
-          "icon": "mdi:power-plug-battery",
-          "show_name": true
-        },
-        {
-          "type": "entity",
-          "entity": "switch.pi_hole",
-          "name": "Ad blocking",
-          "show_name": true
-        },
-        {
-          "type": "entity",
-          "entity": "sensor.sabnzbd_status",
-          "name": "Downloads",
-          "icon": "mdi:download",
-          "show_name": true
-        },
-        {
-          "type": "entity",
-          "entity": "sensor.h2s_0938ac5b0600679_print_status",
-          "name": "Icarus",
-          "icon": "mdi:printer-3d",
-          "show_name": true
-        }
-      ],
+      "theme": "deco_noir",
       "sections": [
         {
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Right now",
-              "heading_style": "title",
-              "icon": "mdi:weather-partly-cloudy"
+              "type": "custom:button-card",
+              "template": "deco_lobby",
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 4
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Scenes"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "weather-forecast",
-              "entity": "weather.forecast_home",
-              "forecast_type": "daily",
-              "show_current": true,
-              "show_forecast": true
-            },
-            {
-              "type": "thermostat",
-              "entity": "climate.nest_thermostat",
-              "name": "Thermostat",
-              "features": [
-                {
-                  "type": "climate-hvac-modes",
-                  "hvac_modes": [
-                    "off",
-                    "heat",
-                    "cool",
-                    "heat_cool"
+              "type": "custom:button-card",
+              "template": "deco_scene",
+              "name": "Living room on",
+              "icon": "mdi:sofa-outline",
+              "tap_action": {
+                "action": "perform-action",
+                "perform_action": "switch.turn_on",
+                "target": {
+                  "entity_id": [
+                    "switch.chez_lounge_lamp",
+                    "switch.couch_lamp",
+                    "switch.pappasan_lamp"
                   ]
                 }
-              ]
+              },
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "button",
+              "type": "custom:button-card",
+              "template": "deco_scene",
+              "name": "Good night",
+              "icon": "mdi:weather-night",
+              "tap_action": {
+                "action": "perform-action",
+                "perform_action": "script.turn_on",
+                "target": {
+                  "entity_id": "script.good_night"
+                }
+              },
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_scene",
               "name": "All lamps off",
-              "icon": "mdi:lightbulb-group-off",
-              "show_state": false,
+              "icon": "mdi:lightbulb-group-off-outline",
               "tap_action": {
                 "action": "perform-action",
                 "perform_action": "switch.turn_off",
@@ -111,28 +580,244 @@
                   ]
                 }
               },
-              "hold_action": {
-                "action": "none"
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
               }
             },
             {
-              "type": "button",
-              "name": "Living room on",
-              "icon": "mdi:sofa",
-              "show_state": false,
+              "type": "custom:button-card",
+              "template": "deco_scene",
+              "name": "Pause music",
+              "icon": "mdi:pause-circle-outline",
               "tap_action": {
                 "action": "perform-action",
-                "perform_action": "switch.turn_on",
+                "perform_action": "media_player.media_pause",
                 "target": {
                   "entity_id": [
-                    "switch.chez_lounge_lamp",
-                    "switch.couch_lamp",
-                    "switch.pappasan_lamp"
+                    "media_player.billie_2",
+                    "media_player.library",
+                    "media_player.kitchen_speaker",
+                    "media_player.spotify"
                   ]
                 }
               },
-              "hold_action": {
-                "action": "none"
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Climate"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            },
+            {
+              "type": "thermostat",
+              "entity": "climate.nest_thermostat",
+              "name": "Thermostat",
+              "features": [
+                {
+                  "type": "climate-hvac-modes",
+                  "hvac_modes": [
+                    "off",
+                    "heat",
+                    "cool",
+                    "heat_cool"
+                  ]
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Living Room",
+              "variables": {
+                "lamps": [
+                  "switch.couch_lamp",
+                  "switch.chez_lounge_lamp",
+                  "switch.pappasan_lamp",
+                  "switch.lamp_window",
+                  "switch.grow_lamp"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M150 92 V40 h20 V28 h20 V16 h40 v12 h20 v12 h20 v52\"/><path d=\"M170 92 V48 h20 V36 h80 v12 h20 v44\"/><path d=\"M200 92 V60 a30 30 0 0 1 60 0 V92\"/></svg>",
+                "line2_entity": "media_player.billie_2",
+                "line2_label": "Billie"
+              },
+              "styles": {
+                "card": [
+                  "--room-accent: var(--deco-gold)"
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.couch_lamp",
+              "name": "Couch",
+              "icon": "mdi:lamp-outline",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.chez_lounge_lamp",
+              "name": "Chez Lounge",
+              "icon": "mdi:lamp-outline",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.pappasan_lamp",
+              "name": "Pappasan",
+              "icon": "mdi:floor-lamp-outline",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.lamp_window",
+              "name": "Window",
+              "icon": "mdi:lamp-outline",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.grow_lamp",
+              "name": "Grow lamp",
+              "icon": "mdi:sprout-outline",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "media_player.billie_2",
+              "name": "Billie",
+              "icon": "mdi:speaker",
+              "grid_options": {
+                "columns": 4,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Library",
+              "variables": {
+                "lamps": [
+                  "switch.torch_light_front",
+                  "switch.torch_light_back",
+                  "switch.basement_fireplace_lights"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M200 92 V30 a40 40 0 0 1 80 0 V92\"/><path d=\"M212 92 V34 a28 28 0 0 1 56 0 V92\"/><path d=\"M240 6 V92\"/><path d=\"M212 50 H268 M212 68 H268\"/></svg>",
+                "line2_entity": "media_player.library",
+                "line2_label": "Speaker"
+              },
+              "styles": {
+                "card": [
+                  "--room-accent: var(--deco-sapphire)"
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.torch_light_front",
+              "name": "Torch front",
+              "icon": "mdi:torch",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.torch_light_back",
+              "name": "Torch back",
+              "icon": "mdi:torch",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "switch.basement_fireplace_lights",
+              "name": "Fireplace",
+              "icon": "mdi:fireplace",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "media_player.library",
+              "name": "Speaker",
+              "icon": "mdi:speaker",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
               }
             }
           ]
@@ -141,140 +826,71 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Living Room",
-              "heading_style": "title",
-              "icon": "mdi:sofa"
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Outside",
+              "variables": {
+                "lamps": [
+                  "light.outdoor_dimmer_light_1",
+                  "light.outdoor_dimmer_light_2"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 L240 20 L290 92\"/><path d=\"M205 92 L240 42 L275 92\"/><path d=\"M240 20 V8 M226 14 l14 -6 14 6\"/><path d=\"M150 92 h150\"/></svg>",
+                "line2_entity": "binary_sensor.rachio_9207aa_rain",
+                "line2_label": "Rain sensor"
+              },
+              "styles": {
+                "card": [
+                  "--room-accent: var(--deco-emerald)"
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
-              "entity": "switch.couch_lamp",
-              "name": "Couch",
-              "icon": "mdi:lamp"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.chez_lounge_lamp",
-              "name": "Chez Lounge",
-              "icon": "mdi:lamp"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.pappasan_lamp",
-              "name": "Pappasan",
-              "icon": "mdi:floor-lamp"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.lamp_window",
-              "name": "Window",
-              "icon": "mdi:lamp"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.grow_lamp",
-              "name": "Grow lamp",
-              "icon": "mdi:sprout"
-            },
-            {
-              "type": "tile",
-              "entity": "media_player.billie_2",
-              "name": "Billie",
-              "icon": "mdi:speaker",
-              "features": [
-                {
-                  "type": "media-player-volume-slider"
-                }
-              ],
-              "features_position": "bottom"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "heading",
-              "heading": "Library",
-              "heading_style": "title",
-              "icon": "mdi:bookshelf"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.torch_light_front",
-              "name": "Torch (Front)",
-              "icon": "mdi:torch"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.torch_light_back",
-              "name": "Torch (Back)",
-              "icon": "mdi:torch"
-            },
-            {
-              "type": "tile",
-              "entity": "switch.basement_fireplace_lights",
-              "name": "Fireplace lights",
-              "icon": "mdi:fireplace"
-            },
-            {
-              "type": "tile",
-              "entity": "media_player.library",
-              "name": "Library speaker",
-              "icon": "mdi:speaker",
-              "features": [
-                {
-                  "type": "media-player-volume-slider"
-                }
-              ],
-              "features_position": "bottom"
-            }
-          ]
-        },
-        {
-          "type": "grid",
-          "cards": [
-            {
-              "type": "heading",
-              "heading": "Outside",
-              "heading_style": "title",
-              "icon": "mdi:tree"
-            },
-            {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "light.outdoor_dimmer_light_1",
               "name": "Outdoor 1",
               "icon": "mdi:outdoor-lamp",
-              "features": [
-                {
-                  "type": "light-brightness"
-                }
-              ],
-              "features_position": "bottom"
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "light.outdoor_dimmer_light_2",
               "name": "Outdoor 2",
               "icon": "mdi:outdoor-lamp",
-              "features": [
-                {
-                  "type": "light-brightness"
-                }
-              ],
-              "features_position": "bottom"
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "automation.outdoor_lights_sunset_to_10_pm",
-              "name": "Sunset to 10 PM schedule",
-              "icon": "mdi:weather-sunset"
+              "name": "Sunset schedule",
+              "icon": "mdi:weather-sunset",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "switch.rachio_9207aa_rain_delay",
-              "name": "Sprinkler rain delay",
-              "icon": "mdi:weather-pouring"
+              "name": "Rain delay",
+              "icon": "mdi:weather-pouring",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             }
           ]
         },
@@ -282,124 +898,566 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Around the house",
-              "heading_style": "title",
-              "icon": "mdi:home-group"
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Around the House",
+              "variables": {
+                "lamps": [
+                  "switch.dining_room_xmas",
+                  "switch.painting_desk"
+                ],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
+                "line2_entity": "sensor.hp_officejet_pro_6970",
+                "line2_label": "Printer"
+              },
+              "styles": {
+                "card": [
+                  "--room-accent: var(--deco-gold)"
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "switch.dining_room_xmas",
-              "name": "Dining Room Xmas",
-              "icon": "mdi:pine-tree"
+              "name": "Dining Xmas",
+              "icon": "mdi:pine-tree",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "switch.painting_desk",
               "name": "Painting desk",
-              "icon": "mdi:palette"
+              "icon": "mdi:palette-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "media_player.kitchen_speaker",
-              "name": "Kitchen speaker",
+              "name": "Kitchen",
               "icon": "mdi:speaker",
-              "features": [
-                {
-                  "type": "media-player-volume-slider"
-                }
-              ],
-              "features_position": "bottom"
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "sensor.hp_officejet_pro_6970",
               "name": "Printer",
-              "icon": "mdi:printer"
+              "icon": "mdi:printer-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
             }
           ]
         },
         {
           "type": "grid",
-          "column_span": 2,
           "cards": [
             {
-              "type": "heading",
-              "heading": "3D Printer (Icarus)",
-              "heading_style": "title",
-              "icon": "mdi:printer-3d"
+              "type": "custom:button-card",
+              "template": "deco_room",
+              "name": "Workshop",
+              "variables": {
+                "lamps": [],
+                "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M196 92 V26 h88 V92\"/><path d=\"M206 92 V36 h68 V92\"/><path d=\"M220 80 h40 M228 70 h24 M236 60 h8\"/><path d=\"M240 26 V12 M226 12 h28\"/></svg>",
+                "line2_entity": "sensor.h2s_0938ac5b0600679_print_progress",
+                "line2_label": "Icarus",
+                "line2_attr": null,
+                "line2_unit": "%"
+              },
+              "styles": {
+                "card": [
+                  "--room-accent: var(--deco-garnet)"
+                ]
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": 2
+              }
             },
             {
               "type": "picture-entity",
               "entity": "camera.h2s_0938ac5b0600679_camera",
               "camera_view": "auto",
               "show_name": false,
-              "show_state": false
+              "show_state": false,
+              "grid_options": {
+                "columns": 12
+              }
             },
             {
-              "type": "tile",
+              "type": "custom:button-card",
+              "template": "deco_rows",
               "entity": "sensor.h2s_0938ac5b0600679_print_status",
-              "name": "Status",
-              "icon": "mdi:printer-3d-nozzle"
+              "name": "Icarus \u00b7 H2S",
+              "icon": "mdi:printer-3d",
+              "variables": {
+                "rows": [
+                  {
+                    "label": "Job",
+                    "entity": "sensor.h2s_0938ac5b0600679_task_name"
+                  },
+                  {
+                    "label": "Progress",
+                    "entity": "sensor.h2s_0938ac5b0600679_print_progress",
+                    "unit": "%"
+                  },
+                  {
+                    "label": "Time left",
+                    "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
+                    "unit": " h"
+                  },
+                  {
+                    "label": "Nozzle",
+                    "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
+                    "unit": "\u00b0",
+                    "round": 0
+                  },
+                  {
+                    "label": "Bed",
+                    "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
+                    "unit": "\u00b0",
+                    "round": 0
+                  },
+                  {
+                    "label": "AMS humidity",
+                    "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
+                    "unit": "%"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": 12
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Now Playing"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_print_progress",
-              "name": "Progress",
-              "icon": "mdi:progress-clock"
+              "type": "media-control",
+              "entity": "media_player.spotify",
+              "name": "Spotify",
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Alexandria"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
-              "name": "Time left",
-              "icon": "mdi:timer-outline"
+              "type": "custom:button-card",
+              "template": "deco_gauge",
+              "entity": "sensor.alexandria_battery",
+              "name": "UPS battery",
+              "grid_options": {
+                "columns": 6,
+                "rows": 3
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_task_name",
-              "name": "Job",
-              "icon": "mdi:file-cad-box"
+              "type": "custom:button-card",
+              "template": "deco_gauge",
+              "entity": "sensor.alexandria_load",
+              "name": "UPS load",
+              "grid_options": {
+                "columns": 6,
+                "rows": 3
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
-              "name": "Nozzle",
-              "icon": "mdi:printer-3d-nozzle-heat"
+              "type": "custom:button-card",
+              "template": "deco_rows",
+              "entity": "sensor.alexandria_status",
+              "name": "Server",
+              "icon": "mdi:server",
+              "styles": {
+                "custom_fields": {
+                  "badge": [
+                    "display: none"
+                  ]
+                }
+              },
+              "variables": {
+                "rows": [
+                  {
+                    "label": "Runtime on battery",
+                    "entity": "sensor.alexandria_time_left",
+                    "unit": " min",
+                    "round": 0
+                  },
+                  {
+                    "label": "Mains voltage",
+                    "entity": "sensor.alexandria_input_voltage",
+                    "unit": " V",
+                    "round": 0
+                  },
+                  {
+                    "label": "Array free",
+                    "entity": "sensor.sabnzbd_free_disk_space",
+                    "unit": " GB",
+                    "round": 0
+                  },
+                  {
+                    "label": "Ads blocked today",
+                    "entity": "sensor.pi_hole_ads_blocked"
+                  }
+                ]
+              },
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 2
+        }
+      ]
+    },
+    {
+      "type": "sections",
+      "title": "Floor Plan",
+      "path": "floor-plan",
+      "icon": "mdi:floor-plan",
+      "max_columns": 2,
+      "theme": "deco_noir",
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Main Floor"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
-              "name": "Bed",
-              "icon": "mdi:radiator"
+              "type": "picture-elements",
+              "image": "/local/deco/floor_main.svg?v=3",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.couch_lamp",
+                  "name": "Couch",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "62.09%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.chez_lounge_lamp",
+                  "name": "Chez Lounge",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "62.09%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.pappasan_lamp",
+                  "name": "Pappasan",
+                  "icon": "mdi:floor-lamp",
+                  "style": {
+                    "left": "90.95%",
+                    "top": "75.49%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.lamp_window",
+                  "name": "Window",
+                  "icon": "mdi:lamp",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "75.49%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.grow_lamp",
+                  "name": "Grow lamp",
+                  "icon": "mdi:sprout",
+                  "style": {
+                    "left": "62.93%",
+                    "top": "75.49%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.billie_2",
+                  "name": "Billie",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "76.94%",
+                    "top": "62.09%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "climate.nest_thermostat",
+                  "name": "[[[ const a=entity.attributes; return Math.round(a.current_temperature)+'\u00b0 \u00b7 set '+Math.round(a.temperature||0)+'\u00b0'; ]]]",
+                  "icon": "mdi:thermostat",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "54.25%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.kitchen_speaker",
+                  "name": "Kitchen",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "32.76%",
+                    "top": "78.1%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.dining_room_xmas",
+                  "name": "Dining Xmas",
+                  "icon": "mdi:pine-tree",
+                  "style": {
+                    "left": "54.53%",
+                    "top": "92.81%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_1",
+                  "name": "Outdoor 1",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "38.15%",
+                    "top": "31.86%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "light.outdoor_dimmer_light_2",
+                  "name": "Outdoor 2",
+                  "icon": "mdi:outdoor-lamp",
+                  "style": {
+                    "left": "60.78%",
+                    "top": "31.86%"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Upper Floor"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_chamber_temperature",
-              "name": "Chamber",
-              "icon": "mdi:thermometer"
+              "type": "picture-elements",
+              "image": "/local/deco/floor_upper.svg?v=3",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.hp_officejet_pro_6970",
+                  "name": "[[[ return 'Printer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer",
+                  "style": {
+                    "left": "40.06%",
+                    "top": "89.22%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Lower Floor"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
-              "type": "tile",
-              "entity": "light.h2s_0938ac5b0600679_chamber_light",
-              "name": "Chamber light",
-              "icon": "mdi:lightbulb"
-            },
-            {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
-              "name": "AMS humidity",
-              "icon": "mdi:water-percent"
-            },
-            {
-              "type": "tile",
-              "entity": "sensor.h2s_0938ac5b0600679_ams_1_tray_4",
-              "name": "AMS slot 4",
-              "icon": "mdi:printer-3d-nozzle-outline"
+              "type": "picture-elements",
+              "image": "/local/deco/floor_lower.svg?v=3",
+              "elements": [
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_front",
+                  "name": "Torch front",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.torch_light_back",
+                  "name": "Torch back",
+                  "icon": "mdi:torch",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "83.22%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.basement_fireplace_lights",
+                  "name": "Fireplace",
+                  "icon": "mdi:fireplace",
+                  "style": {
+                    "left": "51.14%",
+                    "top": "61.41%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "media_player.library",
+                  "name": "Library",
+                  "icon": "mdi:speaker",
+                  "style": {
+                    "left": "85.43%",
+                    "top": "61.41%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "switch.painting_desk",
+                  "name": "Painting desk",
+                  "icon": "mdi:palette",
+                  "style": {
+                    "left": "68.29%",
+                    "top": "41.28%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.h2s_0938ac5b0600679_print_status",
+                  "name": "[[[ return 'Icarus \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:printer-3d",
+                  "style": {
+                    "left": "86.86%",
+                    "top": "41.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
             }
           ]
         }
-      ],
-      "theme": "deco_noir"
+      ]
     },
     {
       "type": "sections",
@@ -413,10 +1471,14 @@
           "column_span": 2,
           "cards": [
             {
-              "type": "heading",
-              "heading": "Spotify",
-              "heading_style": "title",
-              "icon": "mdi:spotify"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Spotify"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "media-control",
@@ -452,10 +1514,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Speakers",
-              "heading_style": "title",
-              "icon": "mdi:speaker-multiple"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Speakers"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "media-control",
@@ -498,10 +1564,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Now playing",
-              "heading_style": "title",
-              "icon": "mdi:television-play"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Now playing"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -519,10 +1589,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Downloads",
-              "heading_style": "title",
-              "icon": "mdi:download-network"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Downloads"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -560,10 +1634,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Coming up",
-              "heading_style": "title",
-              "icon": "mdi:calendar-star"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Coming up"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "calendar",
@@ -590,10 +1668,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Weather",
-              "heading_style": "title",
-              "icon": "mdi:weather-cloudy-clock"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Weather"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "weather-forecast",
@@ -614,10 +1696,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Zones (tap to water now)",
-              "heading_style": "title",
-              "icon": "mdi:sprinkler"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Zones (tap to water now)"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -638,10 +1724,14 @@
               "icon": "mdi:water-outline"
             },
             {
-              "type": "heading",
-              "heading": "Controller",
-              "heading_style": "title",
-              "icon": "mdi:water-pump"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Controller"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -667,10 +1757,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Schedules (tap to run)",
-              "heading_style": "title",
-              "icon": "mdi:calendar-clock"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Schedules (tap to run)"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -691,10 +1785,14 @@
               "icon": "mdi:grass"
             },
             {
-              "type": "heading",
-              "heading": "Outdoor lights",
-              "heading_style": "title",
-              "icon": "mdi:outdoor-lamp"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Outdoor lights"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -736,10 +1834,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Power (APC UPS)",
-              "heading_style": "title",
-              "icon": "mdi:power-plug-battery"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Power (APC UPS)"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -797,10 +1899,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Last 24 hours",
-              "heading_style": "title",
-              "icon": "mdi:chart-line"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Last 24 hours"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "history-graph",
@@ -850,10 +1956,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Pi-hole",
-              "heading_style": "title",
-              "icon": "mdi:pi-hole"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Pi-hole"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -885,10 +1995,14 @@
           "type": "grid",
           "cards": [
             {
-              "type": "heading",
-              "heading": "Storage and backups",
-              "heading_style": "title",
-              "icon": "mdi:harddisk"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Storage and backups"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -915,10 +2029,14 @@
               "icon": "mdi:calendar-sync"
             },
             {
-              "type": "heading",
-              "heading": "Photos (Immich)",
-              "heading_style": "title",
-              "icon": "mdi:image-multiple"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Photos (Immich)"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",
@@ -941,10 +2059,14 @@
               }
             },
             {
-              "type": "heading",
-              "heading": "Printer ink",
-              "heading_style": "title",
-              "icon": "mdi:printer"
+              "type": "custom:button-card",
+              "template": "deco_marquee",
+              "variables": {
+                "title": "Printer ink"
+              },
+              "grid_options": {
+                "columns": "full"
+              }
             },
             {
               "type": "tile",

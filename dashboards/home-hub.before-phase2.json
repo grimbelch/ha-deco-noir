@@ -1,0 +1,983 @@
+{
+  "title": "Home",
+  "views": [
+    {
+      "type": "sections",
+      "title": "Home",
+      "path": "home",
+      "icon": "mdi:home-heart",
+      "max_columns": 4,
+      "badges": [
+        {
+          "type": "entity",
+          "entity": "person.sean",
+          "show_name": false
+        },
+        {
+          "type": "entity",
+          "entity": "weather.forecast_home",
+          "show_name": false,
+          "show_state": true
+        },
+        {
+          "type": "entity",
+          "entity": "climate.nest_thermostat",
+          "name": "Inside",
+          "icon": "mdi:home-thermometer",
+          "show_name": true,
+          "state_content": "current_temperature"
+        },
+        {
+          "type": "entity",
+          "entity": "sensor.alexandria_status",
+          "name": "Power",
+          "icon": "mdi:power-plug-battery",
+          "show_name": true
+        },
+        {
+          "type": "entity",
+          "entity": "switch.pi_hole",
+          "name": "Ad blocking",
+          "show_name": true
+        },
+        {
+          "type": "entity",
+          "entity": "sensor.sabnzbd_status",
+          "name": "Downloads",
+          "icon": "mdi:download",
+          "show_name": true
+        },
+        {
+          "type": "entity",
+          "entity": "sensor.h2s_0938ac5b0600679_print_status",
+          "name": "Icarus",
+          "icon": "mdi:printer-3d",
+          "show_name": true
+        }
+      ],
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Right now",
+              "heading_style": "title",
+              "icon": "mdi:weather-partly-cloudy"
+            },
+            {
+              "type": "weather-forecast",
+              "entity": "weather.forecast_home",
+              "forecast_type": "daily",
+              "show_current": true,
+              "show_forecast": true
+            },
+            {
+              "type": "thermostat",
+              "entity": "climate.nest_thermostat",
+              "name": "Thermostat",
+              "features": [
+                {
+                  "type": "climate-hvac-modes",
+                  "hvac_modes": [
+                    "off",
+                    "heat",
+                    "cool",
+                    "heat_cool"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "button",
+              "name": "All lamps off",
+              "icon": "mdi:lightbulb-group-off",
+              "show_state": false,
+              "tap_action": {
+                "action": "perform-action",
+                "perform_action": "switch.turn_off",
+                "target": {
+                  "entity_id": [
+                    "switch.chez_lounge_lamp",
+                    "switch.couch_lamp",
+                    "switch.pappasan_lamp",
+                    "switch.grow_lamp",
+                    "switch.lamp_window",
+                    "switch.torch_light_front",
+                    "switch.torch_light_back",
+                    "switch.basement_fireplace_lights",
+                    "switch.painting_desk",
+                    "switch.dining_room_xmas"
+                  ]
+                }
+              },
+              "hold_action": {
+                "action": "none"
+              }
+            },
+            {
+              "type": "button",
+              "name": "Living room on",
+              "icon": "mdi:sofa",
+              "show_state": false,
+              "tap_action": {
+                "action": "perform-action",
+                "perform_action": "switch.turn_on",
+                "target": {
+                  "entity_id": [
+                    "switch.chez_lounge_lamp",
+                    "switch.couch_lamp",
+                    "switch.pappasan_lamp"
+                  ]
+                }
+              },
+              "hold_action": {
+                "action": "none"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Living Room",
+              "heading_style": "title",
+              "icon": "mdi:sofa"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.couch_lamp",
+              "name": "Couch",
+              "icon": "mdi:lamp"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.chez_lounge_lamp",
+              "name": "Chez Lounge",
+              "icon": "mdi:lamp"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.pappasan_lamp",
+              "name": "Pappasan",
+              "icon": "mdi:floor-lamp"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.lamp_window",
+              "name": "Window",
+              "icon": "mdi:lamp"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.grow_lamp",
+              "name": "Grow lamp",
+              "icon": "mdi:sprout"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.billie_2",
+              "name": "Billie",
+              "icon": "mdi:speaker",
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Library",
+              "heading_style": "title",
+              "icon": "mdi:bookshelf"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.torch_light_front",
+              "name": "Torch (Front)",
+              "icon": "mdi:torch"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.torch_light_back",
+              "name": "Torch (Back)",
+              "icon": "mdi:torch"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.basement_fireplace_lights",
+              "name": "Fireplace lights",
+              "icon": "mdi:fireplace"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.library",
+              "name": "Library speaker",
+              "icon": "mdi:speaker",
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Outside",
+              "heading_style": "title",
+              "icon": "mdi:tree"
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_1",
+              "name": "Outdoor 1",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_2",
+              "name": "Outdoor 2",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "automation.outdoor_lights_sunset_to_10_pm",
+              "name": "Sunset to 10 PM schedule",
+              "icon": "mdi:weather-sunset"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_rain_delay",
+              "name": "Sprinkler rain delay",
+              "icon": "mdi:weather-pouring"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Around the house",
+              "heading_style": "title",
+              "icon": "mdi:home-group"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.dining_room_xmas",
+              "name": "Dining Room Xmas",
+              "icon": "mdi:pine-tree"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.painting_desk",
+              "name": "Painting desk",
+              "icon": "mdi:palette"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.kitchen_speaker",
+              "name": "Kitchen speaker",
+              "icon": "mdi:speaker",
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.hp_officejet_pro_6970",
+              "name": "Printer",
+              "icon": "mdi:printer"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "3D Printer (Icarus)",
+              "heading_style": "title",
+              "icon": "mdi:printer-3d"
+            },
+            {
+              "type": "picture-entity",
+              "entity": "camera.h2s_0938ac5b0600679_camera",
+              "camera_view": "auto",
+              "show_name": false,
+              "show_state": false
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_print_status",
+              "name": "Status",
+              "icon": "mdi:printer-3d-nozzle"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_print_progress",
+              "name": "Progress",
+              "icon": "mdi:progress-clock"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_remaining_time",
+              "name": "Time left",
+              "icon": "mdi:timer-outline"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_task_name",
+              "name": "Job",
+              "icon": "mdi:file-cad-box"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_nozzle_temperature",
+              "name": "Nozzle",
+              "icon": "mdi:printer-3d-nozzle-heat"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_bed_temperature",
+              "name": "Bed",
+              "icon": "mdi:radiator"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_chamber_temperature",
+              "name": "Chamber",
+              "icon": "mdi:thermometer"
+            },
+            {
+              "type": "tile",
+              "entity": "light.h2s_0938ac5b0600679_chamber_light",
+              "name": "Chamber light",
+              "icon": "mdi:lightbulb"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_ams_1_humidity",
+              "name": "AMS humidity",
+              "icon": "mdi:water-percent"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.h2s_0938ac5b0600679_ams_1_tray_4",
+              "name": "AMS slot 4",
+              "icon": "mdi:printer-3d-nozzle-outline"
+            }
+          ]
+        }
+      ],
+      "theme": "deco_noir"
+    },
+    {
+      "type": "sections",
+      "title": "Media",
+      "path": "media",
+      "icon": "mdi:play-box-multiple",
+      "max_columns": 4,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Spotify",
+              "heading_style": "title",
+              "icon": "mdi:spotify"
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.spotify",
+              "name": "Spotify"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.spotify",
+              "name": "Volume",
+              "icon": "mdi:volume-high",
+              "hide_state": true,
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.spotify",
+              "name": "Playing on",
+              "icon": "mdi:cast-audio",
+              "state_content": "source",
+              "tap_action": {
+                "action": "more-info"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Speakers",
+              "heading_style": "title",
+              "icon": "mdi:speaker-multiple"
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.billie_2",
+              "name": "Billie"
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.library",
+              "name": "Library"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.kitchen_speaker",
+              "name": "Kitchen speaker",
+              "icon": "mdi:speaker",
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "media_player.all_speakers",
+              "name": "All speakers (group)",
+              "icon": "mdi:speaker-multiple",
+              "features": [
+                {
+                  "type": "media-player-volume-slider"
+                }
+              ],
+              "features_position": "bottom"
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Now playing",
+              "heading_style": "title",
+              "icon": "mdi:television-play"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.alexandria_jellyfin_active_clients",
+              "name": "Jellyfin viewers",
+              "icon": "mdi:account-multiple"
+            },
+            {
+              "type": "markdown",
+              "content": "{% set j = states.media_player | selectattr('attributes.media_title','defined') | selectattr('state','in',['playing','paused']) | list %}{% if j %}{% for m in j %}**{{ m.name }}**: {{ m.attributes.media_title }}{% if m.attributes.media_series_title %} ({{ m.attributes.media_series_title }}){% endif %}\n\n{% endfor %}{% else %}_Nothing playing right now._{% endif %}"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Downloads",
+              "heading_style": "title",
+              "icon": "mdi:download-network"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_status",
+              "name": "SABnzbd",
+              "icon": "mdi:download"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_speed",
+              "name": "Speed",
+              "icon": "mdi:speedometer"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_queue_count",
+              "name": "In queue",
+              "icon": "mdi:tray-full"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_left_to_download",
+              "name": "Left",
+              "icon": "mdi:progress-download"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sonarr_upcoming",
+              "name": "Upcoming episodes",
+              "icon": "mdi:television-classic"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Coming up",
+              "heading_style": "title",
+              "icon": "mdi:calendar-star"
+            },
+            {
+              "type": "calendar",
+              "entities": [
+                "calendar.sonarr",
+                "calendar.radarr"
+              ],
+              "initial_view": "listWeek"
+            }
+          ],
+          "column_span": 2
+        }
+      ],
+      "theme": "deco_noir"
+    },
+    {
+      "type": "sections",
+      "title": "Yard",
+      "path": "yard",
+      "icon": "mdi:sprinkler",
+      "max_columns": 3,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Weather",
+              "heading_style": "title",
+              "icon": "mdi:weather-cloudy-clock"
+            },
+            {
+              "type": "weather-forecast",
+              "entity": "weather.forecast_home",
+              "forecast_type": "hourly",
+              "show_current": true,
+              "show_forecast": true
+            },
+            {
+              "type": "tile",
+              "entity": "binary_sensor.rachio_9207aa_rain",
+              "name": "Rain sensor",
+              "icon": "mdi:weather-rainy"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Zones (tap to water now)",
+              "heading_style": "title",
+              "icon": "mdi:sprinkler"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_front_sprinklers",
+              "name": "Front sprinklers",
+              "icon": "mdi:sprinkler-variant"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_back_sprinklers",
+              "name": "Back sprinklers",
+              "icon": "mdi:sprinkler-variant"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_back_drip",
+              "name": "Back drip",
+              "icon": "mdi:water-outline"
+            },
+            {
+              "type": "heading",
+              "heading": "Controller",
+              "heading_style": "title",
+              "icon": "mdi:water-pump"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_rain_delay",
+              "name": "Rain delay",
+              "icon": "mdi:weather-pouring"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_standby",
+              "name": "Standby (pause all)",
+              "icon": "mdi:pause-circle"
+            },
+            {
+              "type": "tile",
+              "entity": "binary_sensor.rachio_9207aa_connectivity",
+              "name": "Rachio online",
+              "icon": "mdi:wifi"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Schedules (tap to run)",
+              "heading_style": "title",
+              "icon": "mdi:calendar-clock"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_front_flower_beds_schedule",
+              "name": "Front flower beds",
+              "icon": "mdi:flower"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_backyard_flower_beds_schedule",
+              "name": "Backyard flower beds",
+              "icon": "mdi:flower-tulip"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.rachio_9207aa_back_lawn_schedule",
+              "name": "Back lawn",
+              "icon": "mdi:grass"
+            },
+            {
+              "type": "heading",
+              "heading": "Outdoor lights",
+              "heading_style": "title",
+              "icon": "mdi:outdoor-lamp"
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_1",
+              "name": "Outdoor 1",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            },
+            {
+              "type": "tile",
+              "entity": "light.outdoor_dimmer_light_2",
+              "name": "Outdoor 2",
+              "icon": "mdi:outdoor-lamp",
+              "features": [
+                {
+                  "type": "light-brightness"
+                }
+              ],
+              "features_position": "bottom"
+            }
+          ]
+        }
+      ],
+      "theme": "deco_noir"
+    },
+    {
+      "type": "sections",
+      "title": "Alexandria",
+      "path": "alexandria",
+      "icon": "mdi:server",
+      "max_columns": 4,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Power (APC UPS)",
+              "heading_style": "title",
+              "icon": "mdi:power-plug-battery"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.alexandria_status",
+              "name": "Status",
+              "icon": "mdi:power-plug"
+            },
+            {
+              "type": "gauge",
+              "entity": "sensor.alexandria_battery",
+              "name": "Battery",
+              "min": 0,
+              "max": 100,
+              "needle": true,
+              "severity": {
+                "green": 60,
+                "yellow": 35,
+                "red": 0
+              }
+            },
+            {
+              "type": "gauge",
+              "entity": "sensor.alexandria_load",
+              "name": "Load",
+              "min": 0,
+              "max": 100,
+              "needle": true,
+              "severity": {
+                "green": 0,
+                "yellow": 60,
+                "red": 80
+              }
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.alexandria_time_left",
+              "name": "Runtime on battery",
+              "icon": "mdi:timer-sand"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.alexandria_input_voltage",
+              "name": "Mains voltage",
+              "icon": "mdi:sine-wave"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.alexandria_battery_replaced",
+              "name": "Battery replaced",
+              "icon": "mdi:battery-sync"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Last 24 hours",
+              "heading_style": "title",
+              "icon": "mdi:chart-line"
+            },
+            {
+              "type": "history-graph",
+              "title": "UPS load and battery",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.alexandria_load",
+                  "name": "Load"
+                },
+                {
+                  "entity": "sensor.alexandria_battery",
+                  "name": "Battery"
+                }
+              ]
+            },
+            {
+              "type": "history-graph",
+              "title": "Mains voltage",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.alexandria_input_voltage",
+                  "name": "Volts"
+                }
+              ]
+            },
+            {
+              "type": "history-graph",
+              "title": "Internet traffic",
+              "hours_to_show": 24,
+              "entities": [
+                {
+                  "entity": "sensor.q1000k_router_download_speed",
+                  "name": "Down"
+                },
+                {
+                  "entity": "sensor.q1000k_router_upload_speed",
+                  "name": "Up"
+                }
+              ]
+            }
+          ],
+          "column_span": 2
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Pi-hole",
+              "heading_style": "title",
+              "icon": "mdi:pi-hole"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.pi_hole",
+              "name": "Ad blocking",
+              "icon": "mdi:shield-check"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.pi_hole_dns_queries",
+              "name": "DNS queries",
+              "icon": "mdi:dns"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.pi_hole_ads_blocked",
+              "name": "Ads blocked",
+              "icon": "mdi:block-helper"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.pi_hole_seen_clients",
+              "name": "Devices",
+              "icon": "mdi:devices"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Storage and backups",
+              "heading_style": "title",
+              "icon": "mdi:harddisk"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_free_disk_space",
+              "name": "Array free",
+              "icon": "mdi:harddisk"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.sabnzbd_total_disk_space",
+              "name": "Array size",
+              "icon": "mdi:database"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.backup_last_successful_automatic_backup",
+              "name": "Last HA backup",
+              "icon": "mdi:backup-restore"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.backup_next_scheduled_automatic_backup",
+              "name": "Next HA backup",
+              "icon": "mdi:calendar-sync"
+            },
+            {
+              "type": "heading",
+              "heading": "Photos (Immich)",
+              "heading_style": "title",
+              "icon": "mdi:image-multiple"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.immich_photos",
+              "name": "Photos",
+              "icon": "mdi:image-multiple",
+              "tap_action": {
+                "action": "url",
+                "url_path": "https://photos.salientpoint.net"
+              }
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.immich_videos",
+              "name": "Videos",
+              "icon": "mdi:filmstrip-box-multiple",
+              "tap_action": {
+                "action": "url",
+                "url_path": "https://photos.salientpoint.net"
+              }
+            },
+            {
+              "type": "heading",
+              "heading": "Printer ink",
+              "heading_style": "title",
+              "icon": "mdi:printer"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.hp_officejet_pro_6970_black_ink",
+              "color": "grey",
+              "name": "Black",
+              "icon": "mdi:water"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.hp_officejet_pro_6970_cyan_ink",
+              "color": "cyan",
+              "name": "Cyan",
+              "icon": "mdi:water"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.hp_officejet_pro_6970_magenta_ink",
+              "color": "pink",
+              "name": "Magenta",
+              "icon": "mdi:water"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.hp_officejet_pro_6970_yellow_ink",
+              "color": "yellow",
+              "name": "Yellow",
+              "icon": "mdi:water"
+            }
+          ]
+        }
+      ],
+      "theme": "deco_noir"
+    }
+  ]
+}

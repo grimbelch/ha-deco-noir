@@ -1,0 +1,155 @@
+{
+  "main": [
+    {
+      "entity": "switch.couch_lamp",
+      "name": "Couch",
+      "icon": "mdi:lamp",
+      "kind": "lamp",
+      "left": 62.93,
+      "top": 62.09
+    },
+    {
+      "entity": "switch.chez_lounge_lamp",
+      "name": "Chez Lounge",
+      "icon": "mdi:lamp",
+      "kind": "lamp",
+      "left": 90.95,
+      "top": 62.09
+    },
+    {
+      "entity": "switch.pappasan_lamp",
+      "name": "Pappasan",
+      "icon": "mdi:floor-lamp",
+      "kind": "lamp",
+      "left": 90.95,
+      "top": 75.49
+    },
+    {
+      "entity": "switch.lamp_window",
+      "name": "Window",
+      "icon": "mdi:lamp",
+      "kind": "lamp",
+      "left": 76.94,
+      "top": 75.49
+    },
+    {
+      "entity": "switch.grow_lamp",
+      "name": "Grow lamp",
+      "icon": "mdi:sprout",
+      "kind": "lamp",
+      "left": 62.93,
+      "top": 75.49
+    },
+    {
+      "entity": "media_player.billie_2",
+      "name": "Billie",
+      "icon": "mdi:speaker",
+      "kind": "speaker",
+      "left": 76.94,
+      "top": 62.09
+    },
+    {
+      "entity": "climate.nest_thermostat",
+      "name": "Thermostat",
+      "icon": "mdi:thermostat",
+      "kind": "climate",
+      "left": 60.78,
+      "top": 54.25
+    },
+    {
+      "entity": "media_player.kitchen_speaker",
+      "name": "Kitchen",
+      "icon": "mdi:speaker",
+      "kind": "speaker",
+      "left": 32.76,
+      "top": 78.1
+    },
+    {
+      "entity": "switch.dining_room_xmas",
+      "name": "Dining Xmas",
+      "icon": "mdi:pine-tree",
+      "kind": "lamp",
+      "left": 54.53,
+      "top": 92.81
+    },
+    {
+      "entity": "light.outdoor_dimmer_light_1",
+      "name": "Outdoor 1",
+      "icon": "mdi:outdoor-lamp",
+      "kind": "lamp",
+      "left": 38.15,
+      "top": 31.86
+    },
+    {
+      "entity": "light.outdoor_dimmer_light_2",
+      "name": "Outdoor 2",
+      "icon": "mdi:outdoor-lamp",
+      "kind": "lamp",
+      "left": 60.78,
+      "top": 31.86
+    }
+  ],
+  "main_aspect": 0.7582,
+  "upper": [
+    {
+      "entity": "sensor.hp_officejet_pro_6970",
+      "name": "Printer",
+      "icon": "mdi:printer",
+      "kind": "sensor",
+      "left": 40.06,
+      "top": 89.22
+    }
+  ],
+  "upper_aspect": 1.1503,
+  "lower": [
+    {
+      "entity": "switch.torch_light_front",
+      "name": "Torch front",
+      "icon": "mdi:torch",
+      "kind": "lamp",
+      "left": 51.14,
+      "top": 83.22
+    },
+    {
+      "entity": "switch.torch_light_back",
+      "name": "Torch back",
+      "icon": "mdi:torch",
+      "kind": "lamp",
+      "left": 85.43,
+      "top": 83.22
+    },
+    {
+      "entity": "switch.basement_fireplace_lights",
+      "name": "Fireplace",
+      "icon": "mdi:fireplace",
+      "kind": "lamp",
+      "left": 51.14,
+      "top": 61.41
+    },
+    {
+      "entity": "media_player.library",
+      "name": "Library",
+      "icon": "mdi:speaker",
+      "kind": "speaker",
+      "left": 85.43,
+      "top": 61.41
+    },
+    {
+      "entity": "switch.painting_desk",
+      "name": "Painting desk",
+      "icon": "mdi:palette",
+      "kind": "lamp",
+      "left": 68.29,
+      "top": 41.28
+    },
+    {
+      "entity": "sensor.h2s_0938ac5b0600679_print_status",
+      "name": "Icarus",
+      "icon": "mdi:printer-3d",
+      "kind": "sensor",
+      "left": 86.86,
+      "top": 41.28
+    }
+  ],
+  "lower_aspect": 1.1745
+}

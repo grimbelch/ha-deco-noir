@@ -1,0 +1,484 @@
+{
+  "deco_marquee": {
+    "card_mod": {
+      "class": "deco-plain"
+    },
+    "show_icon": false,
+    "show_name": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "none"
+    },
+    "hold_action": {
+      "action": "none"
+    },
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
+    "custom_fields": {
+      "m": "[[[ return `<div class='mq'><span class='r'></span><span class='t'><span class='d'>\u25c6</span>${variables.title}<span class='d'>\u25c6</span></span><span class='r'></span></div>`; ]]]"
+    },
+    "styles": {
+      "card": [
+        "background: none",
+        "border: none",
+        "box-shadow: none",
+        "padding: 14px 2px 4px",
+        "overflow: visible"
+      ],
+      "grid": [
+        "grid-template-areas: '\"m\"'",
+        "grid-template-columns: 1fr"
+      ],
+      "custom_fields": {
+        "m": [
+          "width: 100%"
+        ]
+      }
+    },
+    "variables": {
+      "title": "Section"
+    }
+  },
+  "deco_tile": {
+    "show_state": true,
+    "tap_action": {
+      "action": "toggle",
+      "haptic": "light"
+    },
+    "hold_action": {
+      "action": "more-info"
+    },
+    "state_display": "[[[ if (entity && entity.state === 'on' && entity.attributes.brightness) return Math.round(entity.attributes.brightness/2.55) + '%'; if (entity && entity.attributes.volume_level !== undefined && entity.state !== 'off') return (entity.state.charAt(0).toUpperCase()+entity.state.slice(1)) + ' \u00b7 ' + Math.round(entity.attributes.volume_level*100) + '%'; return helpers.localize(entity); ]]]",
+    "styles": {
+      "card": [
+        "padding: 12px 12px 11px",
+        "height: 100%",
+        "box-sizing: border-box",
+        "border-radius: 0",
+        "transition: box-shadow .3s ease, background .3s ease"
+      ],
+      "grid": [
+        "grid-template-areas: '\"i\" \"n\" \"s\"'",
+        "grid-template-rows: 44px min-content min-content",
+        "grid-template-columns: 1fr",
+        "justify-items: start",
+        "align-items: center"
+      ],
+      "img_cell": [
+        "width: 32px",
+        "height: 32px",
+        "margin-left: 6px",
+        "transform: rotate(45deg)",
+        "border: 1px solid var(--deco-hair-faint)",
+        "background: rgba(255,255,255,.015)"
+      ],
+      "icon": [
+        "transform: rotate(-45deg)",
+        "width: 18px",
+        "color: rgba(237,230,214,.38)"
+      ],
+      "name": [
+        "font-family: var(--deco-label)",
+        "font-size: 11px",
+        "letter-spacing: .14em",
+        "text-transform: uppercase",
+        "color: rgba(237,230,214,.6)",
+        "justify-self: start",
+        "margin-top: 8px",
+        "white-space: nowrap",
+        "overflow: hidden",
+        "text-overflow: ellipsis",
+        "max-width: 100%"
+      ],
+      "state": [
+        "font-family: var(--deco-num)",
+        "font-size: 12px",
+        "color: rgba(237,230,214,.34)",
+        "justify-self: start",
+        "margin-top: 3px",
+        "letter-spacing: .04em"
+      ]
+    },
+    "state": [
+      {
+        "value": "on",
+        "styles": {
+          "card": [
+            "border-color: rgba(201,164,76,.55)",
+            "background: radial-gradient(120% 90% at 20% 0%, rgba(201,164,76,.22), rgba(201,164,76,.04) 60%, transparent), var(--ha-card-background)",
+            "box-shadow: 0 0 22px rgba(201,164,76,.18), inset 0 0 0 1px rgba(201,164,76,.14)"
+          ],
+          "img_cell": [
+            "border-color: var(--deco-gold)",
+            "background: rgba(201,164,76,.14)",
+            "box-shadow: 0 0 14px rgba(201,164,76,.35)"
+          ],
+          "icon": [
+            "color: var(--deco-gold-hi)"
+          ],
+          "name": [
+            "color: var(--deco-ivory)"
+          ],
+          "state": [
+            "color: var(--deco-gold-hi)"
+          ]
+        }
+      },
+      {
+        "value": "playing",
+        "id": "playing",
+        "styles": {
+          "card": [
+            "border-color: rgba(201,164,76,.55)",
+            "box-shadow: 0 0 22px rgba(201,164,76,.14)"
+          ],
+          "img_cell": [
+            "border-color: var(--deco-gold)",
+            "background: rgba(201,164,76,.14)"
+          ],
+          "icon": [
+            "color: var(--deco-gold-hi)"
+          ],
+          "name": [
+            "color: var(--deco-ivory)"
+          ],
+          "state": [
+            "color: var(--deco-gold-hi)"
+          ]
+        }
+      },
+      {
+        "value": "unavailable",
+        "styles": {
+          "card": [
+            "opacity: .45"
+          ]
+        }
+      }
+    ]
+  },
+  "deco_scene": {
+    "show_state": false,
+    "hold_action": {
+      "action": "none"
+    },
+    "styles": {
+      "card": [
+        "padding: 14px 6px 12px",
+        "height: 100%",
+        "box-sizing: border-box"
+      ],
+      "grid": [
+        "grid-template-areas: '\"i\" \"n\"'",
+        "grid-template-rows: 1fr min-content"
+      ],
+      "icon": [
+        "width: 26px",
+        "color: var(--deco-gold-hi)"
+      ],
+      "name": [
+        "font-family: var(--deco-label)",
+        "font-size: 10px",
+        "letter-spacing: .2em",
+        "text-transform: uppercase",
+        "color: rgba(237,230,214,.62)",
+        "margin-top: 8px",
+        "white-space: normal",
+        "line-height: 1.3"
+      ]
+    }
+  },
+  "deco_lobby": {
+    "entity": "sensor.time",
+    "show_icon": false,
+    "show_name": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "none"
+    },
+    "hold_action": {
+      "action": "none"
+    },
+    "triggers_update": [
+      "sensor.time",
+      "weather.forecast_home",
+      "sensor.alexandria_status",
+      "sensor.alexandria_battery",
+      "switch.pi_hole",
+      "sensor.sabnzbd_status",
+      "sensor.h2s_0938ac5b0600679_print_status",
+      "climate.nest_thermostat"
+    ],
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}}\n",
+    "custom_fields": {
+      "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
+      "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
+      "chips": "[[[\nconst s=(e)=>states[e]?states[e].state:'unknown';\nconst ups=s('sensor.alexandria_status'); const batt=Math.round(parseFloat(s('sensor.alexandria_battery')));\nconst onb=ups.includes('ONBATT');\nconst chip=(cls,icon,label,val)=>`<span class=\"chip ${cls}\"><ha-icon icon=\"${icon}\"></ha-icon>${label} <b>${val}</b></span>`;\nconst pr=s('sensor.h2s_0938ac5b0600679_print_status');\nconst prl={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing'}[pr]||pr;\nlet out=chip(onb?'bad':'ok','mdi:lightning-bolt','Power',onb?`On battery \u00b7 ${batt}%`:`On mains \u00b7 ${batt}%`);\nout+=chip(s('switch.pi_hole')==='on'?'ok':'bad','mdi:shield-check-outline','Ad blocking',s('switch.pi_hole')==='on'?'On':'Off');\nout+=chip('','mdi:download-outline','Downloads',s('sensor.sabnzbd_status'));\nout+=chip(pr==='failed'?'bad':(pr==='finish'?'ok':''),'mdi:printer-3d','Icarus',prl);\nreturn `<div class=\"chips\">${out}</div>`;\n]]]"
+    },
+    "styles": {
+      "card": [
+        "padding: 22px 22px 18px"
+      ],
+      "grid": [
+        "grid-template-areas: '\"left right\" \"chips chips\"'",
+        "grid-template-columns: 1fr auto",
+        "align-items: end"
+      ],
+      "custom_fields": {
+        "left": [
+          "justify-self: start",
+          "text-align: left"
+        ],
+        "right": [
+          "justify-self: end"
+        ],
+        "chips": [
+          "justify-self: stretch"
+        ]
+      }
+    }
+  },
+  "deco_room": {
+    "show_icon": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "navigate",
+      "navigation_path": "/home-hub/floor-plan"
+    },
+    "hold_action": {
+      "action": "none"
+    },
+    "triggers_update": "all",
+    "custom_fields": {
+      "art": "[[[ return variables.art_svg || ''; ]]]",
+      "meta": "[[[\nconst lamps=variables.lamps||[]; const on=lamps.filter(e=>states[e]&&states[e].state==='on').length;\nlet l1= lamps.length ? (on===0?'<b>All off</b>':`<b>${on} of ${lamps.length}</b> on`) : '';\nlet l2=''; if(variables.line2_entity && states[variables.line2_entity]){ const st=states[variables.line2_entity];\n  let v=st.state; if(variables.line2_attr) v=st.attributes[variables.line2_attr]; l2=`${variables.line2_label} \u00b7 ${v}${variables.line2_unit||''}`; }\nreturn `${l1}${l1&&l2?'<br>':''}${l2}`;\n]]]"
+    },
+    "styles": {
+      "card": [
+        "padding: 0 18px 12px",
+        "height: 100%",
+        "min-height: 92px",
+        "box-sizing: border-box",
+        "overflow: hidden",
+        "background: linear-gradient(180deg, rgba(14,14,20,.35), rgba(14,14,20,.62))"
+      ],
+      "grid": [
+        "grid-template-areas: '\"n meta\"'",
+        "grid-template-columns: 1fr auto",
+        "align-items: end",
+        "height: 100%"
+      ],
+      "name": [
+        "font-family: var(--deco-display)",
+        "font-size: 26px",
+        "letter-spacing: .06em",
+        "color: var(--deco-ivory)",
+        "justify-self: start",
+        "z-index: 1",
+        "align-self: end"
+      ],
+      "custom_fields": {
+        "art": [
+          "position: absolute",
+          "right: 0",
+          "bottom: 0",
+          "width: 300px",
+          "height: 92px",
+          "opacity: .9",
+          "pointer-events: none"
+        ],
+        "meta": [
+          "font-family: var(--deco-label)",
+          "font-size: 10px",
+          "line-height: 1.7",
+          "letter-spacing: .22em",
+          "text-transform: uppercase",
+          "color: rgba(237,230,214,.62)",
+          "text-align: right",
+          "z-index: 1",
+          "text-shadow: 0 1px 8px rgba(0,0,0,.9)",
+          "align-self: end"
+        ]
+      }
+    },
+    "extra_styles": ".meta b,#meta b{color:var(--deco-gold-hi);font-weight:600} b{color:var(--deco-gold-hi);font-weight:600} ha-card::before{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--room-accent,var(--deco-gold)),transparent);opacity:.85}",
+    "variables": {
+      "lamps": [],
+      "art_svg": ""
+    }
+  },
+  "deco_gauge": {
+    "show_icon": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "more-info"
+    },
+    "custom_fields": {
+      "g": "[[[\nconst v=Math.max(0,Math.min(100,parseFloat(entity.state)||0)); const L=201; const dash=(v/100*L).toFixed(1);\nreturn `<svg viewBox=\"0 0 160 96\" style=\"width:100%;max-width:170px;display:block;margin:0 auto\">\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.16)\" stroke-width=\"6\"/>\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:var(--deco-gold)\" stroke-width=\"6\" stroke-dasharray=\"${dash} ${L}\"/>\n<path d=\"M8 86 A72 72 0 0 1 152 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.35)\" stroke-width=\"1\"/>\n<g style=\"stroke:rgba(201,164,76,.5)\"><path d=\"M80 10 v8\"/><path d=\"M24 30 l6 6\"/><path d=\"M136 30 l-6 6\"/></g></svg>\n<div style=\"font:200 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px\">${Math.round(v)}<span style=\"font-size:13px;color:var(--deco-gold-hi)\">%</span></div>`;\n]]]"
+    },
+    "styles": {
+      "card": [
+        "padding: 14px 10px 14px"
+      ],
+      "grid": [
+        "grid-template-areas: '\"g\" \"n\"'",
+        "grid-template-rows: auto min-content"
+      ],
+      "name": [
+        "font-family: var(--deco-label)",
+        "font-size: 10px",
+        "letter-spacing: .28em",
+        "text-transform: uppercase",
+        "color: rgba(237,230,214,.62)",
+        "margin-top: 10px",
+        "white-space: normal"
+      ]
+    }
+  },
+  "deco_rows": {
+    "show_icon": true,
+    "show_state": false,
+    "tap_action": {
+      "action": "more-info"
+    },
+    "triggers_update": "all",
+    "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
+    "custom_fields": {
+      "badge": "[[[\nif(!entity) return ''; const v=entity.state;\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[v]||v;\nconst cls=v==='finish'?'ok':(v==='failed'||v==='offline'?'bad':'');\nreturn `<span class=\"badge ${cls}\">${lab}</span>`;\n]]]",
+      "rows": "[[[\nconst rows=variables.rows||[]; let h='<div class=\"rows\">';\nfor(const r of rows){ const st=states[r.entity]; if(!st) continue; let v=r.attr?st.attributes[r.attr]:st.state;\n  const num=parseFloat(v); if(r.round!==undefined && !isNaN(num)) v=num.toFixed(r.round);\n  h+=`<div class=\"row\"><span>${r.label}</span><b>${v}${r.unit?`<em style=\"font-style:normal;font-size:12px;color:var(--deco-gold-hi);margin-left:2px\">${r.unit}</em>`:''}</b></div>`; }\nreturn h+'</div>';\n]]]"
+    },
+    "styles": {
+      "card": [
+        "padding: 16px 18px 10px"
+      ],
+      "grid": [
+        "grid-template-areas: '\"i n badge\" \"rows rows rows\"'",
+        "grid-template-columns: 34px 1fr auto",
+        "align-items: center",
+        "column-gap: 10px"
+      ],
+      "icon": [
+        "width: 26px",
+        "color: var(--deco-gold-hi)"
+      ],
+      "name": [
+        "font-family: var(--deco-display)",
+        "font-size: 22px",
+        "letter-spacing: .05em",
+        "justify-self: start",
+        "color: var(--deco-ivory)"
+      ],
+      "custom_fields": {
+        "rows": [
+          "margin-top: 6px"
+        ]
+      }
+    },
+    "variables": {
+      "rows": []
+    }
+  },
+  "deco_marker": {
+    "card_mod": {
+      "class": "deco-plain"
+    },
+    "show_state": false,
+    "tap_action": {
+      "action": "toggle",
+      "haptic": "light"
+    },
+    "hold_action": {
+      "action": "more-info"
+    },
+    "styles": {
+      "card": [
+        "background: none",
+        "border: none",
+        "box-shadow: none",
+        "padding: 0",
+        "overflow: visible",
+        "width: 58px"
+      ],
+      "grid": [
+        "grid-template-areas: '\"i\" \"n\"'",
+        "grid-template-rows: 34px auto",
+        "justify-items: center"
+      ],
+      "img_cell": [
+        "width: 24px",
+        "height: 24px",
+        "transform: rotate(45deg)",
+        "border: 1px solid var(--deco-gold)",
+        "background: rgba(11,11,14,.82)",
+        "transition: box-shadow .4s ease, background .4s ease"
+      ],
+      "icon": [
+        "transform: rotate(-45deg)",
+        "width: 14px",
+        "color: rgba(237,230,214,.55)"
+      ],
+      "name": [
+        "font-family: var(--deco-label)",
+        "font-size: 8px",
+        "letter-spacing: .12em",
+        "text-transform: uppercase",
+        "color: rgba(237,230,214,.72)",
+        "white-space: nowrap",
+        "margin-top: 2px",
+        "text-shadow: 0 1px 4px #000, 0 0 2px #000"
+      ]
+    },
+    "state": [
+      {
+        "value": "on",
+        "styles": {
+          "img_cell": [
+            "background: rgba(201,164,76,.32)",
+            "box-shadow: 0 0 14px 4px rgba(230,207,154,.55), 0 0 46px 22px rgba(201,164,76,.22)"
+          ],
+          "icon": [
+            "color: #FFF4D6"
+          ],
+          "name": [
+            "color: var(--deco-gold-hi)"
+          ]
+        }
+      },
+      {
+        "value": "playing",
+        "styles": {
+          "img_cell": [
+            "background: rgba(201,164,76,.25)",
+            "box-shadow: 0 0 12px 3px rgba(230,207,154,.4)"
+          ],
+          "icon": [
+            "color: var(--deco-gold-hi)"
+          ]
+        }
+      },
+      {
+        "value": "heat",
+        "styles": {
+          "img_cell": [
+            "border-color: #D9824A",
+            "box-shadow: 0 0 12px 3px rgba(217,130,74,.35)"
+          ],
+          "icon": [
+            "color: #F0B489"
+          ]
+        }
+      },
+      {
+        "value": "cool",
+        "styles": {
+          "img_cell": [
+            "border-color: var(--deco-sapphire)",
+            "box-shadow: 0 0 12px 3px rgba(90,121,200,.35)"
+          ],
+          "icon": [
+            "color: #AFC2F0"
+          ]
+        }
+      }
+    ]
+  }
+}
