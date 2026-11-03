@@ -132,11 +132,13 @@ home = {
 
         section(room("Around the House", "house",
                      ["switch.dining_room_xmas", "switch.painting_desk"], "var(--deco-gold)",
-                     ("sensor.hp_officejet_pro_6970", "Printer")),
+                     ("sensor.washer_current_status", "Washer")),
                 tile("switch.dining_room_xmas", "Dining Xmas", "mdi:pine-tree"),
                 tile("switch.painting_desk", "Painting desk", "mdi:palette-outline"),
                 tile("media_player.kitchen_speaker", "Kitchen", "mdi:speaker", 6, "more-info"),
-                tile("sensor.hp_officejet_pro_6970", "Printer", "mdi:printer-outline", 6, "more-info")),
+                tile("sensor.hp_officejet_pro_6970", "Printer", "mdi:printer-outline", 6, "more-info"),
+                tile("sensor.washer_current_status", "Washer", "mdi:washing-machine", 6, "more-info"),
+                tile("sensor.dryer_current_status", "Dryer", "mdi:tumble-dryer", 6, "more-info")),
 
         section(room("Workshop", "workshop", [], "var(--deco-garnet)",
                      (f"sensor.{P}_print_progress", "Icarus", None, "%")),

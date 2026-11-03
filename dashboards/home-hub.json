@@ -907,8 +907,8 @@
                   "switch.painting_desk"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
-                "line2_entity": "sensor.hp_officejet_pro_6970",
-                "line2_label": "Printer"
+                "line2_entity": "sensor.washer_current_status",
+                "line2_label": "Washer"
               },
               "styles": {
                 "card": [
@@ -962,6 +962,34 @@
               "entity": "sensor.hp_officejet_pro_6970",
               "name": "Printer",
               "icon": "mdi:printer-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.washer_current_status",
+              "name": "Washer",
+              "icon": "mdi:washing-machine",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              },
+              "tap_action": {
+                "action": "more-info"
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
+              "entity": "sensor.dryer_current_status",
+              "name": "Dryer",
+              "icon": "mdi:tumble-dryer",
               "grid_options": {
                 "columns": 6,
                 "rows": 2
@@ -1445,6 +1473,34 @@
                   "style": {
                     "left": "86.86%",
                     "top": "41.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.washer_current_status",
+                  "name": "[[[ return 'Washer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:washing-machine",
+                  "style": {
+                    "left": "15.43%",
+                    "top": "42.28%"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
+                  "entity": "sensor.dryer_current_status",
+                  "name": "[[[ return 'Dryer \u00b7 ' + helpers.localize(entity); ]]]",
+                  "icon": "mdi:tumble-dryer",
+                  "style": {
+                    "left": "45.43%",
+                    "top": "42.28%"
                   },
                   "tap_action": {
                     "action": "more-info"

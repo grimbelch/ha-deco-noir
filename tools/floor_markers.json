@@ -149,6 +149,22 @@
       "kind": "sensor",
       "left": 86.86,
       "top": 41.28
+    },
+    {
+      "entity": "sensor.washer_current_status",
+      "name": "Washer",
+      "icon": "mdi:washing-machine",
+      "kind": "sensor",
+      "left": 15.43,
+      "top": 42.28
+    },
+    {
+      "entity": "sensor.dryer_current_status",
+      "name": "Dryer",
+      "icon": "mdi:tumble-dryer",
+      "kind": "sensor",
+      "left": 45.43,
+      "top": 42.28
     }
   ],
   "lower_aspect": 1.1745

@@ -177,6 +177,8 @@ MARKERS = {
         ("media_player.library", "Library", "mdi:speaker", 1045, 905, "speaker"),
         ("switch.painting_desk", "Painting desk", "mdi:palette", 985, 845, "lamp"),
         ("sensor.h2s_0938ac5b0600679_print_status", "Icarus", "mdi:printer-3d", 1050, 845, "sensor"),
+        ("sensor.washer_current_status", "Washer", "mdi:washing-machine", 800, 848, "sensor"),
+        ("sensor.dryer_current_status", "Dryer", "mdi:tumble-dryer", 905, 848, "sensor"),
     ],
 }
 
