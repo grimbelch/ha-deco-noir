@@ -12,7 +12,7 @@
     "hold_action": {
       "action": "none"
     },
-    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
     "custom_fields": {
       "m": "[[[ return `<div class='mq'><span class='r'></span><span class='t'><span class='d'>\u25c6</span>${variables.title}<span class='d'>\u25c6</span></span><span class='r'></span></div>`; ]]]"
     },
@@ -127,7 +127,7 @@
           "width": "18px"
         },
         {
-          "color": "rgba(237,230,214,.45)"
+          "color": "var(--seasons-text, rgba(237,230,214,.45))"
         }
       ],
       "name": [
@@ -144,7 +144,7 @@
           "text-transform": "uppercase"
         },
         {
-          "color": "rgba(237,230,214,.6)"
+          "color": "var(--seasons-text, rgba(237,230,214,.6))"
         },
         {
           "justify-self": "start"
@@ -173,7 +173,7 @@
           "font-size": "12px"
         },
         {
-          "color": "rgba(237,230,214,.52)"
+          "color": "var(--seasons-text, rgba(237,230,214,.52))"
         },
         {
           "justify-self": "start"
@@ -342,7 +342,7 @@
           "text-transform": "uppercase"
         },
         {
-          "color": "rgba(237,230,214,.62)"
+          "color": "var(--seasons-text, rgba(237,230,214,.62))"
         },
         {
           "margin-top": "8px"
@@ -377,7 +377,7 @@
       "sensor.h2s_0938ac5b0600679_print_status",
       "climate.nest_thermostat"
     ],
-    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.chips{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--deco-hair-faint);padding-top:14px;margin-top:14px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' !important;grid-template-columns:1fr !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
     "custom_fields": {
       "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
       "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
@@ -455,7 +455,7 @@
           "overflow": "hidden"
         },
         {
-          "background": "linear-gradient(180deg, rgba(14,14,20,.35), rgba(14,14,20,.62))"
+          "background": "linear-gradient(180deg, var(--seasons-surface, rgba(14,14,20,.35)), var(--seasons-surface, rgba(14,14,20,.62)))"
         }
       ],
       "grid": [
@@ -551,7 +551,7 @@
             "text-transform": "uppercase"
           },
           {
-            "color": "rgba(237,230,214,.62)"
+            "color": "var(--seasons-text, rgba(237,230,214,.62))"
           },
           {
             "text-align": "right"
@@ -566,7 +566,7 @@
             "align-self": "end"
           },
           {
-            "background": "rgba(11,11,14,.78)"
+            "background": "var(--seasons-surface, rgba(11,11,14,.78))"
           },
           {
             "padding": "5px 9px"
@@ -623,7 +623,7 @@
           "text-transform": "uppercase"
         },
         {
-          "color": "rgba(237,230,214,.62)"
+          "color": "var(--seasons-text, rgba(237,230,214,.62))"
         },
         {
           "margin-top": "10px"
@@ -641,7 +641,7 @@
       "action": "more-info"
     },
     "triggers_update": "all",
-    "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:rgba(237,230,214,.6)}\n.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
+    "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
     "custom_fields": {
       "badge": "[[[\nif(!entity) return ''; const v=entity.state;\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[v]||v;\nconst cls=v==='finish'?'ok':(v==='failed'||v==='offline'?'bad':'');\nreturn `<span class=\"badge ${cls}\">${lab}</span>`;\n]]]",
       "rows": "[[[\nconst rows=variables.rows||[]; let h='<div class=\"rows\">';\nfor(const r of rows){ const st=states[r.entity]; if(!st) continue; let v=r.attr?st.attributes[r.attr]:st.state;\n  const num=parseFloat(v); if(r.round!==undefined && !isNaN(num)) v=num.toFixed(r.round);\n  h+=`<div class=\"row\"><span>${r.label}</span><b>${v}${r.unit?`<em style=\"font-style:normal;font-size:12px;color:var(--deco-gold-hi);margin-left:2px\">${r.unit}</em>`:''}</b></div>`; }\nreturn h+'</div>';\n]]]"
@@ -768,7 +768,7 @@
           "border": "1px solid var(--deco-gold)"
         },
         {
-          "background": "rgba(11,11,14,.82)"
+          "background": "var(--seasons-surface, rgba(11,11,14,.82))"
         },
         {
           "transition": "box-shadow .4s ease, background .4s ease"
@@ -782,7 +782,7 @@
           "width": "14px"
         },
         {
-          "color": "rgba(237,230,214,.55)"
+          "color": "var(--seasons-text, rgba(237,230,214,.55))"
         }
       ],
       "name": [
@@ -799,7 +799,7 @@
           "text-transform": "uppercase"
         },
         {
-          "color": "rgba(237,230,214,.72)"
+          "color": "var(--seasons-text, rgba(237,230,214,.72))"
         },
         {
           "white-space": "nowrap"
@@ -1026,7 +1026,7 @@
           "text-transform": "uppercase"
         },
         {
-          "color": "rgba(237,230,214,.7)"
+          "color": "var(--seasons-text, rgba(237,230,214,.7))"
         },
         {
           "white-space": "nowrap"
@@ -1040,5 +1040,106 @@
       ]
     },
     "extra_styles": "b { color: var(--deco-gold-hi); font-weight: 600; }"
+  },
+  "saisons_room": {
+    "show_icon": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "none"
+    },
+    "styles": {
+      "card": [
+        {
+          "padding": "0"
+        },
+        {
+          "overflow": "hidden"
+        },
+        {
+          "border-radius": "90px 90px 10px 10px"
+        },
+        {
+          "background": "#f7e8cb"
+        },
+        {
+          "border": "1px solid #9c7651"
+        },
+        {
+          "box-shadow": "inset 0 0 0 4px #ead6b6"
+        }
+      ],
+      "grid": [
+        {
+          "grid-template-areas": "\"art\" \"season\" \"n\""
+        },
+        {
+          "grid-template-columns": "1fr"
+        }
+      ],
+      "name": [
+        {
+          "font-family": "var(--deco-display)"
+        },
+        {
+          "font-size": "32px"
+        },
+        {
+          "color": "#513721"
+        },
+        {
+          "padding": "0 10px 16px"
+        },
+        {
+          "white-space": "normal"
+        }
+      ],
+      "custom_fields": {
+        "art": [
+          {
+            "height": "190px"
+          },
+          {
+            "width": "100%"
+          },
+          {
+            "background-image": "url('/local/seasons/portraits.png?v=1')"
+          },
+          {
+            "background-size": "400% auto"
+          },
+          {
+            "background-position": "[[[ return variables.position + '% 18%'; ]]]"
+          },
+          {
+            "border-bottom": "1px solid #b39165"
+          }
+        ],
+        "season": [
+          {
+            "font-family": "var(--deco-display)"
+          },
+          {
+            "text-transform": "uppercase"
+          },
+          {
+            "letter-spacing": ".16em"
+          },
+          {
+            "font-size": "13px"
+          },
+          {
+            "color": "#835b3c"
+          },
+          {
+            "padding": "12px 0 4px"
+          }
+        ]
+      }
+    },
+    "custom_fields": {
+      "art": " ",
+      "season": "[[[ return variables.season; ]]]"
+    },
+    "extra_styles": "ha-card::before, ha-card::after { display:none!important; }"
   }
 }

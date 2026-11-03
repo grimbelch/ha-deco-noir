@@ -11,6 +11,8 @@ import websocket
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from deco_templates import TEMPLATES, ART  # noqa: E402
+from seasons_dashboard import apply_seasons
+from cogitator_dashboard import apply_cogitator
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
@@ -284,6 +286,7 @@ def main():
     keep = [decorate(v) for v in cur["views"] if v.get("path") in ("media", "yard", "alexandria")]
     cfg = normalize_styles({"title": cur.get("title", "Home"), "button_card_templates": TEMPLATES,
                             "views": [home, floor] + keep})
+    cfg = apply_cogitator(apply_seasons(cfg))
     (ROOT / "templates").mkdir(exist_ok=True)
     (ROOT / "templates" / "deco_templates.json").write_text(json.dumps(cfg["button_card_templates"], indent=2), encoding="utf-8")
     (out_dir / "home-hub.json").write_text(json.dumps(cfg, indent=2), encoding="utf-8")

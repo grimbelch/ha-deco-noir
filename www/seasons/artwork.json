@@ -1,0 +1,5 @@
+{
+  "generator": "built-in image_gen",
+  "asset": "portraits.png",
+  "prompt": "Create a production web UI illustration asset, a horizontal strip of FOUR perfectly equal width seasonal portrait panels in left-to-right order Spring, Summer, Autumn, Winter. Image 1536x1024. Each panel occupies exactly 25% of width, full height, no gaps. Original Alphonse Mucha inspired color lithograph: graceful women in modest draped gowns, sinuous auburn hair, strong warm brown contours, muted sage, rose, amber and winter blue, creamy ivory parchment. Spring crowned in pink blossom; Summer surrounded by ivory lilies; Autumn russet leaves and grapes; Winter pale hood and bare branches with small lantern. Portrait busts faces positioned within upper 45% of image, botanical details filling below, arched frame inside each panel with narrow border. Absolutely NO text, labels, lettering, numbers, interface, controls, watermarks. Artwork only; will be used as four decorative header backgrounds above real Home Assistant controls. Fine print-like detail, no glossy or 3D effects."
+}

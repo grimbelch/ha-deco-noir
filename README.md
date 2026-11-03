@@ -1,5 +1,63 @@
 # Deco Noir
 
+## Optional Cogitator theme
+
+**Cogitator** is the fourth selector option, based on the approved A1 / Pattern IX
+mockup. Its Home layout uses the existing HA entities, numbered ENABLED/STANDBY
+keys, scene commands, climate controls, printer status, and a large green-tinted
+Spotify artwork panel. The status rail counts real room relays rather than
+displaying invented CPU readings. All other Home sections and views are retained.
+
+`www/cogitator/cogitator-card.js` extends the existing card's service/media helpers
+and supplies its own layout and CSS. Scanlines, selective text/control glow, a
+slow scan band, and local Cogitator fonts supply the phosphor treatment. The
+**PHOSPHOR** button reduces effects per browser; OS reduced-motion preferences
+disable the scan animation. Phone layouts stack the panels and omit the rail.
+
+Assets/fonts come from the user's Cogitator repo; font licenses are included.
+Deploy with `tools/deploy_seasons_assets.py --cogitator`, then
+`tools/install_seasons.py --select-cogitator` (requires `HA_TOKEN_FILE`). The latter
+backs up the dashboard, helper, automation, selection, and resources before saving.
+Without the selection flag it preserves the current choice. The regular builder
+includes all four themes. Refresh browser tabs after updating module resources.
+
+## Optional Les Saisons theme
+
+The Home view now has a **Theme** selector with **Deco Noir**, **Deco Noir Lite**,
+and **Les Saisons**. Les Saisons uses an ivory and terracotta palette, with four
+Mucha-inspired seasonal portraits framing live room controls. The original Deco
+Home layout is retained and returns when either Deco option is selected.
+
+The selection applies to all clients using Home Assistant's default theme. A
+profile-level theme override takes precedence. The helper restores its choice
+after restart, and `dashboard_theme_apply` applies it in light and dark modes.
+
+Implementation: `themes/les_saisons.yaml`, `tools/seasons_dashboard.py`, and
+`www/seasons/seasons-card.js` and `www/seasons/portraits.png`. The regular dashboard
+builder includes Seasons. Revision 3 uses `www/seasons/headers-v3.png`, a 2-by-2
+atlas of complete landscape headers (no portrait cropping), with large seasonal
+bouquets surrounding the live titles. Generation details are in `headers-v3.json`.
+Device switches, scene buttons, and media sliders share a consistent custom
+control treatment; entity detail dialogs remain available by clicking the labels.
+The custom card keeps the four rooms in continuous
+illustrated frames, with a compact Scenes/Music/Climate row, live media controls,
+printer status, and responsive four/two/one-column layouts.
+Cormorant Garamond Italic is hosted locally as
+`www/seasons/display.ttf` under its accompanying SIL Open Font License.
+`tools/install_seasons.py` backs up the live dashboard/helper/automation under
+`build/before-seasons-*`, adds the new option, and preserves the selected theme.
+It reads the existing user API token from `HA_TOKEN_FILE` without printing it.
+Run `tools/deploy_seasons_assets.py` to copy the theme, card, font, and artwork to
+matching paths under `/config` before running it. The installer registers the
+versioned JavaScript module resource and backs up the previous resource list.
+Refresh existing browser tabs after deployment so they load the module.
+`tools/check_seasons.py` verifies all three selections and restores the original
+selection without operating household devices.
+
+Artwork is generated with built-in Imagegen; it contains no controls or text.
+The production UI uses actual HA entities rather than the illustrative values
+in the design mockups. Original design studies are under `design/art-nouveau/`.
+
 An Art Deco dashboard theme for Home Assistant: smoked-glass cards over a gold
 sunburst, hairline double borders with stepped corner brackets, and 1920s typography.
 
