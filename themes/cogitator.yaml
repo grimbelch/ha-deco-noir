@@ -74,6 +74,7 @@ cogitator:
   deco-display: '''Cog Title'', serif'
   deco-label: '''Cog Data'', monospace'
   deco-num: '''Cog Data'', monospace'
+  deco-img-filter: grayscale(1) sepia(1) saturate(2.5) hue-rotate(75deg)
   card-mod-theme: cogitator
   card-mod-card: "ha-card {\n  color: var(--primary-text-color);\n  background: var(--ha-card-background);\n\
     \  border: 1px solid var(--ha-card-border-color);\n  border-radius: 2px;\n  backdrop-filter:\

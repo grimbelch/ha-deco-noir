@@ -703,6 +703,110 @@
       "rows": []
     }
   },
+  "deco_print": {
+    "show_icon": false,
+    "show_name": false,
+    "show_state": false,
+    "tap_action": {
+      "action": "more-info"
+    },
+    "triggers_update": "all",
+    "extra_styles": "\n.pr{width:100%}\n.pr .pic{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;\n  background:rgba(0,0,0,.38);border:1px solid var(--deco-hair)}\n.pr .pic img{max-width:100%;max-height:100%;object-fit:contain;filter:var(--deco-img-filter,none)}\n.pr .pic .none{font:400 11px/1 var(--deco-label);letter-spacing:.24em;color:var(--seasons-text, rgba(237,230,214,.5))}\n.pr .badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;\n  padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi);background:rgba(0,0,0,.6)}\n.pr .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)}\n.pr .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n.pr .badge.run{border-color:var(--deco-gold-hi);color:var(--deco-ivory)}\n.pr .job{font:300 20px/1.2 var(--deco-display);color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.pr .bar{height:12px;border:1px solid var(--deco-hair);padding:2px}\n.pr .bar i{display:block;height:100%;background:var(--deco-gold)}\n.pr .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}\n.pr .meta span{display:flex;flex-direction:column;gap:6px}\n.pr .meta em{font:400 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.pr .meta b{font:300 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;white-space:nowrap}\n",
+    "custom_fields": {
+      "body": "[[[\nconst v=variables, st=entity?entity.state:'unavailable';\nconst val=id=>{const s=states[id];return s&&!['unknown','unavailable'].includes(s.state)?s.state:null;};\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[st]||st;\nconst cls=st==='finish'?'ok':(st==='failed'||st==='offline'?'bad':(st==='running'?'run':''));\nconst img=states[v.image], src=img&&img.attributes.entity_picture;\nconst n=Number(val(v.progress)), p=Number.isFinite(n)?Math.max(0,Math.min(100,n)):0;\nconst hrs=Number(val(v.remaining)); let left='\u2014';\nif(Number.isFinite(hrs)){ const m=Math.round(hrs*60); left=m<=0?'Done':(m>=60?Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m':m+'m'); }\nconst cl=val(v.layer), tl=val(v.layers), w=val(v.weight);\nreturn `<div class=\"pr\"><div class=\"pic\">${src?`<img src=\"${src}\" alt=\"\">`:'<span class=\"none\">NO PREVIEW</span>'}<span class=\"badge ${cls}\">${lab}</span></div>`\n +`<div class=\"job\">${val(v.job)||'No active job'}</div><div class=\"bar\"><i style=\"width:${p}%\"></i></div>`\n +`<div class=\"meta\"><span><em>Progress</em><b>${p}%</b></span><span><em>Time left</em><b>${left}</b></span>`\n +`<span><em>Layer</em><b>${cl&&tl?cl+'/'+tl:'\u2014'}</b></span><span><em>Filament</em><b>${w?Math.round(w)+' g':'\u2014'}</b></span></div></div>`;\n]]]"
+    },
+    "styles": {
+      "card": [
+        {
+          "padding": "16px 18px 16px"
+        }
+      ],
+      "grid": [
+        {
+          "grid-template-areas": "\"body\""
+        },
+        {
+          "grid-template-columns": "1fr"
+        }
+      ],
+      "custom_fields": {
+        "body": [
+          {
+            "width": "100%"
+          }
+        ]
+      }
+    },
+    "variables": {}
+  },
+  "deco_bars": {
+    "show_icon": true,
+    "show_state": false,
+    "tap_action": {
+      "action": "none"
+    },
+    "triggers_update": "all",
+    "extra_styles": "\n.fb{width:100%}\n.fr{display:grid;grid-template-columns:46px 14px minmax(0,1.7fr) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.fr:last-child{border-bottom:0}\n.fr .sl{font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.fr .sw{width:14px;height:14px;border:1px solid var(--deco-hair)}\n.fr .nm{font:300 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.fr .nm.dim{color:var(--seasons-text, rgba(237,230,214,.45))}\n.fr .tr{height:16px;border:1px solid var(--deco-hair);padding:2px}\n.fr .tr i{display:block;height:100%;background:var(--deco-gold)}\n.fr .tr i.low{background:var(--deco-garnet)}\n.fr b{font:300 16px/1 var(--deco-num);font-weight:300;color:var(--deco-ivory);text-align:right}\n.fn{display:flex;justify-content:space-between;margin-top:8px;font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n",
+    "custom_fields": {
+      "body": "[[[\nconst trays=variables.trays||[]; let h='<div class=\"fb\">';\nfor(const t of trays){ const s=states[t.entity]; if(!s) continue; const a=s.attributes||{};\n  const empty=a.empty===true||s.state==='Empty', unknown=a.unknown===true||s.state==='?';\n  const remain=Number(a.remain), has=!empty&&!unknown&&Number.isFinite(remain)&&remain>=0;\n  const col=String(a.color||''), swatch=(!empty&&!unknown&&col.length>=7&&col.slice(7)!=='00')?col.slice(0,7):'transparent';\n  const name=empty?'Empty':(unknown?'Unknown':String(a.name||s.state).replace(/^Bambu\\s+/,''));\n  h+=`<div class=\"fr\"><span class=\"sl\">${t.label}</span><span class=\"sw\" style=\"background:${swatch}\"></span>`\n   +`<span class=\"nm ${has?'':'dim'}\">${name}</span><span class=\"tr\"><i class=\"${has&&remain<20?'low':''}\" style=\"width:${has?remain:0}%\"></i></span>`\n   +`<b>${has?remain+'%':'\u2014'}</b></div>`; }\nh+='</div>';\nconst hum=states[variables.humidity], tmp=states[variables.temp];\nif(hum||tmp) h+=`<div class=\"fn\"><span>Humidity ${hum?Math.round(hum.state)+'%':'\u2014'}</span><span>${tmp?Math.round(tmp.state)+'\u00b0C':''}</span></div>`;\nreturn h;\n]]]"
+    },
+    "styles": {
+      "card": [
+        {
+          "padding": "16px 18px 14px"
+        }
+      ],
+      "grid": [
+        {
+          "grid-template-areas": "\"i n\" \"body body\""
+        },
+        {
+          "grid-template-columns": "34px 1fr"
+        },
+        {
+          "align-items": "center"
+        },
+        {
+          "column-gap": "10px"
+        }
+      ],
+      "icon": [
+        {
+          "width": "26px"
+        },
+        {
+          "color": "var(--deco-gold-hi)"
+        }
+      ],
+      "name": [
+        {
+          "font-family": "var(--deco-display)"
+        },
+        {
+          "font-size": "22px"
+        },
+        {
+          "letter-spacing": ".05em"
+        },
+        {
+          "justify-self": "start"
+        },
+        {
+          "color": "var(--deco-ivory)"
+        }
+      ],
+      "custom_fields": {
+        "body": [
+          {
+            "margin-top": "6px"
+          }
+        ]
+      }
+    },
+    "variables": {
+      "trays": []
+    }
+  },
   "deco_marker": {
     "card_mod": {
       "class": "deco-plain"

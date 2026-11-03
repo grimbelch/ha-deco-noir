@@ -275,6 +275,103 @@ return h+'</div>';
         "variables": {"rows": []},
     },
 
+    # ------------------------------------------------------------ current print (preview box)
+    "deco_print": {
+        "show_icon": False, "show_name": False, "show_state": False,
+        "tap_action": {"action": "more-info"},
+        "triggers_update": "all",
+        "extra_styles": """
+.pr{width:100%}
+.pr .pic{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:rgba(0,0,0,.38);border:1px solid var(--deco-hair)}
+.pr .pic img{max-width:100%;max-height:100%;object-fit:contain;filter:var(--deco-img-filter,none)}
+.pr .pic .none{font:400 11px/1 var(--deco-label);letter-spacing:.24em;color:rgba(237,230,214,.5)}
+.pr .badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;
+  padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi);background:rgba(0,0,0,.6)}
+.pr .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)}
+.pr .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}
+.pr .badge.run{border-color:var(--deco-gold-hi);color:var(--deco-ivory)}
+.pr .job{font:300 20px/1.2 var(--deco-display);color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pr .bar{height:12px;border:1px solid var(--deco-hair);padding:2px}
+.pr .bar i{display:block;height:100%;background:var(--deco-gold)}
+.pr .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.pr .meta span{display:flex;flex-direction:column;gap:6px}
+.pr .meta em{font:400 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.pr .meta b{font:300 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;white-space:nowrap}
+""",
+        "custom_fields": {
+            "body": """[[[
+const v=variables, st=entity?entity.state:'unavailable';
+const val=id=>{const s=states[id];return s&&!['unknown','unavailable'].includes(s.state)?s.state:null;};
+const lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[st]||st;
+const cls=st==='finish'?'ok':(st==='failed'||st==='offline'?'bad':(st==='running'?'run':''));
+const img=states[v.image], src=img&&img.attributes.entity_picture;
+const n=Number(val(v.progress)), p=Number.isFinite(n)?Math.max(0,Math.min(100,n)):0;
+const hrs=Number(val(v.remaining)); let left='\u2014';
+if(Number.isFinite(hrs)){ const m=Math.round(hrs*60); left=m<=0?'Done':(m>=60?Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m':m+'m'); }
+const cl=val(v.layer), tl=val(v.layers), w=val(v.weight);
+return `<div class="pr"><div class="pic">${src?`<img src="${src}" alt="">`:'<span class="none">NO PREVIEW</span>'}<span class="badge ${cls}">${lab}</span></div>`
+ +`<div class="job">${val(v.job)||'No active job'}</div><div class="bar"><i style="width:${p}%"></i></div>`
+ +`<div class="meta"><span><em>Progress</em><b>${p}%</b></span><span><em>Time left</em><b>${left}</b></span>`
+ +`<span><em>Layer</em><b>${cl&&tl?cl+'/'+tl:'\u2014'}</b></span><span><em>Filament</em><b>${w?Math.round(w)+' g':'\u2014'}</b></span></div></div>`;
+]]]"""
+        },
+        "styles": {
+            "card": ["padding: 16px 18px 16px"],
+            "grid": ["grid-template-areas: '\"body\"'", "grid-template-columns: 1fr"],
+            "custom_fields": {"body": ["width: 100%"]},
+        },
+        "variables": {},
+    },
+
+    # ------------------------------------------------------------ filament bar chart
+    "deco_bars": {
+        "show_icon": True, "show_state": False,
+        "tap_action": {"action": "none"},
+        "triggers_update": "all",
+        "extra_styles": """
+.fb{width:100%}
+.fr{display:grid;grid-template-columns:46px 14px minmax(0,1.7fr) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--deco-hair-faint)}
+.fr:last-child{border-bottom:0}
+.fr .sl{font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.fr .sw{width:14px;height:14px;border:1px solid var(--deco-hair)}
+.fr .nm{font:300 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr .nm.dim{color:rgba(237,230,214,.45)}
+.fr .tr{height:16px;border:1px solid var(--deco-hair);padding:2px}
+.fr .tr i{display:block;height:100%;background:var(--deco-gold)}
+.fr .tr i.low{background:var(--deco-garnet)}
+.fr b{font:300 16px/1 var(--deco-num);font-weight:300;color:var(--deco-ivory);text-align:right}
+.fn{display:flex;justify-content:space-between;margin-top:8px;font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+""",
+        "custom_fields": {
+            "body": """[[[
+const trays=variables.trays||[]; let h='<div class="fb">';
+for(const t of trays){ const s=states[t.entity]; if(!s) continue; const a=s.attributes||{};
+  const empty=a.empty===true||s.state==='Empty', unknown=a.unknown===true||s.state==='?';
+  const remain=Number(a.remain), has=!empty&&!unknown&&Number.isFinite(remain)&&remain>=0;
+  const col=String(a.color||''), swatch=(!empty&&!unknown&&col.length>=7&&col.slice(7)!=='00')?col.slice(0,7):'transparent';
+  const name=empty?'Empty':(unknown?'Unknown':String(a.name||s.state).replace(/^Bambu\s+/,''));
+  h+=`<div class="fr"><span class="sl">${t.label}</span><span class="sw" style="background:${swatch}"></span>`
+   +`<span class="nm ${has?'':'dim'}">${name}</span><span class="tr"><i class="${has&&remain<20?'low':''}" style="width:${has?remain:0}%"></i></span>`
+   +`<b>${has?remain+'%':'\u2014'}</b></div>`; }
+h+='</div>';
+const hum=states[variables.humidity], tmp=states[variables.temp];
+if(hum||tmp) h+=`<div class="fn"><span>Humidity ${hum?Math.round(hum.state)+'%':'\u2014'}</span><span>${tmp?Math.round(tmp.state)+'\u00b0C':''}</span></div>`;
+return h;
+]]]"""
+        },
+        "styles": {
+            "card": ["padding: 16px 18px 14px"],
+            "grid": ["grid-template-areas: '\"i n\" \"body body\"'", "grid-template-columns: 34px 1fr",
+                     "align-items: center", "column-gap: 10px"],
+            "icon": ["width: 26px", "color: var(--deco-gold-hi)"],
+            "name": ["font-family: var(--deco-display)", "font-size: 22px", "letter-spacing: .05em", "justify-self: start",
+                     "color: var(--deco-ivory)"],
+            "custom_fields": {"body": ["margin-top: 6px"]},
+        },
+        "variables": {"trays": []},
+    },
+
     # ------------------------------------------------------------ floor plan marker
     "deco_marker": {
         "card_mod": PLAIN,
