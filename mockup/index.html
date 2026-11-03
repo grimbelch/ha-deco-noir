@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deco Noir: Home Assistant dashboard mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Limelight&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,200,0..1,0&display=block" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; }
+
+  /* ---------- Deco Noir tokens ---------- */
+  .deco {
+    --ink: #0B0B0E;
+    --midnight: #11131C;
+    --ivory: #EDE6D6;
+    --ivory-dim: rgba(237, 230, 214, .58);
+    --ivory-faint: rgba(237, 230, 214, .32);
+    --gold: #C9A44C;            /* brass: lines, icons */
+    --gold-hi: #E6CF9A;         /* champagne: highlights, text accents */
+    --gold-rgb: 201, 164, 76;
+    --glass: rgba(14, 14, 20, .55);
+    --glass-hi: rgba(26, 24, 30, .62);
+    --hair: rgba(var(--gold-rgb), .38);
+    --hair-faint: rgba(var(--gold-rgb), .16);
+    --emerald: #3E9C82;
+    --sapphire: #5A79C8;
+    --garnet: #B4404F;
+    --display: 'Poiret One', 'Josefin Sans', sans-serif;
+    --label: 'Josefin Sans', sans-serif;
+    --num: 'Jost', 'Josefin Sans', sans-serif;
+    --blur: 18px;
+  }
+  .deco[data-metal="platinum"] {
+    --gold: #A7AFBA; --gold-hi: #E4E8EE; --gold-rgb: 167, 175, 186;
+  }
+  .deco[data-type="limelight"] { --display: 'Limelight', 'Josefin Sans', serif; }
+
+  /* ---------- stage ---------- */
+  .deco {
+    position: relative; overflow: hidden; isolation: isolate;
+    border-radius: var(--radius, 14px);
+    padding: 16px;
+    background:
+      radial-gradient(1200px 520px at 50% -8%, #1d1a14 0%, transparent 60%),
+      radial-gradient(700px 420px at 92% 78%, rgba(62,156,130,.16), transparent 70%),
+      radial-gradient(640px 420px at 4% 62%, rgba(90,121,200,.14), transparent 70%),
+      linear-gradient(180deg, var(--midnight), var(--ink) 55%);
+    color: var(--ivory);
+    font-family: var(--label);
+    font-weight: 300;
+  }
+  .deco .backdrop { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .deco .backdrop svg { width: 100%; height: 100%; display: block; }
+
+  .msym { font-family: 'Material Symbols Outlined'; font-weight: 200; font-style: normal;
+    font-size: 22px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block;
+    white-space: nowrap; font-variation-settings: 'FILL' 0, 'wght' 200, 'opsz' 24; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- switcher (mockup only) ---------- */
+  .switcher { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 12px;
+    font: 400 10px/1 var(--label); letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); }
+  .switcher .grp { display: flex; align-items: center; gap: 6px; }
+  .switcher button { all: unset; cursor: pointer; padding: 6px 10px; border: 1px solid var(--hair-faint);
+    color: var(--ivory-dim); letter-spacing: .18em; }
+  .switcher button[aria-pressed="true"] { border-color: var(--gold); color: var(--gold-hi); background: rgba(var(--gold-rgb), .08); }
+
+  /* ---------- glass card with deco frame ---------- */
+  .card {
+    position: relative; padding: 18px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(120%);
+    backdrop-filter: blur(var(--blur)) saturate(120%);
+    border: 1px solid var(--hair);
+    box-shadow: inset 0 0 0 4px rgba(11,11,14,.0), inset 0 0 0 5px var(--hair-faint), 0 18px 40px rgba(0,0,0,.45);
+  }
+  /* stepped corner brackets */
+  .card::before, .card::after {
+    content: ""; position: absolute; width: 18px; height: 18px; pointer-events: none;
+    border-color: var(--gold); border-style: solid; opacity: .9;
+  }
+  .card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px;
+    box-shadow: 4px 4px 0 -2px transparent; }
+  .card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+  .step::before { content: ""; position: absolute; top: 5px; left: 5px; width: 8px; height: 8px;
+    border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .step::after { content: ""; position: absolute; bottom: 5px; right: 5px; width: 8px; height: 8px;
+    border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+  /* ---------- lobby header ---------- */
+  .lobby { display: grid; grid-template-columns: 1fr auto; gap: 8px 18px; align-items: end; padding: 22px 22px 18px; }
+  .lobby .clock { font: 200 64px/0.9 var(--num); letter-spacing: .02em; color: var(--ivory); }
+  .lobby .clock small { font: 300 16px var(--label); letter-spacing: .3em; color: var(--gold-hi); margin-left: 6px; }
+  .lobby .date { font: 400 11px/1 var(--label); letter-spacing: .38em; text-transform: uppercase; color: var(--gold-hi); margin-top: 10px; }
+  .lobby .greet { font: 400 26px/1.1 var(--display); color: var(--ivory); margin-top: 8px; }
+  .lobby .wx { text-align: right; }
+  .lobby .wx .msym { font-size: 44px; color: var(--gold-hi); }
+  .lobby .wx .t { font: 200 40px/1 var(--num); }
+  .lobby .wx .d { font: 400 10px/1.5 var(--label); letter-spacing: .26em; text-transform: uppercase; color: var(--ivory-dim); }
+  .chips { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;
+    padding-top: 14px; border-top: 1px solid var(--hair-faint); }
+  .chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px;
+    border: 1px solid var(--hair-faint); background: rgba(255,255,255,.02);
+    font: 400 10px/1 var(--label); letter-spacing: .2em; text-transform: uppercase; color: var(--ivory-dim); }
+  .chip .msym { font-size: 16px; color: var(--gold); }
+  .chip b { font-weight: 600; color: var(--ivory); letter-spacing: .14em; }
+  .chip.ok .msym { color: var(--emerald); }
+
+  /* ---------- tabs ---------- */
+  .tabs { display: flex; justify-content: center; gap: 26px; margin: 18px 0 6px;
+    font: 400 11px/1 var(--label); letter-spacing: .34em; text-transform: uppercase; color: var(--ivory-faint); }
+  .tabs span { padding-bottom: 8px; position: relative; }
+  .tabs .on { color: var(--gold-hi); }
+  .tabs .on::after { content: ""; position: absolute; left: 50%; bottom: -2px; width: 7px; height: 7px;
+    transform: translateX(-50%) rotate(45deg); background: var(--gold); }
+
+  /* ---------- marquee heading ---------- */
+  .marquee { display: flex; align-items: center; gap: 12px; margin: 22px 2px 12px; color: var(--gold-hi); }
+  .marquee::before, .marquee::after { content: ""; flex: 1; height: 5px;
+    border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair-faint); }
+  .marquee h2 { margin: 0; font: 400 20px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+  .marquee h2::before, .marquee h2::after { content: "◆"; font-size: 8px; vertical-align: middle; color: var(--gold); margin: 0 10px; }
+
+  /* ---------- scenes ---------- */
+  .scenes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .scene { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px 12px; cursor: pointer;
+    text-align: center; font: 400 10px/1.2 var(--label); letter-spacing: .2em; text-transform: uppercase; color: var(--ivory-dim); }
+  .scene .msym { font-size: 26px; color: var(--gold-hi); }
+  .scene.card::before, .scene.card::after { width: 10px; height: 10px; }
+
+  /* ---------- grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .span2 { grid-column: 1 / -1; }
+
+  /* ---------- room banner ---------- */
+  .room { padding: 0; overflow: hidden; }
+  .room .banner { position: relative; height: 92px; display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 0 18px 12px; border-bottom: 1px solid var(--hair-faint); overflow: hidden; }
+  .room .banner svg.arch { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
+  .room .banner h3 { position: relative; margin: 0; font: 400 26px/1 var(--display); letter-spacing: .06em; }
+  .room .banner .meta { position: relative; text-align: right; font: 400 10px/1.6 var(--label); letter-spacing: .22em;
+    text-transform: uppercase; color: var(--ivory-dim); }
+  .room .banner .meta b { color: var(--gold-hi); font-weight: 600; }
+  .room .body { padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .room.accent-emerald { --accent: var(--emerald); }
+  .room.accent-sapphire { --accent: var(--sapphire); }
+  .room.accent-gold { --accent: var(--gold); }
+  .room .banner::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: .8; }
+
+  /* ---------- tiles ---------- */
+  .tile { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 12px 12px 11px;
+    border: 1px solid var(--hair-faint); background: rgba(255,255,255,.015); cursor: pointer; min-height: 74px; }
+  .tile .ic { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--hair-faint);
+    transform: rotate(45deg); }
+  .tile .ic .msym { transform: rotate(-45deg); font-size: 19px; color: var(--ivory-faint); }
+  .tile .nm { font: 400 11px/1.2 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--ivory-dim); }
+  .tile .st { font: 300 12px/1 var(--num); color: var(--ivory-faint); letter-spacing: .04em; }
+  .tile.on { border-color: rgba(var(--gold-rgb), .55);
+    background: radial-gradient(120% 90% at 20% 0%, rgba(var(--gold-rgb), .22), rgba(var(--gold-rgb), .04) 60%, transparent);
+    box-shadow: 0 0 22px rgba(var(--gold-rgb), .18), inset 0 0 0 1px rgba(var(--gold-rgb), .12); }
+  .tile.on .ic { border-color: var(--gold); background: rgba(var(--gold-rgb), .14); box-shadow: 0 0 14px rgba(var(--gold-rgb), .35); }
+  .tile.on .ic .msym { color: var(--gold-hi); font-variation-settings: 'FILL' 1, 'wght' 200, 'opsz' 24; }
+  .tile.on .nm { color: var(--ivory); }
+  .tile.on .st { color: var(--gold-hi); }
+  .tile .bar { position: absolute; left: 12px; right: 12px; bottom: 6px; height: 2px; background: var(--hair-faint); }
+  .tile .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-hi)); }
+
+  /* ---------- media ---------- */
+  .media { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: center; }
+  .art { width: 96px; height: 96px; position: relative; border: 1px solid var(--hair);
+    background:
+      repeating-conic-gradient(from 0deg at 50% 110%, rgba(var(--gold-rgb), .55) 0 3deg, transparent 3deg 12deg),
+      linear-gradient(160deg, #2a2233, #120f17); }
+  .art::after { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(var(--gold-rgb), .35); }
+  .kicker { font: 400 10px/1 var(--label); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .title { font: 400 22px/1.15 var(--display); margin: 8px 0 2px; }
+  .sub { font: 300 13px/1.3 var(--label); color: var(--ivory-dim); letter-spacing: .04em; }
+  .controls { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
+  .controls .msym { font-size: 24px; color: var(--ivory-dim); }
+  .controls .play { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--gold);
+    transform: rotate(45deg); background: rgba(var(--gold-rgb), .12); }
+  .controls .play .msym { transform: rotate(-45deg); color: var(--gold-hi); font-variation-settings: 'FILL' 1, 'wght' 200, 'opsz' 24; }
+  .progress { margin-top: 12px; height: 2px; background: var(--hair-faint); position: relative; }
+  .progress i { position: absolute; left: 0; top: 0; bottom: 0; width: 38%; background: var(--gold); }
+  .progress i::after { content: ""; position: absolute; right: -4px; top: -3px; width: 8px; height: 8px; background: var(--gold-hi); transform: rotate(45deg); }
+
+  /* ---------- printer + stats ---------- */
+  .row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--hair-faint); }
+  .row:last-child { border-bottom: 0; }
+  .row span { font: 400 10px/1 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--ivory-dim); }
+  .row b { font: 300 18px/1 var(--num); color: var(--ivory); }
+  .row b em { font-style: normal; font-size: 12px; color: var(--gold-hi); margin-left: 2px; }
+  .head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .head .msym { font-size: 26px; color: var(--gold-hi); }
+  .head h4 { margin: 0; font: 400 22px/1 var(--display); letter-spacing: .05em; }
+  .badge { margin-left: auto; font: 600 9px/1 var(--label); letter-spacing: .24em; text-transform: uppercase;
+    padding: 6px 9px; border: 1px solid var(--emerald); color: var(--emerald); }
+
+  .gauges { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .gauge { text-align: center; }
+  .gauge svg { width: 100%; max-width: 150px; height: auto; display: block; margin: 0 auto; }
+  .gauge .v { font: 200 30px/1 var(--num); margin-top: -26px; }
+  .gauge .v em { font-style: normal; font-size: 13px; color: var(--gold-hi); }
+  .gauge .l { font: 400 10px/1 var(--label); letter-spacing: .28em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 8px; }
+
+  .foot { margin-top: 22px; text-align: center; font: 400 9px/1 var(--label); letter-spacing: .4em; text-transform: uppercase; color: var(--ivory-faint); }
+  .foot::before, .foot::after { content: " ◆ "; color: var(--gold); }
+
+  .room:not(.span2) .tile .nm { font-size: 10px; letter-spacing: .08em; }
+  .room:not(.span2) .tile { padding: 10px 9px 11px; }
+  .room .banner .meta { text-shadow: 0 1px 8px rgba(0,0,0,.9); }
+
+  @media (max-width: 560px) {
+    .lobby .clock { font-size: 52px; }
+    .scenes { grid-template-columns: repeat(2, 1fr); }
+    .room .body { grid-template-columns: repeat(2, 1fr); }
+    .tabs { gap: 14px; letter-spacing: .22em; }
+  }
+</style>
+</head>
+<body>
+<div class="deco" id="deco" data-metal="champagne" data-type="poiret">
+
+  <!-- Backdrop: original sunburst + fan line art -->
+  <div class="backdrop" aria-hidden="true">
+    <svg viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMin slice">
+      <defs>
+        <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style="stop-color:rgb(var(--gold-rgb))" stop-opacity=".32"/>
+          <stop offset="1" style="stop-color:rgb(var(--gold-rgb))" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g id="rays" stroke="url(#ray)" stroke-width="1.1"></g>
+      <g fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".14">
+        <circle cx="600" cy="-40" r="240"/><circle cx="600" cy="-40" r="250"/>
+        <circle cx="600" cy="-40" r="420"/><circle cx="600" cy="-40" r="560"/>
+      </g>
+      <g id="fans" fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".12" stroke-width="1"></g>
+      <g fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".10">
+        <path d="M60 0 V1600 M74 0 V1600 M1126 0 V1600 M1140 0 V1600"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="switcher">
+    <div class="grp">Metal
+      <button data-k="metal" data-v="champagne" aria-pressed="true">Champagne</button>
+      <button data-k="metal" data-v="platinum" aria-pressed="false">Platinum</button>
+    </div>
+    <div class="grp">Headings
+      <button data-k="type" data-v="poiret" aria-pressed="true">Poiret One</button>
+      <button data-k="type" data-v="limelight" aria-pressed="false">Limelight</button>
+    </div>
+  </div>
+
+  <!-- Grand Lobby -->
+  <section class="card lobby step">
+    <div>
+      <div class="clock">7:42<small>PM</small></div>
+      <div class="date">Monday · November 2</div>
+      <div class="greet">Good evening, Sean</div>
+    </div>
+    <div class="wx">
+      <span class="msym">partly_cloudy_night</span>
+      <div class="t">54°</div>
+      <div class="d">Cloudy · H 61° L 47°</div>
+    </div>
+    <div class="chips">
+      <span class="chip ok"><span class="msym">bolt</span>Power <b>On mains · 99%</b></span>
+      <span class="chip ok"><span class="msym">shield</span>Ad blocking <b>On</b></span>
+      <span class="chip"><span class="msym">download</span>Downloads <b>Idle</b></span>
+      <span class="chip ok"><span class="msym">deployed_code</span>Icarus <b>Finished</b></span>
+    </div>
+  </section>
+
+  <nav class="tabs"><span class="on">Home</span><span>Media</span><span>Yard</span><span>Alexandria</span></nav>
+
+  <div class="marquee"><h2>Scenes</h2></div>
+  <div class="scenes">
+    <div class="card scene"><span class="msym">chair</span>Living room on</div>
+    <div class="card scene"><span class="msym">movie</span>Movie mode</div>
+    <div class="card scene"><span class="msym">bedtime</span>Good night</div>
+    <div class="card scene"><span class="msym">light_off</span>All lamps off</div>
+  </div>
+
+  <div class="marquee"><h2>Rooms</h2></div>
+  <div class="grid">
+    <section class="card room accent-gold span2">
+      <div class="banner">
+        <svg class="arch" viewBox="0 0 600 92" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <g fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".5">
+            <path d="M420 92 V40 h20 V28 h20 V16 h40 v12 h20 v12 h20 v52"/>
+            <path d="M440 92 V48 h20 V36 h80 v12 h20 v44"/>
+            <path d="M470 92 V60 a30 30 0 0 1 60 0 V92"/>
+          </g>
+        </svg>
+        <h3>Living Room</h3>
+        <div class="meta"><b>3 of 5</b> lamps on<br>Billie · idle</div>
+      </div>
+      <div class="body">
+        <div class="tile on"><div class="ic"><span class="msym">table_lamp</span></div><div><div class="nm">Couch</div><div class="st">On</div></div></div>
+        <div class="tile on"><div class="ic"><span class="msym">table_lamp</span></div><div><div class="nm">Chez Lounge</div><div class="st">On</div></div></div>
+        <div class="tile on"><div class="ic"><span class="msym">floor_lamp</span></div><div><div class="nm">Pappasan</div><div class="st">On</div></div></div>
+        <div class="tile"><div class="ic"><span class="msym">table_lamp</span></div><div><div class="nm">Window</div><div class="st">Off</div></div></div>
+        <div class="tile"><div class="ic"><span class="msym">potted_plant</span></div><div><div class="nm">Grow lamp</div><div class="st">Off · on at 7 AM</div></div></div>
+        <div class="tile"><div class="ic"><span class="msym">speaker</span></div><div><div class="nm">Billie</div><div class="st">Idle · 35%</div></div><div class="bar"><i style="width:35%"></i></div></div>
+      </div>
+    </section>
+
+    <section class="card room accent-sapphire">
+      <div class="banner">
+        <svg class="arch" viewBox="0 0 300 92" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+          <g fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".5">
+            <path d="M200 92 V30 a40 40 0 0 1 80 0 V92"/><path d="M212 92 V34 a28 28 0 0 1 56 0 V92"/>
+            <path d="M240 6 V92"/><path d="M212 50 H268 M212 68 H268"/>
+          </g>
+        </svg>
+        <h3>Library</h3>
+        <div class="meta"><b>All off</b><br>Speaker · idle</div>
+      </div>
+      <div class="body">
+        <div class="tile"><div class="ic"><span class="msym">emoji_objects</span></div><div><div class="nm">Torch front</div><div class="st">Off</div></div></div>
+        <div class="tile"><div class="ic"><span class="msym">emoji_objects</span></div><div><div class="nm">Torch back</div><div class="st">Off</div></div></div>
+        <div class="tile"><div class="ic"><span class="msym">fireplace</span></div><div><div class="nm">Fireplace</div><div class="st">Off</div></div></div>
+      </div>
+    </section>
+
+    <section class="card room accent-emerald">
+      <div class="banner">
+        <svg class="arch" viewBox="0 0 300 92" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+          <g fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-opacity=".5">
+            <path d="M190 92 L240 20 L290 92"/><path d="M205 92 L240 42 L275 92"/>
+            <path d="M240 20 V8 M226 14 l14 -6 14 6"/><path d="M160 92 h140"/>
+          </g>
+        </svg>
+        <h3>Outside</h3>
+        <div class="meta"><b>Lights on</b> until 10 PM<br>Rachio · next 5:30 AM</div>
+      </div>
+      <div class="body">
+        <div class="tile on"><div class="ic"><span class="msym">wb_twilight</span></div><div><div class="nm">Outdoor 1</div><div class="st">80%</div></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div class="tile on"><div class="ic"><span class="msym">wb_twilight</span></div><div><div class="nm">Outdoor 2</div><div class="st">80%</div></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div class="tile"><div class="ic"><span class="msym">rainy</span></div><div><div class="nm">Rain delay</div><div class="st">Off</div></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="grid" style="margin-top:0">
+    <div>
+      <div class="marquee"><h2>Now Playing</h2></div>
+      <section class="card media">
+        <div class="art"></div>
+        <div>
+          <div class="kicker">Spotify · on AURA</div>
+          <div class="title">Cheek to Cheek</div>
+          <div class="sub">Ella Fitzgerald &amp; Louis Armstrong</div>
+          <div class="controls">
+            <span class="msym">skip_previous</span>
+            <span class="play"><span class="msym">pause</span></span>
+            <span class="msym">skip_next</span>
+            <span class="msym" style="margin-left:auto">cast_connected</span>
+          </div>
+          <div class="progress"><i></i></div>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <div class="marquee"><h2>Workshop</h2></div>
+      <section class="card">
+        <div class="head"><span class="msym">deployed_code</span><h4>Icarus · H2S</h4><span class="badge">Finished</span></div>
+        <div class="row"><span>Last job</span><b style="font-size:14px">SD_ROOM-G_ASSET-A</b></div>
+        <div class="row"><span>Progress</span><b>100<em>%</em></b></div>
+        <div class="row"><span>Nozzle / Bed</span><b>23<em>°</em> / 23<em>°</em></b></div>
+        <div class="row"><span>AMS humidity</span><b>38<em>%</em></b></div>
+      </section>
+    </div>
+
+    <div class="span2">
+      <div class="marquee"><h2>Alexandria</h2></div>
+      <section class="card">
+        <div class="gauges">
+          <div class="gauge">
+            <svg viewBox="0 0 160 96" aria-hidden="true">
+              <path d="M16 86 A64 64 0 0 1 144 86" fill="none" style="stroke:rgba(var(--gold-rgb),.16)" stroke-width="6"/>
+              <path d="M16 86 A64 64 0 0 1 144 86" fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-width="6" stroke-dasharray="199 201"/>
+              <path d="M8 86 A72 72 0 0 1 152 86" fill="none" style="stroke:rgba(var(--gold-rgb),.35)" stroke-width="1"/>
+              <g style="stroke:rgba(var(--gold-rgb),.5)"><path d="M80 10 v8"/><path d="M24 30 l6 6"/><path d="M136 30 l-6 6"/></g>
+            </svg>
+            <div class="v">99<em>%</em></div><div class="l">UPS battery</div>
+          </div>
+          <div class="gauge">
+            <svg viewBox="0 0 160 96" aria-hidden="true">
+              <path d="M16 86 A64 64 0 0 1 144 86" fill="none" style="stroke:rgba(var(--gold-rgb),.16)" stroke-width="6"/>
+              <path d="M16 86 A64 64 0 0 1 144 86" fill="none" style="stroke:rgb(var(--gold-rgb))" stroke-width="6" stroke-dasharray="54 201"/>
+              <path d="M8 86 A72 72 0 0 1 152 86" fill="none" style="stroke:rgba(var(--gold-rgb),.35)" stroke-width="1"/>
+              <g style="stroke:rgba(var(--gold-rgb),.5)"><path d="M80 10 v8"/><path d="M24 30 l6 6"/><path d="M136 30 l-6 6"/></g>
+            </svg>
+            <div class="v">27<em>%</em></div><div class="l">Load · 22 min runtime</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="foot">Deco Noir · Home Assistant</div>
+</div>
+
+<script>
+  // sunburst rays + fan motifs (generated so the SVG stays tiny)
+  (function () {
+    var ns = "http://www.w3.org/2000/svg", rays = document.getElementById("rays"), fans = document.getElementById("fans");
+    for (var i = 0; i <= 36; i++) {
+      var a = Math.PI * (0.06 + 0.88 * i / 36), l = document.createElementNS(ns, "line");
+      l.setAttribute("x1", 600 + Math.cos(a) * 250); l.setAttribute("y1", -40 + Math.sin(a) * 250);
+      l.setAttribute("x2", 600 + Math.cos(a) * 1500); l.setAttribute("y2", -40 + Math.sin(a) * 1500);
+      rays.appendChild(l);
+    }
+    [[150, 1600], [1050, 1600], [600, 1600]].forEach(function (c) {
+      for (var r = 60; r <= 300; r += 40) {
+        var p = document.createElementNS(ns, "path");
+        p.setAttribute("d", "M" + (c[0] - r) + " " + c[1] + " A" + r + " " + r + " 0 0 1 " + (c[0] + r) + " " + c[1]);
+        fans.appendChild(p);
+      }
+      for (var k = 1; k < 8; k++) {
+        var t = Math.PI * k / 8, q = document.createElementNS(ns, "line");
+        q.setAttribute("x1", c[0]); q.setAttribute("y1", c[1]);
+        q.setAttribute("x2", c[0] - Math.cos(t) * 300); q.setAttribute("y2", c[1] - Math.sin(t) * 300);
+        fans.appendChild(q);
+      }
+    });
+  })();
+  // mockup switches
+  document.querySelectorAll(".switcher button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var deco = document.getElementById("deco");
+      deco.dataset[b.dataset.k] = b.dataset.v;
+      document.querySelectorAll('.switcher button[data-k="' + b.dataset.k + '"]').forEach(function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+    });
+  });
+</script>
+</body>
+</html>
