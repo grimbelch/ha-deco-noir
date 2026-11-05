@@ -133,6 +133,13 @@ class Omega7Client(private val server: Omega7Server) {
         response.body.bytes()
     }
 
+    /** A recording of someone speaking to it, as WAV: it transcribes it and answers as if heard */
+    suspend fun talk(wav: ByteArray) {
+        call(Request.Builder().url("${server.url}/api/upload_audio").post(wav.toRequestBody("audio/wav".toMediaType())).build()) {
+            checkOk(it.code)
+        }
+    }
+
     /** As if said to it: queued like a spoken request */
     suspend fun command(text: String) = post("/api/command", JSONObject().put("command", text))
 

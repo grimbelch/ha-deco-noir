@@ -1,6 +1,7 @@
 package com.evofactory.homeboard
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -24,6 +25,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.SurfaceDefaults
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -50,6 +52,9 @@ class MainActivity : ComponentActivity() {
     private var omega7 by mutableStateOf(Omega7Server())
     private var omega7Open by mutableStateOf(false)
     private var omega7Voice by mutableStateOf(true)
+
+    /** The remote's voice button on the Omega-7 page: true pressed, false released */
+    private val voiceKey = MutableSharedFlow<Boolean>(extraBufferCapacity = 4)
 
     // Home override's crash guard: the launcher counts as started once it has stayed up a moment
     private val confirmStarted = Runnable {
@@ -135,6 +140,7 @@ class MainActivity : ComponentActivity() {
                             MarqueeTab.Omega7 -> Omega7Page(
                                 server = omega7,
                                 voiceOn = omega7Voice,
+                                voiceKey = voiceKey,
                                 onVoiceChange = {
                                     omega7Voice = it
                                     prefs.omega7Voice = it
@@ -278,6 +284,21 @@ class MainActivity : ComponentActivity() {
         showFreeMemory = prefs.showFreeMemory
     }
 
+    /**
+     * The voice button, on the Omega-7 page, talks to Omega-7 instead of Alexa: if Fire OS lets it
+     * through at all. Every key that isn't plain navigation is logged, to see what the remote sends.
+     */
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (event.keyCode !in NavigationKeys && event.repeatCount == 0) {
+            AppLog.i("Keys", "Key ${KeyEvent.keyCodeToString(event.keyCode)} ${if (event.action == KeyEvent.ACTION_DOWN) "down" else "up"}")
+        }
+        if (event.keyCode in VoiceKeys && tab == MarqueeTab.Omega7) {
+            if (event.repeatCount == 0) voiceKey.tryEmit(event.action == KeyEvent.ACTION_DOWN)
+            return true
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
     override fun onResume() {
         super.onResume()
         // The home override may have switched itself off meanwhile
@@ -296,6 +317,12 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
+        private val VoiceKeys = setOf(KeyEvent.KEYCODE_SEARCH, KeyEvent.KEYCODE_VOICE_ASSIST, KeyEvent.KEYCODE_ASSIST)
+        private val NavigationKeys = setOf(
+            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
+            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
+        )
+
         /** Started properly and still alive; a crash takes the whole process, so this resets */
         @Volatile
         var running = false

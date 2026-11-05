@@ -5,6 +5,10 @@
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-feature android:name="android.software.leanback" android:required="true" />
 
+    <!-- Talking to Omega-7 through the remote's microphone (Omega-7 page) -->
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <!-- Ping utility, camera, Home Assistant -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Camera: checks the TV has an IP address before connecting, e.g. after standby -->
