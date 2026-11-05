@@ -16,7 +16,7 @@ android {
     defaultConfig {
         // Its own id: installs next to stock HomeBoard rather than over it
         applicationId = "com.grimbelch.marquee"
-        minSdk = 28 // Android 9
+        minSdk = 25 // Android 7.1: Fire OS 6 (Fire TV Stick 4K, 2018)
         targetSdk = 36
         versionCode = 1
         versionName = "1.0-deco"
@@ -45,6 +45,11 @@ android {
         }
     }
 
+    // java.time on Android 7.1 (Fire OS 6)
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -66,5 +71,6 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.11.1")
     implementation("com.squareup.okhttp3:okhttp:5.5.1")
     implementation("org.conscrypt:conscrypt-android:2.8.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
     testImplementation("junit:junit:4.13.2")
 }

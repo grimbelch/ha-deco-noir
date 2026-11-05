@@ -1,5 +1,6 @@
 package com.evofactory.homeboard
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -104,7 +105,8 @@ class MainActivity : ComponentActivity() {
         frigate = prefs.frigate
         hiddenWatching = prefs.hiddenWatching
         // Android stops asking by itself after it's been refused. Answering comes back to onResume.
-        if (!canReadWatchNext()) requestPermissions(arrayOf(READ_TV_LISTINGS), 0)
+        // Not before Android 8: there is no Watch Next to read (Fire OS 6), so no point asking
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !canReadWatchNext()) requestPermissions(arrayOf(READ_TV_LISTINGS), 0)
         setContent {
             MaterialTheme(colorScheme = AppColorScheme, shapes = DecoShapes, typography = DecoTypography) {
                 Surface(

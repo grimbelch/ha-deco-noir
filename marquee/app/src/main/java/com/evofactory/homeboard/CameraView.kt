@@ -426,11 +426,11 @@ private class CameraConnection(
         status.reset(Phase.Connecting)
         attempt()
         handler.post(tick)
-        connectivity.registerDefaultNetworkCallback(networkCallback, handler)
+        connectivity.registerDefaultNetworkCallbackOn(networkCallback, handler)
     }
 
     fun release() {
-        connectivity.unregisterNetworkCallback(networkCallback)
+        connectivity.unregisterNetworkCallbackCompat(networkCallback)
         // Kept for next time: shown dimmed while reconnecting, e.g. when the TV comes back on
         if (status.live) snapshots.save()
         snapshots.logCopies()

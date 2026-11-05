@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.tv.TvContract
 import android.net.Uri
+import android.os.Build
 import android.util.LruCache
 import android.widget.Toast
 import androidx.compose.animation.core.animateIntAsState
@@ -172,6 +173,8 @@ const val READ_TV_LISTINGS = "android.permission.READ_TV_LISTINGS"
  * whole tables are read and filtered here.
  */
 fun loadWatchNext(context: Context): List<WatchItem> {
+    // Watch Next and home screen channels arrived in Android 8 (and Fire TV never had them)
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return emptyList()
     val rows = mutableListOf<WatchItem>()
     try {
         readPrograms(context, TvContract.WatchNextPrograms.CONTENT_URI, rows)

@@ -149,7 +149,7 @@ private fun Context.wifiDetails(): List<Pair<String, String>> {
 }
 
 private fun gateway(link: LinkProperties): String? =
-    link.routes.filter { it.isDefaultRoute && it.hasGateway() }
+    link.routes.filter { it.isDefaultRoute && it.hasGatewayCompat() }
         .let { routes -> routes.firstOrNull { it.gateway is Inet4Address } ?: routes.firstOrNull() }
         ?.gateway?.hostAddress
 
@@ -180,8 +180,8 @@ fun NetworkButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
             override fun onCapabilitiesChanged(network: Network, capabilities: NetworkCapabilities) = refresh()
             override fun onLinkPropertiesChanged(network: Network, link: LinkProperties) = refresh()
         }
-        connectivity.registerDefaultNetworkCallback(callback, Handler(Looper.getMainLooper()))
-        onDispose { connectivity.unregisterNetworkCallback(callback) }
+        connectivity.registerDefaultNetworkCallbackOn(callback, Handler(Looper.getMainLooper()))
+        onDispose { connectivity.unregisterNetworkCallbackCompat(callback) }
     }
     val broken = status.problem != null
     val name = if (broken) "${status.kind.label}: no connection" else status.kind.label
