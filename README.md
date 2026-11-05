@@ -118,7 +118,7 @@ tablets, and stays editable from the dashboard UI.
    ```
 2. Copy `themes/deco_noir.yaml` to `/config/themes/` and `www/deco/sunburst.svg` to `/config/www/deco/`.
 3. Add a dashboard resource (type **CSS**):
-   `https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap`
+   `https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;500;600&family=Jost:wght@200;300;400;500&display=swap`
 4. Restart, then set `theme: deco_noir` on your views (or pick it in your profile).
 
 Regenerate the background with `python tools/make_sunburst.py`.

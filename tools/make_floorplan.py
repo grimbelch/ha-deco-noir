@@ -21,7 +21,7 @@ PALETTES = {
     "gold": dict(suffix="", glow_prefix="glow_", main="#C9A44C", hi="#E6CF9A", text="#EDE6D6", wall_rgb="201,164,76",
                  wall_fill=".035", out_fill=".02", wall_op=".55", glow_rgb=None, name_font="'Poiret One',sans-serif",
                  dim_font="'Josefin Sans',sans-serif", name_size="13px", name_sp="2.2px", sm_size="9.5px", sm_sp="1.6px",
-                 title_size="13px", title_sp="4px", dim_op=".42", italic="normal", out_op=".45", stairs_op=".45", fire_op=".7", dim_size="7.5px", dim_sp="1.4px",
+                 title_size="13px", title_sp="4px", dim_op=".42", italic="normal", out_op=".45", stairs_op=".45", fire_op=".7", dim_size="7.5px", dim_sp="1.4px", stroke=".5",
                  fonts=lambda: font_face("Poiret One", "poiret.woff2") + font_face("Josefin Sans", "josefin.woff2")),
     "cog": dict(suffix="_cog", glow_prefix="glow_cog_", main="#58e284", hi="#befacc", text="#befacc", wall_rgb="88,226,132",
                 wall_fill=".05", out_fill=".025", wall_op=".7", glow_rgb="110,255,165", name_font="'Cog Data','Courier New',monospace",
@@ -47,6 +47,11 @@ def ttf_face(name, file):
     return f"@font-face{{font-family:'{name}';src:url(data:font/ttf;base64,{b64}) format('truetype');}}"
 
 
+def stk(p):
+    """Poiret One is one very thin weight: a hairline stroke thickens it (gold palette only)."""
+    return f'stroke:{p["hi"]};stroke-width:{p["stroke"]};stroke-linejoin:round;' if p.get("stroke") else ""
+
+
 def style_css(p):
     g, hi, tx = p["main"], p["hi"], p["text"]
     return (p["fonts"]() + f"""
@@ -56,10 +61,10 @@ def style_css(p):
 .out{{fill:rgba({p["wall_rgb"]},{p["out_fill"]});stroke:{g};stroke-opacity:{p["out_op"]};stroke-width:1.1;stroke-dasharray:5 4}}
 .stairs{{stroke:{g};stroke-opacity:{p["stairs_op"]};stroke-width:1}}
 .fire{{fill:url(#hatch);stroke:{g};stroke-opacity:{p["fire_op"]};stroke-width:1}}
-.name{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};font-size:{p["name_size"]};letter-spacing:{p["name_sp"]};text-anchor:middle}}
+.name{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};{stk(p)}font-size:{p["name_size"]};letter-spacing:{p["name_sp"]};text-anchor:middle}}
 .name.sm{{font-size:{p["sm_size"]};letter-spacing:{p["sm_sp"]}}}
 .dim{{font-family:{p["dim_font"]};font-style:{p["italic"]};fill:{tx};fill-opacity:{p["dim_op"]};font-size:{p["dim_size"]};letter-spacing:{p["dim_sp"]};text-anchor:middle}}
-.title{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};font-size:{p["title_size"]};letter-spacing:{p["title_sp"]}}}
+.title{{font-family:{p["name_font"]};font-style:{p["italic"]};fill:{hi};{stk(p)}font-size:{p["title_size"]};letter-spacing:{p["title_sp"]}}}
 .orn{{fill:{g}}}
 """)
 

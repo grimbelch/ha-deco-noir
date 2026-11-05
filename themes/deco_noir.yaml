@@ -3,7 +3,7 @@
 #
 # Requires: card-mod (HACS) for the glass + ornament layer (card-mod-card below).
 # Fonts:    add a dashboard resource (type: css):
-#           https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;600&family=Jost:wght@200;300;400&display=swap
+#           https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;500;600&family=Jost:wght@200;300;400;500&display=swap
 # Art:      copy www/deco/sunburst.svg to /config/www/deco/sunburst.svg
 
 deco_noir: &deco_noir
@@ -25,6 +25,8 @@ deco_noir: &deco_noir
   deco-display: "'Poiret One', 'Josefin Sans', sans-serif"
   deco-label: "'Josefin Sans', Roboto, sans-serif"
   deco-num: "'Jost', 'Josefin Sans', Roboto, sans-serif"
+  # Poiret One only ships one very thin weight: a hairline outline thickens it without changing the letterforms
+  deco-stroke: "0.6px"
 
   # ---------- Typography ----------
   ha-font-family-body: "var(--deco-label)"
@@ -173,6 +175,7 @@ deco_noir: &deco_noir
       border-bottom: 3px double rgba(var(--deco-gold-rgb), .38);
       border-radius: 0;
       font-family: var(--deco-display);
+      -webkit-text-stroke: var(--deco-stroke, 0px) currentColor;
       letter-spacing: .14em;
       text-transform: uppercase;
     }
@@ -184,6 +187,7 @@ deco_noir: &deco_noir
     /* numbers in the geometric face */
     .state, .value, .info .state, .temp, .attribute {
       font-family: var(--deco-num);
+      font-weight: 400;
     }
 
   modes:

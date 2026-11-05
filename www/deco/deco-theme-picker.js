@@ -15,7 +15,7 @@ class DecoThemePicker extends HTMLElement {
       .wrap{position:relative;display:flex;justify-content:flex-end}
       button.trigger{display:inline-flex;align-items:center;gap:8px;padding:6px 11px 6px 9px;min-height:32px;cursor:pointer;
         border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);color:var(--deco-ivory);
-        font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+        font:500 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
       button.trigger:hover,button.trigger[aria-expanded=true]{border-color:var(--deco-hair);background:rgba(255,255,255,.05)}
       button:focus-visible{outline:1px solid var(--deco-gold-hi);outline-offset:2px}
       ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}
@@ -28,7 +28,7 @@ class DecoThemePicker extends HTMLElement {
       ul:focus,ul:focus-visible{outline:none}
       ul[hidden]{display:none}
       li{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;color:rgba(237,230,214,.75);
-        font:400 11px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+        font:500 11px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
       li:before{content:'\\25C6';font-size:7px;color:transparent}
       li[aria-selected=true]{color:var(--deco-gold-hi)}li[aria-selected=true]:before{color:var(--deco-gold)}
       li.active,li:hover{background:rgba(201,164,76,.12);color:var(--deco-ivory)}

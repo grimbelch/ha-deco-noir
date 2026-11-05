@@ -10,10 +10,10 @@ PLAIN = {"class": "deco-plain"}
 EXTRA = """
 .mq{display:flex;align-items:center;gap:12px;width:100%}
 .mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}
-.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}
+.mq .t{font-family:var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}
 .mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);
-  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}
+  font:500 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:rgba(237,230,214,.6);white-space:nowrap}
 .chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}
 .chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}
 .chip.ok ha-icon{color:var(--deco-emerald)}
@@ -75,10 +75,10 @@ TEMPLATES = {
             "img_cell": ["width: 32px", "height: 32px", "margin-left: 6px", "transform: rotate(45deg)",
                          "border: 1px solid var(--deco-hair-faint)", "background: rgba(255,255,255,.015)"],
             "icon": ["transform: rotate(-45deg)", "width: 18px", "color: rgba(237,230,214,.45)"],
-            "name": ["font-family: var(--deco-label)", "font-size: 11px", "letter-spacing: .1em", "text-transform: uppercase",
+            "name": ["font-family: var(--deco-label)", "font-weight: 500", "font-size: 11px", "letter-spacing: .1em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.6)", "justify-self: start", "margin-top: 8px", "white-space: nowrap",
                      "overflow: hidden", "text-overflow: ellipsis", "max-width: 100%"],
-            "state": ["font-family: var(--deco-num)", "font-size: 12px", "color: rgba(237,230,214,.52)", "justify-self: start",
+            "state": ["font-family: var(--deco-num)", "font-weight: 400", "font-size: 12px", "color: rgba(237,230,214,.52)", "justify-self: start",
                       "margin-top: 3px", "letter-spacing: .04em"],
         },
         "state": [
@@ -107,7 +107,7 @@ TEMPLATES = {
             "grid": ["grid-template-areas: '\"i\" \"n\"'", "grid-template-rows: 40px min-content", "align-content: center"],
             "img_cell": ["height: 40px", "width: 40px", "justify-self: center"],
             "icon": ["width: 28px", "color: var(--deco-gold-hi)"],
-            "name": ["font-family: var(--deco-label)", "font-size: 10px", "letter-spacing: .2em", "text-transform: uppercase",
+            "name": ["font-family: var(--deco-label)", "font-weight: 500", "font-size: 10px", "letter-spacing: .2em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.62)", "margin-top: 8px", "white-space: normal", "line-height: 1.3"],
         },
     },
@@ -121,14 +121,14 @@ TEMPLATES = {
                             "switch.pi_hole", "sensor.sabnzbd_status", "sensor.h2s_0938ac5b0600679_print_status",
                             "climate.nest_thermostat"],
         "extra_styles": EXTRA + """
-.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}
-.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}
-.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}
-.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}
+.clk{font:400 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}
+.clk small{font:400 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}
+.dt{font:500 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}
+.gr{font:400 26px/1.1 var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;color:var(--deco-ivory);margin-top:8px}
 .wx{text-align:right}
 .wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}
-.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}
-.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.wx .t{font:400 40px/1 var(--deco-num);color:var(--deco-ivory)}
+.wx .c{font:500 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:rgba(237,230,214,.6)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 @media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' 'picker' !important;grid-template-columns:1fr !important}#picker{justify-self:start !important;padding-left:0 !important;border-top:0 !important;margin-top:10px !important;padding-top:0 !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}
 """,
@@ -198,12 +198,12 @@ return `${l1}${l1&&l2?'<br>':''}${l2}`;
             "card": ["padding: 0 18px 12px", "height: 100%", "min-height: 92px", "box-sizing: border-box", "overflow: hidden",
                      "background: linear-gradient(180deg, rgba(14,14,20,.35), rgba(14,14,20,.62))"],
             "grid": ["grid-template-areas: '\"n meta\"'", "grid-template-columns: 1fr auto", "align-items: end", "height: 100%"],
-            "name": ["font-family: var(--deco-display)", "font-size: 26px", "letter-spacing: .06em", "color: var(--deco-ivory)",
+            "name": ["font-family: var(--deco-display)", "-webkit-text-stroke: var(--deco-stroke, 0px) currentColor", "font-size: 26px", "letter-spacing: .06em", "color: var(--deco-ivory)",
                      "justify-self: start", "z-index: 1", "align-self: end", "white-space: nowrap", "overflow: hidden",
                      "text-overflow: ellipsis", "max-width: 100%", "padding-right: 10px"],
             "custom_fields": {
                 "art": ["position: absolute", "right: 0", "bottom: 0", "width: 300px", "height: 92px", "opacity: .55", "pointer-events: none"],
-                "meta": ["font-family: var(--deco-label)", "font-size: 10px", "line-height: 1.7", "letter-spacing: .22em",
+                "meta": ["font-family: var(--deco-label)", "font-weight: 500", "font-size: 10px", "line-height: 1.7", "letter-spacing: .22em",
                          "text-transform: uppercase", "color: rgba(237,230,214,.62)", "text-align: right", "z-index: 1",
                          "text-shadow: 0 1px 8px rgba(0,0,0,.9)", "align-self: end",
                          "background: rgba(11,11,14,.78)", "padding: 5px 9px", "border: 1px solid var(--deco-hair-faint)",
@@ -228,12 +228,12 @@ return `<svg viewBox="0 0 160 96" style="width:100%;max-width:170px;display:bloc
 <path d="M16 86 A64 64 0 0 1 144 86" fill="none" style="stroke:var(--deco-gold)" stroke-width="6" stroke-dasharray="${dash} ${L}"/>
 <path d="M8 86 A72 72 0 0 1 152 86" fill="none" style="stroke:rgba(201,164,76,.35)" stroke-width="1"/>
 <g style="stroke:rgba(201,164,76,.5)"><path d="M80 10 v8"/><path d="M24 30 l6 6"/><path d="M136 30 l-6 6"/></g></svg>
-<div style="font:200 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px">${Math.round(v)}<span style="font-size:13px;color:var(--deco-gold-hi)">%</span></div>`;
+<div style="font:400 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px">${Math.round(v)}<span style="font-size:13px;color:var(--deco-gold-hi)">%</span></div>`;
 ]]]"""},
         "styles": {
             "card": ["padding: 14px 10px 14px"],
             "grid": ["grid-template-areas: '\"g\" \"n\"'", "grid-template-rows: auto min-content"],
-            "name": ["font-family: var(--deco-label)", "font-size: 10px", "letter-spacing: .28em", "text-transform: uppercase",
+            "name": ["font-family: var(--deco-label)", "font-weight: 500", "font-size: 10px", "letter-spacing: .28em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.62)", "margin-top: 10px", "white-space: normal"],
         },
     },
@@ -247,8 +247,8 @@ return `<svg viewBox="0 0 160 96" style="width:100%;max-width:170px;display:bloc
 .rows{width:100%}
 .row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}
 .row:last-child{border-bottom:0}
-.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:rgba(237,230,214,.6)}
-.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row span{font:500 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.row b{font:400 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:400;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}
 .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}
 """,
@@ -272,7 +272,7 @@ return h+'</div>';
             "grid": ["grid-template-areas: '\"i n badge\" \"rows rows rows\"'", "grid-template-columns: 34px 1fr auto",
                      "align-items: center", "column-gap: 10px"],
             "icon": ["width: 26px", "color: var(--deco-gold-hi)"],
-            "name": ["font-family: var(--deco-display)", "font-size: 22px", "letter-spacing: .05em", "justify-self: start",
+            "name": ["font-family: var(--deco-display)", "-webkit-text-stroke: var(--deco-stroke, 0px) currentColor", "font-size: 22px", "letter-spacing: .05em", "justify-self: start",
                      "color: var(--deco-ivory)"],
             "custom_fields": {"rows": ["margin-top: 6px"]},
         },
@@ -289,19 +289,19 @@ return h+'</div>';
 .pr .pic{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;
   background:rgba(0,0,0,.38);border:1px solid var(--deco-hair)}
 .pr .pic img{max-width:100%;max-height:100%;object-fit:contain;filter:var(--deco-img-filter,none)}
-.pr .pic .none{font:400 11px/1 var(--deco-label);letter-spacing:.24em;color:rgba(237,230,214,.5)}
+.pr .pic .none{font:500 11px/1 var(--deco-label);letter-spacing:.24em;color:rgba(237,230,214,.5)}
 .pr .badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;
   padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi);background:rgba(0,0,0,.6)}
 .pr .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)}
 .pr .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}
 .pr .badge.run{border-color:var(--deco-gold-hi);color:var(--deco-ivory)}
-.pr .job{font:300 20px/1.2 var(--deco-display);color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pr .job{font:400 20px/1.2 var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pr .bar{height:12px;border:1px solid var(--deco-hair);padding:2px}
 .pr .bar i{display:block;height:100%;background:var(--deco-gold)}
 .pr .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
 .pr .meta span{display:flex;flex-direction:column;gap:6px}
-.pr .meta em{font:400 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
-.pr .meta b{font:300 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;white-space:nowrap}
+.pr .meta em{font:500 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.pr .meta b{font:400 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:400;white-space:nowrap}
 """,
         "custom_fields": {
             "body": """[[[
@@ -337,15 +337,15 @@ return `<div class="pr"><div class="pic">${src?`<img src="${src}" alt="">`:'<spa
 .fb{width:100%}
 .fr{display:grid;grid-template-columns:46px 14px minmax(0,1.7fr) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--deco-hair-faint)}
 .fr:last-child{border-bottom:0}
-.fr .sl{font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.fr .sl{font:500 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
 .fr .sw{width:14px;height:14px;border:1px solid var(--deco-hair)}
-.fr .nm{font:300 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr .nm{font:400 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fr .nm.dim{color:rgba(237,230,214,.45)}
 .fr .tr{height:16px;border:1px solid var(--deco-hair);padding:2px}
 .fr .tr i{display:block;height:100%;background:var(--deco-gold)}
 .fr .tr i.low{background:var(--deco-garnet)}
-.fr b{font:300 16px/1 var(--deco-num);font-weight:300;color:var(--deco-ivory);text-align:right}
-.fn{display:flex;justify-content:space-between;margin-top:8px;font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
+.fr b{font:400 16px/1 var(--deco-num);font-weight:400;color:var(--deco-ivory);text-align:right}
+.fn{display:flex;justify-content:space-between;margin-top:8px;font:500 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,214,.6)}
 """,
         "custom_fields": {
             "body": """[[[
@@ -369,7 +369,7 @@ return h;
             "grid": ["grid-template-areas: '\"i n\" \"body body\"'", "grid-template-columns: 34px 1fr",
                      "align-items: center", "column-gap: 10px"],
             "icon": ["width: 26px", "color: var(--deco-gold-hi)"],
-            "name": ["font-family: var(--deco-display)", "font-size: 22px", "letter-spacing: .05em", "justify-self: start",
+            "name": ["font-family: var(--deco-display)", "-webkit-text-stroke: var(--deco-stroke, 0px) currentColor", "font-size: 22px", "letter-spacing: .05em", "justify-self: start",
                      "color: var(--deco-ivory)"],
             "custom_fields": {"body": ["margin-top: 6px"]},
         },
@@ -391,7 +391,7 @@ return h;
             "img_cell": ["width: 24px", "height: 24px", "transform: rotate(45deg)", "border: 1px solid var(--deco-gold)",
                          "background: rgba(11,11,14,.82)", "transition: box-shadow .4s ease, background .4s ease"],
             "icon": ["transform: rotate(-45deg)", "width: 14px", "color: rgba(237,230,214,.55)"],
-            "name": ["font-family: var(--deco-label)", "font-size: 8px", "letter-spacing: .12em", "text-transform: uppercase",
+            "name": ["font-family: var(--deco-label)", "font-weight: 500", "font-size: 8px", "letter-spacing: .12em", "text-transform: uppercase",
                      "color: rgba(237,230,214,.72)", "white-space: nowrap", "margin-top: 2px",
                      "text-shadow: 0 1px 4px #000, 0 0 2px #000"],
         },
@@ -440,7 +440,7 @@ return h;
             "grid": ["grid-template-areas: '\"i n\"'", "grid-template-columns: 30px 1fr", "align-items: center", "column-gap: 10px"],
             "img_cell": ["width: 30px", "height: 30px"],
             "icon": ["width: 20px", "color: var(--deco-gold-hi)"],
-            "name": ["justify-self: start", "font-family: var(--deco-label)", "font-size: 10px", "letter-spacing: .2em",
+            "name": ["justify-self: start", "font-family: var(--deco-label)", "font-weight: 500", "font-size: 10px", "letter-spacing: .2em",
                      "text-transform: uppercase", "color: rgba(237,230,214,.7)", "white-space: nowrap", "overflow: hidden",
                      "text-overflow: ellipsis"],
         },

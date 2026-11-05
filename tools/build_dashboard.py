@@ -19,7 +19,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = None  # theme comes from the HA default (toggled via input_select.dashboard_theme)
-ASSET_V = "6"  # bump to bust caches when SVGs change
+ASSET_V = "7"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
