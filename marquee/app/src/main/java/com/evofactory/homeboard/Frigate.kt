@@ -85,7 +85,7 @@ data class FrigateServer(val url: String = "", val username: String = "", val pa
 }
 
 /** Android 9 has no TLS 1.3, which Frigate's HTTPS port can insist on: Conscrypt brings it */
-private fun frigateSslContext(): SSLContext =
+internal fun frigateSslContext(): SSLContext =
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) SSLContext.getInstance("TLSv1.3", Conscrypt.newProvider())
     else SSLContext.getInstance("TLS")
 
@@ -126,7 +126,7 @@ fun normalizeFrigateUrl(input: String): String? {
  * Accepts the certificate pinned, or with no pin, any: the first connection is made from the
  * settings, by someone who knows this is their server. It remembers what it saw for saving as the pin.
  */
-private class PinningTrustManager(private val pin: String) : X509TrustManager {
+internal class PinningTrustManager(private val pin: String) : X509TrustManager {
     @Volatile var seen = ""
     @Volatile var changed = false
 

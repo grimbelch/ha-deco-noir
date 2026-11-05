@@ -31,6 +31,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.withFrameNanos
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -98,10 +100,27 @@ fun MarqueeHome(
     weatherId: String,
     scenesFocus: FocusRequester,
     jellyfinFocus: FocusRequester,
+    // Whether Jellyfin has had its first selection: once per launch, not every return to this tab
+    jellyfinSelected: androidx.compose.runtime.MutableState<Boolean>,
     onSetUpHa: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scenes = if (haConnection != null) actionIds else emptyList()
+    // Jellyfin gets the selection once per launch. Asked for after the window settles: asked for at
+    // once, the TV hands it to the first item on screen when the window gains focus.
+    var selectedOnce by jellyfinSelected
+    var jellyfinHasFocus by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        if (selectedOnce) return@LaunchedEffect
+        // Fire OS moves the selection once more as the window settles (and as the Spotify bar fills
+        // in): ask again until it stays on the marquee
+        repeat(INITIAL_SELECTION_TRIES) {
+            withFrameNanos { }
+            if (!jellyfinHasFocus) runCatching { jellyfinFocus.requestFocus() }
+            delay(INITIAL_SELECTION_DELAY_MS)
+        }
+        selectedOnce = true
+    }
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Row(modifier = Modifier.weight(1f).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(20.dp)) {
             Column(
@@ -111,6 +130,7 @@ fun MarqueeHome(
                 LobbyCard(
                     haConnection = haConnection,
                     entityIds = entityIds,
+                    weatherId = weatherId,
                     onSetUpHa = onSetUpHa,
                     modifier = Modifier.weight(1f).fillMaxWidth(),
                 )
@@ -131,18 +151,14 @@ fun MarqueeHome(
                     }
                 }
             }
-            WeatherPanel(haConnection, weatherId, Modifier.weight(1f).fillMaxHeight())
-            // Selected from the first frame it's laid out, before anything else can take it
-            var selectedOnce by remember { mutableStateOf(false) }
+            BasementPanel(haConnection, Modifier.weight(1f).fillMaxHeight())
             JellyfinMarquee(
                 compact = false,
                 modifier = Modifier
                     .weight(0.9f)
                     .fillMaxHeight()
                     .focusRequester(jellyfinFocus)
-                    .onGloballyPositioned {
-                        if (!selectedOnce) selectedOnce = runCatching { jellyfinFocus.requestFocus() }.isSuccess
-                    },
+                    .onFocusChanged { jellyfinHasFocus = it.isFocused },
             )
         }
         SpotifyBar(haConnection, haServer, Modifier.fillMaxWidth().height(SpotifyBarHeight))
@@ -150,6 +166,8 @@ fun MarqueeHome(
 }
 
 private val SpotifyBarHeight = 108.dp
+private const val INITIAL_SELECTION_DELAY_MS = 200L
+private const val INITIAL_SELECTION_TRIES = 10
 
 /** "◆ TITLE ◆" between two gold hairlines, like the dashboard's deco_marquee headings */
 @Composable
@@ -171,6 +189,7 @@ fun MarqueeHeading(title: String, modifier: Modifier = Modifier) {
 private fun LobbyCard(
     haConnection: HaConnection?,
     entityIds: List<String>,
+    weatherId: String,
     onSetUpHa: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -186,7 +205,7 @@ private fun LobbyCard(
     val hour = calendar.get(Calendar.HOUR_OF_DAY)
     val minute = "%02d".format(calendar.get(Calendar.MINUTE))
     val time = if (is24h) "$hour:$minute" else "${(hour % 12).let { if (it == 0) 12 else it }}:$minute"
-    val date = DateFormat.format("EEEE · MMMM d", now).toString().uppercase(Locale.getDefault())
+    val date = DateFormat.format("EEEE · MMM d", now).toString().uppercase(Locale.getDefault())
     val greeting = when {
         hour < 5 -> "Good night"
         hour < 12 -> "Good morning"
@@ -221,7 +240,7 @@ private fun LobbyCard(
                 }
                 Text(
                     date,
-                    style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.38.em, fontWeight = FontWeight.Normal),
+                    style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.28.em, fontWeight = FontWeight.Normal),
                     color = Deco.GoldHi,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -234,6 +253,8 @@ private fun LobbyCard(
                     modifier = Modifier.padding(top = 6.dp),
                 )
             }
+            // Like the dashboard's lobby: the weather in brief on the right
+            haConnection?.entities?.get(weatherId)?.let { LobbyWeather(it) }
         }
         Spacer(Modifier.weight(1f))
         Box(Modifier.padding(top = 12.dp).fillMaxWidth().height(1.dp).background(Deco.HairFaint))
@@ -262,6 +283,24 @@ private fun statusLine(connection: HaConnection): String? = when (connection.sta
     HaStatus.Connecting -> "Connecting to Home Assistant…"
     HaStatus.Offline -> "Home Assistant offline · retrying"
     else -> null
+}
+
+/** A gold icon over the temperature in Jost and the condition in capitals */
+@Composable
+private fun LobbyWeather(entity: HaEntity) {
+    Column(horizontalAlignment = Alignment.End) {
+        MdiIcon(weatherIcon(entity.state), size = 40.dp, color = Deco.GoldHi)
+        Text(
+            entity.temperature?.let { "${it.roundToInt()}°" } ?: "—",
+            style = MaterialTheme.typography.displaySmall.figures(FontWeight.ExtraLight),
+            color = Deco.Ivory,
+        )
+        Text(
+            (weatherLabel(entity.state) ?: entity.state).uppercase(),
+            style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.26.em),
+            color = Deco.IvoryDim,
+        )
+    }
 }
 
 /** The picked sensors as chips: gold icon, NAME, reading in gold-hi Jost */

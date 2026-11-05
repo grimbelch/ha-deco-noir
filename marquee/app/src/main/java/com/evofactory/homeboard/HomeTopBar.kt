@@ -216,12 +216,26 @@ private fun Clock() {
     }
 }
 
+/** Marquee's pages */
+enum class MarqueeTab(val label: String) {
+    /** Lobby, scenes, basement lights, Jellyfin, Spotify */
+    Home("Home"),
+
+    /** Sonarr and Radarr's calendar, and downloads */
+    Media("Media"),
+
+    /** The servo-skull */
+    Omega7("Omega-7"),
+}
+
 /**
- * Marquee's top bar: the name as a marquee sign on the left; free memory, warnings, the network
- * button and the settings cog on the right. No tabs: there's one screen.
+ * Marquee's top bar: the name as a small marquee sign and the tabs on the left; free memory,
+ * warnings, the network button and the settings cog on the right.
  */
 @Composable
 fun MarqueeTopBar(
+    tab: MarqueeTab,
+    onTabChange: (MarqueeTab) -> Unit,
     showFreeMemory: Boolean,
     modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {},
@@ -233,11 +247,15 @@ fun MarqueeTopBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            "◆  MARQUEE  ◆",
-            style = MaterialTheme.typography.titleLarge.marquee().copy(letterSpacing = 0.3.em),
-            color = Deco.GoldHi,
+            "◆ MARQUEE ◆",
+            style = MaterialTheme.typography.titleMedium.marquee().copy(letterSpacing = 0.24.em),
+            color = Deco.Gold,
             maxLines = 1,
+            modifier = Modifier.padding(end = 12.dp),
         )
+        MarqueeTab.entries.forEach { entry ->
+            TabButton(entry.label, selected = entry == tab, onSelect = { onTabChange(entry) })
+        }
         Row(
             modifier = Modifier.weight(1f).fillMaxHeight(),
             horizontalArrangement = Arrangement.spacedBy(PanelItemSpacing, Alignment.End),

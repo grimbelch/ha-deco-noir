@@ -46,6 +46,9 @@ class MainActivity : ComponentActivity() {
     private var showFreeMemory by mutableStateOf(false)
     private var exportOpen by mutableStateOf(false)
     private var importOpen by mutableStateOf(false)
+    private var tab by mutableStateOf(MarqueeTab.Home)
+    private var omega7 by mutableStateOf(Omega7Server())
+    private var omega7Open by mutableStateOf(false)
 
     // Home override's crash guard: the launcher counts as started once it has stayed up a moment
     private val confirmStarted = Runnable {
@@ -58,6 +61,7 @@ class MainActivity : ComponentActivity() {
         haServer = HaServer(prefs.haUrl, prefs.haToken, prefs.haRefreshToken)
         haEntities = prefs.haEntities
         haActions = prefs.haActions
+        omega7 = prefs.omega7
         setContent {
             MaterialTheme(colorScheme = AppColorScheme, shapes = DecoShapes, typography = DecoTypography) {
                 Surface(
@@ -66,19 +70,25 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val scenesFocus = remember { FocusRequester() }
                     val jellyfinFocus = remember { FocusRequester() }
-                    // The marquee is the star: it has the selection from the start (MarqueeHome), and Back returns there
-                    BackHandler { runCatching { jellyfinFocus.requestFocus() } }
+                    val jellyfinSelected = remember { mutableStateOf(false) }
+                    // The marquee is the star: it has the selection from the start (MarqueeHome). Back goes
+                    // to the Home page, and on Home to the marquee.
+                    BackHandler {
+                        if (tab != MarqueeTab.Home) tab = MarqueeTab.Home else runCatching { jellyfinFocus.requestFocus() }
+                    }
 
                     val actions = haActions.take(MAX_HA_ACTIONS)
                     // A picked weather wins; otherwise the dashboard's own
                     val weatherId = haEntities.firstOrNull(::isHaWeather) ?: DEFAULT_WEATHER_ENTITY
                     val followed = remember(haEntities, actions, weatherId) {
-                        (haEntities + actions + weatherId + SPOTIFY_ENTITY).distinct()
+                        (haEntities + actions + weatherId + SPOTIFY_ENTITY + BasementLights.map { it.first } + DownloadSensors.map { it.first }).distinct()
                     }
                     val haConnection = rememberHaConnection(haServer, followed)
 
                     Column(modifier = Modifier.fillMaxSize()) {
                         MarqueeTopBar(
+                            tab = tab,
+                            onTabChange = { tab = it },
                             showFreeMemory = showFreeMemory,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -97,23 +107,39 @@ class MainActivity : ComponentActivity() {
                                 onOpenHomeAssistant = { haPicker = it },
                                 onLogOutOfHomeAssistant = ::logOutOfHa,
                                 onOpenPing = { pingOpen = true },
+                                onOpenOmega7 = { omega7Open = true },
                                 onOpenLauncherSettings = { launcherSettingsOpen = true },
                             )
                         }
-                        MarqueeHome(
-                            haConnection = if (haServer.isSet) haConnection else null,
-                            haServer = haServer,
-                            entityIds = haEntities,
-                            actionIds = actions,
-                            weatherId = weatherId,
-                            scenesFocus = scenesFocus,
-                            jellyfinFocus = jellyfinFocus,
-                            onSetUpHa = { haPicker = HaPick.Sensors },
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .padding(start = EdgePadding, top = 20.dp, end = EdgePadding, bottom = EdgePadding),
-                        )
+                        val page = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .padding(start = EdgePadding, top = 20.dp, end = EdgePadding, bottom = EdgePadding)
+                        val ha = if (haServer.isSet) haConnection else null
+                        when (tab) {
+                            MarqueeTab.Home -> MarqueeHome(
+                                haConnection = ha,
+                                haServer = haServer,
+                                entityIds = haEntities,
+                                actionIds = actions,
+                                weatherId = weatherId,
+                                scenesFocus = scenesFocus,
+                                jellyfinFocus = jellyfinFocus,
+                                jellyfinSelected = jellyfinSelected,
+                                onSetUpHa = { haPicker = HaPick.Sensors },
+                                modifier = page,
+                            )
+                            MarqueeTab.Media -> MediaPage(ha, page)
+                            MarqueeTab.Omega7 -> Omega7Page(
+                                server = omega7,
+                                onSetUp = { omega7Open = true },
+                                onLoginRejected = { saveOmega7(Omega7Server(omega7.url)) },
+                                modifier = page,
+                            )
+                        }
+                    }
+                    if (omega7Open) {
+                        Omega7Dialog(initial = omega7, onSave = ::saveOmega7, onDismiss = { omega7Open = false })
                     }
                     haPicker?.let { pick ->
                         HomeAssistantDialog(
@@ -196,6 +222,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun saveOmega7(value: Omega7Server) {
+        omega7 = value
+        prefs.omega7 = value
     }
 
     /** Ends the login; the address, username and chosen entities stay for logging in again */

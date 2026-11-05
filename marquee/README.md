@@ -6,18 +6,21 @@
 
 ![Marquee banner](app/src/main/res/drawable-xhdpi/banner.png)
 
-## The screen
+## Pages
 
-One screen, no tabs, no app row:
+Three tabs across the top: **Home · Media · Omega-7**. Back returns to Home.
 
-- **Lobby:** the time in Jost, the date in gold capitals, a Poiret greeting, picked HA sensors as chips,
-  and up to 4 HA scenes or scripts under a ◆ SCENES ◆ heading.
-- **Weather:** `weather.forecast_home` (or the weather entity you pick): now, feels-like, humidity and
-  wind, the next 5 hours and the next 5 days.
-- **Jellyfin:** a "Now Showing" cinema marquee with chasing bulbs; OK opens Jellyfin. Selected at launch,
-  and Back returns to it.
-- **Spotify:** Now Playing from `media_player.spotify`: album art, track, artist, progress, and
-  previous / play-pause / next sent through Home Assistant, plus **Open Spotify**.
+- **Home:** the lobby (time, date, greeting, the weather in brief, picked HA sensors as chips, up to 4
+  scenes), the **basement lights** (Torch front, Torch back, Fireplace, Painting desk; OK toggles,
+  plus All on / All off), Jellyfin's "Now Showing" marquee (selected at launch), and Spotify's Now
+  Playing from `media_player.spotify` with previous / play-pause / next and **Open Spotify**.
+- **Media:** like the dashboard's Media view. "Coming up" lists the next two weeks of
+  `calendar.sonarr` and `calendar.radarr` (via `calendar.get_events`); "Downloads" shows SABnzbd's
+  status, speed, queue and what's left, Sonarr's upcoming count, Jellyfin viewers and free array space.
+- **Omega-7:** the servo-skull through its web remote: its eye live (the MJPEG ocular stream), the vox
+  log, the cogitator's vitals, and Wake, preset commands, a command box and its screensavers.
+  Connect in Settings › Omega-7 with the code it shows when asked "show the web access code"; the
+  session key and its self-signed certificate are kept.
 
 HomeBoard's cameras, Frigate alerts, app row and Continue Watching are no longer on screen. Their
 source files stay in place (settings and export still reference them), unused.

@@ -39,6 +39,7 @@ fun SettingsButton(
     onOpenHomeAssistant: (HaPick) -> Unit,
     onLogOutOfHomeAssistant: () -> Unit,
     onOpenPing: () -> Unit,
+    onOpenOmega7: () -> Unit,
     onOpenLauncherSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -74,6 +75,7 @@ fun SettingsButton(
                     MenuAction("Home Assistant") {
                         if (homeAssistantSet) homeAssistantMenuOpen = true else onOpenHomeAssistant(HaPick.Sensors)
                     },
+                    MenuAction("Omega-7", onOpenOmega7),
                     MenuAction("Ping utility", onOpenPing),
                 ),
                 onDismiss = { menuOpen = false },

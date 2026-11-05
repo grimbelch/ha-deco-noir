@@ -32,6 +32,19 @@ class LauncherPrefs(context: Context) {
         get() = readList("hidden_watching")
         set(value) = writeList("hidden_watching", value)
 
+    /** Omega-7's web remote: base URL, session key and the certificate it showed when logging in */
+    var omega7: Omega7Server
+        get() = Omega7Server(
+            prefs.getString("omega7_url", null) ?: "",
+            prefs.getString("omega7_key", null) ?: "",
+            prefs.getString("omega7_cert_pin", null) ?: "",
+        )
+        set(value) = prefs.edit {
+            putString("omega7_url", value.url)
+            putString("omega7_key", value.key)
+            putString("omega7_cert_pin", value.certPin)
+        }
+
     /** Last address entered in the Ping utility */
     var pingHost: String
         get() = prefs.getString("ping_host", null) ?: ""
