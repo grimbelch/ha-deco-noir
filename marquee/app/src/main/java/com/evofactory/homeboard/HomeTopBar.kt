@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.LocalContentColor
@@ -212,5 +213,39 @@ private fun Clock() {
         // A marquee clock: gold Poiret One over the date in spaced capitals
         Text(timeFormat.format(now), style = MaterialTheme.typography.titleLarge.marquee(), color = Deco.GoldHi, maxLines = 1)
         Text(dateFormat.format(now).uppercase(), style = MaterialTheme.typography.labelSmall, color = Deco.Gold, maxLines = 1)
+    }
+}
+
+/**
+ * Marquee's top bar: the name as a marquee sign on the left; free memory, warnings, the network
+ * button and the settings cog on the right. No tabs: there's one screen.
+ */
+@Composable
+fun MarqueeTopBar(
+    showFreeMemory: Boolean,
+    modifier: Modifier = Modifier,
+    actions: @Composable RowScope.() -> Unit = {},
+    settings: @Composable () -> Unit,
+) {
+    Row(
+        modifier = modifier.height(SettingsButtonSize),
+        horizontalArrangement = Arrangement.spacedBy(PanelItemSpacing),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            "◆  MARQUEE  ◆",
+            style = MaterialTheme.typography.titleLarge.marquee().copy(letterSpacing = 0.3.em),
+            color = Deco.GoldHi,
+            maxLines = 1,
+        )
+        Row(
+            modifier = Modifier.weight(1f).fillMaxHeight(),
+            horizontalArrangement = Arrangement.spacedBy(PanelItemSpacing, Alignment.End),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (showFreeMemory) FreeMemory()
+            actions()
+        }
+        settings()
     }
 }

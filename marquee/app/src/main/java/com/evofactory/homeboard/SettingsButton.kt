@@ -35,14 +35,9 @@ val SettingsButtonSize = 40.dp
  */
 @Composable
 fun SettingsButton(
-    showHidden: Boolean,
-    hiddenCount: Int,
-    onShowHiddenChange: (Boolean) -> Unit,
-    onOpenCameras: () -> Unit,
     homeAssistantSet: Boolean,
     onOpenHomeAssistant: (HaPick) -> Unit,
     onLogOutOfHomeAssistant: () -> Unit,
-    onOpenFrigate: () -> Unit,
     onOpenPing: () -> Unit,
     onOpenLauncherSettings: () -> Unit,
     modifier: Modifier = Modifier,
@@ -76,13 +71,10 @@ fun SettingsButton(
                         context.openSystemSettings()
                     },
                     MenuAction("Marquee settings", onOpenLauncherSettings),
-                    MenuAction("Cameras", onOpenCameras),
                     MenuAction("Home Assistant") {
                         if (homeAssistantSet) homeAssistantMenuOpen = true else onOpenHomeAssistant(HaPick.Sensors)
                     },
-                    MenuAction("Frigate", onOpenFrigate),
                     MenuAction("Ping utility", onOpenPing),
-                    showHiddenAction(showHidden, hiddenCount) { onShowHiddenChange(!showHidden) },
                 ),
                 onDismiss = { menuOpen = false },
                 placement = MenuPlacement.BelowAtRightMargin,
@@ -92,8 +84,8 @@ fun SettingsButton(
             ContextMenu(
                 title = "Home Assistant",
                 actions = listOf(
-                    MenuAction("Choose sensors") { onOpenHomeAssistant(HaPick.Sensors) },
-                    MenuAction("Choose action buttons") { onOpenHomeAssistant(HaPick.Actions) },
+                    MenuAction("Choose sensors and weather") { onOpenHomeAssistant(HaPick.Sensors) },
+                    MenuAction("Choose scenes") { onOpenHomeAssistant(HaPick.Actions) },
                     MenuAction("Log out", onLogOutOfHomeAssistant),
                 ),
                 onDismiss = { homeAssistantMenuOpen = false },

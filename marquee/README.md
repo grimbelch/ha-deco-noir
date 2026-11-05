@@ -6,6 +6,22 @@
 
 ![Marquee banner](app/src/main/res/drawable-xhdpi/banner.png)
 
+## The screen
+
+One screen, no tabs, no app row:
+
+- **Lobby:** the time in Jost, the date in gold capitals, a Poiret greeting, picked HA sensors as chips,
+  and up to 4 HA scenes or scripts under a ◆ SCENES ◆ heading.
+- **Weather:** `weather.forecast_home` (or the weather entity you pick): now, feels-like, humidity and
+  wind, the next 5 hours and the next 5 days.
+- **Jellyfin:** a "Now Showing" cinema marquee with chasing bulbs; OK opens Jellyfin. Selected at launch,
+  and Back returns to it.
+- **Spotify:** Now Playing from `media_player.spotify`: album art, track, artist, progress, and
+  previous / play-pause / next sent through Home Assistant, plus **Open Spotify**.
+
+HomeBoard's cameras, Frigate alerts, app row and Continue Watching are no longer on screen. Their
+source files stay in place (settings and export still reference them), unused.
+
 ## What changed from HomeBoard
 
 - **Theme:** [`DecoKit.kt`](app/src/main/java/com/evofactory/homeboard/DecoKit.kt) carries the Deco Noir tokens

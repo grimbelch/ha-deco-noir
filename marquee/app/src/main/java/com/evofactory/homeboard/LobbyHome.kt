@@ -48,6 +48,7 @@ import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -76,106 +77,79 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 
 /*
- * Marquee's Home tab, laid out like the Deco Noir "Home" dashboard view: a lobby header (clock,
- * date, greeting, weather and status chips), a row of scenes under a ◆ SCENES ◆ marquee heading,
- * and, on the right, Jellyfin's "Now Showing" marquee, with the main camera under it if there is one.
+ * Marquee's home screen, laid out like the Deco Noir "Home" dashboard view: a lobby header (clock,
+ * date, greeting, status chips) with scenes under a ◆ SCENES ◆ heading, the weather, Jellyfin's
+ * "Now Showing" marquee, and Spotify's Now Playing along the bottom.
  */
 
 const val JELLYFIN_PACKAGE = "org.jellyfin.androidtv"
 
 /**
- * The Home tab. [camera] draws the main camera into the modifier it's given; null without one.
- * [scenesFocus] selects the first scene, [jellyfinFocus] the Jellyfin marquee. Up from the
- * marquee goes to [upFocus] (the top bar's right end), down from the scenes, marquee and camera to
- * [downFocus] (the app row). [onSetUpHa] opens the Home Assistant login.
+ * Marquee's one screen. Top row: the lobby (clock, greeting, chips) over the scenes, the weather,
+ * and Jellyfin's "Now Showing" marquee. Along the bottom: Spotify's Now Playing bar.
+ * [scenesFocus] selects the first scene, [jellyfinFocus] the Jellyfin marquee.
  */
 @Composable
-fun LobbyHome(
+fun MarqueeHome(
     haConnection: HaConnection?,
+    haServer: HaServer,
     entityIds: List<String>,
     actionIds: List<String>,
-    camera: (@Composable (Modifier) -> Unit)?,
-    cameraFocus: FocusRequester,
+    weatherId: String,
     scenesFocus: FocusRequester,
     jellyfinFocus: FocusRequester,
-    upFocus: FocusRequester,
-    downFocus: FocusRequester,
     onSetUpHa: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scenes = if (haConnection != null) actionIds else emptyList()
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(EdgePadding)) {
-        Column(
-            modifier = Modifier.weight(LOBBY_WEIGHT).fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(PanelItemSpacing),
-        ) {
-            LobbyCard(
-                haConnection = haConnection,
-                entityIds = entityIds,
-                onSetUpHa = onSetUpHa,
-                setUpModifier = Modifier.focusProperties { down = downFocus },
-                modifier = Modifier.weight(1f).fillMaxWidth(),
-            )
-            if (scenes.isNotEmpty() && haConnection != null) {
-                MarqueeHeading("Scenes")
-                Row(horizontalArrangement = Arrangement.spacedBy(PanelItemSpacing)) {
-                    scenes.forEachIndexed { index, id ->
-                        key(id) {
-                            SceneTile(
-                                connection = haConnection,
-                                id = id,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .then(if (index == 0) Modifier.focusRequester(scenesFocus) else Modifier)
-                                    .focusProperties {
-                                        down = downFocus
-                                        if (index == scenes.lastIndex) right = jellyfinFocus
-                                    },
-                            )
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Row(modifier = Modifier.weight(1f).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+            Column(
+                modifier = Modifier.weight(1.1f).fillMaxHeight(),
+                verticalArrangement = Arrangement.spacedBy(PanelItemSpacing),
+            ) {
+                LobbyCard(
+                    haConnection = haConnection,
+                    entityIds = entityIds,
+                    onSetUpHa = onSetUpHa,
+                    modifier = Modifier.weight(1f).fillMaxWidth(),
+                )
+                if (scenes.isNotEmpty() && haConnection != null) {
+                    MarqueeHeading("Scenes")
+                    Row(horizontalArrangement = Arrangement.spacedBy(PanelItemSpacing)) {
+                        scenes.forEachIndexed { index, id ->
+                            key(id) {
+                                SceneTile(
+                                    connection = haConnection,
+                                    id = id,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .then(if (index == 0) Modifier.focusRequester(scenesFocus) else Modifier),
+                                )
+                            }
                         }
                     }
                 }
             }
+            WeatherPanel(haConnection, weatherId, Modifier.weight(1f).fillMaxHeight())
+            // Selected from the first frame it's laid out, before anything else can take it
+            var selectedOnce by remember { mutableStateOf(false) }
+            JellyfinMarquee(
+                compact = false,
+                modifier = Modifier
+                    .weight(0.9f)
+                    .fillMaxHeight()
+                    .focusRequester(jellyfinFocus)
+                    .onGloballyPositioned {
+                        if (!selectedOnce) selectedOnce = runCatching { jellyfinFocus.requestFocus() }.isSuccess
+                    },
+            )
         }
-        BoxWithConstraints(modifier = Modifier.weight(1f).fillMaxHeight()) {
-            // With a camera, the marquee keeps a strip at the top and the camera takes the rest at 16:9
-            val cameraHeight = if (camera != null) {
-                minOf(maxWidth * 9f / 16f, maxHeight - JellyfinStripHeight - PanelItemSpacing)
-            } else {
-                0.dp
-            }
-            Column(verticalArrangement = Arrangement.spacedBy(PanelItemSpacing)) {
-                JellyfinMarquee(
-                    compact = camera != null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .focusRequester(jellyfinFocus)
-                        .focusProperties {
-                            up = upFocus
-                            down = if (camera != null) cameraFocus else downFocus
-                        },
-                )
-                camera?.invoke(
-                    Modifier
-                        .width(cameraHeight * 16f / 9f)
-                        .height(cameraHeight)
-                        .align(Alignment.End)
-                        .focusRequester(cameraFocus)
-                        .focusProperties {
-                            up = jellyfinFocus
-                            down = downFocus
-                        },
-                )
-            }
-        }
+        SpotifyBar(haConnection, haServer, Modifier.fillMaxWidth().height(SpotifyBarHeight))
     }
 }
 
-/** Share of the width the lobby takes, against 1 for the Jellyfin column; see FIRST_SLOT_UNDER_PANEL */
-const val LOBBY_WEIGHT = 1.35f
-
-private val JellyfinStripHeight = 72.dp
+private val SpotifyBarHeight = 108.dp
 
 /** "◆ TITLE ◆" between two gold hairlines, like the dashboard's deco_marquee headings */
 @Composable
@@ -198,7 +172,6 @@ private fun LobbyCard(
     haConnection: HaConnection?,
     entityIds: List<String>,
     onSetUpHa: () -> Unit,
-    setUpModifier: Modifier,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -220,8 +193,6 @@ private fun LobbyCard(
         hour < 17 -> "Good afternoon"
         else -> "Good evening"
     }
-    val entities = haConnection?.entities
-    val weatherId = entityIds.firstOrNull(::isHaWeather)
     val chipIds = entityIds.filterNot { isHaAction(it) || isHaWeather(it) }
 
     Column(
@@ -263,16 +234,15 @@ private fun LobbyCard(
                     modifier = Modifier.padding(top = 6.dp),
                 )
             }
-            if (weatherId != null && entities != null) LobbyWeather(entities[weatherId], haConnection?.daily?.get(weatherId))
         }
         Spacer(Modifier.weight(1f))
         Box(Modifier.padding(top = 12.dp).fillMaxWidth().height(1.dp).background(Deco.HairFaint))
         Box(Modifier.padding(top = 12.dp).fillMaxWidth().clipToBounds()) {
             when {
-                haConnection == null -> DecoOutlinedButton(onClick = onSetUpHa, modifier = setUpModifier) {
+                haConnection == null -> DecoOutlinedButton(onClick = onSetUpHa) {
                     Text("Connect Home Assistant")
                 }
-                haConnection.status == HaStatus.TokenRejected -> DecoOutlinedButton(onClick = onSetUpHa, modifier = setUpModifier) {
+                haConnection.status == HaStatus.TokenRejected -> DecoOutlinedButton(onClick = onSetUpHa) {
                     Text("Home Assistant rejected the login · Log in again")
                 }
                 // Nothing picked means nothing to connect for, so no status either
@@ -292,32 +262,6 @@ private fun statusLine(connection: HaConnection): String? = when (connection.sta
     HaStatus.Connecting -> "Connecting to Home Assistant…"
     HaStatus.Offline -> "Home Assistant offline · retrying"
     else -> null
-}
-
-/** Weather like the lobby's: a gold icon, the temperature large in Jost, then condition · high / low in capitals */
-@Composable
-private fun LobbyWeather(entity: HaEntity?, daily: List<HaForecast>?) {
-    entity ?: return
-    val condition = entity.state
-    val today = daily?.firstOrNull()
-    val range = listOfNotNull(
-        today?.temperature?.let { "H ${it.roundToInt()}°" },
-        today?.lowTemperature?.let { "L ${it.roundToInt()}°" },
-    ).joinToString(" · ")
-    Column(horizontalAlignment = Alignment.End) {
-        MdiIcon(weatherIcon(condition), size = 44.dp, color = Deco.GoldHi)
-        Text(
-            entity.temperature?.let { "${it.roundToInt()}°" } ?: "—",
-            style = MaterialTheme.typography.displaySmall.figures(FontWeight.ExtraLight),
-            color = Deco.Ivory,
-        )
-        Text(
-            listOfNotNull(weatherLabel(condition), range.ifEmpty { null }).joinToString(" · ").uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.26.em),
-            color = Deco.IvoryDim,
-            textAlign = TextAlign.End,
-        )
-    }
 }
 
 /** The picked sensors as chips: gold icon, NAME, reading in gold-hi Jost */
@@ -429,7 +373,7 @@ private val SceneTileHeight = 64.dp
 /**
  * Jellyfin as a cinema marquee: a sunburst crown, "◆ NOW SHOWING ◆", JELLYFIN in Poiret One and a
  * border of marquee bulbs that chase while the remote is on it. OK opens Jellyfin, or its store
- * page if it isn't installed. [compact] is the one-line strip shown above a camera.
+ * page if it isn't installed. [compact] is a one-line strip, for when space is short.
  */
 @Composable
 private fun JellyfinMarquee(compact: Boolean, modifier: Modifier = Modifier) {
@@ -474,18 +418,18 @@ private fun JellyfinMarquee(compact: Boolean, modifier: Modifier = Modifier) {
                     Text("JELLYFIN", style = MaterialTheme.typography.headlineSmall.marquee(), color = Deco.GoldHi)
                 }
             } else {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 28.dp)) {
-                    Text("◆   NOW SHOWING   ◆", style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.34.em), color = Deco.Gold)
-                    Box(Modifier.padding(vertical = 10.dp).width(180.dp)) { DecoDoubleRule(color = Deco.Hair) }
+                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 20.dp)) {
+                    Text("◆  NOW SHOWING  ◆", style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.34.em), color = Deco.Gold)
+                    Box(Modifier.padding(vertical = 10.dp).width(140.dp)) { DecoDoubleRule(color = Deco.Hair) }
                     Text(
                         "JELLYFIN",
-                        style = MaterialTheme.typography.displaySmall.marquee().copy(fontSize = 52.sp, letterSpacing = 0.16.em),
+                        style = MaterialTheme.typography.displaySmall.marquee().copy(fontSize = 38.sp, letterSpacing = 0.12.em),
                         color = Deco.GoldHi,
                         maxLines = 1,
                     )
-                    Box(Modifier.padding(vertical = 10.dp).width(180.dp)) { DecoDoubleRule(color = Deco.Hair) }
+                    Box(Modifier.padding(vertical = 10.dp).width(140.dp)) { DecoDoubleRule(color = Deco.Hair) }
                     Text(
-                        if (installed) "MOVIES · SHOWS · MUSIC" else "INSTALL JELLYFIN",
+                        if (installed) "MOVIES · SHOWS" else "INSTALL JELLYFIN",
                         style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.3.em),
                         color = Deco.IvoryDim,
                     )

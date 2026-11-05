@@ -267,6 +267,22 @@ private val httpClient by lazy {
 }
 
 /**
+ * Downloads [path] from Home Assistant, e.g. a media player's entity_picture (its proxy URL
+ * carries its own token). Null on any failure: a missing picture just isn't shown.
+ */
+suspend fun haFetchBytes(server: HaServer, path: String): ByteArray? = withContext(Dispatchers.IO) {
+    val url = if (path.startsWith("http")) path else server.url + path
+    try {
+        httpClient.newCall(Request.Builder().url(url).build()).execute().use { response ->
+            if (response.isSuccessful) response.body.bytes() else null
+        }
+    } catch (e: Exception) {
+        AppLog.w("HomeAssistant", "Couldn't fetch a picture", e)
+        null
+    }
+}
+
+/**
  * Address as typed → base URL, e.g. "192.168.1.20" → "http://192.168.1.20:8123": http:// is
  * assumed without a scheme, and Home Assistant's port 8123 without a port either. Null if invalid.
  */
@@ -464,6 +480,15 @@ class HaSession internal constructor(private val socket: WebSocket) {
         command("call_service") {
             put("domain", entityId.substringBefore('.'))
             put("service", "turn_on")
+            put("target", JSONObject().put("entity_id", entityId))
+        }
+    }
+
+    /** Calls [domain].[service] on one entity, e.g. media_player.media_play_pause (Marquee's Spotify bar) */
+    suspend fun callService(domain: String, service: String, entityId: String) {
+        command("call_service") {
+            put("domain", domain)
+            put("service", service)
             put("target", JSONObject().put("entity_id", entityId))
         }
     }
