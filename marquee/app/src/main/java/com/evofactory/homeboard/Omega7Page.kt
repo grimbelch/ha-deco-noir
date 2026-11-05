@@ -1,10 +1,6 @@
 package com.evofactory.homeboard
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,7 +23,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -63,12 +58,6 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 // Often enough that a reply follows soon after it's spoken
-private const val TALK_MAX_MS = 15_000L
-// Below this the microphone gave nothing usable (level 0..1)
-private const val SILENCE_LEVEL = 0.02f
-// Half a second of 16 kHz 16-bit audio
-private const val MIN_TALK_BYTES = 16_000
-
 private const val STATE_POLL_MS = 1_500L
 private const val DEFAULT_OMEGA7_ADDRESS = "192.168.0.108"
 private const val RETRY_MS = 10_000L
@@ -77,6 +66,7 @@ private const val RETRY_MS = 10_000L
 private val PresetCommands = listOf(
     "Status report" to "mdi:console",
     "What's on today?" to "mdi:calendar-clock",
+    "Tell me something about the Imperium" to "mdi:skull",
 )
 
 /**
@@ -88,8 +78,6 @@ fun Omega7Page(
     server: Omega7Server,
     voiceOn: Boolean,
     onVoiceChange: (Boolean) -> Unit,
-    // The remote's voice button, if Fire OS passes it on: true pressed, false released
-    voiceKey: kotlinx.coroutines.flow.SharedFlow<Boolean>,
     onSetUp: () -> Unit,
     onLoginRejected: () -> Unit,
     modifier: Modifier = Modifier,
@@ -167,48 +155,6 @@ fun Omega7Page(
             }
             delay(RETRY_MS)
         }
-    }
-
-    // Talking through the remote's mic: OK on Talk starts, OK again (or 15 s) sends
-    val mic = remember { RemoteMic(context) }
-    var talking by remember { mutableStateOf(false) }
-    var level by remember { mutableFloatStateOf(0f) }
-    fun startTalking() {
-        if (talking) return
-        talking = true
-        scope.launch {
-            var peak = 0f
-            val wav = mic.record(TALK_MAX_MS, keepGoing = { talking }) { now ->
-                level = now
-                if (now > peak) peak = now
-            }
-            talking = false
-            level = 0f
-            when {
-                wav == null -> Toast.makeText(context, "No microphone available to Marquee", Toast.LENGTH_LONG).show()
-                peak < SILENCE_LEVEL -> Toast.makeText(context, "Only silence came through the microphone", Toast.LENGTH_LONG).show()
-                wav.size < MIN_TALK_BYTES -> Toast.makeText(context, "Too short to send", Toast.LENGTH_SHORT).show()
-                else -> try {
-                    client.talk(wav)
-                    Toast.makeText(context, "Omega-7 heard you", Toast.LENGTH_SHORT).show()
-                } catch (e: Omega7Exception) {
-                    Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
-    val askForMic = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted) startTalking() else Toast.makeText(context, "Marquee needs the microphone to talk to Omega-7", Toast.LENGTH_LONG).show()
-    }
-    fun talk() {
-        when {
-            talking -> talking = false
-            context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED -> startTalking()
-            else -> askForMic.launch(Manifest.permission.RECORD_AUDIO)
-        }
-    }
-    LaunchedEffect(voiceKey) {
-        voiceKey.collect { pressed -> if (pressed) { if (!talking) talk() } else talking = false }
     }
 
     fun act(label: String, action: suspend () -> Unit) {
@@ -317,7 +263,6 @@ fun Omega7Page(
                     }
                 }
             }
-            TalkButton(talking, level, onClick = ::talk)
             CommandField { text -> act("Sent to Omega-7") { client.command(text) } }
             PresetCommands.forEach { (text, icon) ->
                 DecoOutlinedButton(onClick = { act("Sent to Omega-7") { client.command(text) } }, modifier = Modifier.fillMaxWidth()) {
@@ -325,22 +270,6 @@ fun Omega7Page(
                     Text(text, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(start = 8.dp))
                 }
             }
-        }
-    }
-}
-
-/** Talk, or while recording: a listening line with a gold level meter */
-@Composable
-private fun TalkButton(talking: Boolean, level: Float, onClick: () -> Unit) {
-    DecoButton(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
-        MdiIcon(if (talking) "mdi:send" else "mdi:microphone", size = 18.dp, color = androidx.tv.material3.LocalContentColor.current)
-        if (talking) {
-            Text("Listening · OK to send", modifier = Modifier.padding(horizontal = 8.dp))
-            Box(Modifier.weight(1f).height(6.dp).background(Deco.HairFaint)) {
-                Box(Modifier.fillMaxHeight().fillMaxWidth(level).background(Deco.GoldHi))
-            }
-        } else {
-            Text("Talk with the remote's mic", modifier = Modifier.padding(start = 8.dp))
         }
     }
 }
