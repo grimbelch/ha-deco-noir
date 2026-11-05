@@ -73,6 +73,10 @@ class Omega7State(json: JSONObject) {
         (0 until a.length()).mapNotNull { a.optJSONObject(it) }.map { VoxLine(it.optString("time"), it.optString("speaker"), it.optString("text")) }
     }.orEmpty()
 
+    /** Clips of its speech, newest last; the ids are times in milliseconds */
+    val audioIds: List<Long> = json.optJSONArray("audio_ids")?.let { a -> (0 until a.length()).map { a.optLong(it) } }
+        ?: listOfNotNull(json.optLong("audio_id").takeIf { it > 0 })
+
     private fun describe(value: Any): String? = when (value) {
         JSONObject.NULL -> null
         is JSONObject -> value.optString("summary").ifEmpty { value.optString("status") }.ifEmpty { null }
@@ -121,6 +125,12 @@ class Omega7Client(private val server: Omega7Server) {
     suspend fun state(): Omega7State = call(Request.Builder().url("${server.url}/api/state").build()) { response ->
         checkOk(response.code)
         Omega7State(JSONObject(response.body.string()))
+    }
+
+    /** One clip of what it said, as WAV */
+    suspend fun speech(id: Long): ByteArray = call(Request.Builder().url("${server.url}/api/last_speech.wav?id=$id").build()) { response ->
+        checkOk(response.code)
+        response.body.bytes()
     }
 
     /** As if said to it: queued like a spoken request */

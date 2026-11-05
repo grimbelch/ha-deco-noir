@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,13 +49,15 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-private const val STATE_POLL_MS = 3_000L
+// Often enough that a reply follows soon after it's spoken
+private const val STATE_POLL_MS = 1_500L
 private const val DEFAULT_OMEGA7_ADDRESS = "192.168.0.108"
 private const val RETRY_MS = 10_000L
 
@@ -70,7 +73,14 @@ private val PresetCommands = listOf(
  * cogitator's vitals; and buttons to wake it, send presets, type a command or run a screensaver.
  */
 @Composable
-fun Omega7Page(server: Omega7Server, onSetUp: () -> Unit, onLoginRejected: () -> Unit, modifier: Modifier = Modifier) {
+fun Omega7Page(
+    server: Omega7Server,
+    voiceOn: Boolean,
+    onVoiceChange: (Boolean) -> Unit,
+    onSetUp: () -> Unit,
+    onLoginRejected: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     if (!server.isSet) {
         Box(modifier, contentAlignment = Alignment.Center) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -94,12 +104,37 @@ fun Omega7Page(server: Omega7Server, onSetUp: () -> Unit, onLoginRejected: () ->
     var state by remember { mutableStateOf<Omega7State?>(null) }
     var problem by remember { mutableStateOf<String?>(null) }
     var eye by remember { mutableStateOf<ImageBitmap?>(null) }
+    // Its replies, spoken on the TV: new clips since the page opened, in order
+    val voice = remember { Omega7Voice(context) }
+    val speech = remember { Channel<Long>(Channel.UNLIMITED) }
+    val speak by rememberUpdatedState(voiceOn)
+    var heardUpTo by remember { mutableStateOf<Long?>(null) }
+    LaunchedEffect(client) {
+        for (id in speech) {
+            if (!speak) continue
+            try {
+                voice.play(client.speech(id))
+            } catch (e: Omega7Exception) {
+                AppLog.w("Omega7", "Couldn't fetch a reply: ${e.message}")
+            }
+        }
+    }
 
     LaunchedEffect(client) {
         while (true) {
             try {
-                state = client.state()
+                val fresh = client.state()
+                state = fresh
                 problem = null
+                // The first look only sets where to start, like the web remote: nothing old is replayed
+                val newest = fresh.audioIds.maxOrNull()
+                val heard = heardUpTo
+                if (heard == null) {
+                    heardUpTo = newest ?: 0L
+                } else if (newest != null && newest > heard) {
+                    fresh.audioIds.filter { it > heard }.sorted().forEach { speech.trySend(it) }
+                    heardUpTo = newest
+                }
                 delay(STATE_POLL_MS)
             } catch (e: Omega7Exception) {
                 problem = e.message
@@ -157,6 +192,10 @@ fun Omega7Page(server: Omega7Server, onSetUp: () -> Unit, onLoginRejected: () ->
                 style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.3.em),
                 color = Deco.IvoryDim,
             )
+            DecoOutlinedButton(onClick = { onVoiceChange(!voiceOn) }, modifier = Modifier.padding(top = 10.dp)) {
+                MdiIcon(if (voiceOn) "mdi:volume-high" else "mdi:volume-off", size = 18.dp, color = androidx.tv.material3.LocalContentColor.current)
+                Text(if (voiceOn) "Voice on TV" else "Voice off", modifier = Modifier.padding(start = 8.dp))
+            }
         }
         // The vox log
         Column(

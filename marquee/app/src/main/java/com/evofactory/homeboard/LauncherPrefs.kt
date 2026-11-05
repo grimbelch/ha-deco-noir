@@ -45,6 +45,11 @@ class LauncherPrefs(context: Context) {
             putString("omega7_cert_pin", value.certPin)
         }
 
+    /** Whether Omega-7's replies play on the TV while its page is open */
+    var omega7Voice: Boolean
+        get() = prefs.getBoolean("omega7_voice", true)
+        set(value) = prefs.edit { putBoolean("omega7_voice", value) }
+
     /** Last address entered in the Ping utility */
     var pingHost: String
         get() = prefs.getString("ping_host", null) ?: ""

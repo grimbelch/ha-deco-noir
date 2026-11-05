@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
     private var tab by mutableStateOf(MarqueeTab.Home)
     private var omega7 by mutableStateOf(Omega7Server())
     private var omega7Open by mutableStateOf(false)
+    private var omega7Voice by mutableStateOf(true)
 
     // Home override's crash guard: the launcher counts as started once it has stayed up a moment
     private val confirmStarted = Runnable {
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
         haEntities = prefs.haEntities
         haActions = prefs.haActions
         omega7 = prefs.omega7
+        omega7Voice = prefs.omega7Voice
         setContent {
             MaterialTheme(colorScheme = AppColorScheme, shapes = DecoShapes, typography = DecoTypography) {
                 Surface(
@@ -132,6 +134,11 @@ class MainActivity : ComponentActivity() {
                             MarqueeTab.Media -> MediaPage(ha, page)
                             MarqueeTab.Omega7 -> Omega7Page(
                                 server = omega7,
+                                voiceOn = omega7Voice,
+                                onVoiceChange = {
+                                    omega7Voice = it
+                                    prefs.omega7Voice = it
+                                },
                                 onSetUp = { omega7Open = true },
                                 onLoginRejected = { saveOmega7(Omega7Server(omega7.url)) },
                                 modifier = page,
