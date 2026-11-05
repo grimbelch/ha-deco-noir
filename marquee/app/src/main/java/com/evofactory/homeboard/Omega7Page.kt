@@ -66,7 +66,6 @@ private const val RETRY_MS = 10_000L
 private val PresetCommands = listOf(
     "Status report" to "mdi:console",
     "What's on today?" to "mdi:calendar-clock",
-    "Tell me something about the Imperium" to "mdi:skull",
 )
 
 /**
