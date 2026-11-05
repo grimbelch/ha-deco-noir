@@ -64,6 +64,7 @@ fun HomeTopBar(
     onHomeTabSelected: (Boolean) -> Unit,
     showFreeMemory: Boolean,
     modifier: Modifier = Modifier,
+    showClock: Boolean = true,
     actions: @Composable RowScope.() -> Unit = {},
     settings: @Composable () -> Unit,
 ) {
@@ -95,7 +96,7 @@ fun HomeTopBar(
             actions()
         }
         settings()
-        Clock()
+        if (showClock) Clock()
     }
 }
 

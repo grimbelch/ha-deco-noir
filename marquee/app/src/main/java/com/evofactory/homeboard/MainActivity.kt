@@ -46,9 +46,8 @@ import java.util.UUID
 
 // The panel next to the camera (Home Assistant or the other cameras) is at least this wide; it
 // also gets whatever width the camera leaves
-private val SidePanelWidth = 260.dp
 
-// App tiles from this 0-based slot on have the side panel above them, the earlier ones the camera
+// App tiles from this 0-based slot on have the Jellyfin column above them, the earlier ones the lobby (see LOBBY_WEIGHT)
 private const val FIRST_SLOT_UNDER_PANEL = 3
 
 class MainActivity : ComponentActivity() {
@@ -122,6 +121,7 @@ class MainActivity : ComponentActivity() {
                     val mainCameraFocus = remember { FocusRequester() }
                     val haSensorsFocus = remember { FocusRequester() }
                     val networkFocus = remember { FocusRequester() }
+                    val jellyfinFocus = remember { FocusRequester() }
                     val cogFocus = remember { FocusRequester() }
                     val secondTabFocus = remember { FocusRequester() }
                     val homeTabFocus = remember { FocusRequester() }
@@ -141,7 +141,6 @@ class MainActivity : ComponentActivity() {
                     }
                     val actions = haActions.take(MAX_HA_ACTIONS)
                     val haConnection = rememberHaConnection(haServer, remember(haEntities, actions) { haEntities + actions })
-                    val sideContent = haServer.isSet
                     // Set when a camera's picked in the grid: it's selected once it's on screen
                     var selectMainCamera by remember { mutableStateOf(false) }
                     LaunchedEffect(tab, selectMainCamera) {
@@ -194,8 +193,10 @@ class MainActivity : ComponentActivity() {
                     }
                     // Where up goes from the bottom rows, from the item on screen in this 0-based slot
                     fun aboveRows(slot: Int) = when {
-                        slot >= FIRST_SLOT_UNDER_PANEL && tab == HomeTab.Home && haServer.isSet -> haSensorsFocus
-                        slot < FIRST_SLOT_UNDER_PANEL && tab == HomeTab.Home && camera != null -> mainCameraFocus
+                        // Under the Jellyfin column: the camera if it's there, else the marquee
+                        slot >= FIRST_SLOT_UNDER_PANEL && tab == HomeTab.Home -> if (camera != null) mainCameraFocus else jellyfinFocus
+                        // Under the lobby: the scenes, if there are any
+                        tab == HomeTab.Home && haServer.isSet && actions.isNotEmpty() -> haSensorsFocus
                         else -> FocusRequester.Default
                     }
                     Column(modifier = Modifier.fillMaxSize()) {
@@ -207,6 +208,8 @@ class MainActivity : ComponentActivity() {
                             alertsTabFocus = alertsTabFocus,
                             onHomeTabSelected = { homeTabSelected = it },
                             showFreeMemory = showFreeMemory,
+                            // The lobby has its own large clock
+                            showClock = tab != HomeTab.Home,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(start = EdgePadding, top = TopPadding, end = EdgePadding)
@@ -222,7 +225,8 @@ class MainActivity : ComponentActivity() {
                                     onClick = { launcherSettingsOpen = true },
                                     modifier = Modifier.weight(1f, fill = false),
                                 )
-                                if (haServer.isSet) HaActionButtons(haConnection, actions)
+                                // On Home they're the scenes under the lobby
+                                if (haServer.isSet && tab != HomeTab.Home) HaActionButtons(haConnection, actions)
                                 NetworkButton(
                                     onClick = { networkStatusOpen = true },
                                     modifier = Modifier.focusRequester(networkFocus),
@@ -264,56 +268,39 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.weight(1f).fillMaxWidth().padding(top = EdgePadding),
                             )
                         } else {
-                            // The camera, as large as fits above the app row, and Home Assistant
-                            // next to it, which gets all the width the camera leaves
-                            BoxWithConstraints(
+                            // Like the Home dashboard: the lobby and scenes on the left, Jellyfin's
+                            // marquee on the right, with the main camera under it if there is one
+                            val showCamera = camera != null && !(minimizeVideoStreams && frigateFeed?.playing != null)
+                            LobbyHome(
+                                haConnection = if (haServer.isSet) haConnection else null,
+                                entityIds = haEntities,
+                                actionIds = actions,
+                                camera = if (showCamera && camera != null) {
+                                    { cameraModifier ->
+                                        MainCamera(
+                                            camera = camera,
+                                            cameras = cameras,
+                                            minimizeStreams = minimizeVideoStreams,
+                                            onSelect = ::selectCamera,
+                                            modifier = cameraModifier.decoFrame(innerBand = false),
+                                        )
+                                    }
+                                } else {
+                                    null
+                                },
+                                cameraFocus = mainCameraFocus,
+                                scenesFocus = haSensorsFocus,
+                                jellyfinFocus = jellyfinFocus,
+                                // The button next to the cog
+                                upFocus = networkFocus,
+                                downFocus = appRowFocus,
+                                onSetUpHa = { haPicker = HaPick.Sensors },
                                 modifier = Modifier
                                     .weight(1f)
                                     .fillMaxWidth()
                                     .padding(start = EdgePadding, top = EdgePadding, end = EdgePadding)
                                     .onFocusChanged { middleSelected = it.hasFocus },
-                            ) {
-                                val cameraWidth = minOf(
-                                    maxHeight * 16f / 9f,
-                                    if (sideContent) maxWidth - SidePanelWidth - EdgePadding else maxWidth,
-                                )
-                                Row(horizontalArrangement = Arrangement.spacedBy(EdgePadding)) {
-                                    Box(modifier = Modifier.width(cameraWidth).fillMaxHeight()) {
-                                        // Stopped before a clip opens, so the clip can have its decoder
-                                        if (camera != null && !(minimizeVideoStreams && frigateFeed?.playing != null)) {
-                                            // Restarted when the panel appears or goes: the playing video
-                                            // doesn't follow the camera's new size otherwise
-                                            key(sideContent) {
-                                                MainCamera(
-                                                    camera = camera,
-                                                    cameras = cameras,
-                                                    minimizeStreams = minimizeVideoStreams,
-                                                    onSelect = ::selectCamera,
-                                                    modifier = Modifier
-                                                        .fillMaxWidth()
-                                                        .aspectRatio(16f / 9f)
-                                                        .decoFrame(innerBand = false)
-                                                        .focusRequester(mainCameraFocus)
-                                                        .focusProperties { up = secondTabFocus },
-                                                )
-                                            }
-                                        }
-                                    }
-                                    if (sideContent) {
-                                        Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
-                                            HomeAssistantPanel(
-                                                connection = haConnection,
-                                                entityIds = haEntities,
-                                                sensorsFocus = haSensorsFocus,
-                                                // The button next to the cog
-                                                upFocus = networkFocus,
-                                                onLogIn = { haPicker = HaPick.Sensors },
-                                                modifier = Modifier.fillMaxSize(),
-                                            )
-                                        }
-                                    }
-                                }
-                            }
+                            )
                         }
                         // The tiles' grow room counts towards the margins above and below the row
                         Spacer(Modifier.height(EdgePadding - TileGrowRoom))

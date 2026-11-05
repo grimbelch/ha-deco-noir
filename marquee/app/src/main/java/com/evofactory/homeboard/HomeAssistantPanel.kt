@@ -59,8 +59,8 @@ private const val RETRY_DELAY_MS = 5_000L
 
 private val SensorFadeHeight = 40.dp
 
-/** At most this many action buttons in the top bar */
-const val MAX_HA_ACTIONS = 3
+/** At most this many action buttons: scenes on the Home tab, buttons in the top bar elsewhere */
+const val MAX_HA_ACTIONS = 4
 
 enum class HaStatus { Connecting, Connected, Offline, TokenRejected }
 
