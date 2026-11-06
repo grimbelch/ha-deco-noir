@@ -70,13 +70,13 @@
       "top": 75.16
     },
     {
-      "entity": "switch.dining_room_xmas",
-      "name": "Dining Xmas",
-      "icon": "mdi:pine-tree",
+      "entity": "switch.grow_light_dining_room",
+      "name": "Grow Light",
+      "icon": "mdi:sprout",
       "kind": "lamp",
       "left": 54.53,
       "top": 89.31,
-      "glow": "glow_switch_dining_room_xmas.svg"
+      "glow": "glow_switch_grow_light_dining_room.svg"
     },
     {
       "entity": "light.outdoor_dimmer_light_1",

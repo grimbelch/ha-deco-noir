@@ -19,7 +19,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = None  # theme comes from the HA default (toggled via input_select.dashboard_theme)
-ASSET_V = "7"  # bump to bust caches when SVGs change
+ASSET_V = "8"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -112,7 +112,7 @@ def section(*cards, span=1):
 
 LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_lamp", "switch.grow_lamp",
              "switch.lamp_window", "switch.torch_light_front", "switch.torch_light_back",
-             "switch.basement_fireplace_lights", "switch.painting_desk", "switch.dining_room_xmas"]
+             "switch.basement_fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room"]
 SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitchen_speaker", "media_player.spotify"]
 
 # ---------------------------------------------------------------- HOME
@@ -153,9 +153,9 @@ home = {
                 tile("media_player.billie_2", "Billie", "mdi:speaker", 4, "more-info"),
                 span=2),
 
-        section(room("Kitchen", "house", ["switch.dining_room_xmas"], "var(--deco-gold)",
+        section(room("Dining & Kitchen", "house", ["switch.grow_light_dining_room"], "var(--deco-gold)",
                      ("media_player.kitchen_speaker", "Kitchen speaker")),
-                tile("switch.dining_room_xmas", "Dining Xmas", "mdi:pine-tree"),
+                tile("switch.grow_light_dining_room", "Grow Light", "mdi:sprout-outline"),
                 tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", 6, "more-info")),
 
         # Lower floor

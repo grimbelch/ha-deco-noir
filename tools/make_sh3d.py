@@ -86,7 +86,7 @@ LIGHTS = [
     ("switch.pappasan_lamp", "lvl_main", 830, 612, 150),
     ("switch.lamp_window", "lvl_main", 765, 612, 110),
     ("switch.grow_lamp", "lvl_main", 700, 612, 90),
-    ("switch.dining_room_xmas", "lvl_main", 661, 718, 160),
+    ("switch.grow_light_dining_room", "lvl_main", 661, 718, 160),
     ("light.outdoor_dimmer_light_1", "lvl_main", 585, 345, 220),
     ("light.outdoor_dimmer_light_2", "lvl_main", 690, 345, 220),
     ("switch.torch_light_front", "lvl_lower", 925, 970, 150),
