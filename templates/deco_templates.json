@@ -12,7 +12,7 @@
     "hold_action": {
       "action": "none"
     },
-    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:500 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n",
     "custom_fields": {
       "m": "[[[ return `<div class='mq'><span class='r'></span><span class='t'><span class='d'>\u25c6</span>${variables.title}<span class='d'>\u25c6</span></span><span class='r'></span></div>`; ]]]"
     },
@@ -135,6 +135,9 @@
           "font-family": "var(--deco-label)"
         },
         {
+          "font-weight": "500"
+        },
+        {
           "font-size": "11px"
         },
         {
@@ -168,6 +171,9 @@
       "state": [
         {
           "font-family": "var(--deco-num)"
+        },
+        {
+          "font-weight": "400"
         },
         {
           "font-size": "12px"
@@ -333,6 +339,9 @@
           "font-family": "var(--deco-label)"
         },
         {
+          "font-weight": "500"
+        },
+        {
           "font-size": "10px"
         },
         {
@@ -377,7 +386,7 @@
       "sensor.h2s_0938ac5b0600679_print_status",
       "climate.nest_thermostat"
     ],
-    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:400 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:200 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:300 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:400 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:200 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:400 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.chips{display:flex;flex-wrap:wrap;gap:8px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' 'picker' !important;grid-template-columns:1fr !important}#picker{justify-self:start !important;padding-left:0 !important;border-top:0 !important;margin-top:10px !important;padding-top:0 !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
+    "extra_styles": "\n.mq{display:flex;align-items:center;gap:12px;width:100%}\n.mq .r{flex:1;height:5px;border-top:1px solid var(--deco-hair);border-bottom:1px solid var(--deco-hair-faint)}\n.mq .t{font-family:var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--deco-gold-hi);white-space:nowrap}\n.mq .d{font-size:8px;color:var(--deco-gold);margin:0 10px;vertical-align:middle}\n.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--deco-hair-faint);background:rgba(255,255,255,.02);\n  font:500 10px/1 var(--deco-label);letter-spacing:.18em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6));white-space:nowrap}\n.chip b{font-weight:600;color:var(--deco-ivory);letter-spacing:.12em}\n.chip ha-icon{--mdc-icon-size:15px;color:var(--deco-gold)}\n.chip.ok ha-icon{color:var(--deco-emerald)}\n.chip.bad ha-icon{color:var(--deco-garnet)}\n\n.clk{font:400 64px/.9 var(--deco-num);color:var(--deco-ivory);letter-spacing:.02em}\n.clk small{font:400 16px var(--deco-label);letter-spacing:.3em;color:var(--deco-gold-hi);margin-left:6px}\n.dt{font:500 11px/1 var(--deco-label);letter-spacing:.38em;text-transform:uppercase;color:var(--deco-gold-hi);margin-top:12px}\n.gr{font:400 26px/1.1 var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;color:var(--deco-ivory);margin-top:8px}\n.wx{text-align:right}\n.wx ha-icon{--mdc-icon-size:44px;color:var(--deco-gold-hi)}\n.wx .t{font:400 40px/1 var(--deco-num);color:var(--deco-ivory)}\n.wx .c{font:500 10px/1.5 var(--deco-label);letter-spacing:.26em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.chips{display:flex;flex-wrap:wrap;gap:8px}\n@media (max-width:600px){.clk{font-size:52px}.gr{font-size:22px}#container{grid-template-areas:'left' 'right' 'chips' 'picker' !important;grid-template-columns:1fr !important}#picker{justify-self:start !important;padding-left:0 !important;border-top:0 !important;margin-top:10px !important;padding-top:0 !important}#right{justify-self:start !important;margin-top:10px}.wx{text-align:left;display:flex;align-items:center;gap:12px}.wx ha-icon{--mdc-icon-size:34px}.wx .t{font-size:32px}}\n",
     "custom_fields": {
       "left": "[[[\nconst d=new Date(); let h=d.getHours(); const m=String(d.getMinutes()).padStart(2,'0');\nconst ap=h>=12?'PM':'AM'; h=h%12||12;\nconst days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\nconst months=['January','February','March','April','May','June','July','August','September','October','November','December'];\nconst hr=d.getHours(); const part= hr<5?'Good night':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';\nconst who=(user && user.name) ? user.name.split(' ')[0] : '';\nreturn `<div class=\"clk\">${h}:${m}<small>${ap}</small></div><div class=\"dt\">${days[d.getDay()]} \u00b7 ${months[d.getMonth()]} ${d.getDate()}</div><div class=\"gr\">${part}${who?', '+who:''}</div>`;\n]]]",
       "right": "[[[\nconst map={'clear-night':'weather-night','cloudy':'weather-cloudy','fog':'weather-fog','hail':'weather-hail',\n'lightning':'weather-lightning','lightning-rainy':'weather-lightning-rainy','partlycloudy':'weather-partly-cloudy',\n'pouring':'weather-pouring','rainy':'weather-rainy','snowy':'weather-snowy','snowy-rainy':'weather-snowy-rainy',\n'sunny':'weather-sunny','windy':'weather-windy','windy-variant':'weather-windy-variant','exceptional':'alert-circle-outline'};\nconst w=states['weather.forecast_home']; if(!w) return '';\nconst ic=map[w.state]||'weather-cloudy';\nconst cond=w.state==='partlycloudy'?'Partly cloudy':w.state.replace(/-/g,' ');\nconst t=Math.round(w.attributes.temperature); const u=w.attributes.temperature_unit||'\u00b0';\nconst th=states['climate.nest_thermostat']; const inside= th && th.attributes.current_temperature!==undefined ? ` \u00b7 Inside ${Math.round(th.attributes.current_temperature)}\u00b0` : '';\nreturn `<div class=\"wx\"><ha-icon icon=\"mdi:${ic}\"></ha-icon><div class=\"t\">${t}\u00b0</div><div class=\"c\">${cond}${inside}</div></div>`;\n]]]",
@@ -425,6 +434,9 @@
             "justify-self": "stretch"
           },
           {
+            "align-self": "stretch"
+          },
+          {
             "border-top": "1px solid var(--deco-hair-faint)"
           },
           {
@@ -437,6 +449,9 @@
         "picker": [
           {
             "justify-self": "end"
+          },
+          {
+            "align-self": "stretch"
           },
           {
             "border-top": "1px solid var(--deco-hair-faint)"
@@ -506,6 +521,9 @@
           "font-family": "var(--deco-display)"
         },
         {
+          "-webkit-text-stroke": "var(--deco-stroke, 0px) currentColor"
+        },
+        {
           "font-size": "26px"
         },
         {
@@ -568,6 +586,9 @@
             "font-family": "var(--deco-label)"
           },
           {
+            "font-weight": "500"
+          },
+          {
             "font-size": "10px"
           },
           {
@@ -622,7 +643,7 @@
       "action": "more-info"
     },
     "custom_fields": {
-      "g": "[[[\nconst v=Math.max(0,Math.min(100,parseFloat(entity.state)||0)); const L=201; const dash=(v/100*L).toFixed(1);\nreturn `<svg viewBox=\"0 0 160 96\" style=\"width:100%;max-width:170px;display:block;margin:0 auto\">\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.16)\" stroke-width=\"6\"/>\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:var(--deco-gold)\" stroke-width=\"6\" stroke-dasharray=\"${dash} ${L}\"/>\n<path d=\"M8 86 A72 72 0 0 1 152 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.35)\" stroke-width=\"1\"/>\n<g style=\"stroke:rgba(201,164,76,.5)\"><path d=\"M80 10 v8\"/><path d=\"M24 30 l6 6\"/><path d=\"M136 30 l-6 6\"/></g></svg>\n<div style=\"font:200 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px\">${Math.round(v)}<span style=\"font-size:13px;color:var(--deco-gold-hi)\">%</span></div>`;\n]]]"
+      "g": "[[[\nconst v=Math.max(0,Math.min(100,parseFloat(entity.state)||0)); const L=201; const dash=(v/100*L).toFixed(1);\nreturn `<svg viewBox=\"0 0 160 96\" style=\"width:100%;max-width:170px;display:block;margin:0 auto\">\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.16)\" stroke-width=\"6\"/>\n<path d=\"M16 86 A64 64 0 0 1 144 86\" fill=\"none\" style=\"stroke:var(--deco-gold)\" stroke-width=\"6\" stroke-dasharray=\"${dash} ${L}\"/>\n<path d=\"M8 86 A72 72 0 0 1 152 86\" fill=\"none\" style=\"stroke:rgba(201,164,76,.35)\" stroke-width=\"1\"/>\n<g style=\"stroke:rgba(201,164,76,.5)\"><path d=\"M80 10 v8\"/><path d=\"M24 30 l6 6\"/><path d=\"M136 30 l-6 6\"/></g></svg>\n<div style=\"font:400 30px/1 var(--deco-num);color:var(--deco-ivory);margin-top:-28px\">${Math.round(v)}<span style=\"font-size:13px;color:var(--deco-gold-hi)\">%</span></div>`;\n]]]"
     },
     "styles": {
       "card": [
@@ -641,6 +662,9 @@
       "name": [
         {
           "font-family": "var(--deco-label)"
+        },
+        {
+          "font-weight": "500"
         },
         {
           "font-size": "10px"
@@ -670,7 +694,7 @@
       "action": "more-info"
     },
     "triggers_update": "all",
-    "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:400 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.row b{font:300 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
+    "extra_styles": "\n.rows{width:100%}\n.row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.row:last-child{border-bottom:0}\n.row span{font:500 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.row b{font:400 17px/1 var(--deco-num);color:var(--deco-ivory);font-weight:400;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.badge{font:600 9px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi)}\n.badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)} .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n",
     "custom_fields": {
       "badge": "[[[\nif(!entity) return ''; const v=entity.state;\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[v]||v;\nconst cls=v==='finish'?'ok':(v==='failed'||v==='offline'?'bad':'');\nreturn `<span class=\"badge ${cls}\">${lab}</span>`;\n]]]",
       "rows": "[[[\nconst rows=variables.rows||[]; let h='<div class=\"rows\">';\nfor(const r of rows){ const st=states[r.entity]; if(!st) continue; let v=r.attr?st.attributes[r.attr]:st.state;\n  const num=parseFloat(v); if(r.round!==undefined && !isNaN(num)) v=num.toFixed(r.round);\n  h+=`<div class=\"row\"><span>${r.label}</span><b>${v}${r.unit?`<em style=\"font-style:normal;font-size:12px;color:var(--deco-gold-hi);margin-left:2px\">${r.unit}</em>`:''}</b></div>`; }\nreturn h+'</div>';\n]]]"
@@ -708,6 +732,9 @@
           "font-family": "var(--deco-display)"
         },
         {
+          "-webkit-text-stroke": "var(--deco-stroke, 0px) currentColor"
+        },
+        {
           "font-size": "22px"
         },
         {
@@ -740,7 +767,7 @@
       "action": "more-info"
     },
     "triggers_update": "all",
-    "extra_styles": "\n.pr{width:100%}\n.pr .pic{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;\n  background:rgba(0,0,0,.38);border:1px solid var(--deco-hair)}\n.pr .pic img{max-width:100%;max-height:100%;object-fit:contain;filter:var(--deco-img-filter,none)}\n.pr .pic .none{font:400 11px/1 var(--deco-label);letter-spacing:.24em;color:var(--seasons-text, rgba(237,230,214,.5))}\n.pr .badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;\n  padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi);background:rgba(0,0,0,.6)}\n.pr .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)}\n.pr .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n.pr .badge.run{border-color:var(--deco-gold-hi);color:var(--deco-ivory)}\n.pr .job{font:300 20px/1.2 var(--deco-display);color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.pr .bar{height:12px;border:1px solid var(--deco-hair);padding:2px}\n.pr .bar i{display:block;height:100%;background:var(--deco-gold)}\n.pr .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}\n.pr .meta span{display:flex;flex-direction:column;gap:6px}\n.pr .meta em{font:400 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.pr .meta b{font:300 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:300;white-space:nowrap}\n",
+    "extra_styles": "\n.pr{width:100%}\n.pr .pic{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;\n  background:rgba(0,0,0,.38);border:1px solid var(--deco-hair)}\n.pr .pic img{max-width:100%;max-height:100%;object-fit:contain;filter:var(--deco-img-filter,none)}\n.pr .pic .none{font:500 11px/1 var(--deco-label);letter-spacing:.24em;color:var(--seasons-text, rgba(237,230,214,.5))}\n.pr .badge{position:absolute;top:10px;left:10px;font:600 10px/1 var(--deco-label);letter-spacing:.24em;text-transform:uppercase;\n  padding:6px 9px;border:1px solid var(--deco-gold);color:var(--deco-gold-hi);background:rgba(0,0,0,.6)}\n.pr .badge.ok{border-color:var(--deco-emerald);color:var(--deco-emerald)}\n.pr .badge.bad{border-color:var(--deco-garnet);color:var(--deco-garnet)}\n.pr .badge.run{border-color:var(--deco-gold-hi);color:var(--deco-ivory)}\n.pr .job{font:400 20px/1.2 var(--deco-display);-webkit-text-stroke:var(--deco-stroke,0px) currentColor;color:var(--deco-ivory);margin:14px 0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.pr .bar{height:12px;border:1px solid var(--deco-hair);padding:2px}\n.pr .bar i{display:block;height:100%;background:var(--deco-gold)}\n.pr .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}\n.pr .meta span{display:flex;flex-direction:column;gap:6px}\n.pr .meta em{font:500 10px/1 var(--deco-label);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.pr .meta b{font:400 18px/1 var(--deco-num);color:var(--deco-ivory);font-weight:400;white-space:nowrap}\n",
     "custom_fields": {
       "body": "[[[\nconst v=variables, st=entity?entity.state:'unavailable';\nconst val=id=>{const s=states[id];return s&&!['unknown','unavailable'].includes(s.state)?s.state:null;};\nconst lab={finish:'Finished',running:'Printing',pause:'Paused',failed:'Failed',idle:'Idle',prepare:'Preparing',offline:'Offline'}[st]||st;\nconst cls=st==='finish'?'ok':(st==='failed'||st==='offline'?'bad':(st==='running'?'run':''));\nconst img=states[v.image], src=img&&img.attributes.entity_picture;\nconst n=Number(val(v.progress)), p=Number.isFinite(n)?Math.max(0,Math.min(100,n)):0;\nconst hrs=Number(val(v.remaining)); let left='\u2014';\nif(Number.isFinite(hrs)){ const m=Math.round(hrs*60); left=m<=0?'Done':(m>=60?Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m':m+'m'); }\nconst cl=val(v.layer), tl=val(v.layers), w=val(v.weight);\nreturn `<div class=\"pr\"><div class=\"pic\">${src?`<img src=\"${src}\" alt=\"\">`:'<span class=\"none\">NO PREVIEW</span>'}<span class=\"badge ${cls}\">${lab}</span></div>`\n +`<div class=\"job\">${val(v.job)||'No active job'}</div><div class=\"bar\"><i style=\"width:${p}%\"></i></div>`\n +`<div class=\"meta\"><span><em>Progress</em><b>${p}%</b></span><span><em>Time left</em><b>${left}</b></span>`\n +`<span><em>Layer</em><b>${cl&&tl?cl+'/'+tl:'\u2014'}</b></span><span><em>Filament</em><b>${w?Math.round(w)+' g':'\u2014'}</b></span></div></div>`;\n]]]"
     },
@@ -775,7 +802,7 @@
       "action": "none"
     },
     "triggers_update": "all",
-    "extra_styles": "\n.fb{width:100%}\n.fr{display:grid;grid-template-columns:46px 14px minmax(0,1.7fr) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.fr:last-child{border-bottom:0}\n.fr .sl{font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.fr .sw{width:14px;height:14px;border:1px solid var(--deco-hair)}\n.fr .nm{font:300 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.fr .nm.dim{color:var(--seasons-text, rgba(237,230,214,.45))}\n.fr .tr{height:16px;border:1px solid var(--deco-hair);padding:2px}\n.fr .tr i{display:block;height:100%;background:var(--deco-gold)}\n.fr .tr i.low{background:var(--deco-garnet)}\n.fr b{font:300 16px/1 var(--deco-num);font-weight:300;color:var(--deco-ivory);text-align:right}\n.fn{display:flex;justify-content:space-between;margin-top:8px;font:400 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n",
+    "extra_styles": "\n.fb{width:100%}\n.fr{display:grid;grid-template-columns:46px 14px minmax(0,1.7fr) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--deco-hair-faint)}\n.fr:last-child{border-bottom:0}\n.fr .sl{font:500 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n.fr .sw{width:14px;height:14px;border:1px solid var(--deco-hair)}\n.fr .nm{font:400 15px/1.2 var(--deco-num);color:var(--deco-ivory);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.fr .nm.dim{color:var(--seasons-text, rgba(237,230,214,.45))}\n.fr .tr{height:16px;border:1px solid var(--deco-hair);padding:2px}\n.fr .tr i{display:block;height:100%;background:var(--deco-gold)}\n.fr .tr i.low{background:var(--deco-garnet)}\n.fr b{font:400 16px/1 var(--deco-num);font-weight:400;color:var(--deco-ivory);text-align:right}\n.fn{display:flex;justify-content:space-between;margin-top:8px;font:500 10px/1 var(--deco-label);letter-spacing:.2em;text-transform:uppercase;color:var(--seasons-text, rgba(237,230,214,.6))}\n",
     "custom_fields": {
       "body": "[[[\nconst trays=variables.trays||[]; let h='<div class=\"fb\">';\nfor(const t of trays){ const s=states[t.entity]; if(!s) continue; const a=s.attributes||{};\n  const empty=a.empty===true||s.state==='Empty', unknown=a.unknown===true||s.state==='?';\n  const remain=Number(a.remain), has=!empty&&!unknown&&Number.isFinite(remain)&&remain>=0;\n  const col=String(a.color||''), swatch=(!empty&&!unknown&&col.length>=7&&col.slice(7)!=='00')?col.slice(0,7):'transparent';\n  const name=empty?'Empty':(unknown?'Unknown':String(a.name||s.state).replace(/^Bambu\\s+/,''));\n  h+=`<div class=\"fr\"><span class=\"sl\">${t.label}</span><span class=\"sw\" style=\"background:${swatch}\"></span>`\n   +`<span class=\"nm ${has?'':'dim'}\">${name}</span><span class=\"tr\"><i class=\"${has&&remain<20?'low':''}\" style=\"width:${has?remain:0}%\"></i></span>`\n   +`<b>${has?remain+'%':'\u2014'}</b></div>`; }\nh+='</div>';\nconst hum=states[variables.humidity], tmp=states[variables.temp];\nif(hum||tmp) h+=`<div class=\"fn\"><span>Humidity ${hum?Math.round(hum.state)+'%':'\u2014'}</span><span>${tmp?Math.round(tmp.state)+'\u00b0C':''}</span></div>`;\nreturn h;\n]]]"
     },
@@ -810,6 +837,9 @@
       "name": [
         {
           "font-family": "var(--deco-display)"
+        },
+        {
+          "-webkit-text-stroke": "var(--deco-stroke, 0px) currentColor"
         },
         {
           "font-size": "22px"
@@ -921,6 +951,9 @@
       "name": [
         {
           "font-family": "var(--deco-label)"
+        },
+        {
+          "font-weight": "500"
         },
         {
           "font-size": "8px"
@@ -1148,6 +1181,9 @@
         },
         {
           "font-family": "var(--deco-label)"
+        },
+        {
+          "font-weight": "500"
         },
         {
           "font-size": "10px"
