@@ -37,13 +37,13 @@
       "glow": "glow_switch_lamp_window.svg"
     },
     {
-      "entity": "switch.grow_lamp",
-      "name": "Grow lamp",
+      "entity": "switch.grow_light_living_room",
+      "name": "Grow Light",
       "icon": "mdi:sprout",
       "kind": "lamp",
       "left": 62.93,
       "top": 72.64,
-      "glow": "glow_switch_grow_lamp.svg"
+      "glow": "glow_switch_grow_light_living_room.svg"
     },
     {
       "entity": "media_player.billie_2",
@@ -68,6 +68,15 @@
       "kind": "speaker",
       "left": 32.76,
       "top": 75.16
+    },
+    {
+      "entity": "switch.coffee_light",
+      "name": "Coffee Light",
+      "icon": "mdi:coffee",
+      "kind": "lamp",
+      "left": 51.08,
+      "top": 63.84,
+      "glow": "glow_switch_coffee_light.svg"
     },
     {
       "entity": "switch.grow_light_dining_room",

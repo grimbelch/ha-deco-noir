@@ -13,13 +13,14 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from deco_templates import TEMPLATES, ART  # noqa: E402
 from seasons_dashboard import apply_seasons
 from cogitator_dashboard import apply_cogitator
+from per_user_theme import people, to_per_user, USER_HELPER, JS_TARGET
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
-THEME = None  # theme comes from the HA default (toggled via input_select.dashboard_theme)
-ASSET_V = "8"  # bump to bust caches when SVGs change
+THEME = None  # theme comes from each user's input_select.dashboard_theme_<name> (www/deco/theme-sync.js)
+ASSET_V = "10"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -110,9 +111,10 @@ def section(*cards, span=1):
     return s
 
 
-LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_lamp", "switch.grow_lamp",
+LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_lamp", "switch.grow_light_living_room",
              "switch.lamp_window", "switch.torch_light_front", "switch.torch_light_back",
-             "switch.basement_fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room"]
+             "switch.basement_fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room",
+             "switch.coffee_light"]
 SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitchen_speaker", "media_player.spotify"]
 
 # ---------------------------------------------------------------- HOME
@@ -143,19 +145,20 @@ home = {
 
         # Main floor
         section(room("Living Room", "living",
-                     ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.lamp_window", "switch.grow_lamp"],
+                     ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.lamp_window", "switch.grow_light_living_room"],
                      "var(--deco-gold)", ("media_player.billie_2", "Billie")),
                 tile("switch.couch_lamp", "Couch", "mdi:lamp-outline", 4),
                 tile("switch.chez_lounge_lamp", "Chez Lounge", "mdi:lamp-outline", 4),
                 tile("switch.pappasan_lamp", "Pappasan", "mdi:floor-lamp-outline", 4),
                 tile("switch.lamp_window", "Window", "mdi:lamp-outline", 4),
-                tile("switch.grow_lamp", "Grow lamp", "mdi:sprout-outline", 4),
+                tile("switch.grow_light_living_room", "Grow Light", "mdi:sprout-outline", 4),
                 tile("media_player.billie_2", "Billie", "mdi:speaker", 4, "more-info"),
                 span=2),
 
-        section(room("Dining & Kitchen", "house", ["switch.grow_light_dining_room"], "var(--deco-gold)",
+        section(room("Dining & Kitchen", "house", ["switch.grow_light_dining_room", "switch.coffee_light"], "var(--deco-gold)",
                      ("media_player.kitchen_speaker", "Kitchen speaker")),
                 tile("switch.grow_light_dining_room", "Grow Light", "mdi:sprout-outline"),
+                tile("switch.coffee_light", "Coffee Light", "mdi:coffee-outline"),
                 tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", 6, "more-info")),
 
         # Lower floor
@@ -445,6 +448,8 @@ def main():
     cfg = normalize_styles({"title": cur.get("title", "Home"), "button_card_templates": TEMPLATES,
                             "views": [home, floor, media, yard, workshop, alexandria] + keep})
     cfg = apply_cogitator(apply_seasons(cfg))
+    # one theme per person: rewrite the logical theme rules against each user's own helper
+    cfg = to_per_user(cfg, people(lambda **m: call(m)["result"]))
     (ROOT / "templates").mkdir(exist_ok=True)
     (ROOT / "templates" / "deco_templates.json").write_text(json.dumps(cfg["button_card_templates"], indent=2), encoding="utf-8")
     (out_dir / "home-hub.json").write_text(json.dumps(cfg, indent=2), encoding="utf-8")
@@ -473,7 +478,7 @@ def main():
                 walk(x)
     walk(cfg["views"])
     walk(TEMPLATES)
-    print("missing entities:", sorted(x for x in refs if x not in states))
+    print("missing entities:", sorted(x for x in refs if x not in states and x not in (USER_HELPER, JS_TARGET)))
 
 
 if __name__ == "__main__":

@@ -52,7 +52,12 @@ class DecoThemePicker extends HTMLElement {
   }
   set hass(hass) { this._hass = hass; this.render(); }
   getCardSize() { return 1; }
-  get state() { return this._hass && this._hass.states[this.config.entity]; }
+  // entity may contain {user}: each person has their own input_select.dashboard_theme_<name>
+  get entity() {
+    const u = (this._hass && this._hass.user && this._hass.user.name) || '';
+    return (this.config.entity || '').replace('{user}', u.toLowerCase().replace(/[^a-z0-9]+/g, '_'));
+  }
+  get state() { return this._hass && this._hass.states[this.entity]; }
   options() { return (this.state && this.state.attributes.options) || []; }
   render() {
     if (!this.list) return;
@@ -103,7 +108,7 @@ class DecoThemePicker extends HTMLElement {
   async choose(option) {
     this.close(true);
     try {
-      await this._hass.callService('input_select', 'select_option', {entity_id: this.config.entity, option});
+      await this._hass.callService('input_select', 'select_option', {entity_id: this.entity, option});
     } catch (err) { console.warn('deco-theme-picker:', err); }
   }
   disconnectedCallback() { document.removeEventListener('pointerdown', this._outside, true); }

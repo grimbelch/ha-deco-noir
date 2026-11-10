@@ -7,8 +7,8 @@ HELPER = 'input_select.dashboard_theme'
 P = 'h2s_0938ac5b0600679'
 
 LIGHTS = ['switch.couch_lamp', 'switch.chez_lounge_lamp', 'switch.pappasan_lamp', 'switch.lamp_window',
-          'switch.grow_lamp', 'switch.torch_light_front', 'switch.torch_light_back',
-          'switch.basement_fireplace_lights', 'switch.grow_light_dining_room', 'switch.painting_desk',
+          'switch.grow_light_living_room', 'switch.torch_light_front', 'switch.torch_light_back',
+          'switch.basement_fireplace_lights', 'switch.grow_light_dining_room', 'switch.coffee_light', 'switch.painting_desk',
           'light.outdoor_dimmer_light_1', 'light.outdoor_dimmer_light_2']
 
 
@@ -52,10 +52,10 @@ def cogitator_card(scenes):
             {'title': 'Living Room', 'cards': [
                 rows([('switch.couch_lamp', 'Couch'), ('switch.chez_lounge_lamp', 'Chez Lounge'),
                       ('switch.pappasan_lamp', 'Pappasan'), ('switch.lamp_window', 'Window lamp'),
-                      ('switch.grow_lamp', 'Grow lamp')]),
+                      ('switch.grow_light_living_room', 'Grow Light')]),
                 {'type': 'media-control', 'entity': 'media_player.billie_2'}]},
             {'title': 'Dining & Kitchen', 'cards': [
-                rows([('switch.grow_light_dining_room', 'Grow Light')]),
+                rows([('switch.grow_light_dining_room', 'Grow Light'), ('switch.coffee_light', 'Coffee Light')]),
                 {'type': 'media-control', 'entity': 'media_player.kitchen_speaker'}]},
             {'title': 'Library', 'cards': [
                 rows([('switch.torch_light_front', 'Torch front'), ('switch.torch_light_back', 'Torch back'),

@@ -27,6 +27,8 @@ button{font:inherit;color:inherit;background:#f7e4c4;border:1px solid #a57d53;bo
 class SaisonsHomeCard extends HTMLElement {
   constructor(){super();this.attachShadow({mode:'open'});this.cards=[];this.widgets=[];this.generation=0;}
   setConfig(config){this.config=config;this.build();}
+  // theme_entity may contain {user}: each person has their own input_select.dashboard_theme_<name>
+  get themeEntity(){const t=this.config.theme_entity||'',u=(this._hass&&this._hass.user&&this._hass.user.name)||'';return t.replace('{user}',u.toLowerCase().replace(/[^a-z0-9]+/g,'_'));}
   getCardSize(){return 12;}
   getGridOptions(){return {columns:48,min_columns:12,rows:'auto'};}
   set hass(hass){this._hass=hass;for(const card of this.cards)card.hass=hass;this.update();}
@@ -43,7 +45,7 @@ class SaisonsHomeCard extends HTMLElement {
     const title=this.el('div','wordmark');title.innerHTML=ornament+'<h1>Home</h1>'+ornament;head.append(title);
     const theme=this.el('div','theme');const label=this.el('label','','Theme');label.htmlFor='theme';this.select=this.el('select');this.select.id='theme';
     for(const name of ['Deco Noir','Deco Noir Lite','Les Saisons','Cogitator']){const o=this.el('option','',name);o.value=name;this.select.append(o);}
-    this.select.onchange=()=>this.service('input_select','select_option',{entity_id:this.config.theme_entity,option:this.select.value});theme.append(label,this.select);head.append(theme);
+    this.select.onchange=()=>this.service('input_select','select_option',{entity_id:this.themeEntity,option:this.select.value});theme.append(label,this.select);head.append(theme);
     const top=this.el('div','top');page.append(top);
     const box=(name)=>{const b=this.el('section','box');const h=this.el('h2','',name);h.insertAdjacentHTML('beforeend',ornament);b.append(h);top.append(b);return b;};
     const scenes=this.el('div','scenes');box('Scenes').append(scenes);
@@ -72,7 +74,7 @@ class SaisonsHomeCard extends HTMLElement {
   button(text,label,handler){const b=this.el('button','',text);b.type='button';b.setAttribute('aria-label',label);b.onclick=handler;return b;}
   icon(name){const icon=document.createElement('ha-icon');icon.setAttribute('icon',name||'mdi:lightbulb-outline');return icon;}
   rows(entities,parent){
-    const icons={'Couch':'mdi:sofa-outline','Chez Lounge':'mdi:seat-outline','Pappasan':'mdi:chair-rolling','Window lamp':'mdi:floor-lamp-outline','Grow lamp':'mdi:sprout-outline','Torch front':'mdi:outdoor-lamp','Torch back':'mdi:outdoor-lamp','Fireplace':'mdi:fireplace','Outdoor 1':'mdi:outdoor-lamp','Outdoor 2':'mdi:outdoor-lamp','Sunset schedule':'mdi:calendar-clock-outline','Rain delay':'mdi:umbrella-outline'};
+    const icons={'Couch':'mdi:sofa-outline','Chez Lounge':'mdi:seat-outline','Pappasan':'mdi:chair-rolling','Window lamp':'mdi:floor-lamp-outline','Grow Light':'mdi:sprout-outline','Torch front':'mdi:outdoor-lamp','Torch back':'mdi:outdoor-lamp','Fireplace':'mdi:fireplace','Outdoor 1':'mdi:outdoor-lamp','Outdoor 2':'mdi:outdoor-lamp','Sunset schedule':'mdi:calendar-clock-outline','Rain delay':'mdi:umbrella-outline'};
     for(const cfg of entities){const row=this.el('div','device-row'),details=this.button('',cfg.name+' details',()=>this.more(cfg.entity));details.className='device-details';details.append(this.icon(icons[cfg.name]),this.el('span','',cfg.name));const state=this.el('span','device-state');const toggle=this.button('',cfg.name,()=>{const s=this._hass.states[cfg.entity];this.service(cfg.entity.split('.')[0],s?.state==='on'?'turn_off':'turn_on',{entity_id:cfg.entity});});toggle.className='switch';toggle.setAttribute('role','switch');toggle.append(this.el('span','knob'));row.append(details,state,toggle);parent.append(row);this.widgets.push(()=>{const s=this._hass.states[cfg.entity],on=s?.state==='on',available=s&&!['unavailable','unknown'].includes(s.state);toggle.setAttribute('aria-checked',String(on));toggle.disabled=!available;state.textContent=available?(on?'On':'Off'):'—';});}
   }
   printer(cards,parent){
@@ -107,6 +109,6 @@ class SaisonsHomeCard extends HTMLElement {
   adjust(entity,direction){const a=this._hass.states[entity]?.attributes;if(!a||!Number.isFinite(a.temperature))return;const temperature=Math.max(a.min_temp??-Infinity,Math.min(a.max_temp??Infinity,a.temperature+direction*(a.target_temp_step||1)));this.service('climate','set_temperature',{entity_id:entity,temperature});}
   more(entity){this.dispatchEvent(new CustomEvent('hass-more-info',{detail:{entityId:entity},bubbles:true,composed:true}));}
   async service(domain,service,data,target){try{await this._hass.callService(domain,service,data,target);if(this.error)this.error.textContent='';}catch(e){if(this.error)this.error.textContent=e.message||'The action could not be completed.';}}
-  update(){if(!this._hass)return;if(this.select&&this.shadowRoot.activeElement!==this.select)this.select.value=this._hass.states[this.config.theme_entity]?.state||'Les Saisons';for(const update of this.widgets)update();}
+  update(){if(!this._hass)return;if(this.select&&this.shadowRoot.activeElement!==this.select)this.select.value=this._hass.states[this.themeEntity]?.state||'Les Saisons';for(const update of this.widgets)update();}
 }
 if(!customElements.get('saisons-home-card'))customElements.define('saisons-home-card',SaisonsHomeCard);

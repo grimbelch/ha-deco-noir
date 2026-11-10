@@ -396,7 +396,7 @@
         "picker": {
           "card": {
             "type": "custom:deco-theme-picker",
-            "entity": "input_select.dashboard_theme"
+            "entity": "input_select.dashboard_theme_{user}"
           }
         }
       },
@@ -1128,7 +1128,7 @@
         "action": "perform-action",
         "perform_action": "input_select.select_next",
         "target": {
-          "entity_id": "input_select.dashboard_theme"
+          "entity_id": "[[[ return 'input_select.dashboard_theme_' + user.name.toLowerCase().replace(/[^a-z0-9]+/g, '_'); ]]]"
         }
       },
       "hold_action": {
@@ -1336,14 +1336,72 @@
           "column_span": 4,
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1411,13 +1469,14 @@
                     "switch.chez_lounge_lamp",
                     "switch.couch_lamp",
                     "switch.pappasan_lamp",
-                    "switch.grow_lamp",
+                    "switch.grow_light_living_room",
                     "switch.lamp_window",
                     "switch.torch_light_front",
                     "switch.torch_light_back",
                     "switch.basement_fireplace_lights",
                     "switch.painting_desk",
-                    "switch.grow_light_dining_room"
+                    "switch.grow_light_dining_room",
+                    "switch.coffee_light"
                   ]
                 }
               },
@@ -1470,14 +1529,72 @@
           "column_span": 2,
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1516,14 +1633,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1540,7 +1715,7 @@
                   "switch.chez_lounge_lamp",
                   "switch.pappasan_lamp",
                   "switch.lamp_window",
-                  "switch.grow_lamp"
+                  "switch.grow_light_living_room"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M150 92 V40 h20 V28 h20 V16 h40 v12 h20 v12 h20 v52\"/><path d=\"M170 92 V48 h20 V36 h80 v12 h20 v44\"/><path d=\"M200 92 V60 a30 30 0 0 1 60 0 V92\"/></svg>",
                 "line2_entity": "media_player.billie_2",
@@ -1605,8 +1780,8 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
-              "entity": "switch.grow_lamp",
-              "name": "Grow lamp",
+              "entity": "switch.grow_light_living_room",
+              "name": "Grow Light",
               "icon": "mdi:sprout-outline",
               "grid_options": {
                 "columns": 4,
@@ -1631,14 +1806,72 @@
           "column_span": 2,
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1651,7 +1884,8 @@
               "name": "Dining & Kitchen",
               "variables": {
                 "lamps": [
-                  "switch.grow_light_dining_room"
+                  "switch.grow_light_dining_room",
+                  "switch.coffee_light"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
                 "line2_entity": "media_player.kitchen_speaker",
@@ -1683,6 +1917,17 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
+              "entity": "switch.coffee_light",
+              "name": "Coffee Light",
+              "icon": "mdi:coffee-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "media_player.kitchen_speaker",
               "name": "Kitchen speaker",
               "icon": "mdi:speaker",
@@ -1697,14 +1942,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1787,14 +2090,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1853,14 +2214,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1939,14 +2358,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2031,14 +2508,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2048,7 +2583,7 @@
           "cards": [
             {
               "type": "custom:saisons-home-card",
-              "theme_entity": "input_select.dashboard_theme",
+              "theme_entity": "input_select.dashboard_theme_{user}",
               "music_entity": "media_player.spotify",
               "climate_entity": "climate.nest_thermostat",
               "scenes": [
@@ -2096,13 +2631,14 @@
                         "switch.chez_lounge_lamp",
                         "switch.couch_lamp",
                         "switch.pappasan_lamp",
-                        "switch.grow_lamp",
+                        "switch.grow_light_living_room",
                         "switch.lamp_window",
                         "switch.torch_light_front",
                         "switch.torch_light_back",
                         "switch.basement_fireplace_lights",
                         "switch.painting_desk",
-                        "switch.grow_light_dining_room"
+                        "switch.grow_light_dining_room",
+                        "switch.coffee_light"
                       ]
                     }
                   },
@@ -2156,8 +2692,8 @@
                           "name": "Window lamp"
                         },
                         {
-                          "entity": "switch.grow_lamp",
-                          "name": "Grow lamp"
+                          "entity": "switch.grow_light_living_room",
+                          "name": "Grow Light"
                         }
                       ]
                     },
@@ -2276,14 +2812,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2296,7 +2890,8 @@
               "name": "Dining & Kitchen",
               "variables": {
                 "lamps": [
-                  "switch.grow_light_dining_room"
+                  "switch.grow_light_dining_room",
+                  "switch.coffee_light"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M190 92 V44 L240 14 L290 44 V92\"/><path d=\"M204 92 V50 L240 28 L276 50 V92\"/><path d=\"M228 92 V66 h24 V92\"/><path d=\"M150 92 h150\"/></svg>",
                 "line2_entity": "media_player.kitchen_speaker",
@@ -2328,6 +2923,17 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
+              "entity": "switch.coffee_light",
+              "name": "Coffee Light",
+              "icon": "mdi:coffee-outline",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "media_player.kitchen_speaker",
               "name": "Kitchen speaker",
               "icon": "mdi:speaker",
@@ -2342,14 +2948,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2408,14 +3072,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2500,14 +3222,72 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Les Saisons"
-            },
-            {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state_not": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state": "Les Saisons"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state_not": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2517,7 +3297,7 @@
           "cards": [
             {
               "type": "custom:cogitator-home-card",
-              "theme_entity": "input_select.dashboard_theme",
+              "theme_entity": "input_select.dashboard_theme_{user}",
               "music_entity": "media_player.spotify",
               "climate_entity": "climate.nest_thermostat",
               "scenes": [
@@ -2565,13 +3345,14 @@
                         "switch.chez_lounge_lamp",
                         "switch.couch_lamp",
                         "switch.pappasan_lamp",
-                        "switch.grow_lamp",
+                        "switch.grow_light_living_room",
                         "switch.lamp_window",
                         "switch.torch_light_front",
                         "switch.torch_light_back",
                         "switch.basement_fireplace_lights",
                         "switch.painting_desk",
-                        "switch.grow_light_dining_room"
+                        "switch.grow_light_dining_room",
+                        "switch.coffee_light"
                       ]
                     }
                   },
@@ -2607,11 +3388,12 @@
                     "switch.chez_lounge_lamp",
                     "switch.pappasan_lamp",
                     "switch.lamp_window",
-                    "switch.grow_lamp",
+                    "switch.grow_light_living_room",
                     "switch.torch_light_front",
                     "switch.torch_light_back",
                     "switch.basement_fireplace_lights",
                     "switch.grow_light_dining_room",
+                    "switch.coffee_light",
                     "switch.painting_desk",
                     "light.outdoor_dimmer_light_1",
                     "light.outdoor_dimmer_light_2"
@@ -2686,8 +3468,8 @@
                           "name": "Window lamp"
                         },
                         {
-                          "entity": "switch.grow_lamp",
-                          "name": "Grow lamp"
+                          "entity": "switch.grow_light_living_room",
+                          "name": "Grow Light"
                         }
                       ]
                     },
@@ -2706,6 +3488,10 @@
                         {
                           "entity": "switch.grow_light_dining_room",
                           "name": "Grow Light"
+                        },
+                        {
+                          "entity": "switch.coffee_light",
+                          "name": "Coffee Light"
                         }
                       ]
                     },
@@ -2834,9 +3620,57 @@
           ],
           "visibility": [
             {
-              "condition": "state",
-              "entity": "input_select.dashboard_theme",
-              "state": "Cogitator"
+              "condition": "or",
+              "conditions": [
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "24f3091a2e544efabcc7aea2db3e172b"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_imogen",
+                      "state": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "2a7f7d10213341f68fe0913a2800ef64"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_guest",
+                      "state": "Cogitator"
+                    }
+                  ]
+                },
+                {
+                  "condition": "and",
+                  "conditions": [
+                    {
+                      "condition": "user",
+                      "users": [
+                        "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                      ]
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "input_select.dashboard_theme_sean",
+                      "state": "Cogitator"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -2864,14 +3698,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main.svg?v=8",
+              "image": "/local/deco/floor_main.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=8"
+                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2890,7 +3724,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=8"
+                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2909,7 +3743,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=8"
+                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2928,7 +3762,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_switch_lamp_window.svg?v=8"
+                    "img": "/local/deco/glow_switch_lamp_window.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2945,9 +3779,28 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.grow_lamp",
+                  "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_switch_grow_lamp.svg?v=8"
+                    "img": "/local/deco/glow_switch_grow_light_living_room.svg?v=10"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.coffee_light",
+                  "variables": {
+                    "img": "/local/deco/glow_switch_coffee_light.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2966,7 +3819,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_switch_grow_light_dining_room.svg?v=8"
+                    "img": "/local/deco/glow_switch_grow_light_dining_room.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -2985,7 +3838,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=8"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3004,7 +3857,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=8"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3065,8 +3918,8 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.grow_lamp",
-                  "name": "Grow lamp",
+                  "entity": "switch.grow_light_living_room",
+                  "name": "Grow Light",
                   "icon": "mdi:sprout",
                   "style": {
                     "left": "62.93%",
@@ -3118,6 +3971,17 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
+                  "entity": "switch.coffee_light",
+                  "name": "Coffee Light",
+                  "icon": "mdi:coffee",
+                  "style": {
+                    "left": "51.08%",
+                    "top": "63.84%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
                   "entity": "switch.grow_light_dining_room",
                   "name": "Grow Light",
                   "icon": "mdi:sprout",
@@ -3154,27 +4018,85 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Cogitator"
-                },
-                {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main_cog.svg?v=8",
+              "image": "/local/deco/floor_main_cog.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_couch_lamp.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_couch_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3193,7 +4115,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_chez_lounge_lamp.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_chez_lounge_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3212,7 +4134,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_pappasan_lamp.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_pappasan_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3231,7 +4153,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_lamp_window.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_lamp_window.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3248,9 +4170,28 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.grow_lamp",
+                  "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_grow_lamp.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_grow_light_living_room.svg?v=10"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "screen"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.coffee_light",
+                  "variables": {
+                    "img": "/local/deco/glow_cog_switch_coffee_light.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3269,7 +4210,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_grow_light_dining_room.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_grow_light_dining_room.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3288,7 +4229,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_1.svg?v=8"
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_1.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3307,7 +4248,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_2.svg?v=8"
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_2.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3368,8 +4309,8 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.grow_lamp",
-                  "name": "Grow lamp",
+                  "entity": "switch.grow_light_living_room",
+                  "name": "Grow Light",
                   "icon": "mdi:sprout",
                   "style": {
                     "left": "62.93%",
@@ -3421,6 +4362,17 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
+                  "entity": "switch.coffee_light",
+                  "name": "Coffee Light",
+                  "icon": "mdi:coffee",
+                  "style": {
+                    "left": "51.08%",
+                    "top": "63.84%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
                   "entity": "switch.grow_light_dining_room",
                   "name": "Grow Light",
                   "icon": "mdi:sprout",
@@ -3457,22 +4409,70 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Cogitator"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main_sea.svg?v=8",
+              "image": "/local/deco/floor_main_sea.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_couch_lamp.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_couch_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3491,7 +4491,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_chez_lounge_lamp.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_chez_lounge_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3510,7 +4510,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_pappasan_lamp.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_pappasan_lamp.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3529,7 +4529,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_lamp_window.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_lamp_window.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3546,9 +4546,28 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.grow_lamp",
+                  "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_grow_lamp.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_grow_light_living_room.svg?v=10"
+                  },
+                  "style": {
+                    "left": "0",
+                    "top": "0",
+                    "transform": "none",
+                    "width": "100%",
+                    "height": "100%",
+                    "min-width": "100%",
+                    "display": "block",
+                    "pointer-events": "none",
+                    "mix-blend-mode": "multiply"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_glow",
+                  "entity": "switch.coffee_light",
+                  "variables": {
+                    "img": "/local/deco/glow_sea_switch_coffee_light.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3567,7 +4586,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_grow_light_dining_room.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_grow_light_dining_room.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3586,7 +4605,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_1.svg?v=8"
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_1.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3605,7 +4624,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_2.svg?v=8"
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_2.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3666,8 +4685,8 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.grow_lamp",
-                  "name": "Grow lamp",
+                  "entity": "switch.grow_light_living_room",
+                  "name": "Grow Light",
                   "icon": "mdi:sprout",
                   "style": {
                     "left": "62.93%",
@@ -3719,6 +4738,17 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
+                  "entity": "switch.coffee_light",
+                  "name": "Coffee Light",
+                  "icon": "mdi:coffee",
+                  "style": {
+                    "left": "51.08%",
+                    "top": "63.84%"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "deco_marker",
                   "entity": "switch.grow_light_dining_room",
                   "name": "Grow Light",
                   "icon": "mdi:sprout",
@@ -3755,9 +4785,57 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -3779,7 +4857,7 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper.svg?v=8",
+              "image": "/local/deco/floor_upper.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -3801,20 +4879,78 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Cogitator"
-                },
-                {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper_cog.svg?v=8",
+              "image": "/local/deco/floor_upper_cog.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -3836,15 +4972,63 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Cogitator"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper_sea.svg?v=8",
+              "image": "/local/deco/floor_upper_sea.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -3866,9 +5050,57 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -3884,14 +5116,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower.svg?v=8",
+              "image": "/local/deco/floor_lower.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=8"
+                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3910,7 +5142,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=8"
+                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3929,7 +5161,7 @@
                   "template": "deco_glow",
                   "entity": "switch.basement_fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=8"
+                    "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -3948,7 +5180,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_switch_painting_desk.svg?v=8"
+                    "img": "/local/deco/glow_switch_painting_desk.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4068,27 +5300,85 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Cogitator"
-                },
-                {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state_not": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Cogitator"
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state_not": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower_cog.svg?v=8",
+              "image": "/local/deco/floor_lower_cog.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_torch_light_front.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_torch_light_front.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4107,7 +5397,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_torch_light_back.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_torch_light_back.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4126,7 +5416,7 @@
                   "template": "deco_glow",
                   "entity": "switch.basement_fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_basement_fireplace_lights.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_basement_fireplace_lights.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4145,7 +5435,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_painting_desk.svg?v=8"
+                    "img": "/local/deco/glow_cog_switch_painting_desk.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4265,22 +5555,70 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Cogitator"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Cogitator"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower_sea.svg?v=8",
+              "image": "/local/deco/floor_lower_sea.svg?v=10",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_torch_light_front.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_torch_light_front.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4299,7 +5637,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_torch_light_back.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_torch_light_back.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4318,7 +5656,7 @@
                   "template": "deco_glow",
                   "entity": "switch.basement_fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_basement_fireplace_lights.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_basement_fireplace_lights.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4337,7 +5675,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_painting_desk.svg?v=8"
+                    "img": "/local/deco/glow_sea_switch_painting_desk.svg?v=10"
                   },
                   "style": {
                     "left": "0",
@@ -4457,9 +5795,57 @@
               },
               "visibility": [
                 {
-                  "condition": "state",
-                  "entity": "input_select.dashboard_theme",
-                  "state": "Les Saisons"
+                  "condition": "or",
+                  "conditions": [
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "24f3091a2e544efabcc7aea2db3e172b"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_imogen",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "2a7f7d10213341f68fe0913a2800ef64"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_guest",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "and",
+                      "conditions": [
+                        {
+                          "condition": "user",
+                          "users": [
+                            "ddf7f16f7e9f437bab9af0c00e5fdcd9"
+                          ]
+                        },
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dashboard_theme_sean",
+                          "state": "Les Saisons"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }

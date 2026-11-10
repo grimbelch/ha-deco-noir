@@ -10,6 +10,8 @@ if '--deco' in sys.argv:         # Deco theme file (fonts/weights) + picker
     files=['themes/deco_noir.yaml','www/deco/deco-theme-picker.js']
 if '--picker' in sys.argv:       # Deco theme dropdown card
     files=['www/deco/deco-theme-picker.js']
+if '--per-user' in sys.argv:     # per-user theme: cards that resolve {user} + the theme-sync module
+    files=['www/seasons/seasons-card.js','www/cogitator/cogitator-card.js','www/deco/deco-theme-picker.js','www/deco/theme-sync.js']
 if '--floorplans' in sys.argv:   # per-theme floor plan SVGs and light-pool overlays
     files=sorted(f.relative_to(ROOT).as_posix() for f in (ROOT/'www'/'deco').glob('*.svg') if f.name.startswith(('floor_','glow_')))
 payload={f:base64.b64encode((ROOT/f).read_bytes()).decode() for f in files}
@@ -21,7 +23,7 @@ function agent($execute,$args){
 }
 $files=json_decode(file_get_contents('/tmp/seasons_payload.json'),true);
 foreach($files as $name=>$data){
- if($name!=='www/deco/deco-theme-picker.js' && !preg_match('#^www/deco/(floor|glow)_[a-z0-9_]+\.svg$#',$name) && !in_array($name,['themes/deco_noir.yaml','themes/les_saisons.yaml','www/seasons/portraits.png','www/seasons/headers-v3.png','www/seasons/seasons-card.js','www/seasons/display.ttf','www/seasons/OFL.txt','themes/cogitator.yaml','www/cogitator/cogitator-card.js','www/cogitator/title.ttf','www/cogitator/data.ttf','www/cogitator/cog-skull.png','www/cogitator/OFL-PirataOne.txt','www/cogitator/OFL-ChakraPetch.txt'])) throw new Exception('Unexpected path');
+ if(!in_array($name,['www/deco/deco-theme-picker.js','www/deco/theme-sync.js']) && !preg_match('#^www/deco/(floor|glow)_[a-z0-9_]+\.svg$#',$name) && !in_array($name,['themes/deco_noir.yaml','themes/les_saisons.yaml','www/seasons/portraits.png','www/seasons/headers-v3.png','www/seasons/seasons-card.js','www/seasons/display.ttf','www/seasons/OFL.txt','themes/cogitator.yaml','www/cogitator/cogitator-card.js','www/cogitator/title.ttf','www/cogitator/data.ttf','www/cogitator/cog-skull.png','www/cogitator/OFL-PirataOne.txt','www/cogitator/OFL-ChakraPetch.txt'])) throw new Exception('Unexpected path');
  $path='/mnt/data/supervisor/homeassistant/'.$name;
  $h=agent('guest-file-open',['path'=>$path,'mode'=>'w']);
  try { foreach(str_split(base64_decode($data),24576) as $part) {

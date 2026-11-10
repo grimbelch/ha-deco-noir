@@ -26,5 +26,7 @@ class HA:
 
 if __name__ == '__main__':
     ha = HA()
-    print('Authenticated; theme:', ha.rest('states/input_select.dashboard_theme')['state'])
+    me = ha.call(type='auth/current_user')
+    helper = 'input_select.dashboard_theme_' + __import__('re').sub(r'[^a-z0-9]+', '_', me['name'].lower())
+    print('Authenticated as', me['name'], '; theme:', ha.rest('states/' + helper)['state'])
     print('Registered themes:', list(ha.call(type='frontend/get_themes')['themes']))

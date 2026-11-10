@@ -17,6 +17,19 @@ Tabs are ordered by how often they are used, and each answers one question:
 `tools/build_dashboard.py` is the source of truth for every tab except Omega-7. Run it, then
 `tools/install_seasons.py` (registers module versions and keeps the selected theme).
 
+## Themes are per person
+
+Each login has its own `input_select.dashboard_theme_<name>` (Sean, Imogen, Guest), so one
+person's choice never changes anyone else's. The builders still write rules against the single
+logical `input_select.dashboard_theme`; `tools/per_user_theme.py` rewrites them right before
+saving into `or[ and[user=<id>, <rule on that user's helper>] ]`, and converts a live config back
+for the idempotent transforms. Cards and pickers take `input_select.dashboard_theme_{user}` and
+resolve `{user}` in the browser. `www/deco/theme-sync.js` applies the chosen HA theme to the
+signed-in user only (the frontend's `settheme`, saved to their profile); there is no server-wide
+`frontend.set_theme` automation any more. A newly added HA user needs a rebuild
+(`build_dashboard.py`, then `install_seasons.py` creates their helper) before the themed sections
+show for them. Deploy the card code with `deploy_seasons_assets.py --per-user`.
+
 ## Floor plans follow the theme
 
 `tools/make_floorplan.py` writes three palettes of every floor plan and light-pool overlay:

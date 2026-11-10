@@ -186,10 +186,11 @@ MARKERS = {
         ("switch.chez_lounge_lamp", "Chez Lounge", "mdi:lamp", 830, 530, "lamp"),
         ("switch.pappasan_lamp", "Pappasan", "mdi:floor-lamp", 830, 612, "lamp"),
         ("switch.lamp_window", "Window", "mdi:lamp", 765, 612, "lamp"),
-        ("switch.grow_lamp", "Grow lamp", "mdi:sprout", 700, 612, "lamp"),
+        ("switch.grow_light_living_room", "Grow Light", "mdi:sprout", 700, 612, "lamp"),
         ("media_player.billie_2", "Billie", "mdi:speaker", 765, 530, "speaker"),
         ("climate.nest_thermostat", "Thermostat", "mdi:thermostat", 690, 482, "climate"),
         ("media_player.kitchen_speaker", "Kitchen", "mdi:speaker", 560, 628, "speaker"),
+        ("switch.coffee_light", "Coffee Light", "mdi:coffee", 645, 556, "lamp"),
         ("switch.grow_light_dining_room", "Grow Light", "mdi:sprout", 661, 718, "lamp"),
         ("light.outdoor_dimmer_light_1", "Outdoor 1", "mdi:outdoor-lamp", 585, 345, "lamp"),
         ("light.outdoor_dimmer_light_2", "Outdoor 2", "mdi:outdoor-lamp", 690, 345, "lamp"),
@@ -214,6 +215,7 @@ MARKERS = {
 # Each lamp lights only its own room: a warm radial glow clipped to the room shape.
 LIVING = [(672, 505), (858, 505), (858, 633), (672, 633)]
 DINING = [(601, 633), (721, 633), (721, 747), (601, 747)]
+KITCHEN = [(533, 532), (672, 532), (672, 652), (533, 652)]
 PATIO = [(533, 165), (643, 165), (643, 255), (740, 255), (740, 365), (533, 365)]
 LIBRARY = [(758, 873), (1083, 873), (1083, 1006), (878, 1006), (878, 947), (820, 947), (820, 923), (758, 923)]
 CRAFT = [(948, 763), (1083, 763), (1083, 873), (948, 873)]
@@ -222,8 +224,9 @@ GLOW_ROOMS = {
     "switch.chez_lounge_lamp": (LIVING, "255,196,120", 120),
     "switch.pappasan_lamp": (LIVING, "255,190,110", 130),
     "switch.lamp_window": (LIVING, "255,200,130", 110),
-    "switch.grow_lamp": (LIVING, "214,110,255", 95),
+    "switch.grow_light_living_room": (LIVING, "214,110,255", 95),
     "switch.grow_light_dining_room": (DINING, "214,110,255", 95),
+    "switch.coffee_light": (KITCHEN, "255,200,140", 100),
     "light.outdoor_dimmer_light_1": (PATIO, "255,205,140", 150),
     "light.outdoor_dimmer_light_2": (PATIO, "255,205,140", 150),
     "switch.torch_light_front": (LIBRARY, "255,170,80", 140),

@@ -85,8 +85,9 @@ LIGHTS = [
     ("switch.chez_lounge_lamp", "lvl_main", 830, 530, 110),
     ("switch.pappasan_lamp", "lvl_main", 830, 612, 150),
     ("switch.lamp_window", "lvl_main", 765, 612, 110),
-    ("switch.grow_lamp", "lvl_main", 700, 612, 90),
+    ("switch.grow_light_living_room", "lvl_main", 700, 612, 90),
     ("switch.grow_light_dining_room", "lvl_main", 661, 718, 160),
+    ("switch.coffee_light", "lvl_main", 645, 556, 120),
     ("light.outdoor_dimmer_light_1", "lvl_main", 585, 345, 220),
     ("light.outdoor_dimmer_light_2", "lvl_main", 690, 345, 220),
     ("switch.torch_light_front", "lvl_lower", 925, 970, 150),
@@ -94,7 +95,7 @@ LIGHTS = [
     ("switch.basement_fireplace_lights", "lvl_lower", 925, 905, 100),
     ("switch.painting_desk", "lvl_lower", 985, 845, 110),
 ]
-LIGHT_COLOR = {"switch.grow_lamp": "D66EFF", "switch.basement_fireplace_lights": "FF8C3C"}
+LIGHT_COLOR = {"switch.grow_light_living_room": "D66EFF", "switch.basement_fireplace_lights": "FF8C3C"}
 
 
 # ---------------------------------------------------------------- wall builder
