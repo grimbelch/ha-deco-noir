@@ -138,13 +138,13 @@
       "glow": "glow_switch_torch_light_back.svg"
     },
     {
-      "entity": "switch.basement_fireplace_lights",
+      "entity": "switch.fireplace_lights",
       "name": "Fireplace",
       "icon": "mdi:fireplace",
       "kind": "lamp",
       "left": 51.14,
       "top": 61.41,
-      "glow": "glow_switch_basement_fireplace_lights.svg"
+      "glow": "glow_switch_fireplace_lights.svg"
     },
     {
       "entity": "media_player.library",

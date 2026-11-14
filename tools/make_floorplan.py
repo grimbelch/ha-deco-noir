@@ -201,7 +201,7 @@ MARKERS = {
     "lower": [
         ("switch.torch_light_front", "Torch front", "mdi:torch", 925, 970, "lamp"),
         ("switch.torch_light_back", "Torch back", "mdi:torch", 1045, 970, "lamp"),
-        ("switch.basement_fireplace_lights", "Fireplace", "mdi:fireplace", 925, 905, "lamp"),
+        ("switch.fireplace_lights", "Fireplace", "mdi:fireplace", 925, 905, "lamp"),
         ("media_player.library", "Library", "mdi:speaker", 1045, 905, "speaker"),
         ("switch.painting_desk", "Painting desk", "mdi:palette", 985, 845, "lamp"),
         ("sensor.h2s_0938ac5b0600679_print_status", "Icarus", "mdi:printer-3d", 1050, 845, "sensor"),
@@ -231,7 +231,7 @@ GLOW_ROOMS = {
     "light.outdoor_dimmer_light_2": (PATIO, "255,205,140", 150),
     "switch.torch_light_front": (LIBRARY, "255,170,80", 140),
     "switch.torch_light_back": (LIBRARY, "255,170,80", 140),
-    "switch.basement_fireplace_lights": (LIBRARY, "255,140,60", 150),
+    "switch.fireplace_lights": (LIBRARY, "255,140,60", 150),
     "switch.painting_desk": (CRAFT, "255,214,160", 110),
 }
 

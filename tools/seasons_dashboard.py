@@ -95,7 +95,7 @@ def apply_seasons(cfg):
         {'type':'media-control','entity':'media_player.billie_2'}])),
       section(room('Library','Summer',100/3,[rows([
         ('switch.torch_light_front','Torch front'),('switch.torch_light_back','Torch back'),
-        ('switch.basement_fireplace_lights','Fireplace')]),{'type':'media-control','entity':'media_player.library'}])),
+        ('switch.fireplace_lights','Fireplace')]),{'type':'media-control','entity':'media_player.library'}])),
       section(room('Outside','Autumn',200/3,[rows([
         ('light.outdoor_dimmer_light_1','Outdoor 1'),('light.outdoor_dimmer_light_2','Outdoor 2'),
         ('automation.outdoor_lights_sunset_to_10_pm','Sunset schedule'),('switch.rachio_9207aa_rain_delay','Rain delay')])])),

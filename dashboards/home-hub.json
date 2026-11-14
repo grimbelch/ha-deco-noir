@@ -1473,7 +1473,7 @@
                     "switch.lamp_window",
                     "switch.torch_light_front",
                     "switch.torch_light_back",
-                    "switch.basement_fireplace_lights",
+                    "switch.fireplace_lights",
                     "switch.painting_desk",
                     "switch.grow_light_dining_room",
                     "switch.coffee_light"
@@ -2022,7 +2022,7 @@
                 "lamps": [
                   "switch.torch_light_front",
                   "switch.torch_light_back",
-                  "switch.basement_fireplace_lights"
+                  "switch.fireplace_lights"
                 ],
                 "art_svg": "<svg viewBox=\"0 0 300 92\" preserveAspectRatio=\"xMaxYMax meet\" style=\"stroke:var(--deco-gold);fill:none;stroke-opacity:.5\"><path d=\"M200 92 V30 a40 40 0 0 1 80 0 V92\"/><path d=\"M212 92 V34 a28 28 0 0 1 56 0 V92\"/><path d=\"M240 6 V92\"/><path d=\"M212 50 H268 M212 68 H268\"/></svg>",
                 "line2_entity": "media_player.library",
@@ -2065,7 +2065,7 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
-              "entity": "switch.basement_fireplace_lights",
+              "entity": "switch.fireplace_lights",
               "name": "Fireplace",
               "icon": "mdi:fireplace",
               "grid_options": {
@@ -2635,7 +2635,7 @@
                         "switch.lamp_window",
                         "switch.torch_light_front",
                         "switch.torch_light_back",
-                        "switch.basement_fireplace_lights",
+                        "switch.fireplace_lights",
                         "switch.painting_desk",
                         "switch.grow_light_dining_room",
                         "switch.coffee_light"
@@ -2721,7 +2721,7 @@
                           "name": "Torch back"
                         },
                         {
-                          "entity": "switch.basement_fireplace_lights",
+                          "entity": "switch.fireplace_lights",
                           "name": "Fireplace"
                         }
                       ]
@@ -3349,7 +3349,7 @@
                         "switch.lamp_window",
                         "switch.torch_light_front",
                         "switch.torch_light_back",
-                        "switch.basement_fireplace_lights",
+                        "switch.fireplace_lights",
                         "switch.painting_desk",
                         "switch.grow_light_dining_room",
                         "switch.coffee_light"
@@ -3391,7 +3391,7 @@
                     "switch.grow_light_living_room",
                     "switch.torch_light_front",
                     "switch.torch_light_back",
-                    "switch.basement_fireplace_lights",
+                    "switch.fireplace_lights",
                     "switch.grow_light_dining_room",
                     "switch.coffee_light",
                     "switch.painting_desk",
@@ -3516,7 +3516,7 @@
                           "name": "Torch back"
                         },
                         {
-                          "entity": "switch.basement_fireplace_lights",
+                          "entity": "switch.fireplace_lights",
                           "name": "Fireplace"
                         }
                       ]
@@ -3698,14 +3698,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main.svg?v=10",
+              "image": "/local/deco/floor_main.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=10"
+                    "img": "/local/deco/glow_switch_couch_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3724,7 +3724,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=10"
+                    "img": "/local/deco/glow_switch_chez_lounge_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3743,7 +3743,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=10"
+                    "img": "/local/deco/glow_switch_pappasan_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3762,7 +3762,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_switch_lamp_window.svg?v=10"
+                    "img": "/local/deco/glow_switch_lamp_window.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3781,7 +3781,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_switch_grow_light_living_room.svg?v=10"
+                    "img": "/local/deco/glow_switch_grow_light_living_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3800,7 +3800,7 @@
                   "template": "deco_glow",
                   "entity": "switch.coffee_light",
                   "variables": {
-                    "img": "/local/deco/glow_switch_coffee_light.svg?v=10"
+                    "img": "/local/deco/glow_switch_coffee_light.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3819,7 +3819,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_switch_grow_light_dining_room.svg?v=10"
+                    "img": "/local/deco/glow_switch_grow_light_dining_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3838,7 +3838,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=10"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_1.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -3857,7 +3857,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=10"
+                    "img": "/local/deco/glow_light_outdoor_dimmer_light_2.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4089,14 +4089,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main_cog.svg?v=10",
+              "image": "/local/deco/floor_main_cog.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_couch_lamp.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_couch_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4115,7 +4115,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_chez_lounge_lamp.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_chez_lounge_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4134,7 +4134,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_pappasan_lamp.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_pappasan_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4153,7 +4153,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_lamp_window.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_lamp_window.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4172,7 +4172,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_grow_light_living_room.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_grow_light_living_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4191,7 +4191,7 @@
                   "template": "deco_glow",
                   "entity": "switch.coffee_light",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_coffee_light.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_coffee_light.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4210,7 +4210,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_grow_light_dining_room.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_grow_light_dining_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4229,7 +4229,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_1.svg?v=10"
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_1.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4248,7 +4248,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_2.svg?v=10"
+                    "img": "/local/deco/glow_cog_light_outdoor_dimmer_light_2.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4465,14 +4465,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_main_sea.svg?v=10",
+              "image": "/local/deco/floor_main_sea.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.couch_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_couch_lamp.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_couch_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4491,7 +4491,7 @@
                   "template": "deco_glow",
                   "entity": "switch.chez_lounge_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_chez_lounge_lamp.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_chez_lounge_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4510,7 +4510,7 @@
                   "template": "deco_glow",
                   "entity": "switch.pappasan_lamp",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_pappasan_lamp.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_pappasan_lamp.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4529,7 +4529,7 @@
                   "template": "deco_glow",
                   "entity": "switch.lamp_window",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_lamp_window.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_lamp_window.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4548,7 +4548,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_living_room",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_grow_light_living_room.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_grow_light_living_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4567,7 +4567,7 @@
                   "template": "deco_glow",
                   "entity": "switch.coffee_light",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_coffee_light.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_coffee_light.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4586,7 +4586,7 @@
                   "template": "deco_glow",
                   "entity": "switch.grow_light_dining_room",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_grow_light_dining_room.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_grow_light_dining_room.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4605,7 +4605,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_1",
                   "variables": {
-                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_1.svg?v=10"
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_1.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4624,7 +4624,7 @@
                   "template": "deco_glow",
                   "entity": "light.outdoor_dimmer_light_2",
                   "variables": {
-                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_2.svg?v=10"
+                    "img": "/local/deco/glow_sea_light_outdoor_dimmer_light_2.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -4857,7 +4857,7 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper.svg?v=10",
+              "image": "/local/deco/floor_upper.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -4950,7 +4950,7 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper_cog.svg?v=10",
+              "image": "/local/deco/floor_upper_cog.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -5028,7 +5028,7 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_upper_sea.svg?v=10",
+              "image": "/local/deco/floor_upper_sea.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
@@ -5116,14 +5116,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower.svg?v=10",
+              "image": "/local/deco/floor_lower.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=10"
+                    "img": "/local/deco/glow_switch_torch_light_front.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5142,7 +5142,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=10"
+                    "img": "/local/deco/glow_switch_torch_light_back.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5159,9 +5159,9 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_switch_basement_fireplace_lights.svg?v=10"
+                    "img": "/local/deco/glow_switch_fireplace_lights.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5180,7 +5180,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_switch_painting_desk.svg?v=10"
+                    "img": "/local/deco/glow_switch_painting_desk.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5219,7 +5219,7 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "name": "Fireplace",
                   "icon": "mdi:fireplace",
                   "style": {
@@ -5371,14 +5371,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower_cog.svg?v=10",
+              "image": "/local/deco/floor_lower_cog.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_torch_light_front.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_torch_light_front.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5397,7 +5397,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_torch_light_back.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_torch_light_back.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5414,9 +5414,9 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_basement_fireplace_lights.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_fireplace_lights.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5435,7 +5435,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_cog_switch_painting_desk.svg?v=10"
+                    "img": "/local/deco/glow_cog_switch_painting_desk.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5474,7 +5474,7 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "name": "Fireplace",
                   "icon": "mdi:fireplace",
                   "style": {
@@ -5611,14 +5611,14 @@
             },
             {
               "type": "picture-elements",
-              "image": "/local/deco/floor_lower_sea.svg?v=10",
+              "image": "/local/deco/floor_lower_sea.svg?v=11",
               "elements": [
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
                   "entity": "switch.torch_light_front",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_torch_light_front.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_torch_light_front.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5637,7 +5637,7 @@
                   "template": "deco_glow",
                   "entity": "switch.torch_light_back",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_torch_light_back.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_torch_light_back.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5654,9 +5654,9 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_glow",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_basement_fireplace_lights.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_fireplace_lights.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5675,7 +5675,7 @@
                   "template": "deco_glow",
                   "entity": "switch.painting_desk",
                   "variables": {
-                    "img": "/local/deco/glow_sea_switch_painting_desk.svg?v=10"
+                    "img": "/local/deco/glow_sea_switch_painting_desk.svg?v=11"
                   },
                   "style": {
                     "left": "0",
@@ -5714,7 +5714,7 @@
                 {
                   "type": "custom:button-card",
                   "template": "deco_marker",
-                  "entity": "switch.basement_fireplace_lights",
+                  "entity": "switch.fireplace_lights",
                   "name": "Fireplace",
                   "icon": "mdi:fireplace",
                   "style": {

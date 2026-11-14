@@ -20,7 +20,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = None  # theme comes from each user's input_select.dashboard_theme_<name> (www/deco/theme-sync.js)
-ASSET_V = "10"  # bump to bust caches when SVGs change
+ASSET_V = "11"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -113,7 +113,7 @@ def section(*cards, span=1):
 
 LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_lamp", "switch.grow_light_living_room",
              "switch.lamp_window", "switch.torch_light_front", "switch.torch_light_back",
-             "switch.basement_fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room",
+             "switch.fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room",
              "switch.coffee_light"]
 SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitchen_speaker", "media_player.spotify"]
 
@@ -163,11 +163,11 @@ home = {
 
         # Lower floor
         section(room("Library", "library",
-                     ["switch.torch_light_front", "switch.torch_light_back", "switch.basement_fireplace_lights"],
+                     ["switch.torch_light_front", "switch.torch_light_back", "switch.fireplace_lights"],
                      "var(--deco-sapphire)", ("media_player.library", "Speaker")),
                 tile("switch.torch_light_front", "Torch front", "mdi:torch"),
                 tile("switch.torch_light_back", "Torch back", "mdi:torch"),
-                tile("switch.basement_fireplace_lights", "Fireplace", "mdi:fireplace"),
+                tile("switch.fireplace_lights", "Fireplace", "mdi:fireplace"),
                 tile("media_player.library", "Speaker", "mdi:speaker", 6, "more-info")),
 
         section(room("Craft Room", "workshop", ["switch.painting_desk"], "var(--deco-garnet)",

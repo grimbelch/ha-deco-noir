@@ -92,10 +92,10 @@ LIGHTS = [
     ("light.outdoor_dimmer_light_2", "lvl_main", 690, 345, 220),
     ("switch.torch_light_front", "lvl_lower", 925, 970, 150),
     ("switch.torch_light_back", "lvl_lower", 1045, 970, 150),
-    ("switch.basement_fireplace_lights", "lvl_lower", 925, 905, 100),
+    ("switch.fireplace_lights", "lvl_lower", 925, 905, 100),
     ("switch.painting_desk", "lvl_lower", 985, 845, 110),
 ]
-LIGHT_COLOR = {"switch.grow_light_living_room": "D66EFF", "switch.basement_fireplace_lights": "FF8C3C"}
+LIGHT_COLOR = {"switch.grow_light_living_room": "D66EFF", "switch.fireplace_lights": "FF8C3C"}
 
 
 # ---------------------------------------------------------------- wall builder

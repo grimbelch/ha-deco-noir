@@ -8,7 +8,7 @@ P = 'h2s_0938ac5b0600679'
 
 LIGHTS = ['switch.couch_lamp', 'switch.chez_lounge_lamp', 'switch.pappasan_lamp', 'switch.lamp_window',
           'switch.grow_light_living_room', 'switch.torch_light_front', 'switch.torch_light_back',
-          'switch.basement_fireplace_lights', 'switch.grow_light_dining_room', 'switch.coffee_light', 'switch.painting_desk',
+          'switch.fireplace_lights', 'switch.grow_light_dining_room', 'switch.coffee_light', 'switch.painting_desk',
           'light.outdoor_dimmer_light_1', 'light.outdoor_dimmer_light_2']
 
 
@@ -59,7 +59,7 @@ def cogitator_card(scenes):
                 {'type': 'media-control', 'entity': 'media_player.kitchen_speaker'}]},
             {'title': 'Library', 'cards': [
                 rows([('switch.torch_light_front', 'Torch front'), ('switch.torch_light_back', 'Torch back'),
-                      ('switch.basement_fireplace_lights', 'Fireplace')]),
+                      ('switch.fireplace_lights', 'Fireplace')]),
                 {'type': 'media-control', 'entity': 'media_player.library'}]},
             {'title': 'Craft Room', 'cards': [
                 rows([('switch.painting_desk', 'Painting desk'), (f'light.{P}_chamber_light', 'Icarus chamber')])]},
