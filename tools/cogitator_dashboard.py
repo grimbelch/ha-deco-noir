@@ -61,7 +61,7 @@ def cogitator_card(scenes):
                 {'type': 'media-control', 'entity': 'media_player.kitchen_speaker'}]},
             {'title': 'Library', 'cards': [
                 rows([('switch.fireplace_lamp', 'Fireplace lamp'), ('switch.torch_light_back', 'Torch back'),
-                      ('switch.fireplace_lights', 'Fireplace')]),
+                      ('switch.fireplace_lights', 'Fireplace'), ('switch.billie_library', 'Billie + Library')]),
                 {'type': 'media-control', 'entity': 'media_player.library'}]},
             {'title': 'Craft Room', 'cards': [
                 rows([('switch.painting_desk', 'Painting desk'), (f'light.{P}_chamber_light', 'Icarus chamber')])]},

@@ -170,7 +170,8 @@ home = {
                 tile("switch.fireplace_lamp", "Fireplace lamp", "mdi:lamp-outline"),
                 tile("switch.torch_light_back", "Torch back", "mdi:torch"),
                 tile("switch.fireplace_lights", "Fireplace", "mdi:fireplace"),
-                tile("media_player.library", "Speaker", "mdi:speaker", 6, "more-info")),
+                tile("switch.billie_library", "Billie + Library", "mdi:speaker-multiple"),
+                tile("media_player.library", "Speaker", "mdi:speaker", 12, "more-info")),
 
         section(room("Craft Room", "workshop", ["switch.painting_desk"], "var(--deco-garnet)",
                      (f"sensor.{P}_print_status", "Icarus")),

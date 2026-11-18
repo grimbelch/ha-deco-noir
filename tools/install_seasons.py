@@ -32,7 +32,7 @@ for name,value in [('dashboard',cfg),('helpers',helpers),('automation',automatio
 out=to_per_user(apply_cogitator(apply_seasons(from_per_user(cfg))),users)
 resources=ha.call(type='lovelace/resources')
 (backup/'resources.json').write_text(json.dumps(resources,indent=2),encoding='utf-8')
-for resource_url in ['/local/seasons/seasons-card.js?v=10','/local/cogitator/cogitator-card.js?v=11',
+for resource_url in ['/local/seasons/seasons-card.js?v=11','/local/cogitator/cogitator-card.js?v=12',
                      '/local/deco/deco-theme-picker.js?v=5','/local/deco/theme-sync.js?v=1']:
     existing=next((r for r in resources if r['url'].split('?')[0]==resource_url.split('?')[0]),None)
     if existing:

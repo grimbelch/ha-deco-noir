@@ -2089,11 +2089,22 @@
             {
               "type": "custom:button-card",
               "template": "deco_tile",
+              "entity": "switch.billie_library",
+              "name": "Billie + Library",
+              "icon": "mdi:speaker-multiple",
+              "grid_options": {
+                "columns": 6,
+                "rows": 2
+              }
+            },
+            {
+              "type": "custom:button-card",
+              "template": "deco_tile",
               "entity": "media_player.library",
               "name": "Speaker",
               "icon": "mdi:speaker",
               "grid_options": {
-                "columns": 6,
+                "columns": 12,
                 "rows": 2
               },
               "tap_action": {
@@ -2733,6 +2744,10 @@
                         {
                           "entity": "switch.fireplace_lights",
                           "name": "Fireplace"
+                        },
+                        {
+                          "entity": "switch.billie_library",
+                          "name": "Billie + Library"
                         }
                       ]
                     },
@@ -3558,6 +3573,10 @@
                         {
                           "entity": "switch.fireplace_lights",
                           "name": "Fireplace"
+                        },
+                        {
+                          "entity": "switch.billie_library",
+                          "name": "Billie + Library"
                         }
                       ]
                     },
