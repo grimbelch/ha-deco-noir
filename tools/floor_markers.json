@@ -28,15 +28,6 @@
       "glow": "glow_switch_pappasan_lamp.svg"
     },
     {
-      "entity": "switch.lamp_window",
-      "name": "Window",
-      "icon": "mdi:lamp",
-      "kind": "lamp",
-      "left": 76.94,
-      "top": 72.64,
-      "glow": "glow_switch_lamp_window.svg"
-    },
-    {
       "entity": "switch.grow_light_living_room",
       "name": "Grow Light",
       "icon": "mdi:sprout",
@@ -88,6 +79,24 @@
       "glow": "glow_switch_grow_light_dining_room.svg"
     },
     {
+      "entity": "switch.dining_room_pendant",
+      "name": "Pendant",
+      "icon": "mdi:ceiling-light",
+      "kind": "lamp",
+      "left": 54.53,
+      "top": 83.02,
+      "glow": "glow_switch_dining_room_pendant.svg"
+    },
+    {
+      "entity": "switch.dining_room_torch",
+      "name": "Dining Torch",
+      "icon": "mdi:floor-lamp-torchiere",
+      "kind": "lamp",
+      "left": 64.66,
+      "top": 77.99,
+      "glow": "glow_switch_dining_room_torch.svg"
+    },
+    {
       "entity": "light.outdoor_dimmer_light_1",
       "name": "Outdoor 1",
       "icon": "mdi:outdoor-lamp",
@@ -120,13 +129,13 @@
   "upper_aspect": 1.1503,
   "lower": [
     {
-      "entity": "switch.torch_light_front",
-      "name": "Torch front",
-      "icon": "mdi:torch",
+      "entity": "switch.fireplace_lamp",
+      "name": "Fireplace lamp",
+      "icon": "mdi:lamp",
       "kind": "lamp",
       "left": 51.14,
       "top": 83.22,
-      "glow": "glow_switch_torch_light_front.svg"
+      "glow": "glow_switch_fireplace_lamp.svg"
     },
     {
       "entity": "switch.torch_light_back",

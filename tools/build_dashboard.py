@@ -20,7 +20,7 @@ URL = os.environ.get("HA_URL", "ws://192.168.0.200/api/websocket")
 TOKEN = pathlib.Path(os.environ["HA_TOKEN_FILE"]).read_text().strip()
 DASH = "home-hub"
 THEME = None  # theme comes from each user's input_select.dashboard_theme_<name> (www/deco/theme-sync.js)
-ASSET_V = "11"  # bump to bust caches when SVGs change
+ASSET_V = "13"  # bump to bust caches when SVGs change
 P = "h2s_0938ac5b0600679"
 
 ws = websocket.create_connection(URL, timeout=60)
@@ -112,9 +112,9 @@ def section(*cards, span=1):
 
 
 LAMPS_ALL = ["switch.chez_lounge_lamp", "switch.couch_lamp", "switch.pappasan_lamp", "switch.grow_light_living_room",
-             "switch.lamp_window", "switch.torch_light_front", "switch.torch_light_back",
+             "switch.fireplace_lamp", "switch.torch_light_back",
              "switch.fireplace_lights", "switch.painting_desk", "switch.grow_light_dining_room",
-             "switch.coffee_light"]
+             "switch.coffee_light", "switch.dining_room_pendant", "switch.dining_room_torch"]
 SPEAKERS = ["media_player.billie_2", "media_player.library", "media_player.kitchen_speaker", "media_player.spotify"]
 
 # ---------------------------------------------------------------- HOME
@@ -145,27 +145,29 @@ home = {
 
         # Main floor
         section(room("Living Room", "living",
-                     ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.lamp_window", "switch.grow_light_living_room"],
+                     ["switch.couch_lamp", "switch.chez_lounge_lamp", "switch.pappasan_lamp", "switch.grow_light_living_room"],
                      "var(--deco-gold)", ("media_player.billie_2", "Billie")),
                 tile("switch.couch_lamp", "Couch", "mdi:lamp-outline", 4),
                 tile("switch.chez_lounge_lamp", "Chez Lounge", "mdi:lamp-outline", 4),
                 tile("switch.pappasan_lamp", "Pappasan", "mdi:floor-lamp-outline", 4),
-                tile("switch.lamp_window", "Window", "mdi:lamp-outline", 4),
-                tile("switch.grow_light_living_room", "Grow Light", "mdi:sprout-outline", 4),
-                tile("media_player.billie_2", "Billie", "mdi:speaker", 4, "more-info"),
+                tile("switch.grow_light_living_room", "Grow Light", "mdi:sprout-outline", 6),
+                tile("media_player.billie_2", "Billie", "mdi:speaker", 6, "more-info"),
                 span=2),
 
-        section(room("Dining & Kitchen", "house", ["switch.grow_light_dining_room", "switch.coffee_light"], "var(--deco-gold)",
+        section(room("Dining & Kitchen", "house", ["switch.grow_light_dining_room", "switch.coffee_light",
+                                                    "switch.dining_room_pendant", "switch.dining_room_torch"], "var(--deco-gold)",
                      ("media_player.kitchen_speaker", "Kitchen speaker")),
                 tile("switch.grow_light_dining_room", "Grow Light", "mdi:sprout-outline"),
                 tile("switch.coffee_light", "Coffee Light", "mdi:coffee-outline"),
-                tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", 6, "more-info")),
+                tile("switch.dining_room_pendant", "Pendant", "mdi:ceiling-light-outline"),
+                tile("switch.dining_room_torch", "Dining Torch", "mdi:floor-lamp-torchiere-outline"),
+                tile("media_player.kitchen_speaker", "Kitchen speaker", "mdi:speaker", 12, "more-info")),
 
         # Lower floor
         section(room("Library", "library",
-                     ["switch.torch_light_front", "switch.torch_light_back", "switch.fireplace_lights"],
+                     ["switch.fireplace_lamp", "switch.torch_light_back", "switch.fireplace_lights"],
                      "var(--deco-sapphire)", ("media_player.library", "Speaker")),
-                tile("switch.torch_light_front", "Torch front", "mdi:torch"),
+                tile("switch.fireplace_lamp", "Fireplace lamp", "mdi:lamp-outline"),
                 tile("switch.torch_light_back", "Torch back", "mdi:torch"),
                 tile("switch.fireplace_lights", "Fireplace", "mdi:fireplace"),
                 tile("media_player.library", "Speaker", "mdi:speaker", 6, "more-info")),

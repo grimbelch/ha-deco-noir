@@ -91,10 +91,10 @@ def apply_seasons(cfg):
     seasonal = [
       section(room('Living Room','Spring',0,[rows([
         ('switch.couch_lamp','Couch'),('switch.chez_lounge_lamp','Chez Lounge'),('switch.pappasan_lamp','Pappasan'),
-        ('switch.lamp_window','Window lamp'),('switch.grow_light_living_room','Grow Light')]),
+        ('switch.grow_light_living_room','Grow Light')]),
         {'type':'media-control','entity':'media_player.billie_2'}])),
       section(room('Library','Summer',100/3,[rows([
-        ('switch.torch_light_front','Torch front'),('switch.torch_light_back','Torch back'),
+        ('switch.fireplace_lamp','Fireplace lamp'),('switch.torch_light_back','Torch back'),
         ('switch.fireplace_lights','Fireplace')]),{'type':'media-control','entity':'media_player.library'}])),
       section(room('Outside','Autumn',200/3,[rows([
         ('light.outdoor_dimmer_light_1','Outdoor 1'),('light.outdoor_dimmer_light_2','Outdoor 2'),

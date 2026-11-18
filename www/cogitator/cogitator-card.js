@@ -1,4 +1,4 @@
-import '/local/seasons/seasons-card.js?v=8';
+import '/local/seasons/seasons-card.js?v=10';
 // Fonts are declared and preloaded at module load so the first paint never shows fallback text.
 if(!document.getElementById('cogitator-fonts')){
   for(const f of ['title','data']){const l=document.createElement('link');l.rel='preload';l.as='font';l.type='font/ttf';l.crossOrigin='anonymous';l.href='/local/cogitator/'+f+'.ttf';document.head.append(l);}
